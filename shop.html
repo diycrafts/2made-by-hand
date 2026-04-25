@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>All Guides — Made By Hand</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://js.stripe.com/v3/"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--cream:#FAF7F2;--warm:#F0EBE1;--stone:#D6CEC2;--bark:#8C6B4A;--forest:#4A6741;--ink:#2A2520;--muted:#8A7E72;--white:#FFFFFF;--gold:#C8963C;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;background:rgba(250,247,242,0.95);backdrop-filter:blur(14px);border-bottom:1px solid rgba(214,206,194,0.5);}
+.logo{font-family:'Lora',serif;font-size:1.25rem;font-weight:700;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:0.6rem;}
+.logo-mark{width:34px;height:34px;background:var(--bark);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+.back{display:flex;align-items:center;gap:0.4rem;font-size:0.88rem;font-weight:600;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.back:hover{color:var(--ink);}
+
+/* PAGE HEADER */
+.page-top{padding:100px 5vw 3rem;text-align:center;}
+.eyebrow{font-size:0.75rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--forest);margin-bottom:0.75rem;}
+.page-top h1{font-family:'Lora',serif;font-size:clamp(2.2rem,5vw,3.8rem);font-weight:700;margin-bottom:0.75rem;}
+.page-top h1 em{font-style:italic;color:var(--bark);}
+.page-top p{font-size:1rem;color:var(--muted);max-width:520px;margin:0 auto;line-height:1.75;}
+
+/* FILTERS */
+.filters{display:flex;gap:0.6rem;justify-content:center;padding:1.5rem 5vw 2.5rem;flex-wrap:wrap;}
+.fb{padding:0.6rem 1.4rem;border-radius:50px;border:1.5px solid var(--stone);background:transparent;font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:600;color:var(--muted);cursor:pointer;transition:all 0.2s;}
+.fb:hover{border-color:var(--bark);color:var(--bark);}
+.fb.active{background:var(--ink);border-color:var(--ink);color:white;}
+
+/* GRID */
+.shop-wrap{max-width:1200px;margin:0 auto;padding:0 5vw 7rem;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.75rem;}
+
+/* PRODUCT CARD */
+.card{background:var(--white);border:1.5px solid var(--stone);border-radius:18px;overflow:hidden;transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s;opacity:0;transform:translateY(16px);}
+.card.visible{opacity:1;transform:translateY(0);}
+.card:not(.soon):hover{transform:translateY(-6px);box-shadow:0 16px 50px rgba(42,37,32,0.12);border-color:var(--bark);}
+.card.hidden{display:none!important;}
+.card.soon{opacity:0.5;pointer-events:none;}
+
+/* Thumbnail */
+.thumb{width:100%;aspect-ratio:16/9;overflow:hidden;position:relative;}
+.thumb img{width:100%;height:100%;object-fit:cover;transition:transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94);}
+.card:hover .thumb img{transform:scale(1.06);}
+.cat-tag{position:absolute;top:0.8rem;left:0.8rem;font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:0.3rem 0.75rem;border-radius:50px;background:rgba(250,247,242,0.92);color:var(--ink);backdrop-filter:blur(4px);}
+.soon-tag{position:absolute;top:0.8rem;right:0.8rem;font-size:0.7rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:0.3rem 0.75rem;border-radius:50px;background:var(--gold);color:white;}
+
+/* Body */
+.card-body{padding:1.5rem 1.5rem 1.75rem;}
+.card-title{font-family:'Lora',serif;font-size:1.25rem;font-weight:700;color:var(--ink);margin-bottom:0.5rem;line-height:1.3;}
+.card-desc{font-size:0.9rem;color:var(--muted);line-height:1.65;margin-bottom:1.2rem;}
+.card-tags{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1.2rem;}
+.ctag{font-size:0.73rem;font-weight:600;color:var(--muted);background:var(--warm);padding:0.25rem 0.65rem;border-radius:50px;border:1px solid var(--stone);}
+.card-footer{display:flex;align-items:center;justify-content:space-between;padding-top:1.2rem;border-top:1.5px solid var(--warm);}
+.price{font-family:'Lora',serif;font-size:1.6rem;font-weight:700;color:var(--ink);line-height:1;}
+.price sup{font-family:'Nunito',sans-serif;font-size:0.9rem;font-weight:400;color:var(--muted);vertical-align:super;}
+.buy{display:inline-flex;align-items:center;gap:0.5rem;background:var(--bark);color:white;font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:700;padding:0.7rem 1.4rem;border-radius:50px;border:none;cursor:pointer;transition:background 0.2s,transform 0.15s;}
+.buy:hover{background:var(--ink);transform:scale(1.03);}
+
+/* MODAL */
+.overlay{display:none;position:fixed;inset:0;background:rgba(42,37,32,0.65);z-index:500;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(8px);}
+.overlay.open{display:flex;}
+.modal{background:var(--white);border-radius:20px;width:100%;max-width:460px;overflow:hidden;box-shadow:0 30px 80px rgba(42,37,32,0.25);animation:pop 0.3s cubic-bezier(0.34,1.56,0.64,1);}
+@keyframes pop{from{opacity:0;transform:scale(0.93) translateY(16px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.modal-top{background:var(--ink);padding:1.75rem 2rem;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;}
+.m-name{font-family:'Lora',serif;font-size:1.1rem;font-weight:600;color:var(--cream);margin-bottom:0.3rem;}
+.m-price{font-family:'Lora',serif;font-size:1.6rem;font-weight:700;color:#E8C878;}
+.m-close{background:none;border:none;color:rgba(250,247,242,0.4);font-size:1.5rem;cursor:pointer;padding:0;line-height:1;flex-shrink:0;}
+.m-close:hover{color:var(--cream);}
+.modal-body{padding:1.75rem 2rem 2rem;}
+.field{margin-bottom:1.1rem;}
+.field label{display:block;font-size:0.78rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;}
+.field input{width:100%;background:var(--cream);border:1.5px solid var(--stone);border-radius:8px;padding:0.8rem 1rem;color:var(--ink);font-size:1rem;font-family:'Nunito',sans-serif;outline:none;transition:border-color 0.2s;}
+.field input:focus{border-color:var(--bark);}
+#card-el{background:var(--cream);border:1.5px solid var(--stone);border-radius:8px;padding:0.85rem 1rem;transition:border-color 0.2s;}
+#card-err{font-size:0.82rem;color:#C0392B;margin-top:0.4rem;min-height:1.2em;}
+.pay-btn{width:100%;background:var(--bark);color:white;border:none;border-radius:50px;padding:1rem;font-size:1rem;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;margin-top:1.5rem;transition:background 0.2s;letter-spacing:0.02em;}
+.pay-btn:hover:not(:disabled){background:var(--ink);}
+.pay-btn:disabled{opacity:0.5;cursor:not-allowed;}
+.secure{display:flex;align-items:center;justify-content:center;gap:0.4rem;font-size:0.78rem;color:var(--muted);margin-top:1rem;padding-top:1rem;border-top:1px solid var(--warm);}
+
+/* Success */
+.success{display:none;text-align:center;padding:1.5rem 0 0.5rem;}
+.success .icon{font-size:3.5rem;display:block;margin-bottom:1rem;}
+.success h3{font-family:'Lora',serif;font-size:1.5rem;font-weight:700;color:var(--forest);margin-bottom:0.75rem;}
+.success p{font-size:0.9rem;color:var(--muted);line-height:1.6;margin-bottom:1.5rem;}
+.dl{display:inline-flex;align-items:center;gap:0.5rem;background:var(--forest);color:white;font-weight:700;font-family:'Nunito',sans-serif;padding:0.9rem 2rem;border-radius:50px;text-decoration:none;font-size:0.95rem;transition:background 0.2s;}
+.dl:hover{background:var(--ink);}
+
+/* FOOTER */
+footer{background:var(--ink);padding:2.5rem 5vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.fl{font-family:'Lora',serif;font-size:1.1rem;font-weight:700;color:rgba(250,247,242,0.65);}
+footer p{font-size:0.8rem;color:rgba(250,247,242,0.3);}
+footer a{color:rgba(250,247,242,0.45);text-decoration:none;}
+
+@media(max-width:600px){.grid{grid-template-columns:1fr;} footer{flex-direction:column;text-align:center;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo"><div class="logo-mark">🪨</div>Made By Hand</a>
+  <a href="index.html" class="back">← Back to Home</a>
+</nav>
+
+<div class="page-top">
+  <div class="eyebrow">The Collection</div>
+  <h1>All <em>DIY Guides</em></h1>
+  <p>Every guide is built from a real project — real photos, full materials list, and clear steps anyone can follow.</p>
+</div>
+
+<div class="filters">
+  <button class="fb active" onclick="doFilter('all',this)">All Guides</button>
+  <button class="fb" onclick="doFilter('concrete',this)">🪨 Concrete</button>
+  <button class="fb" onclick="doFilter('garden',this)">🌿 Garden</button>
+  <button class="fb" onclick="doFilter('glass',this)">💎 Glass & Resin</button>
+  <button class="fb" onclick="doFilter('interior',this)">🏠 Interior</button>
+</div>
+
+<div class="shop-wrap">
+  <div class="grid" id="grid">
+
+    <!-- Fire Bowl -->
+    <div class="card" data-cat="concrete">
+      <div class="thumb">
+        <img src="thumbnail_fire_bowl.jpg" alt="Concrete Fire Bowl"/>
+        <div class="cat-tag">Concrete</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Concrete Fire Bowl</div>
+        <div class="card-desc">A $3 plastic basin becomes a stunning outdoor fire bowl. Heavy, weather-resistant, and looks like it belongs in a $500 garden store.</div>
+        <div class="card-tags">
+          <span class="ctag">⏱ 30 min active</span>
+          <span class="ctag">💰 Under $30</span>
+          <span class="ctag">🌱 Beginner</span>
+        </div>
+        <div class="card-footer">
+          <div class="price"><sup>$</sup>7.99</div>
+          <button class="buy" onclick="openModal('Concrete Fire Bowl',7.99,'DIY_Concrete_Fire_Bowl_Guide.pdf')">Buy Guide ↓</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stone Wall -->
+    <div class="card" data-cat="interior">
+      <div class="thumb">
+        <img src="thumbnail_stone_wall.jpg" alt="Natural Stone Accent Wall"/>
+        <div class="cat-tag">Interior</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Natural Stone Accent Wall</div>
+        <div class="card-desc">Install a full natural stone feature wall yourself and save $2,000–$7,000 vs a contractor. Includes lighting guide for the dramatic nighttime look.</div>
+        <div class="card-tags">
+          <span class="ctag">⏱ 2–3 days</span>
+          <span class="ctag">💰 $300–600</span>
+          <span class="ctag">🌱 No experience needed</span>
+        </div>
+        <div class="card-footer">
+          <div class="price"><sup>$</sup>12.99</div>
+          <button class="buy" onclick="openModal('Natural Stone Accent Wall',12.99,'DIY_Natural_Stone_Accent_Wall_Guide.pdf')">Buy Guide ↓</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Woven Planter -->
+    <div class="card" data-cat="concrete garden">
+      <div class="thumb">
+        <img src="thumbnail_planter_facebook.jpg" alt="Woven Concrete Planter"/>
+        <div class="cat-tag">Concrete · Garden</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Woven Texture Concrete Planter</div>
+        <div class="card-desc">A $5 laundry basket acts as your mold and transfers a beautiful woven pattern. Makes a planter that sells for $100 — yours costs under $20.</div>
+        <div class="card-tags">
+          <span class="ctag">⏱ 45 min active</span>
+          <span class="ctag">💰 Under $20</span>
+          <span class="ctag">🌱 Beginner</span>
+        </div>
+        <div class="card-footer">
+          <div class="price"><sup>$</sup>3.99</div>
+          <button class="buy" onclick="openModal('Woven Texture Concrete Planter',3.99,'DIY_Concrete_Woven_Planter_Guide.pdf')">Buy Guide ↓</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Candle Holder -->
+    <div class="card" data-cat="concrete">
+      <div class="thumb">
+        <img src="thumbnail_candle_facebook.jpg" alt="Concrete Candle Holder"/>
+        <div class="cat-tag">Concrete</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Concrete Candle Holder</div>
+        <div class="card-desc">Two plastic cups and a bag of concrete — that's truly all it takes. The easiest project in the collection, and one of the most satisfying to unmold.</div>
+        <div class="card-tags">
+          <span class="ctag">⏱ 20 min active</span>
+          <span class="ctag">💰 Under $10</span>
+          <span class="ctag">🌱 Perfect first project</span>
+        </div>
+        <div class="card-footer">
+          <div class="price"><sup>$</sup>3.00</div>
+          <button class="buy" onclick="openModal('Concrete Candle Holder',3.00,'DIY_Concrete_Candle_Holder_Guide.pdf')">Buy Guide ↓</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Glass Mosaic Stones -->
+    <div class="card" data-cat="glass garden">
+      <div class="thumb">
+        <img src="thumbnail_glass_stones_facebook.jpg" alt="Glass Mosaic Stepping Stones"/>
+        <div class="cat-tag">Glass · Garden</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Glass Mosaic Stepping Stones</div>
+        <div class="card-desc">Press coloured glass into concrete and polish it smooth. Vivid and beautiful by day — at night with a light beneath each stone, they glow like stained glass.</div>
+        <div class="card-tags">
+          <span class="ctag">⏱ 30 min per stone</span>
+          <span class="ctag">💰 $8–15 each</span>
+          <span class="ctag">🌱 Beginner</span>
+        </div>
+        <div class="card-footer">
+          <div class="price"><sup>$</sup>3.00</div>
+          <button class="buy" onclick="openModal('Glass Mosaic Stepping Stones',3.00,'DIY_Glass_Mosaic_Stepping_Stones_Guide.pdf')">Buy Guide ↓</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Leaf Stepping Stones -->
+    <div class="card" data-cat="concrete garden">
+      <div class="thumb">
+        <img src="thumbnail_leaf_stones.jpg" alt="Leaf Imprint Stepping Stones"/>
+        <div class="cat-tag">Concrete · Garden</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Leaf Imprint Stepping Stones</div>
+        <div class="card-desc">Press a large rhubarb or hosta leaf into poured concrete — every single vein transfers perfectly. Nature does the design work. You pour and wait.</div>
+        <div class="card-tags">
+          <span class="ctag">⏱ 15 min per stone</span>
+          <span class="ctag">💰 Under $5 each</span>
+          <span class="ctag">🌱 Beginner</span>
+        </div>
+        <div class="card-footer">
+          <div class="price"><sup>$</sup>3.00</div>
+          <button class="buy" onclick="openModal('Leaf Imprint Stepping Stones',3.00,'DIY_Leaf_Concrete_Stepping_Stones_Guide.pdf')">Buy Guide ↓</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Resin Coasters — coming soon -->
+    <div class="card soon" data-cat="glass">
+      <div class="thumb">
+        <img src="thumbnail_resin_facebook.jpg" alt="Flower Resin Coasters"/>
+        <div class="cat-tag">Glass & Resin</div>
+        <div class="soon-tag">Coming Soon</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Flower Resin Coasters</div>
+        <div class="card-desc">Real garden flowers preserved forever inside crystal-clear resin. The most giftable project in the whole collection.</div>
+        <div class="card-tags">
+          <span class="ctag">⏱ 30 min active</span>
+          <span class="ctag">💰 Under $15 for 4</span>
+        </div>
+        <div class="card-footer">
+          <div class="price"><sup>$</sup>3.00</div>
+          <button class="buy">Coming Soon</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Epoxy Shelf — coming soon -->
+    <div class="card soon" data-cat="interior glass">
+      <div class="thumb" style="background:linear-gradient(145deg,#080614,#100E28);display:flex;align-items:center;justify-content:center;font-size:5rem;">
+        💙
+        <div class="cat-tag">Interior</div>
+        <div class="soon-tag">Coming Soon</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Epoxy River Shelf</div>
+        <div class="card-desc">A live-edge wood shelf with a glowing blue epoxy river running through it. Wall art and storage combined into one extraordinary piece.</div>
+        <div class="card-tags">
+          <span class="ctag">⏱ Weekend project</span>
+          <span class="ctag">💰 $100–200</span>
+        </div>
+        <div class="card-footer">
+          <div class="price"><sup>$</sup>9.99</div>
+          <button class="buy">Coming Soon</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="fl">🪨 Made By Hand</div>
+  <p>© 2026 · All guides are digital PDF downloads · <a href="mailto:you@example.com">Contact us</a></p>
+</footer>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <div class="modal-top">
+      <div>
+        <div class="m-name" id="m-name">Guide</div>
+        <div class="m-price" id="m-price">$0.00</div>
+      </div>
+      <button class="m-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div id="form-wrap">
+        <div class="field">
+          <label>Your email — for your receipt</label>
+          <input type="email" id="email" placeholder="your@email.com"/>
+        </div>
+        <div class="field">
+          <label>Card details</label>
+          <div id="card-el"></div>
+          <div id="card-err"></div>
+        </div>
+        <button class="pay-btn" id="pay-btn" onclick="pay()">Complete Purchase</button>
+        <div class="secure">🔒 Secured by Stripe · PDF delivered instantly</div>
+      </div>
+      <div class="success" id="success-box">
+        <span class="icon">🎉</span>
+        <h3>You're all set!</h3>
+        <p>Your PDF guide is ready to download.<br/>A receipt has been sent to your email.</p>
+        <a id="dl-link" href="#" download class="dl">⬇ Download Your Guide</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── STRIPE ─────────────────────────────────────────────────────────────────
+// Replace with your Stripe Publishable Key from dashboard.stripe.com/apikeys
+const STRIPE_KEY = 'pk_test_YOUR_PUBLISHABLE_KEY_HERE';
+
+let stripe, cardEl, curFile, curAmt;
+
+function initStripe() {
+  if (stripe) return;
+  stripe = Stripe(STRIPE_KEY);
+  const els = stripe.elements({
+    appearance: {
+      theme: 'stripe',
+      variables: { colorPrimary:'#8C6B4A', colorBackground:'#FAF7F2', colorText:'#2A2520', fontFamily:"'Nunito', sans-serif", borderRadius:'8px' }
+    }
+  });
+  cardEl = els.create('card', { hidePostalCode: true });
+  cardEl.mount('#card-el');
+  cardEl.on('change', e => { document.getElementById('card-err').textContent = e.error ? e.error.message : ''; });
+}
+
+function openModal(name, price, file) {
+  curFile = file; curAmt = Math.round(price * 100);
+  document.getElementById('m-name').textContent = name;
+  document.getElementById('m-price').textContent = '$' + price.toFixed(2);
+  document.getElementById('pay-btn').textContent = 'Pay $' + price.toFixed(2) + ' & Download';
+  document.getElementById('pay-btn').disabled = false;
+  document.getElementById('card-err').textContent = '';
+  document.getElementById('email').value = '';
+  document.getElementById('form-wrap').style.display = 'block';
+  document.getElementById('success-box').style.display = 'none';
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(initStripe, 80);
+}
+
+function closeModal() {
+  document.getElementById('overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('overlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('overlay')) closeModal();
+});
+
+async function pay() {
+  const email = document.getElementById('email').value.trim();
+  if (!email || !email.includes('@')) { document.getElementById('card-err').textContent = 'Please enter a valid email address.'; return; }
+  const btn = document.getElementById('pay-btn');
+  btn.disabled = true; btn.textContent = 'Processing...';
+  try {
+    // Replace '/create-payment-intent' with your Netlify function URL
+    // See README for backend setup instructions
+    const res = await fetch('/create-payment-intent', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ amount: curAmt, email, currency: 'usd' })
+    });
+    const { clientSecret, error: sErr } = await res.json();
+    if (sErr) throw new Error(sErr);
+    const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: { card: cardEl, billing_details: { email } }
+    });
+    if (error) {
+      document.getElementById('card-err').textContent = error.message;
+      btn.disabled = false; btn.textContent = 'Try Again';
+    } else if (paymentIntent.status === 'succeeded') {
+      document.getElementById('form-wrap').style.display = 'none';
+      document.getElementById('success-box').style.display = 'block';
+      document.getElementById('dl-link').href = curFile;
+    }
+  } catch(err) {
+    document.getElementById('card-err').textContent = 'Something went wrong. Please try again.';
+    btn.disabled = false; btn.textContent = 'Try Again';
+  }
+}
+
+// ── FILTER ─────────────────────────────────────────────────────────────────
+function doFilter(cat, btn) {
+  document.querySelectorAll('.fb').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.card').forEach(c => {
+    c.classList.toggle('hidden', cat !== 'all' && !(c.dataset.cat||'').includes(cat));
+  });
+}
+
+// ── CARD REVEAL ON SCROLL ──────────────────────────────────────────────────
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 60);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.card').forEach(c => {
+  c.style.transition = 'opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s, border-color 0.3s';
+  obs.observe(c);
+});
+</script>
+</body>
+</html>

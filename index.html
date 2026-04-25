@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Made By Hand — DIY Guides for the Home & Garden</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --cream:#FAF7F2; --warm:#F0EBE1; --stone:#D6CEC2;
+  --bark:#8C6B4A; --forest:#4A6741; --ink:#2A2520;
+  --muted:#8A7E72; --white:#FFFFFF; --gold:#C8963C;
+}
+html { scroll-behavior: smooth; }
+body { font-family:'Nunito',sans-serif; background:var(--cream); color:var(--ink); overflow-x:hidden; }
+
+/* NAV */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:200; height:68px;
+  display:flex; align-items:center; justify-content:space-between; padding:0 5vw;
+  background:rgba(250,247,242,0.93); backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(214,206,194,0.5); transition:box-shadow 0.3s;
+}
+nav.scrolled { box-shadow:0 2px 20px rgba(42,37,32,0.08); }
+.logo { font-family:'Lora',serif; font-size:1.25rem; font-weight:700; color:var(--ink); text-decoration:none; display:flex; align-items:center; gap:0.6rem; }
+.logo-mark { width:34px; height:34px; background:var(--bark); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; }
+.nav-cta { display:inline-flex; align-items:center; gap:0.5rem; background:var(--bark); color:white; font-family:'Nunito',sans-serif; font-size:0.88rem; font-weight:700; padding:0.6rem 1.5rem; border-radius:50px; text-decoration:none; transition:background 0.2s,transform 0.15s; }
+.nav-cta:hover { background:var(--ink); transform:translateY(-1px); }
+
+/* HERO */
+.hero { min-height:100vh; padding:90px 5vw 60px; display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; max-width:1300px; margin:0 auto; position:relative; }
+
+.tag-pill { display:inline-flex; align-items:center; gap:0.5rem; border:1.5px solid var(--stone); border-radius:50px; padding:0.4rem 1rem; font-size:0.78rem; font-weight:700; color:var(--bark); margin-bottom:1.75rem; animation:fade-up 0.6s 0.1s both; }
+
+.hero h1 { font-family:'Lora',serif; font-size:clamp(2.8rem,5vw,4.6rem); font-weight:700; line-height:1.1; margin-bottom:1.5rem; animation:fade-up 0.6s 0.2s both; }
+.hero h1 em { font-style:italic; color:var(--bark); }
+.hero-desc { font-size:1.05rem; color:var(--muted); line-height:1.85; max-width:480px; margin-bottom:2.5rem; font-weight:400; animation:fade-up 0.6s 0.3s both; }
+.hero-desc strong { color:var(--ink); font-weight:600; }
+
+.hero-actions { display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; animation:fade-up 0.6s 0.4s both; }
+.btn-big { display:inline-flex; align-items:center; gap:0.65rem; background:var(--bark); color:white; font-family:'Nunito',sans-serif; font-size:1.05rem; font-weight:800; padding:1rem 2.4rem; border-radius:50px; text-decoration:none; border:none; cursor:pointer; box-shadow:0 6px 24px rgba(140,107,74,0.35); transition:background 0.2s,transform 0.2s,box-shadow 0.2s; }
+.btn-big:hover { background:var(--ink); transform:translateY(-2px); box-shadow:0 10px 30px rgba(42,37,32,0.25); }
+.btn-big .arr { transition:transform 0.2s; }
+.btn-big:hover .arr { transform:translateX(4px); }
+.btn-ghost { font-size:0.9rem; font-weight:600; color:var(--muted); text-decoration:none; display:flex; align-items:center; gap:0.35rem; transition:color 0.2s; }
+.btn-ghost:hover { color:var(--ink); }
+
+.hero-trust { display:flex; align-items:center; gap:1.5rem; margin-top:2.5rem; padding-top:2rem; border-top:1px solid var(--stone); flex-wrap:wrap; animation:fade-up 0.6s 0.5s both; }
+.trust-chip { display:flex; align-items:center; gap:0.4rem; font-size:0.8rem; font-weight:600; color:var(--muted); }
+
+/* HERO FLOATING CARDS */
+.hero-right { position:relative; height:560px; animation:fade-up 0.7s 0.3s both; }
+.fc { position:absolute; border-radius:18px; overflow:hidden; box-shadow:0 20px 60px rgba(42,37,32,0.18); transition:transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.4s; cursor:pointer; }
+.fc img { width:100%; height:100%; object-fit:cover; display:block; }
+.fc:hover { box-shadow:0 30px 80px rgba(42,37,32,0.28); z-index:10!important; }
+.fc-1 { width:275px; height:275px; top:20px; left:10px; z-index:3; transform:rotate(-3deg); }
+.fc-2 { width:235px; height:235px; top:60px; right:20px; z-index:2; transform:rotate(4deg); }
+.fc-3 { width:220px; height:220px; bottom:50px; left:55px; z-index:4; transform:rotate(1deg); }
+.fc-4 { width:195px; height:195px; bottom:60px; right:5px; z-index:1; transform:rotate(-2deg); }
+.fc-label { position:absolute; bottom:0; left:0; right:0; padding:1rem 0.85rem 0.75rem; background:linear-gradient(transparent,rgba(42,37,32,0.85)); color:white; font-size:0.72rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; }
+
+@keyframes fade-up { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+/* MARQUEE */
+.marquee-wrap { background:var(--ink); padding:1rem 0; overflow:hidden; }
+.marquee-track { display:flex; width:max-content; animation:marquee 32s linear infinite; }
+.marquee-track:hover { animation-play-state:paused; }
+.marquee-item { display:flex; align-items:center; gap:0.75rem; padding:0 2.5rem; white-space:nowrap; font-size:0.82rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:rgba(250,247,242,0.45); }
+.marquee-dot { width:4px; height:4px; border-radius:50%; background:var(--bark); }
+@keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+/* ABOUT */
+.about { padding:8rem 5vw; max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:6rem; align-items:center; }
+.section-label { display:inline-flex; align-items:center; gap:0.5rem; font-size:0.75rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--forest); margin-bottom:1.25rem; }
+.about h2 { font-family:'Lora',serif; font-size:clamp(1.9rem,3vw,2.8rem); font-weight:700; line-height:1.2; margin-bottom:1.5rem; }
+.about p { font-size:1rem; color:var(--muted); line-height:1.9; margin-bottom:1rem; }
+.about p strong { color:var(--ink); font-weight:600; }
+.about p em { font-style:italic; color:var(--bark); }
+.check-list { list-style:none; margin-top:1.75rem; display:flex; flex-direction:column; gap:0.7rem; }
+.check-list li { display:flex; align-items:flex-start; gap:0.75rem; font-size:0.95rem; font-weight:500; color:var(--ink); }
+.check-list li::before { content:'✓'; color:var(--forest); font-weight:800; font-size:1rem; width:20px; flex-shrink:0; margin-top:1px; }
+
+/* Photo collage */
+.about-photos { display:grid; grid-template-columns:1fr 1fr; gap:0.85rem; }
+.ap { border-radius:14px; overflow:hidden; position:relative; aspect-ratio:1; transition:transform 0.3s; }
+.ap:hover { transform:scale(1.02); }
+.ap img { width:100%; height:100%; object-fit:cover; display:block; }
+.ap:first-child { grid-column:span 2; aspect-ratio:2/1; }
+
+/* HOW IT WORKS */
+.how { background:var(--warm); padding:7rem 5vw; text-align:center; }
+.how h2 { font-family:'Lora',serif; font-size:clamp(1.9rem,3vw,2.8rem); font-weight:700; margin-bottom:0.75rem; }
+.how-sub { color:var(--muted); font-size:1rem; max-width:480px; margin:0 auto 4rem; line-height:1.75; }
+.steps { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; max-width:880px; margin:0 auto 3.5rem; }
+.step { background:var(--white); border-radius:18px; padding:2.5rem 1.75rem; border:1.5px solid var(--stone); transition:transform 0.25s,box-shadow 0.25s,border-color 0.25s; }
+.step:hover { transform:translateY(-6px); box-shadow:0 16px 40px rgba(42,37,32,0.1); border-color:var(--bark); }
+.step-num { width:50px; height:50px; background:var(--bark); color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Lora',serif; font-size:1.3rem; font-weight:700; margin:0 auto 1.25rem; }
+.step h3 { font-family:'Lora',serif; font-size:1.1rem; font-weight:700; margin-bottom:0.6rem; }
+.step p { font-size:0.88rem; color:var(--muted); line-height:1.7; }
+.how-btn { display:inline-flex; align-items:center; gap:0.65rem; background:var(--ink); color:white; font-family:'Nunito',sans-serif; font-size:1rem; font-weight:700; padding:1rem 2.5rem; border-radius:50px; text-decoration:none; box-shadow:0 4px 20px rgba(42,37,32,0.2); transition:background 0.2s,transform 0.2s; }
+.how-btn:hover { background:var(--bark); transform:translateY(-2px); }
+
+/* PROMISE */
+.promise { padding:7rem 5vw; max-width:1000px; margin:0 auto; text-align:center; }
+.promise h2 { font-family:'Lora',serif; font-size:clamp(1.9rem,3vw,2.8rem); font-weight:700; margin-bottom:1rem; }
+.promise-intro { font-size:1rem; color:var(--muted); max-width:600px; margin:0 auto 3rem; line-height:1.8; }
+.promise-intro em { font-style:italic; color:var(--bark); font-family:'Lora',serif; font-size:1.15rem; }
+.promise-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; text-align:left; }
+.pc { background:var(--white); border:1.5px solid var(--stone); border-radius:16px; padding:1.75rem; transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s; }
+.pc:hover { border-color:var(--bark); transform:translateY(-3px); box-shadow:0 8px 30px rgba(140,107,74,0.12); }
+.pc-icon { font-size:2rem; margin-bottom:0.85rem; display:block; }
+.pc h3 { font-family:'Lora',serif; font-size:1.05rem; font-weight:700; margin-bottom:0.5rem; }
+.pc p { font-size:0.88rem; color:var(--muted); line-height:1.65; }
+
+/* FEATURED */
+.featured { background:var(--warm); padding:7rem 5vw; }
+.featured-inner { max-width:1100px; margin:0 auto; }
+.featured-header { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:3rem; flex-wrap:wrap; gap:1rem; }
+.featured-header h2 { font-family:'Lora',serif; font-size:clamp(1.9rem,3vw,2.6rem); font-weight:700; }
+.see-all { display:inline-flex; align-items:center; gap:0.4rem; font-size:0.9rem; font-weight:700; color:var(--bark); text-decoration:none; transition:gap 0.2s; }
+.see-all:hover { gap:0.8rem; }
+.feat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; }
+.feat-card { background:var(--white); border:1.5px solid var(--stone); border-radius:16px; overflow:hidden; transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s; text-decoration:none; color:inherit; display:block; }
+.feat-card:hover { transform:translateY(-6px); box-shadow:0 16px 50px rgba(42,37,32,0.12); border-color:var(--bark); }
+.feat-thumb { width:100%; aspect-ratio:16/9; overflow:hidden; }
+.feat-thumb img { width:100%; height:100%; object-fit:cover; transition:transform 0.4s; }
+.feat-card:hover .feat-thumb img { transform:scale(1.06); }
+.feat-body { padding:1.25rem 1.35rem 1.4rem; }
+.feat-title { font-family:'Lora',serif; font-size:1.1rem; font-weight:700; margin-bottom:0.4rem; }
+.feat-desc { font-size:0.84rem; color:var(--muted); line-height:1.55; margin-bottom:1rem; }
+.feat-footer { display:flex; align-items:center; justify-content:space-between; }
+.feat-price { font-family:'Lora',serif; font-size:1.3rem; font-weight:700; }
+.feat-cta { font-size:0.8rem; font-weight:700; color:var(--bark); }
+
+/* FINAL CTA */
+.final { background:var(--ink); padding:7rem 5vw; text-align:center; }
+.final h2 { font-family:'Lora',serif; font-size:clamp(2rem,4vw,3.2rem); font-weight:700; color:var(--cream); margin-bottom:1rem; line-height:1.2; }
+.final p { color:rgba(250,247,242,0.55); font-size:1rem; max-width:500px; margin:0 auto 2.5rem; line-height:1.75; }
+.final-btn { display:inline-flex; align-items:center; gap:0.75rem; background:var(--gold); color:var(--ink); font-family:'Nunito',sans-serif; font-size:1.1rem; font-weight:800; padding:1.1rem 2.8rem; border-radius:50px; text-decoration:none; box-shadow:0 6px 24px rgba(200,150,60,0.4); transition:background 0.2s,transform 0.2s; }
+.final-btn:hover { background:#daa840; transform:translateY(-2px); }
+
+/* FOOTER */
+footer { background:#1E1B18; padding:2.5rem 5vw; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; }
+.footer-logo { font-family:'Lora',serif; font-size:1.1rem; font-weight:700; color:rgba(250,247,242,0.65); }
+footer p { font-size:0.8rem; color:rgba(250,247,242,0.3); }
+footer a { color:rgba(250,247,242,0.45); text-decoration:none; }
+
+/* SCROLL REVEAL */
+.reveal { opacity:0; transform:translateY(28px); transition:opacity 0.65s ease,transform 0.65s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero { grid-template-columns:1fr; padding-top:90px; gap:2rem; }
+  .hero-right { height:320px; }
+  .fc-1{width:170px;height:170px;} .fc-2{width:150px;height:150px;} .fc-3{width:145px;height:145px;} .fc-4{width:130px;height:130px;bottom:0;}
+  .about { grid-template-columns:1fr; gap:3rem; padding:5rem 5vw; }
+  .about-photos { display:none; }
+  .steps { grid-template-columns:1fr; }
+  .promise-grid { grid-template-columns:1fr; }
+  .feat-grid { grid-template-columns:1fr 1fr; }
+  footer { flex-direction:column; text-align:center; }
+}
+@media(max-width:600px){ .feat-grid{grid-template-columns:1fr;} .hero-trust{gap:0.75rem;} }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="index.html" class="logo">
+    <div class="logo-mark">🪨</div>Made By Hand
+  </a>
+  <a href="shop.html" class="nav-cta">View All Guides →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="tag-pill">✦ Instant PDF Download · No Account Needed</div>
+    <h1>Beautiful Things<br/>You Can<br/><em>Make Yourself</em></h1>
+    <p class="hero-desc">
+      Step-by-step guides for real home and garden projects.
+      <strong>Written for people who want results</strong>, not just inspiration —
+      every guide is built from an actual project, with real photos at every step.
+    </p>
+    <div class="hero-actions">
+      <a href="shop.html" class="btn-big">View All Guides <span class="arr">→</span></a>
+      <a href="#about" class="btn-ghost">What's inside? ↓</a>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-chip">🔒 Secure payment</div>
+      <div class="trust-chip">⬇ Instant download</div>
+      <div class="trust-chip">♾️ Yours forever</div>
+      <div class="trust-chip">📸 Real photos</div>
+    </div>
+  </div>
+
+  <div class="hero-right" id="hero-cards">
+    <div class="fc fc-1" id="fc1">
+      <img src="thumbnail_fire_bowl.jpg" alt="Concrete Fire Bowl"/>
+      <div class="fc-label">Concrete Fire Bowl</div>
+    </div>
+    <div class="fc fc-2" id="fc2">
+      <img src="thumbnail_stone_wall.jpg" alt="Stone Accent Wall"/>
+      <div class="fc-label">Stone Accent Wall</div>
+    </div>
+    <div class="fc fc-3" id="fc3">
+      <img src="thumbnail_glass_stones_facebook.jpg" alt="Glass Mosaic Stones"/>
+      <div class="fc-label">Glass Mosaic Stones</div>
+    </div>
+    <div class="fc fc-4" id="fc4">
+      <img src="thumbnail_planter_facebook.jpg" alt="Woven Planter"/>
+      <div class="fc-label">Woven Planter</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item">🔥 Concrete Fire Bowl <div class="marquee-dot"></div></div>
+    <div class="marquee-item">🪨 Stone Accent Wall <div class="marquee-dot"></div></div>
+    <div class="marquee-item">💎 Glass Mosaic Stones <div class="marquee-dot"></div></div>
+    <div class="marquee-item">🌿 Woven Planter <div class="marquee-dot"></div></div>
+    <div class="marquee-item">🍃 Leaf Stepping Stones <div class="marquee-dot"></div></div>
+    <div class="marquee-item">🕯️ Candle Holder <div class="marquee-dot"></div></div>
+    <div class="marquee-item">🌸 Flower Resin Coasters <div class="marquee-dot"></div></div>
+    <div class="marquee-item">💙 Epoxy River Shelf <div class="marquee-dot"></div></div>
+    <div class="marquee-item">🔥 Concrete Fire Bowl <div class="marquee-dot"></div></div>
+    <div class="marquee-item">🪨 Stone Accent Wall <div class="marquee-dot"></div></div>
+    <div class="marquee-item">💎 Glass Mosaic Stones <div class="marquee-dot"></div></div>
+    <div class="marquee-item">🌿 Woven Planter <div class="marquee-dot"></div></div>
+    <div class="marquee-item">🍃 Leaf Stepping Stones <div class="marquee-dot"></div></div>
+    <div class="marquee-item">🕯️ Candle Holder <div class="marquee-dot"></div></div>
+    <div class="marquee-item">🌸 Flower Resin Coasters <div class="marquee-dot"></div></div>
+    <div class="marquee-item">💙 Epoxy River Shelf <div class="marquee-dot"></div></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="reveal">
+    <div class="section-label">🌱 What This Is All About</div>
+    <h2>We Believe Anyone Can Make Something Extraordinary</h2>
+    <p>There's something deeply satisfying about making something with your own hands — <strong>something that lasts</strong>, something that becomes part of your home and your life. A fire bowl you built yourself. A garden path that glows at night. A stone wall that transforms your living room.</p>
+    <p>These projects aren't complicated. They just <em>look</em> like they are. That's the secret — most beautiful things are simpler than they appear. You just need someone to walk you through it, step by step.</p>
+    <p>That's exactly what every guide in this shop does. No jargon, no skipped steps, no assumed knowledge. Just <strong>clear instructions with real photos</strong> from the actual project — so you always know what to expect.</p>
+    <ul class="check-list">
+      <li>Full materials list with costs — no surprises at the hardware store</li>
+      <li>Real photos taken at every step of the process</li>
+      <li>The most common mistakes — and how to avoid them</li>
+      <li>Troubleshooting for when things don't go perfectly</li>
+      <li>Written for complete beginners — no experience needed</li>
+    </ul>
+  </div>
+  <div class="about-photos reveal">
+    <div class="ap"><img src="thumbnail_fire_bowl.jpg" alt="Fire Bowl"/></div>
+    <div class="ap"><img src="thumbnail_candle_facebook.jpg" alt="Candle Holder"/></div>
+    <div class="ap"><img src="thumbnail_leaf_stones.jpg" alt="Leaf Stones"/></div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="section-label" style="justify-content:center;margin-bottom:1rem">How It Works</div>
+  <h2>Three Simple Steps</h2>
+  <p class="how-sub">From choosing a guide to holding your PDF — it takes about 60 seconds.</p>
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">1</div>
+      <h3>Choose a Guide</h3>
+      <p>Browse the collection and pick a project that excites you. Every guide has a full description so you know exactly what's inside before buying.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">2</div>
+      <h3>Pay Securely</h3>
+      <p>Payment is handled by Stripe — the same system used by Amazon and Apple. Your card details are never stored. Takes about 30 seconds.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">3</div>
+      <h3>Download & Make</h3>
+      <p>Your PDF is available instantly. Print it or keep it on your phone — and start building whenever you're ready. Yours to keep forever.</p>
+    </div>
+  </div>
+  <a href="shop.html" class="how-btn">Browse All Guides →</a>
+</section>
+
+<!-- PROMISE -->
+<section class="promise">
+  <div class="section-label" style="justify-content:center;margin-bottom:1rem">Our Promise</div>
+  <h2>Made for People Who Want to Actually Do It</h2>
+  <p class="promise-intro"><em>"Not just dream about it. Not just save it to Pinterest.<br/>Actually pick up the materials and make something beautiful."</em></p>
+  <div class="promise-grid">
+    <div class="pc reveal"><span class="pc-icon">📸</span><h3>Real Photos, Not Illustrations</h3><p>Every photo was taken during the actual project. You'll see exactly what each step looks like in real life — not a diagram or a stock photo.</p></div>
+    <div class="pc reveal"><span class="pc-icon">🧑‍🏫</span><h3>Written Like a Friend Explaining It</h3><p>No confusing technical language. No skipped steps. Written as if someone's standing next to you in the garden, talking you through it.</p></div>
+    <div class="pc reveal"><span class="pc-icon">💰</span><h3>Save Hundreds — Sometimes Thousands</h3><p>The stone accent wall guide alone could save you $5,000 vs a contractor. Most projects cost a fraction of what they look like they're worth.</p></div>
+    <div class="pc reveal"><span class="pc-icon">⏱️</span><h3>Projects You Can Actually Finish</h3><p>Every project can be completed in a weekend or less. No month-long commitments — real, visible results in real time.</p></div>
+  </div>
+</section>
+
+<!-- FEATURED -->
+<section class="featured">
+  <div class="featured-inner">
+    <div class="featured-header reveal">
+      <div><div class="section-label">Featured</div><h2>Most Popular Guides</h2></div>
+      <a href="shop.html" class="see-all">See all guides →</a>
+    </div>
+    <div class="feat-grid">
+      <a href="shop.html" class="feat-card reveal">
+        <div class="feat-thumb"><img src="thumbnail_glass_stones_facebook.jpg" alt="Glass Mosaic Stones"/></div>
+        <div class="feat-body">
+          <div class="feat-title">Glass Mosaic Stepping Stones</div>
+          <div class="feat-desc">They glow at night like stained glass windows. One of the most spectacular projects in the collection.</div>
+          <div class="feat-footer"><div class="feat-price">$3.00</div><div class="feat-cta">Get guide →</div></div>
+        </div>
+      </a>
+      <a href="shop.html" class="feat-card reveal">
+        <div class="feat-thumb"><img src="thumbnail_stone_wall.jpg" alt="Stone Accent Wall"/></div>
+        <div class="feat-body">
+          <div class="feat-title">Natural Stone Accent Wall</div>
+          <div class="feat-desc">Save $2,000–$7,000 vs hiring a contractor. Includes a full lighting guide for the dramatic nighttime effect.</div>
+          <div class="feat-footer"><div class="feat-price">$12.99</div><div class="feat-cta">Get guide →</div></div>
+        </div>
+      </a>
+      <a href="shop.html" class="feat-card reveal">
+        <div class="feat-thumb"><img src="thumbnail_planter_facebook.jpg" alt="Woven Planter"/></div>
+        <div class="feat-body">
+          <div class="feat-title">Woven Texture Concrete Planter</div>
+          <div class="feat-desc">A $5 laundry basket transfers a beautiful woven pattern onto concrete. Looks like a $100 planter — costs under $20.</div>
+          <div class="feat-footer"><div class="feat-price">$3.99</div><div class="feat-cta">Get guide →</div></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final">
+  <h2>Ready to Make Something<br/>You're Proud Of?</h2>
+  <p>Start with one guide. See how it goes. We think you'll be back for another one pretty soon.</p>
+  <a href="shop.html" class="final-btn">Browse All Guides →</a>
+</section>
+
+<footer>
+  <div class="footer-logo">🪨 Made By Hand</div>
+  <p>© 2026 · All guides are digital PDF downloads · <a href="mailto:you@example.com">Contact us</a></p>
+</footer>
+
+<script>
+// Nav shadow
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// Scroll reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Floating cards parallax on mouse move
+const fcs = [
+  { el: document.getElementById('fc1'), base: -3, depth: 6 },
+  { el: document.getElementById('fc2'), base:  4, depth: 4 },
+  { el: document.getElementById('fc3'), base:  1, depth: 8 },
+  { el: document.getElementById('fc4'), base: -2, depth: 5 },
+];
+document.addEventListener('mousemove', e => {
+  const cx = window.innerWidth/2, cy = window.innerHeight/2;
+  const dx = (e.clientX-cx)/cx, dy = (e.clientY-cy)/cy;
+  fcs.forEach(({el, base, depth}) => {
+    if (el.matches(':hover')) return;
+    el.style.transform = `rotate(${base}deg) translate(${dx*depth}px,${dy*depth}px)`;
+  });
+});
+fcs.forEach(({el, base}) => {
+  el.addEventListener('mouseenter', () => {
+    el.style.transform = `rotate(0deg) scale(1.06)`;
+  });
+  el.addEventListener('mouseleave', () => {
+    el.style.transform = `rotate(${base}deg)`;
+  });
+  el.addEventListener('click', () => { window.location.href='shop.html'; });
+});
+</script>
+</body>
+</html>
