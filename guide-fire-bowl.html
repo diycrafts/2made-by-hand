@@ -26,12 +26,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;display:flex;ali
 .hero-text p{font-size:1rem;color:var(--muted);line-height:1.85;margin-bottom:2rem;}
 .meta-row{display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:2rem;}
 .meta-chip{font-size:0.82rem;font-weight:600;color:var(--muted);background:var(--warm);padding:0.4rem 1rem;border-radius:50px;border:1px solid var(--stone);}
-.price-row{display:flex;align-items:center;gap:1.5rem;margin-bottom:0.5rem;}
+.price-row{display:flex;align-items:center;gap:1.5rem;margin-bottom:0.75rem;flex-wrap:wrap;}
 .big-price{font-family:'Lora',serif;font-size:2.5rem;font-weight:700;color:var(--ink);}
 .big-price sup{font-size:1.2rem;font-weight:400;color:var(--muted);vertical-align:super;}
 .buy-big{display:inline-flex;align-items:center;gap:0.65rem;background:var(--bark);color:white;font-family:'Nunito',sans-serif;font-size:1.05rem;font-weight:800;padding:1rem 2.4rem;border-radius:50px;border:none;cursor:pointer;box-shadow:0 6px 24px rgba(140,107,74,0.35);transition:background 0.2s,transform 0.2s;}
 .buy-big:hover{background:var(--ink);transform:translateY(-2px);}
-.trust-note{font-size:0.78rem;color:var(--muted);display:flex;align-items:center;gap:0.4rem;}
+.trust-note{font-size:0.78rem;color:var(--muted);display:flex;align-items:center;gap:0.4rem;flex-wrap:wrap;}
 .inside-section{background:var(--warm);padding:5rem 5vw;}
 .inside-inner{max-width:900px;margin:0 auto;}
 .section-label{font-size:0.75rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--forest);margin-bottom:1rem;display:block;}
@@ -57,21 +57,21 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;display:flex;ali
 .bottom-btn:hover{background:#daa840;transform:translateY(-2px);}
 .overlay{display:none;position:fixed;inset:0;background:rgba(42,37,32,0.65);z-index:500;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(8px);}
 .overlay.open{display:flex;}
-.modal{background:var(--white);border-radius:20px;width:100%;max-width:460px;overflow:hidden;box-shadow:0 30px 80px rgba(42,37,32,0.25);animation:pop 0.3s cubic-bezier(0.34,1.56,0.64,1);}
+.modal{background:var(--white);border-radius:20px;width:100%;max-width:500px;overflow:hidden;box-shadow:0 30px 80px rgba(42,37,32,0.25);animation:pop 0.3s cubic-bezier(0.34,1.56,0.64,1);max-height:90vh;overflow-y:auto;}
 @keyframes pop{from{opacity:0;transform:scale(0.93) translateY(16px)}to{opacity:1;transform:scale(1) translateY(0)}}
-.modal-top{background:var(--ink);padding:1.75rem 2rem;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;}
+.modal-top{background:var(--ink);padding:1.75rem 2rem;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;position:sticky;top:0;z-index:1;}
 .m-name{font-family:'Lora',serif;font-size:1.1rem;font-weight:600;color:var(--cream);margin-bottom:0.3rem;}
 .m-price{font-family:'Lora',serif;font-size:1.6rem;font-weight:700;color:#E8C878;}
 .m-close{background:none;border:none;color:rgba(250,247,242,0.4);font-size:1.5rem;cursor:pointer;padding:0;line-height:1;flex-shrink:0;}
 .m-close:hover{color:var(--cream);}
 .modal-body{padding:1.75rem 2rem 2rem;}
-.field{margin-bottom:1.1rem;}
+.field{margin-bottom:1.25rem;}
 .field label{display:block;font-size:0.78rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;}
 .field input{width:100%;background:var(--cream);border:1.5px solid var(--stone);border-radius:8px;padding:0.8rem 1rem;color:var(--ink);font-size:1rem;font-family:'Nunito',sans-serif;outline:none;transition:border-color 0.2s;}
 .field input:focus{border-color:var(--bark);}
 #payment-element{margin-bottom:0.5rem;}
-#card-err{font-size:0.82rem;color:#C0392B;margin-top:0.4rem;min-height:1.2em;}
-.pay-btn{width:100%;background:var(--bark);color:white;border:none;border-radius:50px;padding:1rem;font-size:1rem;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;margin-top:1.5rem;transition:background 0.2s;}
+#card-err{font-size:0.82rem;color:#C0392B;margin-top:0.4rem;min-height:1.2em;margin-bottom:0.5rem;}
+.pay-btn{width:100%;background:var(--bark);color:white;border:none;border-radius:50px;padding:1rem;font-size:1rem;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;margin-top:1rem;transition:background 0.2s;}
 .pay-btn:hover:not(:disabled){background:var(--ink);}
 .pay-btn:disabled{opacity:0.5;cursor:not-allowed;}
 .secure{display:flex;align-items:center;justify-content:center;gap:0.4rem;font-size:0.78rem;color:var(--muted);margin-top:1rem;padding-top:1rem;border-top:1px solid var(--warm);}
@@ -92,68 +92,58 @@ footer a{color:rgba(250,247,242,0.45);text-decoration:none;}
   <a href="index.html" class="logo"><div class="logo-mark">🪨</div>Made By Hand</a>
   <a href="shop.html" class="back">← All Guides</a>
 </nav>
-
 <section class="guide-hero">
-  <div class="hero-img">
-    <img src="thumbnail_fire_bowl.jpg" alt="Concrete Fire Bowl"/>
-  </div>
+  <div class="hero-img"><img src="thumbnail_fire_bowl.jpg" alt="Concrete Fire Bowl"/></div>
   <div class="hero-text">
     <span class="eyebrow">Concrete · Outdoor</span>
     <h1>Concrete Fire Bowl</h1>
-    <p>A $3 plastic basin from the dollar store, a bag of concrete, and a pair of gloves — that's all it takes. In one weekend you'll have a heavy, beautiful fire bowl that looks like it cost $300 in a garden store.</p>
+    <p>A $3 plastic basin from the dollar store and a bag of concrete — that's all it takes. In one weekend you'll have a heavy, beautiful fire bowl that looks like it cost $300 in a garden store.</p>
     <div class="meta-row"><span class="meta-chip">⏱ 30 min active</span><span class="meta-chip">⏳ 48h curing</span><span class="meta-chip">💰 Under $30</span><span class="meta-chip">🌱 Complete beginner</span></div>
     <div class="price-row">
       <div class="big-price"><sup>$</sup>5.00</div>
       <button class="buy-big" onclick="openModal()">⬇ Buy & Download</button>
     </div>
-    <div class="trust-note">🔒 Secure payment · Instant PDF download · Yours forever</div>
+    <div class="trust-note">🔒 Secure · ⬇ Instant PDF · 🍎 Apple Pay · G Google Pay · 💳 Card</div>
   </div>
 </section>
-
 <section class="inside-section">
   <div class="inside-inner">
     <span class="section-label">What's Inside</span>
     <h2>Everything You Need to Make This</h2>
-    <div class="inside-grid">
-      <div class="inside-card"><div class="ic-icon">📋</div><div class="ic-text"><strong>Full materials list</strong><span>Every item with exact quantities and where to buy — no guessing</span></div></div>
-      <div class="inside-card"><div class="ic-icon">📸</div><div class="ic-text"><strong>Real photos every step</strong><span>Taken during the actual project so you know exactly what to expect</span></div></div>
-      <div class="inside-card"><div class="ic-icon">🛠️</div><div class="ic-text"><strong>Mixing & pouring guide</strong><span>The exact consistency you need and how to get it right every time</span></div></div>
-      <div class="inside-card"><div class="ic-icon">⚠️</div><div class="ic-text"><strong>Most common mistakes</strong><span>The #1 thing beginners get wrong — and exactly how to avoid it</span></div></div>
-      <div class="inside-card"><div class="ic-icon">🔧</div><div class="ic-text"><strong>Unmolding tips</strong><span>How to release the mold cleanly without cracking or chipping</span></div></div>
-      <div class="inside-card"><div class="ic-icon">💡</div><div class="ic-text"><strong>Setup & safety guide</strong><span>How to place it outdoors safely and prepare it for the first fire</span></div></div>
-    </div>
+    <div class="inside-grid"><div class="inside-card"><div class="ic-icon">📋</div><div class="ic-text"><strong>Full materials list</strong><span>Every item with exact quantities and where to buy</span></div></div>
+<div class="inside-card"><div class="ic-icon">📸</div><div class="ic-text"><strong>Real photos every step</strong><span>Taken during the actual project</span></div></div>
+<div class="inside-card"><div class="ic-icon">🛠️</div><div class="ic-text"><strong>Mixing & pouring guide</strong><span>The exact consistency you need every time</span></div></div>
+<div class="inside-card"><div class="ic-icon">⚠️</div><div class="ic-text"><strong>Most common mistakes</strong><span>The #1 thing beginners get wrong — and how to avoid it</span></div></div>
+<div class="inside-card"><div class="ic-icon">🔧</div><div class="ic-text"><strong>Unmolding tips</strong><span>How to release the mold cleanly without cracking</span></div></div>
+<div class="inside-card"><div class="ic-icon">💡</div><div class="ic-text"><strong>Setup & safety guide</strong><span>How to place it outdoors safely</span></div></div>
+</div>
   </div>
 </section>
-
 <section class="steps-section">
   <h2>The Steps — At a Glance</h2>
-  <div class="steps-list">
-    <div class="step-row"><div class="step-n">1</div><div class="step-t"><strong>Oil your mold generously</strong><span>Coat every surface of the plastic basin — this is the most important step</span></div></div>
-    <div class="step-row"><div class="step-n">2</div><div class="step-t"><strong>Mix concrete to thick consistency</strong><span>Like peanut butter — not runny, not stiff. Mix for 3 full minutes</span></div></div>
-    <div class="step-row"><div class="step-n">3</div><div class="step-t"><strong>Press into the mold</strong><span>Fill the basin and shape the walls to 1.5–2 inches thick</span></div></div>
-    <div class="step-row"><div class="step-n">4</div><div class="step-t"><strong>Cure for 48 hours</strong><span>Cover and keep shaded — patience here means a stronger bowl</span></div></div>
-    <div class="step-row"><div class="step-n">5</div><div class="step-t"><strong>Unmold and reveal</strong><span>Flex the plastic and peel — the satisfying moment</span></div></div>
-    <div class="step-row"><div class="step-n">6</div><div class="step-t"><strong>Sand and seal</strong><span>Smooth the rim and apply sealer for outdoor durability</span></div></div>
-  </div>
+  <div class="steps-list"><div class="step-row"><div class="step-n">1</div><div class="step-t"><strong>Oil your mold generously</strong><span>Coat every surface — this is the most important step</span></div></div>
+<div class="step-row"><div class="step-n">2</div><div class="step-t"><strong>Mix concrete to thick consistency</strong><span>Like peanut butter — mix for 3 full minutes</span></div></div>
+<div class="step-row"><div class="step-n">3</div><div class="step-t"><strong>Press into the mold</strong><span>Fill the basin and shape the walls 1.5–2 inches thick</span></div></div>
+<div class="step-row"><div class="step-n">4</div><div class="step-t"><strong>Cure for 48 hours</strong><span>Cover and keep shaded — patience here = stronger bowl</span></div></div>
+<div class="step-row"><div class="step-n">5</div><div class="step-t"><strong>Unmold and reveal</strong><span>Flex the plastic and peel — the satisfying moment</span></div></div>
+<div class="step-row"><div class="step-n">6</div><div class="step-t"><strong>Sand and seal</strong><span>Smooth the rim and apply sealer for outdoor durability</span></div></div>
+</div>
 </section>
-
 <section class="bottom-cta">
   <h2>Ready to Make This?</h2>
   <p>Instant PDF download. Pay once, keep forever. Real photos at every step.</p>
   <button class="bottom-btn" onclick="openModal()">⬇ Buy Guide — $5.00</button>
 </section>
-
 <footer>
   <div class="fl">🪨 Made By Hand</div>
   <p>© 2026 · All guides are digital PDF downloads · <a href="mailto:you@example.com">Contact us</a></p>
 </footer>
-
 <div class="overlay" id="overlay">
   <div class="modal">
     <div class="modal-top">
       <div>
-        <div class="m-name">Concrete Fire Bowl</div>
-        <div class="m-price">$5.00</div>
+        <div class="m-name" id="m-name">Guide</div>
+        <div class="m-price" id="m-price">$5.00</div>
       </div>
       <button class="m-close" onclick="closeModal()">✕</button>
     </div>
@@ -161,12 +151,9 @@ footer a{color:rgba(250,247,242,0.45);text-decoration:none;}
       <div id="form-wrap">
         <div class="field">
           <label>Your email — for your receipt</label>
-          <input type="email" id="email" placeholder="your@email.com"/>
+          <input type="email" id="email" placeholder="your@email.com" oninput="clearErr()"/>
         </div>
-        <div class="field">
-          <label>Payment details</label>
-          <div id="payment-element"></div>
-        </div>
+        <div id="payment-element"></div>
         <div id="card-err"></div>
         <button class="pay-btn" id="pay-btn" onclick="pay()">Pay $5.00 & Download</button>
         <div class="secure">🔒 Secured by Stripe · PDF delivered instantly</div>
@@ -175,15 +162,59 @@ footer a{color:rgba(250,247,242,0.45);text-decoration:none;}
         <span class="icon">🎉</span>
         <h3>You're all set!</h3>
         <p>Your PDF guide is ready to download.<br/>A receipt has been sent to your email.</p>
-        <a id="dl-link" href="DIY_Concrete_Fire_Bowl_Guide.pdf" download class="dl">⬇ Download Your Guide</a>
+        <a id="dl-link" href="#" download class="dl">⬇ Download Your Guide</a>
       </div>
     </div>
   </div>
 </div>
-
 <script>
 const STRIPE_KEY = 'pk_live_51TQB5uERLV3AA0mv0dp2i9c6m3Y1oxuGCe0pghanMWYW9Y8gr4tPWJdwJAUhdaqDaUfWazxd4GKMaRaPfDgwMrBm00d1NxbK5G';
-let stripe, elements;
+let stripe, elements, paymentEl, pdfFile = 'DIY_Concrete_Fire_Bowl_Guide.pdf';
+
+function clearErr() {
+  document.getElementById('card-err').textContent = '';
+}
+
+async function initStripe() {
+  if (elements) return;
+  stripe = Stripe(STRIPE_KEY);
+
+  const email = document.getElementById('email').value.trim();
+
+  try {
+    const res = await fetch('/.netlify/functions/create-payment-intent', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ amount: 500, email: email || 'pending@example.com', currency: 'usd' })
+    });
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+
+    window._clientSecret = data.clientSecret;
+
+    elements = stripe.elements({
+      clientSecret: data.clientSecret,
+      appearance: {
+        theme: 'stripe',
+        variables: {
+          colorPrimary: '#8C6B4A',
+          colorBackground: '#FAF7F2',
+          colorText: '#2A2520',
+          fontFamily: "'Nunito', sans-serif",
+          borderRadius: '8px',
+          spacingUnit: '4px',
+        }
+      }
+    });
+
+    paymentEl = elements.create('payment', {
+      layout: 'tabs',
+    });
+    paymentEl.mount('#payment-element');
+  } catch(err) {
+    document.getElementById('card-err').textContent = 'Could not load payment form. Please refresh and try again.';
+  }
+}
 
 function openModal() {
   document.getElementById('form-wrap').style.display = 'block';
@@ -192,11 +223,11 @@ function openModal() {
   document.getElementById('pay-btn').textContent = 'Pay $5.00 & Download';
   document.getElementById('card-err').textContent = '';
   document.getElementById('email').value = '';
-  document.getElementById('payment-element').innerHTML = '<p style="color:var(--muted);font-size:0.85rem;padding:0.5rem 0;">Enter your email above, then click Pay to load payment options.</p>';
+  document.getElementById('payment-element').innerHTML = '';
+  elements = null;
   document.getElementById('overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
-  elements = null;
-  stripe = Stripe(STRIPE_KEY);
+  setTimeout(initStripe, 150);
 }
 
 function closeModal() {
@@ -204,8 +235,10 @@ function closeModal() {
   document.body.style.overflow = '';
 }
 
-document.getElementById('overlay').addEventListener('click', e => {
-  if (e.target === document.getElementById('overlay')) closeModal();
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('overlay').addEventListener('click', e => {
+    if (e.target === document.getElementById('overlay')) closeModal();
+  });
 });
 
 async function pay() {
@@ -214,79 +247,47 @@ async function pay() {
     document.getElementById('card-err').textContent = 'Please enter a valid email address.';
     return;
   }
+
   const btn = document.getElementById('pay-btn');
   btn.disabled = true;
-  btn.textContent = 'Loading payment...';
-  document.getElementById('card-err').textContent = '';
+  btn.textContent = 'Processing...';
 
   try {
-    const res = await fetch('/.netlify/functions/create-payment-intent', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ amount: 500, email, currency: 'usd' })
-    });
-    const { clientSecret, error: sErr } = await res.json();
-    if (sErr) throw new Error(sErr);
-
-    elements = stripe.elements({
-      clientSecret,
-      appearance: {
-        theme: 'stripe',
-        variables: {
-          colorPrimary: '#8C6B4A',
-          colorBackground: '#FAF7F2',
-          colorText: '#2A2520',
-          fontFamily: "'Nunito', sans-serif",
-          borderRadius: '8px'
-        }
-      }
+    const { error } = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        return_url: window.location.href + '?success=1',
+        receipt_email: email,
+      },
+      redirect: 'if_required',
     });
 
-    document.getElementById('payment-element').innerHTML = '';
-    const paymentEl = elements.create('payment');
-    paymentEl.mount('#payment-element');
-
-    btn.disabled = false;
-    btn.textContent = 'Pay $5.00 & Download';
-
-    paymentEl.on('ready', () => {
-      btn.textContent = 'Pay $5.00 & Download';
-    });
-
+    if (error) {
+      document.getElementById('card-err').textContent = error.message;
+      btn.disabled = false;
+      btn.textContent = 'Try Again';
+    } else {
+      document.getElementById('form-wrap').style.display = 'none';
+      document.getElementById('success-box').style.display = 'block';
+      document.getElementById('dl-link').href = pdfFile;
+    }
   } catch(err) {
     document.getElementById('card-err').textContent = 'Something went wrong. Please try again.';
     btn.disabled = false;
     btn.textContent = 'Try Again';
-    return;
   }
-
-  btn.onclick = async function() {
-    btn.disabled = true;
-    btn.textContent = 'Processing...';
-    try {
-      const { error } = await stripe.confirmPayment({
-        elements,
-        confirmParams: {
-          return_url: window.location.href,
-          receipt_email: email,
-        },
-        redirect: 'if_required'
-      });
-      if (error) {
-        document.getElementById('card-err').textContent = error.message;
-        btn.disabled = false;
-        btn.textContent = 'Try Again';
-      } else {
-        document.getElementById('form-wrap').style.display = 'none';
-        document.getElementById('success-box').style.display = 'block';
-      }
-    } catch(err) {
-      document.getElementById('card-err').textContent = 'Something went wrong. Please try again.';
-      btn.disabled = false;
-      btn.textContent = 'Try Again';
-    }
-  };
 }
+
+// Handle return from redirect-based payment (e.g. bank redirect)
+window.addEventListener('DOMContentLoaded', async () => {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('success') === '1') {
+    document.getElementById('overlay').classList.add('open');
+    document.getElementById('form-wrap').style.display = 'none';
+    document.getElementById('success-box').style.display = 'block';
+    document.getElementById('dl-link').href = pdfFile;
+  }
+});
 </script>
 </body>
 </html>
