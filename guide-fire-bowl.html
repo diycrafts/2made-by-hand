@@ -185,38 +185,6 @@ footer a{color:rgba(250,247,242,0.45);text-decoration:none;}
 const STRIPE_KEY = 'pk_live_51TQB5uERLV3AA0mv0dp2i9c6m3Y1oxuGCe0pghanMWYW9Y8gr4tPWJdwJAUhdaqDaUfWazxd4GKMaRaPfDgwMrBm00d1NxbK5G';
 let stripe, elements;
 
-async function initStripe() {
-  if (elements) return;
-  stripe = Stripe(STRIPE_KEY);
-
-  const email = document.getElementById('email').value.trim();
-
-  const res = await fetch('/.netlify/functions/create-payment-intent', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ amount: 500, email: email || '', currency: 'usd' })
-  });
-  const { clientSecret, error: sErr } = await res.json();
-  if (sErr) { document.getElementById('card-err').textContent = sErr; return; }
-
-  elements = stripe.elements({
-    clientSecret,
-    appearance: {
-      theme: 'stripe',
-      variables: {
-        colorPrimary: '#8C6B4A',
-        colorBackground: '#FAF7F2',
-        colorText: '#2A2520',
-        fontFamily: "'Nunito', sans-serif",
-        borderRadius: '8px'
-      }
-    }
-  });
-
-  const paymentEl = elements.create('payment');
-  paymentEl.mount('#payment-element');
-}
-
 function openModal() {
   document.getElementById('form-wrap').style.display = 'block';
   document.getElementById('success-box').style.display = 'none';
@@ -224,10 +192,11 @@ function openModal() {
   document.getElementById('pay-btn').textContent = 'Pay $5.00 & Download';
   document.getElementById('card-err').textContent = '';
   document.getElementById('email').value = '';
+  document.getElementById('payment-element').innerHTML = '<p style="color:var(--muted);font-size:0.85rem;padding:0.5rem 0;">Enter your email above, then click Pay to load payment options.</p>';
   document.getElementById('overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
   elements = null;
-  setTimeout(initStripe, 80);
+  stripe = Stripe(STRIPE_KEY);
 }
 
 function closeModal() {
@@ -247,29 +216,76 @@ async function pay() {
   }
   const btn = document.getElementById('pay-btn');
   btn.disabled = true;
-  btn.textContent = 'Processing...';
+  btn.textContent = 'Loading payment...';
+  document.getElementById('card-err').textContent = '';
+
   try {
-    const { error } = await stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        return_url: window.location.href,
-        receipt_email: email,
-      },
-      redirect: 'if_required'
+    const res = await fetch('/.netlify/functions/create-payment-intent', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ amount: 500, email, currency: 'usd' })
     });
-    if (error) {
-      document.getElementById('card-err').textContent = error.message;
-      btn.disabled = false;
-      btn.textContent = 'Try Again';
-    } else {
-      document.getElementById('form-wrap').style.display = 'none';
-      document.getElementById('success-box').style.display = 'block';
-    }
+    const { clientSecret, error: sErr } = await res.json();
+    if (sErr) throw new Error(sErr);
+
+    elements = stripe.elements({
+      clientSecret,
+      appearance: {
+        theme: 'stripe',
+        variables: {
+          colorPrimary: '#8C6B4A',
+          colorBackground: '#FAF7F2',
+          colorText: '#2A2520',
+          fontFamily: "'Nunito', sans-serif",
+          borderRadius: '8px'
+        }
+      }
+    });
+
+    document.getElementById('payment-element').innerHTML = '';
+    const paymentEl = elements.create('payment');
+    paymentEl.mount('#payment-element');
+
+    btn.disabled = false;
+    btn.textContent = 'Pay $5.00 & Download';
+
+    paymentEl.on('ready', () => {
+      btn.textContent = 'Pay $5.00 & Download';
+    });
+
   } catch(err) {
     document.getElementById('card-err').textContent = 'Something went wrong. Please try again.';
     btn.disabled = false;
     btn.textContent = 'Try Again';
+    return;
   }
+
+  btn.onclick = async function() {
+    btn.disabled = true;
+    btn.textContent = 'Processing...';
+    try {
+      const { error } = await stripe.confirmPayment({
+        elements,
+        confirmParams: {
+          return_url: window.location.href,
+          receipt_email: email,
+        },
+        redirect: 'if_required'
+      });
+      if (error) {
+        document.getElementById('card-err').textContent = error.message;
+        btn.disabled = false;
+        btn.textContent = 'Try Again';
+      } else {
+        document.getElementById('form-wrap').style.display = 'none';
+        document.getElementById('success-box').style.display = 'block';
+      }
+    } catch(err) {
+      document.getElementById('card-err').textContent = 'Something went wrong. Please try again.';
+      btn.disabled = false;
+      btn.textContent = 'Try Again';
+    }
+  };
 }
 </script>
 </body>
