@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Viral Blueprint — $2,453/month from Facebook Reels | Made By Hand</title>
+<meta name="description" content="The exact system behind 3M+ views per video and $2,453/month from Facebook Reels — with $0 ad spend. 18-page PDF guide. Instant download."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --cream:#FAF7F2; --warm:#F0EBE1; --stone:#D6CEC2;
+  --bark:#8C6B4A; --forest:#4A6741; --ink:#2A2520;
+  --muted:#8A7E72; --white:#FFFFFF; --gold:#C8963C;
+  --dark:#0f0f0f; --orange:#EA7A2D;
+}
+html { scroll-behavior: smooth; }
+body { font-family:'Nunito',sans-serif; background:var(--cream); color:var(--ink); overflow-x:hidden; }
+
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:200; height:68px;
+  display:flex; align-items:center; justify-content:space-between; padding:0 5vw;
+  background:rgba(250,247,242,0.93); backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(214,206,194,0.5);
+}
+.logo { font-family:'Lora',serif; font-size:1.25rem; font-weight:700; color:var(--ink); text-decoration:none; display:flex; align-items:center; gap:0.6rem; }
+.logo-mark { width:34px; height:34px; background:var(--bark); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; }
+.nav-back { font-size:0.88rem; font-weight:700; color:var(--muted); text-decoration:none; display:flex; align-items:center; gap:0.4rem; transition:color 0.2s; }
+.nav-back:hover { color:var(--ink); }
+
+/* HERO */
+.guide-hero {
+  margin-top:68px;
+  background:linear-gradient(135deg, #0f0f0f 0%, #1c160f 60%, #0f0f0f 100%);
+  padding:5rem 5vw 4rem;
+}
+.guide-hero-inner {
+  max-width:1100px; margin:0 auto;
+  display:grid; grid-template-columns:1fr 480px; gap:4rem; align-items:start;
+}
+.guide-badge {
+  display:inline-flex; align-items:center; gap:0.5rem;
+  background:var(--gold); color:#1a1410;
+  font-size:0.72rem; font-weight:800; letter-spacing:0.12em; text-transform:uppercase;
+  padding:0.4rem 1rem; border-radius:50px; margin-bottom:1.5rem;
+}
+.guide-title {
+  font-family:'Lora',serif;
+  font-size:clamp(2.4rem,4vw,3.6rem);
+  font-weight:700; line-height:1.1; color:#fff; margin-bottom:1rem;
+}
+.guide-title span { color:var(--orange); }
+.guide-tagline {
+  font-size:1.1rem; color:rgba(255,255,255,0.65);
+  line-height:1.7; margin-bottom:2rem; max-width:500px;
+}
+.guide-proof {
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(200,150,60,0.25);
+  border-radius:14px; padding:1.25rem 1.5rem;
+  margin-bottom:2rem;
+}
+.guide-proof-label {
+  font-size:0.7rem; font-weight:800; letter-spacing:0.12em; text-transform:uppercase;
+  color:var(--gold); margin-bottom:0.75rem;
+}
+.guide-proof img {
+  width:100%; border-radius:8px; display:block;
+}
+.guide-stats {
+  display:flex; gap:2.5rem; margin-bottom:2.5rem; flex-wrap:wrap;
+}
+.gs { }
+.gs-num { font-family:'Lora',serif; font-size:2rem; font-weight:700; color:#F5A623; line-height:1; }
+.gs-label { font-size:0.75rem; color:rgba(255,255,255,0.4); font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin-top:0.2rem; }
+
+/* BUY CARD */
+.buy-card {
+  background:var(--white);
+  border-radius:20px;
+  padding:2rem;
+  box-shadow:0 30px 80px rgba(0,0,0,0.4);
+  position:sticky; top:90px;
+}
+.buy-thumb {
+  width:100%; border-radius:12px; overflow:hidden; margin-bottom:1.5rem;
+}
+.buy-thumb img { width:100%; display:block; }
+.buy-price-row {
+  display:flex; align-items:baseline; gap:0.75rem; margin-bottom:0.5rem;
+}
+.buy-price {
+  font-family:'Lora',serif; font-size:2.4rem; font-weight:700; color:var(--ink);
+}
+.buy-original {
+  font-size:1rem; color:var(--muted); text-decoration:line-through; font-weight:600;
+}
+.buy-save {
+  font-size:0.78rem; font-weight:800; color:#4A6741;
+  background:#e8f4e8; padding:0.2rem 0.6rem; border-radius:50px;
+}
+.buy-desc {
+  font-size:0.88rem; color:var(--muted); margin-bottom:1.5rem; line-height:1.6;
+}
+.buy-btn {
+  display:flex; align-items:center; justify-content:center; gap:0.65rem;
+  width:100%; background:var(--gold); color:#1a1410;
+  font-family:'Nunito',sans-serif; font-size:1.05rem; font-weight:800;
+  padding:1rem; border-radius:50px; text-decoration:none; border:none; cursor:pointer;
+  box-shadow:0 6px 24px rgba(200,150,60,0.4);
+  transition:background 0.2s, transform 0.2s;
+  margin-bottom:0.75rem;
+}
+.buy-btn:hover { background:#daa840; transform:translateY(-1px); }
+.buy-meta {
+  display:flex; align-items:center; justify-content:center;
+  gap:1rem; font-size:0.78rem; color:var(--muted); font-weight:600;
+}
+.buy-meta span { display:flex; align-items:center; gap:0.3rem; }
+.buy-includes {
+  margin-top:1.5rem; padding-top:1.5rem;
+  border-top:1px solid var(--stone);
+}
+.buy-includes-title {
+  font-size:0.75rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase;
+  color:var(--muted); margin-bottom:0.85rem;
+}
+.include-item {
+  display:flex; align-items:center; gap:0.6rem;
+  font-size:0.88rem; font-weight:600; color:var(--ink);
+  padding:0.4rem 0;
+}
+.include-item::before { content:'✓'; color:var(--forest); font-weight:800; }
+
+/* CONTENT SECTION */
+.guide-content {
+  max-width:1100px; margin:0 auto; padding:5rem 5vw;
+  display:grid; grid-template-columns:1fr 480px; gap:4rem; align-items:start;
+}
+.content-left {}
+.section-label { display:inline-flex; align-items:center; gap:0.5rem; font-size:0.75rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--forest); margin-bottom:1.25rem; }
+.content-left h2 { font-family:'Lora',serif; font-size:clamp(1.7rem,2.5vw,2.4rem); font-weight:700; margin-bottom:1.5rem; line-height:1.2; }
+.content-left p { font-size:1rem; color:var(--muted); line-height:1.9; margin-bottom:1rem; }
+.content-left p strong { color:var(--ink); font-weight:600; }
+
+.chapters { margin-top:2rem; display:flex; flex-direction:column; gap:0.5rem; }
+.chapter {
+  background:var(--warm); border:1.5px solid var(--stone);
+  border-radius:12px; padding:1rem 1.25rem;
+  display:flex; align-items:flex-start; gap:1rem;
+}
+.chapter-num {
+  font-family:'Lora',serif; font-size:0.85rem; font-weight:700;
+  color:var(--bark); min-width:36px; padding-top:2px;
+}
+.chapter-body {}
+.chapter-title { font-size:0.95rem; font-weight:700; color:var(--ink); margin-bottom:0.25rem; }
+.chapter-desc { font-size:0.82rem; color:var(--muted); line-height:1.5; }
+
+/* Proof section */
+.proof-section {
+  background:var(--ink); padding:5rem 5vw; text-align:center;
+}
+.proof-section h2 {
+  font-family:'Lora',serif; font-size:clamp(1.8rem,3vw,2.5rem);
+  font-weight:700; color:var(--cream); margin-bottom:0.75rem;
+}
+.proof-section p {
+  color:rgba(250,247,242,0.5); font-size:1rem; max-width:500px;
+  margin:0 auto 2.5rem; line-height:1.75;
+}
+.proof-img-wrap {
+  max-width:800px; margin:0 auto;
+  border-radius:16px; overflow:hidden;
+  box-shadow:0 30px 80px rgba(0,0,0,0.5);
+  border:1px solid rgba(200,150,60,0.2);
+}
+.proof-img-wrap img { width:100%; display:block; }
+
+footer { background:#1E1B18; padding:2.5rem 5vw; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; }
+.footer-logo { font-family:'Lora',serif; font-size:1.1rem; font-weight:700; color:rgba(250,247,242,0.65); }
+footer p { font-size:0.8rem; color:rgba(250,247,242,0.3); }
+footer a { color:rgba(250,247,242,0.45); text-decoration:none; }
+
+@media(max-width:900px){
+  .guide-hero-inner { grid-template-columns:1fr; }
+  .buy-card { position:static; }
+  .guide-content { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">
+    <div class="logo-mark">🪨</div>Made By Hand
+  </a>
+  <a href="index.html" class="nav-back">← Back to home</a>
+</nav>
+
+<!-- HERO -->
+<section class="guide-hero">
+  <div class="guide-hero-inner">
+    <div>
+      <div class="guide-badge">★ Best Seller · 18-Page PDF Guide</div>
+      <h1 class="guide-title">The Viral<br/><span>Blueprint</span></h1>
+      <p class="guide-tagline">
+        How to create content that reaches <strong style="color:#fff">3M+ views per video</strong>
+        and generates real income — with $0 ad spend.
+        The exact system behind $2,453/month from Facebook Reels.
+      </p>
+
+      <div class="guide-proof">
+        <div class="guide-proof-label">📊 Real earnings proof — last 28 days</div>
+        <img src="WhatsApp_Image_2026-04-26_at_23_07_32.jpeg" alt="$2,453 earnings from Facebook Reels"/>
+      </div>
+
+      <div class="guide-stats">
+        <div class="gs">
+          <div class="gs-num">$2,453</div>
+          <div class="gs-label">Monthly earnings (real)</div>
+        </div>
+        <div class="gs">
+          <div class="gs-num">3M+</div>
+          <div class="gs-label">Views per video</div>
+        </div>
+        <div class="gs">
+          <div class="gs-num">+358%</div>
+          <div class="gs-label">Growth vs prev. month</div>
+        </div>
+        <div class="gs">
+          <div class="gs-num">$0</div>
+          <div class="gs-label">Ad spend required</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUY CARD -->
+    <div class="buy-card">
+      <div class="buy-thumb">
+        <img src="thumbnail_viral_blueprint.jpg" alt="The Viral Blueprint PDF"/>
+      </div>
+      <div class="buy-price-row">
+        <div class="buy-price">$9.99</div>
+        <div class="buy-original">$19.99</div>
+        <div class="buy-save">50% OFF</div>
+      </div>
+      <p class="buy-desc">One-time payment. Instant download. Yours to keep forever.</p>
+      <a href="shop.html" class="buy-btn">Get Instant Access →</a>
+      <div class="buy-meta">
+        <span>🔒 Secure payment</span>
+        <span>⬇ Instant PDF</span>
+        <span>♾️ Yours forever</span>
+      </div>
+      <div class="buy-includes">
+        <div class="buy-includes-title">What's included</div>
+        <div class="include-item">18-page PDF guide (instant download)</div>
+        <div class="include-item">7 proven hook types with real examples</div>
+        <div class="include-item">The 4-step Viral Content Framework</div>
+        <div class="include-item">48-hour viral playbook</div>
+        <div class="include-item">5 income streams with real numbers</div>
+        <div class="include-item">30-day action plan (day by day)</div>
+        <div class="include-item">Real earnings proof — $2,453/month</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<section class="guide-content">
+  <div class="content-left">
+    <div class="section-label">📖 What's Inside</div>
+    <h2>Everything You Need to Go From Zero to Viral — and Turn It Into Income</h2>
+    <p>Most creators post and hope. This guide gives you the <strong>psychology, the system, and the step-by-step plan</strong> to engineer content that spreads — and then monetise that audience with five different income streams.</p>
+    <p>Every strategy in this guide is drawn from real results: 3M+ views per video, $2,453 in the last 28 days, with $0 in ad spend. This isn't theory — it's the exact playbook.</p>
+
+    <div class="chapters">
+      <div class="chapter">
+        <div class="chapter-num">01</div>
+        <div class="chapter-body">
+          <div class="chapter-title">The Science of Virality</div>
+          <div class="chapter-desc">Why content explodes — the psychology and patterns behind every viral hit. The 3 triggers that drive sharing.</div>
+        </div>
+      </div>
+      <div class="chapter">
+        <div class="chapter-num">02</div>
+        <div class="chapter-body">
+          <div class="chapter-title">The Hook Formula</div>
+          <div class="chapter-desc">7 proven hook types with real video examples that stop scrolls instantly. You have 3 seconds — here's how to use them.</div>
+        </div>
+      </div>
+      <div class="chapter">
+        <div class="chapter-num">03</div>
+        <div class="chapter-body">
+          <div class="chapter-title">Scroll-Stopping Psychology</div>
+          <div class="chapter-desc">How the brain works in a feed and how to trigger automatic attention before conscious thought kicks in.</div>
+        </div>
+      </div>
+      <div class="chapter">
+        <div class="chapter-num">04</div>
+        <div class="chapter-body">
+          <div class="chapter-title">The Viral Content Framework</div>
+          <div class="chapter-desc">A repeatable 4-step system for creating content with viral potential every time — no guessing.</div>
+        </div>
+      </div>
+      <div class="chapter">
+        <div class="chapter-num">05</div>
+        <div class="chapter-body">
+          <div class="chapter-title">Managing Virality</div>
+          <div class="chapter-desc">What to do when a video blows up — the 48-hour playbook to convert a spike into permanent growth.</div>
+        </div>
+      </div>
+      <div class="chapter">
+        <div class="chapter-num">06</div>
+        <div class="chapter-body">
+          <div class="chapter-title">Monetising Your Audience</div>
+          <div class="chapter-desc">5 income streams for the DIY niche, with real numbers. From first dollar to systems that earn while you sleep.</div>
+        </div>
+      </div>
+      <div class="chapter">
+        <div class="chapter-num">07</div>
+        <div class="chapter-body">
+          <div class="chapter-title">Your 30-Day Action Plan</div>
+          <div class="chapter-desc">Day-by-day plan to go from zero to results within one month. No excuses — every day has a specific task.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- empty right column — buy card is sticky in hero on desktop -->
+  <div></div>
+</section>
+
+<!-- PROOF SECTION -->
+<section class="proof-section">
+  <h2>Real Results. Real Money.</h2>
+  <p>This is what $2,453 from Facebook Reels looks like — earned in the last 28 days, with $0 in advertising.</p>
+  <div class="proof-img-wrap">
+    <img src="WhatsApp_Image_2026-04-26_at_23_07_32.jpeg" alt="Facebook Reels earnings proof — $2,453 in 28 days"/>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">🪨 Made By Hand</div>
+  <p>© 2026 · All guides are digital PDF downloads · <a href="mailto:you@example.com">Contact us</a></p>
+</footer>
+</body>
+</html>
