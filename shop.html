@@ -124,18 +124,38 @@ footer a{color:rgba(250,247,242,0.45);text-decoration:none;}
   <div class="grid" id="grid">
 
     <!-- ===== NOU — PRIMUL in grila ===== -->
+    <a href="guide-bottle-edging.html" class="card" data-cat="concrete garden">
+      <div class="thumb">
+        <img src="thumbnail_bottle-edging.jpg" alt="DIY Concrete Bottle Glass Garden Edging"/>
+        <div class="cat-tag">Concrete &middot; Garden</div>
+        <div class="new-tag">NEW</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">DIY Concrete Bottle Glass Garden Edging</div>
+        <div class="card-desc">Turn 100+ recycled bottles into a garden border that glows like stained glass in sunlight. Built with basic concrete in a simple wooden mold.</div>
+        <div class="card-tags">
+          <span class="ctag">&#9201; 1 day + 48h cure</span>
+          <span class="ctag">&#128176; $25&ndash;$60</span>
+          <span class="ctag">&#127807; Beginner</span>
+        </div>
+        <div class="card-footer">
+          <div class="price"><sup>$</sup>5.00</div>
+          <span class="view-btn">View Guide &#8594;</span>
+        </div>
+      </div>
+    </a>
+
     <a href="guide-creek-bridge.html" class="card" data-cat="garden">
       <div class="thumb">
         <img src="thumbnail_creek-bridge.jpg" alt="DIY Dry Creek Stream and Garden Bridge"/>
         <div class="cat-tag">Wood &middot; Garden</div>
-        <div class="new-tag">NEW</div>
       </div>
       <div class="card-body">
         <div class="card-title">DIY Dry Creek Stream &amp; Garden Bridge</div>
         <div class="card-desc">Turn a flat backyard into a stunning natural stream with a handmade arched wooden bridge. One weekend, $80&ndash;130 in materials.</div>
         <div class="card-tags">
           <span class="ctag">&#9201; 1 weekend</span>
-          <span class="ctag">&#128176; $80&ndash;130</span>
+          <span class="ctag">&#128176; $80&ndash;$130</span>
           <span class="ctag">&#127807; Beginner</span>
         </div>
         <div class="card-footer">
@@ -316,7 +336,6 @@ function doFilter(cat, btn) {
     c.classList.toggle('hidden', cat !== 'all' && !(c.dataset.cat||'').includes(cat));
   });
 }
-
 const obs = new IntersectionObserver(entries => {
   entries.forEach((e, i) => {
     if (e.isIntersecting) {
@@ -325,7 +344,6 @@ const obs = new IntersectionObserver(entries => {
     }
   });
 }, { threshold: 0.1 });
-
 document.querySelectorAll('.card, .vb-card-pinned').forEach(c => {
   c.style.transition = 'opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s, border-color 0.3s';
   obs.observe(c);
