@@ -4,184 +4,108 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>The Viral Blueprint — $2,453/month from Facebook Reels | Made By Hand</title>
-<meta name="description" content="The exact system behind 3M+ views per video and $2,453/month from Facebook Reels — with $0 ad spend. 18-page PDF guide. Instant download."/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://js.stripe.com/v3/"></script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
   --cream:#FAF7F2; --warm:#F0EBE1; --stone:#D6CEC2;
   --bark:#8C6B4A; --forest:#4A6741; --ink:#2A2520;
   --muted:#8A7E72; --white:#FFFFFF; --gold:#C8963C;
-  --dark:#0f0f0f; --orange:#EA7A2D;
+  --orange:#EA7A2D;
 }
 html { scroll-behavior: smooth; }
 body { font-family:'Nunito',sans-serif; background:var(--cream); color:var(--ink); overflow-x:hidden; }
 
-nav {
-  position:fixed; top:0; left:0; right:0; z-index:200; height:68px;
-  display:flex; align-items:center; justify-content:space-between; padding:0 5vw;
-  background:rgba(250,247,242,0.93); backdrop-filter:blur(14px);
-  border-bottom:1px solid rgba(214,206,194,0.5);
-}
-.logo { font-family:'Lora',serif; font-size:1.25rem; font-weight:700; color:var(--ink); text-decoration:none; display:flex; align-items:center; gap:0.6rem; }
-.logo-mark { width:34px; height:34px; background:var(--bark); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; }
-.nav-back { font-size:0.88rem; font-weight:700; color:var(--muted); text-decoration:none; display:flex; align-items:center; gap:0.4rem; transition:color 0.2s; }
+nav { position:fixed;top:0;left:0;right:0;z-index:200;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;background:rgba(250,247,242,0.93);backdrop-filter:blur(14px);border-bottom:1px solid rgba(214,206,194,0.5); }
+.logo { font-family:'Lora',serif;font-size:1.25rem;font-weight:700;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:0.6rem; }
+.logo-mark { width:34px;height:34px;background:var(--bark);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem; }
+.nav-back { font-size:0.88rem;font-weight:700;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:0.4rem;transition:color 0.2s; }
 .nav-back:hover { color:var(--ink); }
 
 /* HERO */
-.guide-hero {
-  margin-top:68px;
-  background:linear-gradient(135deg, #0f0f0f 0%, #1c160f 60%, #0f0f0f 100%);
-  padding:5rem 5vw 4rem;
-}
-.guide-hero-inner {
-  max-width:1100px; margin:0 auto;
-  display:grid; grid-template-columns:1fr 480px; gap:4rem; align-items:start;
-}
-.guide-badge {
-  display:inline-flex; align-items:center; gap:0.5rem;
-  background:var(--gold); color:#1a1410;
-  font-size:0.72rem; font-weight:800; letter-spacing:0.12em; text-transform:uppercase;
-  padding:0.4rem 1rem; border-radius:50px; margin-bottom:1.5rem;
-}
-.guide-title {
-  font-family:'Lora',serif;
-  font-size:clamp(2.4rem,4vw,3.6rem);
-  font-weight:700; line-height:1.1; color:#fff; margin-bottom:1rem;
-}
+.guide-hero { margin-top:68px;background:linear-gradient(135deg,#0f0f0f 0%,#1c160f 60%,#0f0f0f 100%);padding:5rem 5vw 4rem; }
+.guide-hero-inner { max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 420px;gap:4rem;align-items:start; }
+.guide-badge { display:inline-flex;align-items:center;gap:0.5rem;background:var(--gold);color:#1a1410;font-size:0.72rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;padding:0.4rem 1rem;border-radius:50px;margin-bottom:1.5rem; }
+.guide-title { font-family:'Lora',serif;font-size:clamp(2.4rem,4vw,3.6rem);font-weight:700;line-height:1.1;color:#fff;margin-bottom:1rem; }
 .guide-title span { color:var(--orange); }
-.guide-tagline {
-  font-size:1.1rem; color:rgba(255,255,255,0.65);
-  line-height:1.7; margin-bottom:2rem; max-width:500px;
-}
-.guide-proof {
-  background:rgba(255,255,255,0.05);
-  border:1px solid rgba(200,150,60,0.25);
-  border-radius:14px; padding:1.25rem 1.5rem;
-  margin-bottom:2rem;
-}
-.guide-proof-label {
-  font-size:0.7rem; font-weight:800; letter-spacing:0.12em; text-transform:uppercase;
-  color:var(--gold); margin-bottom:0.75rem;
-}
-.guide-proof img {
-  width:100%; border-radius:8px; display:block;
-}
-.guide-stats {
-  display:flex; gap:2.5rem; margin-bottom:2.5rem; flex-wrap:wrap;
-}
-.gs { }
-.gs-num { font-family:'Lora',serif; font-size:2rem; font-weight:700; color:#F5A623; line-height:1; }
-.gs-label { font-size:0.75rem; color:rgba(255,255,255,0.4); font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin-top:0.2rem; }
+.guide-tagline { font-size:1.1rem;color:rgba(255,255,255,0.65);line-height:1.7;margin-bottom:2rem;max-width:500px; }
+.guide-proof { background:rgba(255,255,255,0.05);border:1px solid rgba(200,150,60,0.25);border-radius:14px;padding:1.25rem 1.5rem;margin-bottom:2rem; }
+.guide-proof-label { font-size:0.7rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem; }
+.guide-proof img { width:100%;border-radius:8px;display:block; }
+.guide-stats { display:flex;gap:2.5rem;margin-bottom:2.5rem;flex-wrap:wrap; }
+.gs-num { font-family:'Lora',serif;font-size:2rem;font-weight:700;color:#F5A623;line-height:1; }
+.gs-label { font-size:0.75rem;color:rgba(255,255,255,0.4);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;margin-top:0.2rem; }
 
 /* BUY CARD */
-.buy-card {
-  background:var(--white);
-  border-radius:20px;
-  padding:2rem;
-  box-shadow:0 30px 80px rgba(0,0,0,0.4);
-  position:sticky; top:90px;
-}
-.buy-thumb {
-  width:100%; border-radius:12px; overflow:hidden; margin-bottom:1.5rem;
-}
-.buy-thumb img { width:100%; display:block; }
-.buy-price-row {
-  display:flex; align-items:baseline; gap:0.75rem; margin-bottom:0.5rem;
-}
-.buy-price {
-  font-family:'Lora',serif; font-size:2.4rem; font-weight:700; color:var(--ink);
-}
-.buy-original {
-  font-size:1rem; color:var(--muted); text-decoration:line-through; font-weight:600;
-}
-.buy-save {
-  font-size:0.78rem; font-weight:800; color:#4A6741;
-  background:#e8f4e8; padding:0.2rem 0.6rem; border-radius:50px;
-}
-.buy-desc {
-  font-size:0.88rem; color:var(--muted); margin-bottom:1.5rem; line-height:1.6;
-}
-.buy-btn {
-  display:flex; align-items:center; justify-content:center; gap:0.65rem;
-  width:100%; background:var(--gold); color:#1a1410;
-  font-family:'Nunito',sans-serif; font-size:1.05rem; font-weight:800;
-  padding:1rem; border-radius:50px; text-decoration:none; border:none; cursor:pointer;
-  box-shadow:0 6px 24px rgba(200,150,60,0.4);
-  transition:background 0.2s, transform 0.2s;
-  margin-bottom:0.75rem;
-}
-.buy-btn:hover { background:#daa840; transform:translateY(-1px); }
-.buy-meta {
-  display:flex; align-items:center; justify-content:center;
-  gap:1rem; font-size:0.78rem; color:var(--muted); font-weight:600;
-}
-.buy-meta span { display:flex; align-items:center; gap:0.3rem; }
-.buy-includes {
-  margin-top:1.5rem; padding-top:1.5rem;
-  border-top:1px solid var(--stone);
-}
-.buy-includes-title {
-  font-size:0.75rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase;
-  color:var(--muted); margin-bottom:0.85rem;
-}
-.include-item {
-  display:flex; align-items:center; gap:0.6rem;
-  font-size:0.88rem; font-weight:600; color:var(--ink);
-  padding:0.4rem 0;
-}
-.include-item::before { content:'✓'; color:var(--forest); font-weight:800; }
+.buy-card { background:var(--white);border-radius:20px;padding:2rem;box-shadow:0 30px 80px rgba(0,0,0,0.4);position:sticky;top:90px; }
+.buy-thumb { width:100%;border-radius:12px;overflow:hidden;margin-bottom:1.5rem; }
+.buy-thumb img { width:100%;display:block; }
+.buy-price-row { display:flex;align-items:baseline;gap:0.75rem;margin-bottom:0.25rem; }
+.buy-price { font-family:'Lora',serif;font-size:2.8rem;font-weight:700;color:var(--ink); }
+.buy-original { font-size:1.1rem;color:var(--muted);text-decoration:line-through;font-weight:600; }
+.buy-save { font-size:0.78rem;font-weight:800;color:#4A6741;background:#e8f4e8;padding:0.25rem 0.65rem;border-radius:50px; }
+.buy-desc { font-size:0.88rem;color:var(--muted);margin-bottom:1.5rem;line-height:1.6;margin-top:0.5rem; }
+.buy-btn { display:flex;align-items:center;justify-content:center;gap:0.65rem;width:100%;background:var(--gold);color:#1a1410;font-family:'Nunito',sans-serif;font-size:1.05rem;font-weight:800;padding:1rem;border-radius:50px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 6px 24px rgba(200,150,60,0.4);transition:background 0.2s,transform 0.2s;margin-bottom:0.75rem; }
+.buy-btn:hover { background:#daa840;transform:translateY(-1px); }
+.buy-meta { display:flex;align-items:center;justify-content:center;gap:1rem;font-size:0.78rem;color:var(--muted);font-weight:600;flex-wrap:wrap; }
+.buy-includes { margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--stone); }
+.buy-includes-title { font-size:0.75rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.85rem; }
+.include-item { display:flex;align-items:center;gap:0.6rem;font-size:0.88rem;font-weight:600;color:var(--ink);padding:0.35rem 0; }
+.include-item::before { content:'✓';color:var(--forest);font-weight:800; }
 
-/* CONTENT SECTION */
-.guide-content {
-  max-width:1100px; margin:0 auto; padding:5rem 5vw;
-  display:grid; grid-template-columns:1fr 480px; gap:4rem; align-items:start;
-}
-.content-left {}
-.section-label { display:inline-flex; align-items:center; gap:0.5rem; font-size:0.75rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--forest); margin-bottom:1.25rem; }
-.content-left h2 { font-family:'Lora',serif; font-size:clamp(1.7rem,2.5vw,2.4rem); font-weight:700; margin-bottom:1.5rem; line-height:1.2; }
-.content-left p { font-size:1rem; color:var(--muted); line-height:1.9; margin-bottom:1rem; }
-.content-left p strong { color:var(--ink); font-weight:600; }
+/* STRIPE MODAL */
+.stripe-overlay { display:none;position:fixed;inset:0;z-index:1000;background:rgba(42,37,32,0.8);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:1rem; }
+.stripe-overlay.open { display:flex; }
+.stripe-modal { background:var(--white);border-radius:20px;padding:2.5rem;width:100%;max-width:460px;box-shadow:0 40px 100px rgba(0,0,0,0.4);position:relative;animation:modal-in 0.3s ease; }
+@keyframes modal-in { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+.modal-close { position:absolute;top:1rem;right:1rem;background:var(--warm);border:none;cursor:pointer;width:32px;height:32px;border-radius:50%;font-size:1.1rem;color:var(--muted);display:flex;align-items:center;justify-content:center;transition:background 0.2s; }
+.modal-close:hover { background:var(--stone); }
+.modal-title { font-family:'Lora',serif;font-size:1.4rem;font-weight:700;margin-bottom:0.3rem; }
+.modal-sub { font-size:0.88rem;color:var(--muted);margin-bottom:1.5rem; }
+.modal-price-row { display:flex;align-items:center;gap:0.75rem;background:var(--warm);border-radius:12px;padding:1rem 1.25rem;margin-bottom:1.5rem; }
+.modal-price-main { font-family:'Lora',serif;font-size:2rem;font-weight:700;color:var(--ink); }
+.modal-price-orig { font-size:0.9rem;color:var(--muted);text-decoration:line-through; }
+.modal-price-save { font-size:0.75rem;font-weight:800;color:#4A6741;background:#e8f4e8;padding:0.2rem 0.5rem;border-radius:50px;margin-left:auto; }
+.field-label { font-size:0.78rem;font-weight:700;color:var(--muted);margin-bottom:0.4rem;display:block;text-transform:uppercase;letter-spacing:0.06em; }
+.email-field { width:100%;padding:0.85rem 1rem;border:1.5px solid var(--stone);border-radius:10px;font-family:'Nunito',sans-serif;font-size:0.95rem;color:var(--ink);background:var(--cream);outline:none;margin-bottom:1rem;transition:border-color 0.2s; }
+.email-field:focus { border-color:var(--bark); }
+#card-element { border:1.5px solid var(--stone);border-radius:10px;padding:1rem;background:var(--cream);margin-bottom:0.75rem; }
+#card-errors { font-size:0.85rem;color:#e53e3e;font-weight:600;min-height:1.2rem;margin-bottom:0.75rem; }
+.pay-btn { width:100%;background:var(--gold);color:#1a1410;font-family:'Nunito',sans-serif;font-size:1.05rem;font-weight:800;padding:1rem;border-radius:50px;border:none;cursor:pointer;box-shadow:0 6px 24px rgba(200,150,60,0.4);transition:background 0.2s,transform 0.2s;margin-bottom:0.75rem; }
+.pay-btn:hover:not(:disabled) { background:#daa840;transform:translateY(-1px); }
+.pay-btn:disabled { opacity:0.6;cursor:not-allowed; }
+.modal-trust { display:flex;align-items:center;justify-content:center;gap:0.75rem;font-size:0.75rem;color:var(--muted);font-weight:600;flex-wrap:wrap; }
 
-.chapters { margin-top:2rem; display:flex; flex-direction:column; gap:0.5rem; }
-.chapter {
-  background:var(--warm); border:1.5px solid var(--stone);
-  border-radius:12px; padding:1rem 1.25rem;
-  display:flex; align-items:flex-start; gap:1rem;
-}
-.chapter-num {
-  font-family:'Lora',serif; font-size:0.85rem; font-weight:700;
-  color:var(--bark); min-width:36px; padding-top:2px;
-}
-.chapter-body {}
-.chapter-title { font-size:0.95rem; font-weight:700; color:var(--ink); margin-bottom:0.25rem; }
-.chapter-desc { font-size:0.82rem; color:var(--muted); line-height:1.5; }
+/* CONTENT */
+.guide-content { max-width:1100px;margin:0 auto;padding:5rem 5vw;display:grid;grid-template-columns:1fr 420px;gap:4rem;align-items:start; }
+.section-label { display:inline-flex;align-items:center;gap:0.5rem;font-size:0.75rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--forest);margin-bottom:1.25rem; }
+.content-left h2 { font-family:'Lora',serif;font-size:clamp(1.7rem,2.5vw,2.4rem);font-weight:700;margin-bottom:1.5rem;line-height:1.2; }
+.content-left p { font-size:1rem;color:var(--muted);line-height:1.9;margin-bottom:1rem; }
+.content-left p strong { color:var(--ink);font-weight:600; }
+.chapters { margin-top:2rem;display:flex;flex-direction:column;gap:0.5rem; }
+.chapter { background:var(--warm);border:1.5px solid var(--stone);border-radius:12px;padding:1rem 1.25rem;display:flex;align-items:flex-start;gap:1rem; }
+.chapter-num { font-family:'Lora',serif;font-size:0.85rem;font-weight:700;color:var(--bark);min-width:36px;padding-top:2px; }
+.chapter-title { font-size:0.95rem;font-weight:700;color:var(--ink);margin-bottom:0.25rem; }
+.chapter-desc { font-size:0.82rem;color:var(--muted);line-height:1.5; }
 
-/* Proof section */
-.proof-section {
-  background:var(--ink); padding:5rem 5vw; text-align:center;
-}
-.proof-section h2 {
-  font-family:'Lora',serif; font-size:clamp(1.8rem,3vw,2.5rem);
-  font-weight:700; color:var(--cream); margin-bottom:0.75rem;
-}
-.proof-section p {
-  color:rgba(250,247,242,0.5); font-size:1rem; max-width:500px;
-  margin:0 auto 2.5rem; line-height:1.75;
-}
-.proof-img-wrap {
-  max-width:800px; margin:0 auto;
-  border-radius:16px; overflow:hidden;
-  box-shadow:0 30px 80px rgba(0,0,0,0.5);
-  border:1px solid rgba(200,150,60,0.2);
-}
-.proof-img-wrap img { width:100%; display:block; }
+.proof-section { background:var(--ink);padding:5rem 5vw;text-align:center; }
+.proof-section h2 { font-family:'Lora',serif;font-size:clamp(1.8rem,3vw,2.5rem);font-weight:700;color:var(--cream);margin-bottom:0.75rem; }
+.proof-section p { color:rgba(250,247,242,0.5);font-size:1rem;max-width:500px;margin:0 auto 2.5rem;line-height:1.75; }
+.proof-img-wrap { max-width:800px;margin:0 auto;border-radius:16px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,0.5);border:1px solid rgba(200,150,60,0.2); }
+.proof-img-wrap img { width:100%;display:block; }
 
-footer { background:#1E1B18; padding:2.5rem 5vw; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; }
-.footer-logo { font-family:'Lora',serif; font-size:1.1rem; font-weight:700; color:rgba(250,247,242,0.65); }
-footer p { font-size:0.8rem; color:rgba(250,247,242,0.3); }
-footer a { color:rgba(250,247,242,0.45); text-decoration:none; }
+.final-cta-bar { background:var(--warm);padding:3rem 5vw;text-align:center;border-top:1px solid var(--stone); }
+.final-cta-bar h3 { font-family:'Lora',serif;font-size:1.6rem;font-weight:700;margin-bottom:0.5rem; }
+.final-cta-bar p { color:var(--muted);font-size:0.95rem;margin-bottom:1.5rem; }
+.final-cta-btn { display:inline-flex;align-items:center;gap:0.6rem;background:var(--gold);color:#1a1410;font-family:'Nunito',sans-serif;font-size:1rem;font-weight:800;padding:0.9rem 2rem;border-radius:50px;border:none;cursor:pointer;box-shadow:0 6px 24px rgba(200,150,60,0.4);transition:background 0.2s,transform 0.2s; }
+.final-cta-btn:hover { background:#daa840;transform:translateY(-2px); }
+
+footer { background:#1E1B18;padding:2.5rem 5vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem; }
+.footer-logo { font-family:'Lora',serif;font-size:1.1rem;font-weight:700;color:rgba(250,247,242,0.65); }
+footer p { font-size:0.8rem;color:rgba(250,247,242,0.3); }
+footer a { color:rgba(250,247,242,0.45);text-decoration:none; }
 
 @media(max-width:900px){
   .guide-hero-inner { grid-template-columns:1fr; }
@@ -193,65 +117,39 @@ footer a { color:rgba(250,247,242,0.45); text-decoration:none; }
 <body>
 
 <nav>
-  <a href="index.html" class="logo">
-    <div class="logo-mark">🪨</div>Made By Hand
-  </a>
-  <a href="index.html" class="nav-back">← Back to home</a>
+  <a href="index.html" class="logo"><div class="logo-mark">🪨</div>Made By Hand</a>
+  <a href="shop.html" class="nav-back">← All Guides</a>
 </nav>
 
-<!-- HERO -->
 <section class="guide-hero">
   <div class="guide-hero-inner">
     <div>
       <div class="guide-badge">★ Best Seller · 18-Page PDF Guide</div>
       <h1 class="guide-title">The Viral<br/><span>Blueprint</span></h1>
-      <p class="guide-tagline">
-        How to create content that reaches <strong style="color:#fff">3M+ views per video</strong>
-        and generates real income — with $0 ad spend.
-        The exact system behind $2,453/month from Facebook Reels.
-      </p>
-
+      <p class="guide-tagline">How to create content that reaches <strong style="color:#fff">3M+ views per video</strong> and generates real income — with $0 ad spend. The exact system behind $2,453/month from Facebook Reels.</p>
       <div class="guide-proof">
         <div class="guide-proof-label">📊 Real earnings proof — last 28 days</div>
-        <img src="WhatsApp_Image_2026-04-26_at_23_07_32.jpeg" alt="$2,453 earnings from Facebook Reels"/>
+        <img src="WhatsApp_Image_2026-04-26_at_23_07_32.jpeg" alt="$2,453 earnings"/>
       </div>
-
       <div class="guide-stats">
-        <div class="gs">
-          <div class="gs-num">$2,453</div>
-          <div class="gs-label">Monthly earnings (real)</div>
-        </div>
-        <div class="gs">
-          <div class="gs-num">3M+</div>
-          <div class="gs-label">Views per video</div>
-        </div>
-        <div class="gs">
-          <div class="gs-num">+358%</div>
-          <div class="gs-label">Growth vs prev. month</div>
-        </div>
-        <div class="gs">
-          <div class="gs-num">$0</div>
-          <div class="gs-label">Ad spend required</div>
-        </div>
+        <div><div class="gs-num">$2,453</div><div class="gs-label">Monthly earnings</div></div>
+        <div><div class="gs-num">3M+</div><div class="gs-label">Views per video</div></div>
+        <div><div class="gs-num">+358%</div><div class="gs-label">Growth vs prev. month</div></div>
+        <div><div class="gs-num">$0</div><div class="gs-label">Ad spend</div></div>
       </div>
     </div>
 
-    <!-- BUY CARD -->
     <div class="buy-card">
-      <div class="buy-thumb">
-        <img src="thumbnail_viral_blueprint.jpg" alt="The Viral Blueprint PDF"/>
-      </div>
+      <div class="buy-thumb"><img src="thumbnail_viral_blueprint.jpg" alt="The Viral Blueprint"/></div>
       <div class="buy-price-row">
-        <div class="buy-price">$9.99</div>
-        <div class="buy-original">$19.99</div>
+        <div class="buy-price">$45</div>
+        <div class="buy-original">$90</div>
         <div class="buy-save">50% OFF</div>
       </div>
-      <p class="buy-desc">One-time payment. Instant download. Yours to keep forever.</p>
-      <a href="shop.html" class="buy-btn">Get Instant Access →</a>
+      <p class="buy-desc">One-time payment · Instant PDF download · Yours forever</p>
+      <button class="buy-btn" onclick="openCheckout()">🔓 Get Instant Access — $45</button>
       <div class="buy-meta">
-        <span>🔒 Secure payment</span>
-        <span>⬇ Instant PDF</span>
-        <span>♾️ Yours forever</span>
+        <span>🔒 Stripe</span><span>⬇ Instant PDF</span><span>♾️ Keep forever</span>
       </div>
       <div class="buy-includes">
         <div class="buy-includes-title">What's included</div>
@@ -267,83 +165,162 @@ footer a { color:rgba(250,247,242,0.45); text-decoration:none; }
   </div>
 </section>
 
-<!-- CONTENT -->
 <section class="guide-content">
   <div class="content-left">
     <div class="section-label">📖 What's Inside</div>
     <h2>Everything You Need to Go From Zero to Viral — and Turn It Into Income</h2>
-    <p>Most creators post and hope. This guide gives you the <strong>psychology, the system, and the step-by-step plan</strong> to engineer content that spreads — and then monetise that audience with five different income streams.</p>
-    <p>Every strategy in this guide is drawn from real results: 3M+ views per video, $2,453 in the last 28 days, with $0 in ad spend. This isn't theory — it's the exact playbook.</p>
-
+    <p>Most creators post and hope. This guide gives you the <strong>psychology, the system, and the step-by-step plan</strong> to engineer content that spreads — and then monetise that audience with five income streams.</p>
+    <p>Every strategy is drawn from real results: 3M+ views per video, $2,453 in the last 28 days, with $0 in ad spend.</p>
     <div class="chapters">
-      <div class="chapter">
-        <div class="chapter-num">01</div>
-        <div class="chapter-body">
-          <div class="chapter-title">The Science of Virality</div>
-          <div class="chapter-desc">Why content explodes — the psychology and patterns behind every viral hit. The 3 triggers that drive sharing.</div>
-        </div>
-      </div>
-      <div class="chapter">
-        <div class="chapter-num">02</div>
-        <div class="chapter-body">
-          <div class="chapter-title">The Hook Formula</div>
-          <div class="chapter-desc">7 proven hook types with real video examples that stop scrolls instantly. You have 3 seconds — here's how to use them.</div>
-        </div>
-      </div>
-      <div class="chapter">
-        <div class="chapter-num">03</div>
-        <div class="chapter-body">
-          <div class="chapter-title">Scroll-Stopping Psychology</div>
-          <div class="chapter-desc">How the brain works in a feed and how to trigger automatic attention before conscious thought kicks in.</div>
-        </div>
-      </div>
-      <div class="chapter">
-        <div class="chapter-num">04</div>
-        <div class="chapter-body">
-          <div class="chapter-title">The Viral Content Framework</div>
-          <div class="chapter-desc">A repeatable 4-step system for creating content with viral potential every time — no guessing.</div>
-        </div>
-      </div>
-      <div class="chapter">
-        <div class="chapter-num">05</div>
-        <div class="chapter-body">
-          <div class="chapter-title">Managing Virality</div>
-          <div class="chapter-desc">What to do when a video blows up — the 48-hour playbook to convert a spike into permanent growth.</div>
-        </div>
-      </div>
-      <div class="chapter">
-        <div class="chapter-num">06</div>
-        <div class="chapter-body">
-          <div class="chapter-title">Monetising Your Audience</div>
-          <div class="chapter-desc">5 income streams for the DIY niche, with real numbers. From first dollar to systems that earn while you sleep.</div>
-        </div>
-      </div>
-      <div class="chapter">
-        <div class="chapter-num">07</div>
-        <div class="chapter-body">
-          <div class="chapter-title">Your 30-Day Action Plan</div>
-          <div class="chapter-desc">Day-by-day plan to go from zero to results within one month. No excuses — every day has a specific task.</div>
-        </div>
-      </div>
+      <div class="chapter"><div class="chapter-num">01</div><div><div class="chapter-title">The Science of Virality</div><div class="chapter-desc">Why content explodes — psychology and patterns behind every viral hit. The 3 triggers that drive sharing.</div></div></div>
+      <div class="chapter"><div class="chapter-num">02</div><div><div class="chapter-title">The Hook Formula</div><div class="chapter-desc">7 proven hook types with real examples that stop scrolls. You have 3 seconds — here's how to use them.</div></div></div>
+      <div class="chapter"><div class="chapter-num">03</div><div><div class="chapter-title">Scroll-Stopping Psychology</div><div class="chapter-desc">How the brain works in a feed and how to trigger automatic attention before conscious thought kicks in.</div></div></div>
+      <div class="chapter"><div class="chapter-num">04</div><div><div class="chapter-title">The Viral Content Framework</div><div class="chapter-desc">A repeatable 4-step system for creating content with viral potential every time — no guessing.</div></div></div>
+      <div class="chapter"><div class="chapter-num">05</div><div><div class="chapter-title">Managing Virality</div><div class="chapter-desc">What to do when a video blows up — the 48-hour playbook to convert a spike into permanent growth.</div></div></div>
+      <div class="chapter"><div class="chapter-num">06</div><div><div class="chapter-title">Monetising Your Audience</div><div class="chapter-desc">5 income streams for the DIY niche, with real numbers. From first dollar to income while you sleep.</div></div></div>
+      <div class="chapter"><div class="chapter-num">07</div><div><div class="chapter-title">Your 30-Day Action Plan</div><div class="chapter-desc">Day-by-day plan to go from zero to results in one month. Every day has a specific task.</div></div></div>
     </div>
   </div>
-
-  <!-- empty right column — buy card is sticky in hero on desktop -->
   <div></div>
 </section>
 
-<!-- PROOF SECTION -->
 <section class="proof-section">
   <h2>Real Results. Real Money.</h2>
-  <p>This is what $2,453 from Facebook Reels looks like — earned in the last 28 days, with $0 in advertising.</p>
+  <p>$2,453 from Facebook Reels in the last 28 days — with $0 in advertising.</p>
   <div class="proof-img-wrap">
-    <img src="WhatsApp_Image_2026-04-26_at_23_07_32.jpeg" alt="Facebook Reels earnings proof — $2,453 in 28 days"/>
+    <img src="WhatsApp_Image_2026-04-26_at_23_07_32.jpeg" alt="Facebook Reels earnings proof"/>
   </div>
 </section>
+
+<div class="final-cta-bar">
+  <h3>Ready to start earning from your content?</h3>
+  <p>One-time payment · Instant download · $45 (was $90)</p>
+  <button class="final-cta-btn" onclick="openCheckout()">🔓 Get The Viral Blueprint — $45</button>
+</div>
+
+<!-- STRIPE MODAL -->
+<div class="stripe-overlay" id="stripe-overlay" onclick="handleOverlayClick(event)">
+  <div class="stripe-modal">
+    <button class="modal-close" onclick="closeCheckout()">✕</button>
+    <div class="modal-title">Complete Your Order</div>
+    <div class="modal-sub">The Viral Blueprint — instant PDF download</div>
+    <div class="modal-price-row">
+      <div><div class="modal-price-main">$45</div><div style="font-size:0.8rem;color:var(--muted)">One-time</div></div>
+      <div class="modal-price-orig">$90</div>
+      <div class="modal-price-save">50% OFF</div>
+    </div>
+    <label class="field-label" for="email">Email address</label>
+    <input class="email-field" type="email" id="email" placeholder="you@example.com"/>
+    <label class="field-label">Card details</label>
+    <div id="card-element"></div>
+    <div id="card-errors"></div>
+    <button class="pay-btn" id="pay-btn" onclick="handlePayment()">🔒 Pay $45 Securely</button>
+    <div class="modal-trust">
+      <span>🔒 256-bit SSL</span>
+      <span>💳 Powered by Stripe</span>
+      <span>⬇ Instant download after payment</span>
+    </div>
+  </div>
+</div>
 
 <footer>
   <div class="footer-logo">🪨 Made By Hand</div>
   <p>© 2026 · All guides are digital PDF downloads · <a href="mailto:you@example.com">Contact us</a></p>
 </footer>
+
+<script>
+// ================================================
+// STRIPE CONFIG — replace these two values:
+// 1. Go to dashboard.stripe.com → Developers → API Keys
+//    Copy your Publishable key (pk_live_...)
+// 2. Go to Products → Create product "Viral Blueprint" $45
+//    Copy the Price ID (price_...)
+// ================================================
+const STRIPE_KEY = 'pk_test_REPLACE_WITH_YOUR_STRIPE_PUBLISHABLE_KEY';
+
+let stripe, cardElement;
+
+function initStripe() {
+  if (stripe) return;
+  stripe = Stripe(STRIPE_KEY);
+  const elements = stripe.elements();
+  cardElement = elements.create('card', {
+    style: {
+      base: {
+        fontFamily: "'Nunito', sans-serif",
+        fontSize: '16px',
+        color: '#2A2520',
+        '::placeholder': { color: '#8A7E72' }
+      }
+    }
+  });
+  cardElement.mount('#card-element');
+  cardElement.on('change', e => {
+    document.getElementById('card-errors').textContent = e.error ? e.error.message : '';
+  });
+}
+
+function openCheckout() {
+  document.getElementById('stripe-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(initStripe, 50);
+}
+
+function closeCheckout() {
+  document.getElementById('stripe-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('stripe-overlay')) closeCheckout();
+}
+
+async function handlePayment() {
+  const btn = document.getElementById('pay-btn');
+  const email = document.getElementById('email').value.trim();
+  const errEl = document.getElementById('card-errors');
+
+  if (!email || !email.includes('@')) {
+    errEl.textContent = 'Please enter a valid email address.';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Processing...';
+  errEl.textContent = '';
+
+  try {
+    // Calls your existing Netlify function
+    const res = await fetch('/.netlify/functions/create-payment-intent', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ amount: 4500, currency: 'usd', email })
+    });
+
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+
+    const { error, paymentIntent } = await stripe.confirmCardPayment(data.clientSecret, {
+      payment_method: { card: cardElement, billing_details: { email } }
+    });
+
+    if (error) {
+      errEl.textContent = error.message;
+      btn.disabled = false;
+      btn.textContent = '🔒 Pay $45 Securely';
+    } else if (paymentIntent.status === 'succeeded') {
+      closeCheckout();
+      // Redirect to PDF download after successful payment
+      window.location.href = 'The_Viral_Blueprint_Guide.pdf';
+    }
+  } catch (err) {
+    errEl.textContent = 'Something went wrong. Please try again.';
+    btn.disabled = false;
+    btn.textContent = '🔒 Pay $45 Securely';
+  }
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCheckout(); });
+</script>
 </body>
 </html>

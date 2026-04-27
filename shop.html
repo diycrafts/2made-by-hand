@@ -26,6 +26,99 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;display:flex;ali
 .fb:hover{border-color:var(--bark);color:var(--bark);}
 .fb.active{background:var(--ink);border-color:var(--ink);color:white;}
 .shop-wrap{max-width:1200px;margin:0 auto;padding:0 5vw 7rem;}
+
+/* PINNED VIRAL BLUEPRINT CARD */
+.pinned-wrap {
+  display:flex; justify-content:center;
+  margin-bottom:2rem;
+}
+.pinned-label {
+  display:flex; align-items:center; justify-content:center;
+  gap:0.5rem; font-size:0.72rem; font-weight:800;
+  letter-spacing:0.12em; text-transform:uppercase;
+  color:var(--muted); margin-bottom:0.85rem;
+}
+.pinned-label::before, .pinned-label::after {
+  content:''; flex:1; height:1px; background:var(--stone); max-width:60px;
+}
+.vb-card-pinned {
+  width:100%; max-width:520px;
+  background:#0f0f0f;
+  border:2px solid rgba(200,150,60,0.5);
+  border-radius:18px; overflow:hidden;
+  text-decoration:none; color:inherit; display:block;
+  box-shadow:0 8px 40px rgba(0,0,0,0.18);
+  transition:transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  position:relative;
+  opacity:0; transform:translateY(16px);
+}
+.vb-card-pinned.visible {
+  opacity:1; transform:translateY(0);
+}
+.vb-card-pinned:hover {
+  transform:translateY(-5px);
+  box-shadow:0 20px 60px rgba(0,0,0,0.28);
+  border-color:rgba(200,150,60,0.9);
+}
+.vb-pin-badge {
+  position:absolute; top:12px; left:12px; z-index:2;
+  display:inline-flex; align-items:center; gap:0.4rem;
+  background:var(--gold); color:#1a1410;
+  font-size:0.68rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase;
+  padding:0.3rem 0.8rem; border-radius:50px;
+}
+.vb-best-seller {
+  position:absolute; top:12px; right:12px; z-index:2;
+  display:inline-flex; align-items:center; gap:0.35rem;
+  background:rgba(255,255,255,0.12); backdrop-filter:blur(6px);
+  color:#fff; border:1px solid rgba(255,255,255,0.2);
+  font-size:0.68rem; font-weight:800; letter-spacing:0.08em; text-transform:uppercase;
+  padding:0.3rem 0.8rem; border-radius:50px;
+}
+.vb-thumb {
+  width:100%; aspect-ratio:16/9; overflow:hidden;
+}
+.vb-thumb img {
+  width:100%; height:100%; object-fit:cover;
+  transition:transform 0.45s;
+}
+.vb-card-pinned:hover .vb-thumb img { transform:scale(1.04); }
+.vb-pin-body {
+  padding:1.25rem 1.4rem 1.5rem;
+}
+.vb-pin-title {
+  font-family:'Lora',serif; font-size:1.2rem; font-weight:700;
+  color:#fff; margin-bottom:0.35rem;
+}
+.vb-pin-desc {
+  font-size:0.85rem; color:rgba(255,255,255,0.5); line-height:1.55; margin-bottom:1rem;
+}
+.vb-pin-footer {
+  display:flex; align-items:center; justify-content:space-between;
+}
+.vb-pin-price {
+  display:flex; align-items:baseline; gap:0.6rem;
+}
+.vb-pin-price .current {
+  font-family:'Lora',serif; font-size:1.5rem; font-weight:700; color:#F5A623;
+}
+.vb-pin-price .original {
+  font-size:0.9rem; color:rgba(255,255,255,0.3); text-decoration:line-through;
+}
+.vb-pin-price .save {
+  font-size:0.72rem; font-weight:800; color:#4A6741;
+  background:rgba(74,103,65,0.2); padding:0.2rem 0.5rem; border-radius:50px;
+}
+.vb-pin-btn {
+  display:inline-flex; align-items:center; gap:0.4rem;
+  background:var(--gold); color:#1a1410;
+  font-family:'Nunito',sans-serif; font-size:0.85rem; font-weight:800;
+  padding:0.6rem 1.2rem; border-radius:50px;
+  transition:background 0.2s;
+}
+.vb-card-pinned:hover .vb-pin-btn { background:#daa840; }
+
+/* REGULAR GRID */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.75rem;}
 .card{background:var(--white);border:1.5px solid var(--stone);border-radius:18px;overflow:hidden;transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s;opacity:0;transform:translateY(16px);text-decoration:none;color:inherit;display:block;}
 .card.visible{opacity:1;transform:translateY(0);}
@@ -47,6 +140,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;display:flex;ali
 .price sup{font-family:'Nunito',sans-serif;font-size:0.9rem;font-weight:400;color:var(--muted);vertical-align:super;}
 .view-btn{display:inline-flex;align-items:center;gap:0.5rem;background:var(--bark);color:white;font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:700;padding:0.7rem 1.4rem;border-radius:50px;border:none;cursor:pointer;transition:background 0.2s,transform 0.15s;text-decoration:none;}
 .view-btn:hover{background:var(--ink);transform:scale(1.03);}
+
 footer{background:var(--ink);padding:2.5rem 5vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
 .fl{font-family:'Lora',serif;font-size:1.1rem;font-weight:700;color:rgba(250,247,242,0.65);}
 footer p{font-size:0.8rem;color:rgba(250,247,242,0.3);}
@@ -55,6 +149,7 @@ footer a{color:rgba(250,247,242,0.45);text-decoration:none;}
 </style>
 </head>
 <body>
+
 <nav>
   <a href="index.html" class="logo"><div class="logo-mark">🪨</div>Made By Hand</a>
   <a href="index.html" class="back">← Back to Home</a>
@@ -75,6 +170,32 @@ footer a{color:rgba(250,247,242,0.45);text-decoration:none;}
 </div>
 
 <div class="shop-wrap">
+
+  <!-- PINNED: VIRAL BLUEPRINT -->
+  <div class="pinned-label">📌 Pinned · Best Seller</div>
+  <div class="pinned-wrap">
+    <a href="guide-viral-blueprint.html" class="vb-card-pinned" id="vb-pinned">
+      <div class="vb-pin-badge">⭐ Best Seller</div>
+      <div class="vb-best-seller">Limited Offer</div>
+      <div class="vb-thumb">
+        <img src="thumbnail_viral_blueprint.jpg" alt="The Viral Blueprint"/>
+      </div>
+      <div class="vb-pin-body">
+        <div class="vb-pin-title">The Viral Blueprint — $2,453/month from Facebook Reels</div>
+        <div class="vb-pin-desc">The exact system behind 3M+ views per video and real monthly income — with $0 ad spend. Psychology, hooks, monetisation & 30-day plan.</div>
+        <div class="vb-pin-footer">
+          <div class="vb-pin-price">
+            <span class="current">$45</span>
+            <span class="original">$90</span>
+            <span class="save">50% OFF</span>
+          </div>
+          <span class="vb-pin-btn">Get Guide →</span>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <!-- REGULAR GRID -->
   <div class="grid" id="grid">
 
     <a href="guide-mosaic-table.html" class="card" data-cat="garden">
@@ -191,7 +312,7 @@ footer a{color:rgba(250,247,242,0.45);text-decoration:none;}
           <span class="ctag">🌱 No experience needed</span>
         </div>
         <div class="card-footer">
-          <div class="price"><sup>$</sup>5.00</div>
+          <div class="price"><sup>$</sup>12.99</div>
           <span class="view-btn">View Guide →</span>
         </div>
       </div>
@@ -225,7 +346,6 @@ footer a{color:rgba(250,247,242,0.45);text-decoration:none;}
       </div>
       <div class="card-body">
         <div class="card-title">Flower Resin Coasters</div>
-
         <div class="card-footer">
           <div class="price"><sup>$</sup>5.00</div>
           <span class="view-btn">Coming Soon</span>
@@ -248,13 +368,21 @@ function doFilter(cat, btn) {
   document.querySelectorAll('.card').forEach(c => {
     c.classList.toggle('hidden', cat !== 'all' && !(c.dataset.cat||'').includes(cat));
   });
+  // Always show pinned VB card
+  document.getElementById('vb-pinned').closest('.pinned-wrap').style.display = 'flex';
+  document.querySelector('.pinned-label').style.display = 'flex';
 }
+
 const obs = new IntersectionObserver(entries => {
   entries.forEach((e, i) => {
-    if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 60); obs.unobserve(e.target); }
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 60);
+      obs.unobserve(e.target);
+    }
   });
 }, { threshold: 0.1 });
-document.querySelectorAll('.card').forEach(c => {
+
+document.querySelectorAll('.card, .vb-card-pinned').forEach(c => {
   c.style.transition = 'opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s, border-color 0.3s';
   obs.observe(c);
 });
