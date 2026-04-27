@@ -1,40 +1,29 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 exports.handler = async (event) => {
-  const headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    'Content-Type': 'application/json',
-  };
-
-  if (event.httpMethod === 'OPTIONS') {
-    return { statusCode: 200, headers, body: '' };
-  }
-
   if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, headers, body: JSON.stringify({ error: 'Method Not Allowed' }) };
+    return { statusCode: 405, body: 'Method Not Allowed' };
   }
 
   try {
-    const { amount, email, currency } = JSON.parse(event.body);
+    const { amount, currency, email } = JSON.parse(event.body);
 
-    const intent = await stripe.paymentIntents.create({
-      amount: amount || 500,
-      currency: currency || 'usd',
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount,        // 4500 = $45.00
+      currency,
       receipt_email: email,
-      automatic_payment_methods: { enabled: true },
+      metadata: { product: 'The $2K Reels Playbook', email },
     });
 
     return {
       statusCode: 200,
-      headers,
-      body: JSON.stringify({ clientSecret: intent.client_secret }),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ clientSecret: paymentIntent.client_secret }),
     };
   } catch (err) {
     return {
       statusCode: 500,
-      headers,
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ error: err.message }),
     };
   }
