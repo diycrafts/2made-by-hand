@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DIY Dry Creek Stream & Garden Bridge — Made by Hand</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://js.stripe.com/v3/"></script>
+  <style>
+    :root {
+      --bark:   #3b2a1a;
+      --forest: #2d4a2d;
+      --moss:   #4CAF50;
+      --lime:   #8BC34A;
+      --ink:    #1a1a2e;
+      --cream:  #f8f3ec;
+      --stone:  #9e9e9e;
+      --gold:   #FFC107;
+      --white:  #ffffff;
+      --shadow: 0 4px 24px rgba(0,0,0,0.12);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Nunito', sans-serif; background: var(--cream); color: var(--ink); }
+
+    /* NAV */
+    nav { background: var(--forest); padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: 'Lora', serif; color: var(--white); font-size: 1.25rem; font-weight: 700; text-decoration: none; letter-spacing: 0.02em; }
+    .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; margin-left: 24px; font-size: 0.9rem; font-weight: 600; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--lime); }
+
+    /* HERO */
+    .hero { display: grid; grid-template-columns: 1fr 1fr; min-height: 580px; }
+    .hero-img { position: relative; overflow: hidden; }
+    .hero-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent 60%, var(--cream) 100%); }
+    .hero-content { display: flex; flex-direction: column; justify-content: center; padding: 60px 48px 60px 40px; }
+    .hero-badge { display: inline-block; background: var(--moss); color: var(--white); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 14px; border-radius: 100px; margin-bottom: 20px; }
+    .hero-content h1 { font-family: 'Lora', serif; font-size: 2.5rem; font-weight: 700; line-height: 1.2; color: var(--forest); margin-bottom: 12px; }
+    .hero-content h1 span { color: var(--moss); }
+    .hero-content p { color: #555; font-size: 1.05rem; line-height: 1.7; margin-bottom: 28px; }
+    .price-row { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
+    .price-tag { font-size: 2.6rem; font-weight: 800; color: var(--forest); }
+    .price-save { background: var(--gold); color: var(--bark); font-size: 0.8rem; font-weight: 800; padding: 4px 12px; border-radius: 100px; }
+    .btn-buy { background: var(--moss); color: var(--white); border: none; padding: 18px 40px; border-radius: 50px; font-family: 'Nunito', sans-serif; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s; box-shadow: 0 6px 20px rgba(76,175,80,0.35); display: flex; align-items: center; gap: 10px; width: fit-content; }
+    .btn-buy:hover { background: var(--forest); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(45,74,45,0.35); }
+    .trust-row { display: flex; gap: 18px; margin-top: 20px; }
+    .trust-item { font-size: 0.82rem; color: var(--stone); display: flex; align-items: center; gap: 5px; }
+
+    /* WHAT'S INSIDE */
+    .section { padding: 72px 48px; }
+    .section-label { font-size: 0.75rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--moss); margin-bottom: 10px; }
+    .section h2 { font-family: 'Lora', serif; font-size: 2rem; color: var(--forest); margin-bottom: 36px; }
+    .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .card { background: var(--white); border-radius: 16px; padding: 28px 24px; box-shadow: var(--shadow); border-top: 4px solid var(--moss); transition: transform 0.2s; }
+    .card:hover { transform: translateY(-4px); }
+    .card-icon { font-size: 2rem; margin-bottom: 12px; }
+    .card h3 { font-family: 'Lora', serif; font-size: 1.05rem; color: var(--forest); margin-bottom: 8px; }
+    .card p { font-size: 0.88rem; color: #666; line-height: 1.6; }
+
+    /* STEPS */
+    .steps-section { background: var(--forest); padding: 72px 48px; }
+    .steps-section .section-label { color: var(--lime); }
+    .steps-section h2 { color: var(--white); }
+    .steps-list { display: flex; flex-direction: column; gap: 0; }
+    .step-item { display: flex; gap: 28px; padding: 24px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .step-item:last-child { border-bottom: none; }
+    .step-num { width: 44px; height: 44px; min-width: 44px; background: var(--moss); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1rem; color: var(--white); }
+    .step-body h4 { color: var(--white); font-size: 1rem; font-weight: 700; margin-bottom: 5px; }
+    .step-body p { color: rgba(255,255,255,0.7); font-size: 0.9rem; line-height: 1.6; }
+
+    /* CTA STRIP */
+    .cta-strip { background: var(--ink); text-align: center; padding: 56px 40px; }
+    .cta-strip h2 { font-family: 'Lora', serif; color: var(--white); font-size: 1.9rem; margin-bottom: 12px; }
+    .cta-strip p { color: rgba(255,255,255,0.65); margin-bottom: 28px; font-size: 1rem; }
+    .btn-cta { background: var(--gold); color: var(--bark); border: none; padding: 18px 48px; border-radius: 50px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: all 0.2s; }
+    .btn-cta:hover { background: var(--lime); transform: translateY(-2px); }
+
+    /* MODAL */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 1000; align-items: center; justify-content: center; }
+    .modal-overlay.open { display: flex; }
+    .modal { background: var(--white); border-radius: 20px; padding: 40px 36px; width: 100%; max-width: 480px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); position: relative; }
+    .modal-close { position: absolute; top: 16px; right: 18px; font-size: 1.6rem; background: none; border: none; cursor: pointer; color: var(--stone); line-height: 1; }
+    .modal h3 { font-family: 'Lora', serif; font-size: 1.4rem; color: var(--forest); margin-bottom: 6px; }
+    .modal .modal-sub { color: var(--stone); font-size: 0.9rem; margin-bottom: 22px; }
+    .modal label { display: block; font-weight: 700; font-size: 0.85rem; color: var(--forest); margin-bottom: 6px; }
+    .modal input[type="email"] { width: 100%; padding: 12px 16px; border: 2px solid #e0e0e0; border-radius: 10px; font-family: 'Nunito', sans-serif; font-size: 1rem; margin-bottom: 20px; outline: none; transition: border-color 0.2s; }
+    .modal input[type="email"]:focus { border-color: var(--moss); }
+    #payment-element { margin-bottom: 22px; }
+    #submit-btn { width: 100%; background: var(--moss); color: var(--white); border: none; padding: 16px; border-radius: 50px; font-size: 1rem; font-weight: 800; cursor: pointer; transition: background 0.2s; font-family: 'Nunito', sans-serif; }
+    #submit-btn:hover { background: var(--forest); }
+    #submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    #payment-message { margin-top: 14px; text-align: center; font-size: 0.9rem; color: #d32f2f; }
+    .success-box { text-align: center; padding: 20px 0; }
+    .success-box .check { font-size: 3rem; margin-bottom: 10px; }
+    .success-box h4 { font-family: 'Lora', serif; font-size: 1.3rem; color: var(--forest); margin-bottom: 8px; }
+    .success-box p { color: var(--stone); font-size: 0.9rem; }
+
+    /* FOOTER */
+    footer { background: var(--forest); color: rgba(255,255,255,0.6); text-align: center; padding: 28px; font-size: 0.85rem; }
+    footer a { color: var(--lime); text-decoration: none; }
+
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-img { height: 280px; }
+      .hero-img::after { display: none; }
+      .hero-content { padding: 32px 24px; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .section { padding: 48px 24px; }
+      .steps-section { padding: 48px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">Made by Hand ✦</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="shop.html">All Guides</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-img">
+      <img src="thumbnail_creek-bridge.jpg" alt="DIY Dry Creek Stream and Garden Bridge at sunset" />
+    </div>
+    <div class="hero-content">
+      <span class="hero-badge">🌿 Garden Series</span>
+      <h1>DIY Backyard <span>Dry Creek Stream</span> & Garden Bridge</h1>
+      <p>Transform a flat, boring backyard corner into a stunning natural stream with a handmade wooden arched bridge — no plumber, no contractor, just one weekend and a little creativity.</p>
+      <div class="price-row">
+        <span class="price-tag">$5.00</span>
+        <span class="price-save">SAVE $200+ vs. hiring out</span>
+      </div>
+      <button class="btn-buy" onclick="openModal()">
+        <span>📥</span> Get the Guide — $5.00
+      </button>
+      <div class="trust-row">
+        <span class="trust-item">✓ Instant PDF download</span>
+        <span class="trust-item">✓ Apple Pay &amp; Google Pay</span>
+        <span class="trust-item">✓ Secure checkout</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT'S INSIDE -->
+  <section class="section">
+    <div class="section-label">Inside This Guide</div>
+    <h2>Everything You Need to Build It</h2>
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-icon">📋</div>
+        <h3>Full Materials List</h3>
+        <p>Every item with estimated costs. Total project budget: $80–$130. Know exactly what to buy before you start.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🪨</div>
+        <h3>Rock Selection Tips</h3>
+        <p>Which rocks to use, where to source them cheaply, and how to arrange sizes for a natural, realistic look.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🌊</div>
+        <h3>Creek Layout & Shaping</h3>
+        <p>How to mark, dig, and line a curved trench that looks like it's always been there — not a straight ditch.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🌉</div>
+        <h3>Wooden Bridge Build</h3>
+        <p>Step-by-step for the arched cedar bridge — cutting curved rails, adding deck boards, sealing for weather.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">💡</div>
+        <h3>Pro Tips & Variations</h3>
+        <p>Add a solar pump for real water flow, use lights for evening magic, or widen into a stepping-stone crossing.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔧</div>
+        <h3>Troubleshooting</h3>
+        <p>Rocks shifting? Wobbly bridge? Weeds coming through? Solutions for every common problem, clearly explained.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEPS -->
+  <section class="steps-section">
+    <div class="section-label">The Process</div>
+    <h2 style="color:white; font-family:'Lora',serif; font-size:2rem; margin-bottom:36px;">How It All Comes Together</h2>
+    <div class="steps-list">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>Mark &amp; Dig the Creek Path</h4>
+          <p>Use a garden hose to lay out a natural S-curve, then dig a 6–8 inch wide, 4–6 inch deep trench with clean angled sides.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>Line With Landscape Fabric</h4>
+          <p>Press weed barrier fabric into the trench and up the sides, secured with staples. This keeps weeds out and rocks in place for years.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>Add River Rocks in Layers</h4>
+          <p>Large rocks at the edges for banks, medium pebbles in the center — layered in 3 sizes for a realistic, natural finish.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h4>Build the Arched Cedar Bridge</h4>
+          <p>Cut two curved side rails with a jigsaw, space on concrete footings, attach deck boards with galvanized screws, sand and seal.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h4>Place, Plant &amp; Enjoy</h4>
+          <p>Set the bridge in place, press footings level, add edge plants like ornamental grass or creeping thyme, and admire your work!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-strip">
+    <h2>Ready to Build Your Dream Garden?</h2>
+    <p>Instant download. 4 beautifully designed pages. Everything you need for one weekend project.</p>
+    <button class="btn-cta" onclick="openModal()">📥 Download the Guide — $5.00</button>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© DIY Craft Studio — Made by Hand ✦ <a href="shop.html">Browse All Guides</a></p>
+  </footer>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal()">×</button>
+      <div id="modal-content">
+        <h3>Get Your Guide 🌿</h3>
+        <p class="modal-sub">DIY Dry Creek Stream &amp; Garden Bridge — $5.00</p>
+        <label for="email-input">Your email (for receipt)</label>
+        <input type="email" id="email-input" placeholder="you@example.com" />
+        <div id="payment-element"></div>
+        <button id="submit-btn" onclick="handlePayment()">Pay $5.00 &amp; Download</button>
+        <div id="payment-message"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const STRIPE_PK = 'pk_live_51TQB5uERLV3AA0mv0dp2i9c6m3Y1oxuGCe0pghanMWYW9Y8gr4tPWJdwJAUhdaqDaUfWazxd4GKMaRaPfDgwMrBm00d1NxbK5G';
+    const PDF_FILE = 'DIY_Dry_Creek_Stream_Bridge_Guide.pdf';
+
+    let stripe, elements, paymentElement, clientSecret;
+
+    async function openModal() {
+      document.getElementById('modal-overlay').classList.add('open');
+      if (!stripe) {
+        stripe = Stripe(STRIPE_PK);
+        await initStripe();
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('modal-overlay').classList.remove('open');
+    }
+
+    document.getElementById('modal-overlay').addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+
+    async function initStripe() {
+      try {
+        const res = await fetch('/.netlify/functions/create-payment-intent', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ amount: 500, currency: 'usd', email: '' })
+        });
+        const data = await res.json();
+        clientSecret = data.clientSecret;
+
+        elements = stripe.elements({
+          clientSecret,
+          appearance: {
+            theme: 'stripe',
+            variables: { colorPrimary: '#4CAF50', borderRadius: '10px', fontFamily: 'Nunito, sans-serif' }
+          }
+        });
+
+        paymentElement = elements.create('payment', { layout: 'tabs' });
+        paymentElement.mount('#payment-element');
+      } catch (err) {
+        document.getElementById('payment-message').textContent = 'Could not load payment. Please try again.';
+      }
+    }
+
+    async function handlePayment() {
+      const btn = document.getElementById('submit-btn');
+      const msg = document.getElementById('payment-message');
+      const email = document.getElementById('email-input').value.trim();
+
+      if (!email || !email.includes('@')) {
+        msg.textContent = 'Please enter a valid email address.';
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Processing…';
+      msg.textContent = '';
+
+      const { error, paymentIntent } = await stripe.confirmPayment({
+        elements,
+        confirmParams: { receipt_email: email },
+        redirect: 'if_required'
+      });
+
+      if (error) {
+        msg.textContent = error.message;
+        btn.disabled = false;
+        btn.textContent = 'Pay $5.00 & Download';
+        return;
+      }
+
+      if (paymentIntent && paymentIntent.status === 'succeeded') {
+        // Show success and trigger download
+        document.getElementById('modal-content').innerHTML = `
+          <div class="success-box">
+            <div class="check">🎉</div>
+            <h4>Payment Successful!</h4>
+            <p>Your guide is downloading now. Check your email for a receipt.</p>
+            <p style="margin-top:12px; color:#4CAF50; font-weight:700;">Thank you — happy building! 🌿</p>
+          </div>
+        `;
+        const link = document.createElement('a');
+        link.href = PDF_FILE;
+        link.download = PDF_FILE;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    }
+  </script>
+</body>
+</html>
