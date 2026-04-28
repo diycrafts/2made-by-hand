@@ -5,532 +5,430 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Made By Hand — DIY Guides for the Home & Garden</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --cream:#FAF7F2; --warm:#F0EBE1; --stone:#D6CEC2;
-  --bark:#8C6B4A; --forest:#4A6741; --ink:#2A2520;
-  --muted:#8A7E72; --white:#FFFFFF; --gold:#C8963C;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#FAFAF8;--ink:#18181A;--ink2:#3D3D40;--muted:#8A8A90;
+  --stone:#E2E0DA;--warm:#F2EEE6;--bark:#7C5C3A;--bark2:#A07848;
+  --forest:#3A5C3A;--red:#C0392B;--gold:#D4A843;--goldl:#F0C96A;--white:#FFFFFF;
 }
-html { scroll-behavior: smooth; }
-body { font-family:'Nunito',sans-serif; background:var(--cream); color:var(--ink); overflow-x:hidden; }
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden;}
+
+/* ANN BAR */
+.ann-bar{background:var(--ink);color:rgba(255,255,255,0.7);font-size:0.78rem;font-weight:500;text-align:center;padding:9px 20px;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;}
+.ann-bar strong{color:var(--goldl);}
+.ann-bar a{color:var(--goldl);text-decoration:none;font-weight:700;border-bottom:1px solid rgba(240,201,106,0.4);}
 
 /* NAV */
-nav {
-  position:fixed; top:0; left:0; right:0; z-index:200; height:68px;
-  display:flex; align-items:center; justify-content:space-between; padding:0 5vw;
-  background:rgba(250,247,242,0.93); backdrop-filter:blur(14px);
-  border-bottom:1px solid rgba(214,206,194,0.5); transition:box-shadow 0.3s;
-}
-nav.scrolled { box-shadow:0 2px 20px rgba(42,37,32,0.08); }
-.logo { font-family:'Lora',serif; font-size:1.25rem; font-weight:700; color:var(--ink); text-decoration:none; display:flex; align-items:center; gap:0.6rem; }
-.logo-mark { width:34px; height:34px; background:var(--bark); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; }
-.nav-cta { display:inline-flex; align-items:center; gap:0.5rem; background:var(--bark); color:white; font-family:'Nunito',sans-serif; font-size:0.88rem; font-weight:700; padding:0.6rem 1.5rem; border-radius:50px; text-decoration:none; transition:background 0.2s,transform 0.15s; }
-.nav-cta:hover { background:var(--ink); transform:translateY(-1px); }
-
-/* VIRAL BLUEPRINT — slim strip under nav */
-.vb-strip-bar {
-  margin-top:68px;
-  background:#0f0f0f;
-  border-bottom:1px solid rgba(200,150,60,0.3);
-  padding:10px 5vw;
-  display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap;
-}
-.vb-strip-bar a { text-decoration:none; display:flex; align-items:center; gap:14px; flex-wrap:wrap; justify-content:center; }
-.vb-strip-badge { font-size:0.65rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; background:var(--gold); color:#1a1410; padding:3px 10px; border-radius:20px; white-space:nowrap; }
-.vb-strip-text { font-size:0.85rem; font-weight:600; color:rgba(255,255,255,0.75); }
-.vb-strip-text span { color:rgba(255,255,255,0.4); text-decoration:line-through; margin-right:4px; }
-.vb-strip-price { font-family:'Lora',serif; font-size:1rem; font-weight:700; color:#F5A623; }
-.vb-strip-cta { font-size:0.78rem; font-weight:800; background:var(--gold); color:#1a1410; padding:5px 14px; border-radius:20px; white-space:nowrap; transition:background 0.2s; }
-.vb-strip-bar a:hover .vb-strip-cta { background:#daa840; }
+nav{position:sticky;top:0;z-index:300;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;background:rgba(250,250,248,0.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--stone);}
+.logo{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;color:var(--ink);text-decoration:none;}
+.logo span{color:var(--bark);}
+.nav-right{display:flex;align-items:center;gap:20px;}
+.nav-link{font-size:0.85rem;font-weight:500;color:var(--ink2);text-decoration:none;transition:color 0.15s;}
+.nav-link:hover{color:var(--ink);}
+.nav-shop-btn{background:var(--ink);color:white;font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:600;padding:9px 22px;border-radius:6px;text-decoration:none;transition:background 0.2s,transform 0.15s;}
+.nav-shop-btn:hover{background:var(--bark);transform:translateY(-1px);}
 
 /* HERO */
-.hero { min-height:calc(100vh - 108px); padding:60px 5vw 60px; display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; max-width:1300px; margin:0 auto; position:relative; }
-.tag-pill { display:inline-flex; align-items:center; gap:0.5rem; border:1.5px solid var(--stone); border-radius:50px; padding:0.4rem 1rem; font-size:0.78rem; font-weight:700; color:var(--bark); margin-bottom:1.75rem; animation:fade-up 0.6s 0.1s both; }
-.hero h1 { font-family:'Lora',serif; font-size:clamp(2.8rem,5vw,4.6rem); font-weight:700; line-height:1.1; margin-bottom:1.5rem; animation:fade-up 0.6s 0.2s both; }
-.hero h1 em { font-style:italic; color:var(--bark); }
-.hero-desc { font-size:1.05rem; color:var(--muted); line-height:1.85; max-width:480px; margin-bottom:2.5rem; font-weight:400; animation:fade-up 0.6s 0.3s both; }
-.hero-desc strong { color:var(--ink); font-weight:600; }
-.hero-actions { display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; animation:fade-up 0.6s 0.4s both; }
-.btn-big { display:inline-flex; align-items:center; gap:0.65rem; background:var(--bark); color:white; font-family:'Nunito',sans-serif; font-size:1.05rem; font-weight:800; padding:1rem 2.4rem; border-radius:50px; text-decoration:none; border:none; cursor:pointer; box-shadow:0 6px 24px rgba(140,107,74,0.35); transition:background 0.2s,transform 0.2s,box-shadow 0.2s; }
-.btn-big:hover { background:var(--ink); transform:translateY(-2px); box-shadow:0 10px 30px rgba(42,37,32,0.25); }
-.btn-big .arr { transition:transform 0.2s; }
-.btn-big:hover .arr { transform:translateX(4px); }
-.btn-ghost { font-size:0.9rem; font-weight:600; color:var(--muted); text-decoration:none; display:flex; align-items:center; gap:0.35rem; transition:color 0.2s; }
-.btn-ghost:hover { color:var(--ink); }
-.hero-trust { display:flex; align-items:center; gap:1.5rem; margin-top:2.5rem; padding-top:2rem; border-top:1px solid var(--stone); flex-wrap:wrap; animation:fade-up 0.6s 0.5s both; }
-.trust-chip { display:flex; align-items:center; gap:0.4rem; font-size:0.8rem; font-weight:600; color:var(--muted); }
+.hero{display:grid;grid-template-columns:1fr 1fr;min-height:88vh;max-width:1400px;margin:0 auto;padding:0 5vw;align-items:center;gap:4rem;}
+.hero-left{padding:4rem 0;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:0.72rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--forest);margin-bottom:1.5rem;}
+.hero-eyebrow::before{content:'';width:28px;height:2px;background:var(--forest);}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,5.5vw,5.2rem);font-weight:900;line-height:1.02;letter-spacing:-0.02em;color:var(--ink);margin-bottom:1.5rem;}
+.hero h1 em{font-style:italic;color:var(--bark);}
+.hero-desc{font-size:1.05rem;color:var(--ink2);line-height:1.8;max-width:440px;margin-bottom:2.5rem;}
+.hero-desc strong{color:var(--ink);font-weight:600;}
+.hero-cta-row{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:2.5rem;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:white;font-family:'DM Sans',sans-serif;font-size:0.95rem;font-weight:700;padding:14px 28px;border-radius:8px;text-decoration:none;box-shadow:0 4px 20px rgba(24,24,26,0.2);transition:background 0.2s,transform 0.2s;}
+.btn-primary:hover{background:var(--bark);transform:translateY(-2px);}
+.btn-ghost{display:inline-flex;align-items:center;gap:6px;font-size:0.9rem;font-weight:600;color:var(--ink2);text-decoration:none;border-bottom:1.5px solid var(--stone);padding-bottom:2px;transition:color 0.15s,border-color 0.15s;}
+.btn-ghost:hover{color:var(--ink);border-color:var(--ink);}
+.hero-stats{display:flex;gap:2rem;padding-top:2rem;border-top:1px solid var(--stone);}
+.hero-stat-n{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--ink);line-height:1;}
+.hero-stat-l{font-size:0.72rem;color:var(--muted);font-weight:500;margin-top:3px;text-transform:uppercase;letter-spacing:0.06em;}
 
-/* HERO FLOATING CARDS */
-.hero-right { position:relative; height:560px; animation:fade-up 0.7s 0.3s both; }
-.fc { position:absolute; border-radius:18px; overflow:hidden; box-shadow:0 20px 60px rgba(42,37,32,0.18); transition:transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.4s; cursor:pointer; }
-.fc img { width:100%; height:100%; object-fit:cover; display:block; }
-.fc:hover { box-shadow:0 30px 80px rgba(42,37,32,0.28); z-index:10!important; }
-.fc-1 { width:275px; height:275px; top:20px; left:10px; z-index:3; transform:rotate(-3deg); }
-.fc-2 { width:235px; height:235px; top:60px; right:20px; z-index:2; transform:rotate(4deg); }
-.fc-3 { width:220px; height:220px; bottom:50px; left:55px; z-index:4; transform:rotate(1deg); }
-.fc-4 { width:195px; height:195px; bottom:60px; right:5px; z-index:1; transform:rotate(-2deg); }
-.fc-label { position:absolute; bottom:0; left:0; right:0; padding:1rem 0.85rem 0.75rem; background:linear-gradient(transparent,rgba(42,37,32,0.85)); color:white; font-size:0.72rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; }
+/* HERO RIGHT */
+.hero-right{position:relative;height:620px;}
+.hcard{position:absolute;border-radius:12px;overflow:hidden;box-shadow:0 24px 60px rgba(24,24,26,0.14);transition:transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94),box-shadow 0.4s;cursor:pointer;}
+.hcard img{width:100%;height:100%;object-fit:cover;display:block;}
+.hcard:hover{box-shadow:0 32px 80px rgba(24,24,26,0.22);z-index:10!important;}
+.hcard-label{position:absolute;bottom:0;left:0;right:0;padding:32px 14px 12px;background:linear-gradient(transparent,rgba(24,24,26,0.82));color:white;font-size:0.7rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;}
+.hcard-price{position:absolute;top:10px;right:10px;background:white;color:var(--ink);font-size:0.72rem;font-weight:800;padding:4px 10px;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,0.12);}
+.hc1{width:280px;height:280px;top:20px;left:0;z-index:3;transform:rotate(-1.5deg);}
+.hc2{width:240px;height:240px;top:40px;right:10px;z-index:2;transform:rotate(2deg);}
+.hc3{width:225px;height:225px;bottom:60px;left:50px;z-index:4;transform:rotate(1deg);}
+.hc4{width:200px;height:200px;bottom:50px;right:0;z-index:1;transform:rotate(-1deg);}
 
-/* URGENCY BAR */
-.urgency-strip {
-  background:linear-gradient(135deg,#1a2a1a,#2d4a2d);
-  padding:14px 5vw;
-  display:flex; align-items:center; justify-content:center; gap:20px; flex-wrap:wrap;
-  text-align:center;
-}
-.urgency-strip p { font-size:0.88rem; font-weight:700; color:rgba(255,255,255,0.85); }
-.urgency-strip .pill { background:rgba(255,193,7,0.2); border:1px solid rgba(255,193,7,0.4); color:#FFC107; font-size:0.78rem; font-weight:800; padding:4px 14px; border-radius:20px; }
-.urgency-strip a { background:#FFC107; color:#1a1a1a; font-size:0.85rem; font-weight:800; padding:8px 20px; border-radius:20px; text-decoration:none; transition:background 0.2s; }
-.urgency-strip a:hover { background:#FFD54F; }
+/* PROOF BAR */
+.proof-bar{background:var(--warm);border-top:1px solid var(--stone);border-bottom:1px solid var(--stone);padding:16px 5vw;display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap;}
+.proof-item{display:flex;align-items:center;gap:7px;font-size:0.82rem;font-weight:600;color:var(--ink2);}
+.proof-div{width:1px;height:18px;background:var(--stone);}
 
-@keyframes fade-up { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+/* SHOP SECTION */
+.shop-section{padding:5.5rem 5vw;max-width:1300px;margin:0 auto;}
+.section-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:2.25rem;flex-wrap:wrap;gap:1rem;}
+.section-eyebrow{font-size:0.7rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--forest);margin-bottom:5px;}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.4rem);font-weight:700;color:var(--ink);line-height:1.15;}
+.see-all-link{font-size:0.88rem;font-weight:600;color:var(--bark);text-decoration:none;border-bottom:1.5px solid rgba(124,92,58,0.3);padding-bottom:2px;transition:border-color 0.2s;}
+.see-all-link:hover{border-color:var(--bark);}
 
-/* MARQUEE */
-.marquee-wrap { background:var(--ink); padding:1rem 0; overflow:hidden; }
-.marquee-track { display:flex; width:max-content; animation:marquee 32s linear infinite; }
-.marquee-track:hover { animation-play-state:paused; }
-.marquee-item { display:flex; align-items:center; gap:0.75rem; padding:0 2.5rem; white-space:nowrap; font-size:0.82rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:rgba(250,247,242,0.45); }
-.marquee-dot { width:4px; height:4px; border-radius:50%; background:var(--bark); }
-@keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+/* PRODUCT GRID */
+.prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem;}
+.prod-card{background:var(--white);border:1px solid var(--stone);border-radius:12px;overflow:hidden;text-decoration:none;color:inherit;transition:transform 0.25s,box-shadow 0.25s,border-color 0.25s;display:block;position:relative;}
+.prod-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(24,24,26,0.1);border-color:var(--bark2);}
+.prod-thumb{width:100%;aspect-ratio:4/3;overflow:hidden;position:relative;}
+.prod-thumb img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s;display:block;}
+.prod-card:hover .prod-thumb img{transform:scale(1.05);}
+.prod-tag{position:absolute;top:10px;left:10px;font-size:0.62rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;padding:3px 9px;border-radius:4px;background:rgba(250,250,248,0.95);color:var(--ink);backdrop-filter:blur(4px);}
+.prod-badge{position:absolute;top:10px;right:10px;font-size:0.6rem;font-weight:800;letter-spacing:0.05em;text-transform:uppercase;padding:3px 9px;border-radius:4px;}
+.badge-new{background:var(--forest);color:white;}
+.badge-hot{background:var(--red);color:white;}
+.prod-body{padding:0.9rem 1rem 1.1rem;}
+.prod-name{font-family:'Playfair Display',serif;font-size:0.92rem;font-weight:700;color:var(--ink);margin-bottom:3px;line-height:1.3;}
+.prod-sub{font-size:0.75rem;color:var(--muted);margin-bottom:0.75rem;line-height:1.5;}
+.prod-urgency{display:flex;align-items:center;gap:5px;margin-bottom:0.65rem;flex-wrap:wrap;}
+.prod-stock{font-size:0.65rem;font-weight:700;color:var(--red);display:flex;align-items:center;gap:3px;}
+.prod-stock::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--red);flex-shrink:0;}
+.prod-timer{font-size:0.62rem;font-weight:700;background:#FFF3CD;color:#856404;border:1px solid #FFC107;padding:2px 6px;border-radius:3px;}
+.prod-footer{display:flex;align-items:center;justify-content:space-between;padding-top:0.75rem;border-top:1px solid var(--warm);}
+.prod-was{font-size:0.68rem;color:var(--muted);text-decoration:line-through;display:block;margin-bottom:1px;}
+.prod-price{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--red);line-height:1;}
+.prod-cta{font-size:0.75rem;font-weight:700;background:var(--ink);color:white;padding:6px 13px;border-radius:5px;transition:background 0.15s;white-space:nowrap;}
+.prod-card:hover .prod-cta{background:var(--bark);}
 
-/* ABOUT */
-.about { padding:8rem 5vw; max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:6rem; align-items:center; }
-.section-label { display:inline-flex; align-items:center; gap:0.5rem; font-size:0.75rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--forest); margin-bottom:1.25rem; }
-.about h2 { font-family:'Lora',serif; font-size:clamp(1.9rem,3vw,2.8rem); font-weight:700; line-height:1.2; margin-bottom:1.5rem; }
-.about p { font-size:1rem; color:var(--muted); line-height:1.9; margin-bottom:1rem; }
-.about p strong { color:var(--ink); font-weight:600; }
-.about p em { font-style:italic; color:var(--bark); }
-.check-list { list-style:none; margin-top:1.75rem; display:flex; flex-direction:column; gap:0.7rem; }
-.check-list li { display:flex; align-items:flex-start; gap:0.75rem; font-size:0.95rem; font-weight:500; color:var(--ink); }
-.check-list li::before { content:'✓'; color:var(--forest); font-weight:800; font-size:1rem; width:20px; flex-shrink:0; margin-top:1px; }
-.about-photos { display:grid; grid-template-columns:1fr 1fr; gap:0.85rem; }
-.ap { border-radius:14px; overflow:hidden; position:relative; aspect-ratio:1; transition:transform 0.3s; }
-.ap:hover { transform:scale(1.02); }
-.ap img { width:100%; height:100%; object-fit:cover; display:block; }
-.ap:first-child { grid-column:span 2; aspect-ratio:2/1; }
+/* FEAT BANNER */
+.feat-banner-wrap{padding:0 5vw 5.5rem;}
+.feat-banner{background:linear-gradient(135deg,#0f0f0f,#1c1c1c);border-radius:16px;padding:3.5rem 4vw;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;position:relative;overflow:hidden;}
+.feat-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 50%,rgba(212,168,67,0.07) 0%,transparent 60%);pointer-events:none;}
+.feat-eyebrow{font-size:0.67rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;}
+.feat-banner h3{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.8rem);font-weight:700;color:white;line-height:1.1;margin-bottom:0.8rem;}
+.feat-banner h3 span{color:var(--gold);}
+.feat-banner p{font-size:0.92rem;color:rgba(255,255,255,0.48);line-height:1.75;margin-bottom:1.75rem;max-width:380px;}
+.feat-stats{display:flex;gap:2rem;margin-bottom:1.75rem;}
+.feat-stat-n{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--gold);line-height:1;}
+.feat-stat-l{font-size:0.68rem;color:rgba(255,255,255,0.38);text-transform:uppercase;letter-spacing:0.08em;margin-top:3px;}
+.feat-price-row{display:flex;align-items:baseline;gap:10px;margin-bottom:1.5rem;}
+.feat-price-row .cur{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--gold);}
+.feat-price-row .was{font-size:0.88rem;color:rgba(255,255,255,0.28);text-decoration:line-through;}
+.feat-price-row .save{font-size:0.68rem;font-weight:800;background:rgba(212,168,67,0.18);border:1px solid rgba(212,168,67,0.35);color:var(--gold);padding:3px 9px;border-radius:4px;}
+.feat-btn{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:#1a1410;font-family:'DM Sans',sans-serif;font-size:0.92rem;font-weight:800;padding:12px 26px;border-radius:7px;text-decoration:none;box-shadow:0 6px 24px rgba(212,168,67,0.3);transition:background 0.2s,transform 0.2s;}
+.feat-btn:hover{background:var(--goldl);transform:translateY(-2px);}
+.feat-banner-right{border-radius:12px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,0.5);}
+.feat-banner-right img{width:100%;display:block;}
 
-/* HOW IT WORKS */
-.how { background:var(--warm); padding:7rem 5vw; text-align:center; }
-.how h2 { font-family:'Lora',serif; font-size:clamp(1.9rem,3vw,2.8rem); font-weight:700; margin-bottom:0.75rem; }
-.how-sub { color:var(--muted); font-size:1rem; max-width:480px; margin:0 auto 4rem; line-height:1.75; }
-.steps { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; max-width:880px; margin:0 auto 3.5rem; }
-.step { background:var(--white); border-radius:18px; padding:2.5rem 1.75rem; border:1.5px solid var(--stone); transition:transform 0.25s,box-shadow 0.25s,border-color 0.25s; }
-.step:hover { transform:translateY(-6px); box-shadow:0 16px 40px rgba(42,37,32,0.1); border-color:var(--bark); }
-.step-num { width:50px; height:50px; background:var(--bark); color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Lora',serif; font-size:1.3rem; font-weight:700; margin:0 auto 1.25rem; }
-.step h3 { font-family:'Lora',serif; font-size:1.1rem; font-weight:700; margin-bottom:0.6rem; }
-.step p { font-size:0.88rem; color:var(--muted); line-height:1.7; }
-.how-btn { display:inline-flex; align-items:center; gap:0.65rem; background:var(--ink); color:white; font-family:'Nunito',sans-serif; font-size:1rem; font-weight:700; padding:1rem 2.5rem; border-radius:50px; text-decoration:none; box-shadow:0 4px 20px rgba(42,37,32,0.2); transition:background 0.2s,transform 0.2s; }
-.how-btn:hover { background:var(--bark); transform:translateY(-2px); }
+/* WHY */
+.why-section{padding:5.5rem 5vw;max-width:1100px;margin:0 auto;}
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-top:2.5rem;}
+.why-card{padding:1.6rem;border-radius:10px;border:1px solid var(--stone);background:var(--white);transition:border-color 0.2s,transform 0.2s;}
+.why-card:hover{border-color:var(--bark2);transform:translateY(-3px);}
+.why-icon{font-size:1.75rem;margin-bottom:0.85rem;display:block;}
+.why-card h4{font-family:'Playfair Display',serif;font-size:0.98rem;font-weight:700;margin-bottom:5px;color:var(--ink);}
+.why-card p{font-size:0.8rem;color:var(--muted);line-height:1.65;}
 
-/* MID-PAGE CTA */
-.mid-cta { background:var(--ink); padding:6rem 5vw; }
-.mid-cta-inner { max-width:1100px; margin:0 auto; text-align:center; }
-.mid-cta-label { display:inline-block; font-size:0.72rem; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; color:#ff8a80; background:rgba(192,57,43,0.2); border:1px solid rgba(192,57,43,0.4); padding:5px 16px; border-radius:20px; margin-bottom:1.25rem; }
-.mid-cta-title { font-family:'Lora',serif; font-size:clamp(2rem,4vw,3rem); font-weight:700; color:white; line-height:1.15; margin-bottom:1rem; }
-.mid-cta-title em { font-style:italic; color:var(--gold); }
-.mid-cta-sub { font-size:1rem; color:rgba(255,255,255,0.5); max-width:520px; margin:0 auto 3rem; line-height:1.75; }
-.mid-cta-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; margin-bottom:2.5rem; }
-.mid-cta-card { background:rgba(255,255,255,0.05); border:1.5px solid rgba(255,255,255,0.1); border-radius:18px; overflow:hidden; transition:transform 0.3s,border-color 0.3s,box-shadow 0.3s; text-align:left; }
-.mid-cta-card:hover { transform:translateY(-5px); border-color:rgba(200,150,60,0.6); box-shadow:0 20px 50px rgba(0,0,0,0.4); }
-.mid-cta-card--featured { border-color:rgba(200,150,60,0.5); background:rgba(200,150,60,0.06); }
-.mid-cta-img { position:relative; aspect-ratio:16/9; overflow:hidden; }
-.mid-cta-img img { width:100%; height:100%; object-fit:cover; transition:transform 0.4s; display:block; }
-.mid-cta-card:hover .mid-cta-img img { transform:scale(1.05); }
-.mid-cta-badge { position:absolute; top:10px; left:10px; font-size:0.65rem; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; background:var(--gold); color:#1a1410; padding:4px 10px; border-radius:20px; }
-.mid-cta-badge--hot { background:#c0392b; color:white; }
-.mid-cta-body { padding:1.25rem 1.25rem 1.5rem; }
-.mid-cta-name { font-family:'Lora',serif; font-size:1rem; font-weight:700; color:white; margin-bottom:4px; }
-.mid-cta-meta { font-size:0.78rem; color:rgba(255,255,255,0.4); margin-bottom:0.85rem; }
-.mid-cta-pricing { display:flex; align-items:baseline; gap:8px; margin-bottom:1rem; }
-.mid-cta-price { font-family:'Lora',serif; font-size:1.5rem; font-weight:700; color:#FFC107; }
-.mid-cta-old { font-size:0.85rem; color:rgba(255,255,255,0.3); text-decoration:line-through; }
-.mid-cta-btn { display:inline-flex; align-items:center; gap:6px; background:var(--bark); color:white; font-family:'Nunito',sans-serif; font-size:0.88rem; font-weight:800; padding:10px 20px; border-radius:50px; text-decoration:none; transition:background 0.2s,transform 0.15s; }
-.mid-cta-btn:hover { background:var(--gold); color:#1a1410; transform:translateY(-1px); }
-.mid-cta-footer { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; padding-top:1.5rem; border-top:1px solid rgba(255,255,255,0.08); }
-.mid-cta-all { font-size:0.95rem; font-weight:700; color:var(--gold); text-decoration:none; transition:color 0.2s; }
-.mid-cta-all:hover { color:white; }
-.mid-cta-trust { display:flex; gap:1.25rem; flex-wrap:wrap; }
-.mid-cta-trust span { font-size:0.78rem; color:rgba(255,255,255,0.35); font-weight:600; }
-@media(max-width:900px){ .mid-cta-cards { grid-template-columns:1fr; } .mid-cta-footer { flex-direction:column; align-items:center; text-align:center; } }
+/* TESTIMONIALS */
+.testi-section{background:var(--ink);padding:5rem 5vw;text-align:center;}
+.testi-eyebrow{font-size:0.68rem;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:var(--goldl);margin-bottom:8px;}
+.testi-title{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,3vw,2.2rem);font-weight:700;color:white;margin-bottom:3rem;}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;max-width:1000px;margin:0 auto;}
+.testi-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:1.6rem;text-align:left;}
+.testi-stars{color:var(--gold);font-size:0.8rem;margin-bottom:0.8rem;letter-spacing:2px;}
+.testi-text{font-size:0.85rem;color:rgba(255,255,255,0.6);line-height:1.7;margin-bottom:0.9rem;font-style:italic;}
+.testi-name{font-size:0.72rem;font-weight:700;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.06em;}
 
-/* PROMISE */
-.promise { padding:7rem 5vw; max-width:1000px; margin:0 auto; text-align:center; }
-.promise h2 { font-family:'Lora',serif; font-size:clamp(1.9rem,3vw,2.8rem); font-weight:700; margin-bottom:1rem; }
-.promise-intro { font-size:1rem; color:var(--muted); max-width:600px; margin:0 auto 3rem; line-height:1.8; }
-.promise-intro em { font-style:italic; color:var(--bark); font-family:'Lora',serif; font-size:1.15rem; }
-.promise-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; text-align:left; }
-.pc { background:var(--white); border:1.5px solid var(--stone); border-radius:16px; padding:1.75rem; transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s; }
-.pc:hover { border-color:var(--bark); transform:translateY(-3px); box-shadow:0 8px 30px rgba(140,107,74,0.12); }
-.pc-icon { font-size:2rem; margin-bottom:0.85rem; display:block; }
-.pc h3 { font-family:'Lora',serif; font-size:1.05rem; font-weight:700; margin-bottom:0.5rem; }
-.pc p { font-size:0.88rem; color:var(--muted); line-height:1.65; }
-
-/* FEATURED */
-.featured { background:var(--warm); padding:7rem 5vw; }
-.featured-inner { max-width:1100px; margin:0 auto; }
-.featured-header { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:3rem; flex-wrap:wrap; gap:1rem; }
-.featured-header h2 { font-family:'Lora',serif; font-size:clamp(1.9rem,3vw,2.6rem); font-weight:700; }
-.see-all { display:inline-flex; align-items:center; gap:0.4rem; font-size:0.9rem; font-weight:700; color:var(--bark); text-decoration:none; transition:gap 0.2s; }
-.see-all:hover { gap:0.8rem; }
-.feat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; }
-.feat-card { background:var(--white); border:1.5px solid var(--stone); border-radius:16px; overflow:hidden; transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s; text-decoration:none; color:inherit; display:block; }
-.feat-card:hover { transform:translateY(-6px); box-shadow:0 16px 50px rgba(42,37,32,0.12); border-color:var(--bark); }
-.feat-thumb { width:100%; aspect-ratio:16/9; overflow:hidden; }
-.feat-thumb img { width:100%; height:100%; object-fit:cover; transition:transform 0.4s; }
-.feat-card:hover .feat-thumb img { transform:scale(1.06); }
-.feat-body { padding:1.25rem 1.35rem 1.4rem; }
-.feat-title { font-family:'Lora',serif; font-size:1.1rem; font-weight:700; margin-bottom:0.4rem; }
-.feat-desc { font-size:0.84rem; color:var(--muted); line-height:1.55; margin-bottom:1rem; }
-.feat-footer { display:flex; align-items:center; justify-content:space-between; }
-.feat-price { font-family:'Lora',serif; font-size:1.3rem; font-weight:700; color:#c0392b; }
-.feat-price-old { font-size:0.78rem; color:var(--muted); text-decoration:line-through; margin-left:6px; }
-.feat-cta { font-size:0.8rem; font-weight:700; color:var(--bark); }
-
-/* FINAL CTA */
-.final { background:var(--ink); padding:7rem 5vw; text-align:center; }
-.final h2 { font-family:'Lora',serif; font-size:clamp(2rem,4vw,3.2rem); font-weight:700; color:var(--cream); margin-bottom:1rem; line-height:1.2; }
-.final p { color:rgba(250,247,242,0.55); font-size:1rem; max-width:500px; margin:0 auto 2.5rem; line-height:1.75; }
-.final-btn { display:inline-flex; align-items:center; gap:0.75rem; background:var(--gold); color:var(--ink); font-family:'Nunito',sans-serif; font-size:1.1rem; font-weight:800; padding:1.1rem 2.8rem; border-radius:50px; text-decoration:none; box-shadow:0 6px 24px rgba(200,150,60,0.4); transition:background 0.2s,transform 0.2s; }
-.final-btn:hover { background:#daa840; transform:translateY(-2px); }
+/* BOTTOM CTA */
+.bottom-cta{padding:7rem 5vw;background:var(--warm);border-top:1px solid var(--stone);text-align:center;}
+.bottom-cta h2{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4vw,3.5rem);font-weight:700;color:var(--ink);line-height:1.1;margin-bottom:1rem;}
+.bottom-cta h2 em{font-style:italic;color:var(--bark);}
+.bottom-cta p{font-size:1rem;color:var(--muted);max-width:460px;margin:0 auto 2.5rem;line-height:1.8;}
+.btn-big-dark{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:white;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;padding:16px 36px;border-radius:8px;text-decoration:none;box-shadow:0 6px 24px rgba(24,24,26,0.2);transition:background 0.2s,transform 0.2s;}
+.btn-big-dark:hover{background:var(--bark);transform:translateY(-2px);}
+.bottom-trust{display:flex;align-items:center;justify-content:center;gap:24px;margin-top:2rem;flex-wrap:wrap;}
+.bottom-trust span{font-size:0.78rem;color:var(--muted);font-weight:500;display:flex;align-items:center;gap:4px;}
 
 /* FOOTER */
-footer { background:#1E1B18; padding:2.5rem 5vw; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; }
-.footer-logo { font-family:'Lora',serif; font-size:1.1rem; font-weight:700; color:rgba(250,247,242,0.65); }
-footer p { font-size:0.8rem; color:rgba(250,247,242,0.3); }
-footer a { color:rgba(250,247,242,0.45); text-decoration:none; }
+footer{background:var(--ink);padding:2.25rem 5vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.footer-logo{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:rgba(255,255,255,0.55);}
+footer p{font-size:0.75rem;color:rgba(255,255,255,0.25);}
+footer a{color:rgba(255,255,255,0.38);text-decoration:none;}
 
-/* SCROLL REVEAL */
-.reveal { opacity:0; transform:translateY(28px); transition:opacity 0.65s ease,transform 0.65s ease; }
-.reveal.visible { opacity:1; transform:translateY(0); }
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
 
 /* RESPONSIVE */
+@media(max-width:1100px){.prod-grid{grid-template-columns:repeat(2,1fr);}.why-grid{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:900px){
-  .hero { grid-template-columns:1fr; padding-top:40px; gap:2rem; }
-  .hero-right { height:320px; }
-  .fc-1{width:170px;height:170px;} .fc-2{width:150px;height:150px;} .fc-3{width:145px;height:145px;} .fc-4{width:130px;height:130px;bottom:0;}
-  .about { grid-template-columns:1fr; gap:3rem; padding:5rem 5vw; }
-  .about-photos { display:none; }
-  .steps { grid-template-columns:1fr; }
-  .promise-grid { grid-template-columns:1fr; }
-  .feat-grid { grid-template-columns:1fr 1fr; }
-  footer { flex-direction:column; text-align:center; }
-  .urgency-strip { flex-direction:column; gap:10px; }
+  .hero{grid-template-columns:1fr;min-height:auto;padding:3rem 5vw;}
+  .hero-right{height:300px;order:-1;}
+  .hc1{width:165px;height:165px;top:10px;} .hc2{width:148px;height:148px;top:20px;right:5px;} .hc3{width:140px;height:140px;bottom:0;left:30px;} .hc4{width:128px;height:128px;bottom:0;}
+  .feat-banner{grid-template-columns:1fr;}
+  .feat-banner-right{display:none;}
+  .testi-grid{grid-template-columns:1fr;}
+  .proof-div{display:none;}
+  .proof-bar{gap:16px;}
+  footer{flex-direction:column;text-align:center;}
 }
-@media(max-width:600px){ .feat-grid{grid-template-columns:1fr;} .hero-trust{gap:0.75rem;} .vb-strip-bar{flex-direction:column;gap:8px;} }
+@media(max-width:600px){.prod-grid{grid-template-columns:1fr;}.why-grid{grid-template-columns:1fr;}.hero-stats{gap:1.25rem;}.hero h1{font-size:2.8rem;}}
 </style>
 </head>
 <body>
 
-<nav id="nav">
-  <a href="index.html" class="logo">
-    <div class="logo-mark">&#129704;</div>Made By Hand
-  </a>
-  <a href="shop.html" class="nav-cta">View All Guides &#8594;</a>
+<!-- ANN BAR -->
+<div class="ann-bar">
+  <span>&#128308; Limited pricing active &mdash; guides from <strong>$5.00</strong> (was $9.00)</span>
+  <a href="shop.html">Shop all guides &#8594;</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="logo">Made By <span>Hand</span></a>
+  <div class="nav-right">
+    <a href="#why" class="nav-link">About</a>
+    <a href="guide-viral-blueprint.html" class="nav-link">Viral Blueprint</a>
+    <a href="shop.html" class="nav-shop-btn">Shop All Guides &#8594;</a>
+  </div>
 </nav>
 
-<!-- VIRAL BLUEPRINT — slim strip only -->
-<div class="vb-strip-bar">
-  <a href="guide-viral-blueprint.html">
-    <span class="vb-strip-badge">&#11088; Best Seller</span>
-    <span class="vb-strip-text">The $2K Reels Playbook &mdash; <span>$134</span></span>
-    <span class="vb-strip-price">$67</span>
-    <span class="vb-strip-cta">Get it &#8594;</span>
-  </a>
-</div>
-
-<!-- HERO — DIY guides front and center -->
+<!-- HERO -->
 <section class="hero">
-  <div>
-    <div class="tag-pill">&#10022; Real Projects &middot; Real Photos &middot; Instant Download</div>
-    <h1>Beautiful Things<br/>You Can<br/><em>Make Yourself</em></h1>
-    <p class="hero-desc">
-      Step-by-step guides for real home and garden projects.
-      <strong>Written for people who want results</strong>, not just inspiration &mdash;
-      every guide is built from an actual project, with real photos at every step.
-      From <strong>$5.00</strong>.
-    </p>
-    <div class="hero-actions">
-      <a href="shop.html" class="btn-big">Browse All Guides <span class="arr">&#8594;</span></a>
-      <a href="#about" class="btn-ghost">What's inside? &#8595;</a>
+  <div class="hero-left">
+    <div class="hero-eyebrow">Real Projects &middot; Real Results</div>
+    <h1>Make Something<br/><em>Beautiful</em><br/>This Weekend</h1>
+    <p class="hero-desc">Step-by-step PDF guides for home &amp; garden projects. <strong>Real photos at every step.</strong> From concrete planters to stone walls &mdash; for people who want to actually build it.</p>
+    <div class="hero-cta-row">
+      <a href="shop.html" class="btn-primary">Shop All Guides &#8594;</a>
+      <a href="#shop" class="btn-ghost">Browse the collection &#8595;</a>
     </div>
-    <div class="hero-trust">
-      <div class="trust-chip">&#128274; Secure payment</div>
-      <div class="trust-chip">&#11015; Instant download</div>
-      <div class="trust-chip">&#9854; Yours forever</div>
-      <div class="trust-chip">&#128247; Real photos</div>
+    <div class="hero-stats">
+      <div><div class="hero-stat-n">12+</div><div class="hero-stat-l">Guides</div></div>
+      <div><div class="hero-stat-n">$5</div><div class="hero-stat-l">Starting from</div></div>
+      <div><div class="hero-stat-n">3M+</div><div class="hero-stat-l">Project views</div></div>
     </div>
   </div>
-
   <div class="hero-right" id="hero-cards">
-    <div class="fc fc-1" id="fc1">
-      <img src="thumbnail_fire_bowl.jpg" alt="Concrete Fire Bowl"/>
-      <div class="fc-label">Concrete Fire Bowl</div>
-    </div>
-    <div class="fc fc-2" id="fc2">
-      <img src="thumbnail_stone_wall.jpg" alt="Stone Accent Wall"/>
-      <div class="fc-label">Stone Accent Wall</div>
-    </div>
-    <div class="fc fc-3" id="fc3">
-      <img src="thumbnail_glass_stones_facebook.jpg" alt="Glass Mosaic Stones"/>
-      <div class="fc-label">Glass Mosaic Stones</div>
-    </div>
-    <div class="fc fc-4" id="fc4">
-      <img src="thumbnail_planter_facebook.jpg" alt="Woven Planter"/>
-      <div class="fc-label">Woven Planter</div>
-    </div>
+    <div class="hcard hc1" id="fc1"><img src="thumbnail_balloon-vase.jpg" alt="Balloon Vase"/><div class="hcard-label">Balloon Vase</div><div class="hcard-price">$13</div></div>
+    <div class="hcard hc2" id="fc2"><img src="thumbnail_rope-planter.jpg" alt="Rope Planter"/><div class="hcard-label">Rope Planter</div><div class="hcard-price">$9.99</div></div>
+    <div class="hcard hc3" id="fc3"><img src="thumbnail_hand-planter.jpg" alt="Hand Planter"/><div class="hcard-label">Hand Planter</div><div class="hcard-price">$5</div></div>
+    <div class="hcard hc4" id="fc4"><img src="thumbnail_fire_bowl.jpg" alt="Fire Bowl"/><div class="hcard-label">Fire Bowl</div><div class="hcard-price">$5</div></div>
   </div>
 </section>
 
-<!-- URGENCY STRIP -->
-<div class="urgency-strip">
-  <p>&#128308; Limited-time pricing &mdash; guides from <strong>$5.00</strong> (was $9.00)</p>
-  <span class="pill">&#128293; Prices go up soon</span>
-  <a href="shop.html">See all guides &#8594;</a>
+<!-- PROOF BAR -->
+<div class="proof-bar">
+  <div class="proof-item">&#128274; Secure Stripe checkout</div>
+  <div class="proof-div"></div>
+  <div class="proof-item">&#11015; Instant PDF download</div>
+  <div class="proof-div"></div>
+  <div class="proof-item">&#9989; Apple Pay &amp; Google Pay</div>
+  <div class="proof-div"></div>
+  <div class="proof-item">&#128247; Real project photos</div>
+  <div class="proof-div"></div>
+  <div class="proof-item">&#9854; Yours forever</div>
 </div>
 
-<!-- MARQUEE -->
-<div class="marquee-wrap">
-  <div class="marquee-track">
-    <div class="marquee-item">&#128293; Concrete Fire Bowl <div class="marquee-dot"></div></div>
-    <div class="marquee-item">&#129704; Stone Accent Wall <div class="marquee-dot"></div></div>
-    <div class="marquee-item">&#128142; Glass Mosaic Stones <div class="marquee-dot"></div></div>
-    <div class="marquee-item">&#127807; Woven Planter <div class="marquee-dot"></div></div>
-    <div class="marquee-item">&#127807; Leaf Stepping Stones <div class="marquee-dot"></div></div>
-    <div class="marquee-item">&#128557; Candle Holder <div class="marquee-dot"></div></div>
-    <div class="marquee-item">&#127874; Balloon Vase <div class="marquee-dot"></div></div>
-    <div class="marquee-item">&#129322; Rope Texture Planter <div class="marquee-dot"></div></div>
-    <div class="marquee-item">&#128293; Concrete Fire Bowl <div class="marquee-dot"></div></div>
-    <div class="marquee-item">&#129704; Stone Accent Wall <div class="marquee-dot"></div></div>
-    <div class="marquee-item">&#128142; Glass Mosaic Stones <div class="marquee-dot"></div></div>
-    <div class="marquee-item">&#127807; Woven Planter <div class="marquee-dot"></div></div>
-    <div class="marquee-item">&#127807; Leaf Stepping Stones <div class="marquee-dot"></div></div>
-    <div class="marquee-item">&#128557; Candle Holder <div class="marquee-dot"></div></div>
-    <div class="marquee-item">&#127874; Balloon Vase <div class="marquee-dot"></div></div>
-    <div class="marquee-item">&#129322; Rope Texture Planter <div class="marquee-dot"></div></div>
+<!-- SHOP SECTION -->
+<section class="shop-section" id="shop">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-eyebrow">The Collection</div>
+      <div class="section-title">Most Popular Guides</div>
+    </div>
+    <a href="shop.html" class="see-all-link">View all 12 guides &#8594;</a>
+  </div>
+
+  <div class="prod-grid">
+
+    <a href="guide-balloon-vase.html" class="prod-card reveal">
+      <div class="prod-thumb">
+        <img src="thumbnail_balloon-vase.jpg" alt="Balloon Vase"/>
+        <span class="prod-tag">Concrete &middot; Interior</span>
+        <span class="prod-badge badge-new">NEW</span>
+      </div>
+      <div class="prod-body">
+        <div class="prod-name">Concrete Balloon Vase with Gold Interior</div>
+        <div class="prod-sub">Pour into a balloon, cure, pop &mdash; a $200 designer vase for under $40.</div>
+        <div class="prod-urgency">
+          <span class="prod-stock">Only 3 left at this price</span>
+          <span class="prod-timer" data-mins="37">&#9200; 37:00</span>
+        </div>
+        <div class="prod-footer">
+          <div><span class="prod-was">Was $22.00</span><div class="prod-price">$13.00</div></div>
+          <span class="prod-cta">Buy Now</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="guide-rope-planter.html" class="prod-card reveal">
+      <div class="prod-thumb">
+        <img src="thumbnail_rope-planter.jpg" alt="Rope Planter"/>
+        <span class="prod-tag">Concrete &middot; Garden</span>
+        <span class="prod-badge badge-hot">&#128293; Hot</span>
+      </div>
+      <div class="prod-body">
+        <div class="prod-name">Concrete Rope Texture Planter</div>
+        <div class="prod-sub">Wrap rope, pour concrete, unmold &mdash; a $150 planter for under $30.</div>
+        <div class="prod-urgency">
+          <span class="prod-stock">Only 2 left at this price</span>
+          <span class="prod-timer" data-mins="52">&#9200; 52:00</span>
+        </div>
+        <div class="prod-footer">
+          <div><span class="prod-was">Was $17.00</span><div class="prod-price">$9.99</div></div>
+          <span class="prod-cta">Buy Now</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="guide-hand-planter.html" class="prod-card reveal">
+      <div class="prod-thumb">
+        <img src="thumbnail_hand-planter.jpg" alt="Hand Planter"/>
+        <span class="prod-tag">Concrete &middot; Garden</span>
+      </div>
+      <div class="prod-body">
+        <div class="prod-name">DIY Concrete Hand Planter</div>
+        <div class="prod-sub">Cast your hand in concrete with a rubber glove. Plant with succulents.</div>
+        <div class="prod-urgency">
+          <span class="prod-stock">Only 4 left at this price</span>
+          <span class="prod-timer" data-mins="44">&#9200; 44:00</span>
+        </div>
+        <div class="prod-footer">
+          <div><span class="prod-was">Was $9.00</span><div class="prod-price">$5.00</div></div>
+          <span class="prod-cta">Buy Now</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="guide-stone-wall.html" class="prod-card reveal">
+      <div class="prod-thumb">
+        <img src="thumbnail_stone_wall.jpg" alt="Stone Accent Wall"/>
+        <span class="prod-tag">Stone &middot; Interior</span>
+      </div>
+      <div class="prod-body">
+        <div class="prod-name">Natural Stone Accent Wall</div>
+        <div class="prod-sub">Save $2,000&ndash;$7,000 vs a contractor. Full lighting guide included.</div>
+        <div class="prod-urgency">
+          <span class="prod-stock">Only 2 left at this price</span>
+          <span class="prod-timer" data-mins="43">&#9200; 43:00</span>
+        </div>
+        <div class="prod-footer">
+          <div><span class="prod-was">Was $22.00</span><div class="prod-price">$12.99</div></div>
+          <span class="prod-cta">Buy Now</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+  <div style="text-align:center;margin-top:2.25rem;">
+    <a href="shop.html" class="btn-primary reveal">See All 12 Guides &#8594;</a>
+  </div>
+</section>
+
+<!-- VIRAL BLUEPRINT BANNER -->
+<div class="feat-banner-wrap">
+  <div class="feat-banner reveal">
+    <div>
+      <div class="feat-eyebrow">&#11088; Best Seller &middot; Digital Guide</div>
+      <h3>The <span>$2K Reels</span><br/>Playbook</h3>
+      <p>$2,453/month from Facebook Reels &mdash; zero ad spend. The exact system behind 3M+ views per video.</p>
+      <div class="feat-stats">
+        <div><div class="feat-stat-n">$2,453</div><div class="feat-stat-l">Monthly / real proof</div></div>
+        <div><div class="feat-stat-n">3M+</div><div class="feat-stat-l">Views per video</div></div>
+        <div><div class="feat-stat-n">$0</div><div class="feat-stat-l">Ad spend</div></div>
+      </div>
+      <div class="feat-price-row">
+        <span class="cur">$67</span>
+        <span class="was">$134</span>
+        <span class="save">50% OFF</span>
+      </div>
+      <a href="guide-viral-blueprint.html" class="feat-btn">Get the Guide &#8594;</a>
+    </div>
+    <div class="feat-banner-right">
+      <img src="thumbnail_viral_blueprint.jpg" alt="The $2K Reels Playbook"/>
+    </div>
   </div>
 </div>
 
-<!-- ABOUT -->
-<section class="about" id="about">
-  <div class="reveal">
-    <div class="section-label">&#127807; What This Is All About</div>
-    <h2>We Believe Anyone Can Make Something Extraordinary</h2>
-    <p>There's something deeply satisfying about making something with your own hands &mdash; <strong>something that lasts</strong>, something that becomes part of your home and your life. A fire bowl you built yourself. A garden path that glows at night. A stone wall that transforms your living room.</p>
-    <p>These projects aren't complicated. They just <em>look</em> like they are. That's the secret &mdash; most beautiful things are simpler than they appear. You just need someone to walk you through it, step by step.</p>
-    <p>That's exactly what every guide in this shop does. No jargon, no skipped steps, no assumed knowledge. Just <strong>clear instructions with real photos</strong> from the actual project.</p>
-    <ul class="check-list">
-      <li>Full materials list with costs &mdash; no surprises at the hardware store</li>
-      <li>Real photos taken at every step of the process</li>
-      <li>The most common mistakes &mdash; and how to avoid them</li>
-      <li>Troubleshooting for when things don't go perfectly</li>
-      <li>Written for complete beginners &mdash; no experience needed</li>
-    </ul>
+<!-- WHY -->
+<section class="why-section" id="why">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-eyebrow">Why Made By Hand</div>
+      <div class="section-title">Built Different</div>
+    </div>
   </div>
-  <div class="about-photos reveal">
-    <div class="ap"><img src="thumbnail_fire_bowl.jpg" alt="Fire Bowl"/></div>
-    <div class="ap"><img src="thumbnail_candle_facebook.jpg" alt="Candle Holder"/></div>
-    <div class="ap"><img src="thumbnail_leaf_stones.jpg" alt="Leaf Stones"/></div>
+  <div class="why-grid">
+    <div class="why-card reveal"><span class="why-icon">&#128247;</span><h4>Real Photos, Every Step</h4><p>Every photo was taken during the actual build. You'll always know exactly what to expect at every stage.</p></div>
+    <div class="why-card reveal"><span class="why-icon">&#128176;</span><h4>Save Hundreds</h4><p>The stone wall guide alone saves $5,000+ vs a contractor. Most projects look far more expensive than they are.</p></div>
+    <div class="why-card reveal"><span class="why-icon">&#9201;</span><h4>Done in a Weekend</h4><p>Every project is designed to be completed in 1&ndash;2 days. Real results, fast.</p></div>
+    <div class="why-card reveal"><span class="why-icon">&#127807;</span><h4>Zero Experience Needed</h4><p>Written for complete beginners. No jargon, no skipped steps. If you can follow a recipe, you can do this.</p></div>
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
-<section class="how">
-  <div class="section-label" style="justify-content:center;margin-bottom:1rem">How It Works</div>
-  <h2>Three Simple Steps</h2>
-  <p class="how-sub">From choosing a guide to holding your PDF &mdash; it takes about 60 seconds.</p>
-  <div class="steps">
-    <div class="step reveal">
-      <div class="step-num">1</div>
-      <h3>Choose a Guide</h3>
-      <p>Browse the collection and pick a project that excites you. Every guide has a full description so you know exactly what's inside before buying.</p>
-    </div>
-    <div class="step reveal">
-      <div class="step-num">2</div>
-      <h3>Pay Securely</h3>
-      <p>Payment is handled by Stripe &mdash; the same system used by Amazon and Apple. Your card details are never stored. Takes about 30 seconds.</p>
-    </div>
-    <div class="step reveal">
-      <div class="step-num">3</div>
-      <h3>Download &amp; Make</h3>
-      <p>Your PDF is available instantly. Print it or keep it on your phone &mdash; and start building whenever you're ready. Yours to keep forever.</p>
-    </div>
-  </div>
-  <a href="shop.html" class="how-btn">Browse All Guides &#8594;</a>
-</section>
-
-<!-- MID-PAGE CTA -->
-<section class="mid-cta">
-  <div class="mid-cta-inner">
-    <div class="mid-cta-label">&#128308; Limited Pricing &mdash; Today Only</div>
-    <h2 class="mid-cta-title">Pick a Project.<br/><em>Make It This Weekend.</em></h2>
-    <p class="mid-cta-sub">Every guide has everything you need — materials list, real photos, step-by-step instructions. No experience needed. Results in 1–2 days.</p>
-
-    <div class="mid-cta-cards">
-
-      <div class="mid-cta-card">
-        <div class="mid-cta-img">
-          <img src="thumbnail_balloon-vase.jpg" alt="Balloon Vase"/>
-          <span class="mid-cta-badge">&#11088; Most Popular</span>
-        </div>
-        <div class="mid-cta-body">
-          <div class="mid-cta-name">Concrete Balloon Vase</div>
-          <div class="mid-cta-meta">30 min &middot; Under $40</div>
-          <div class="mid-cta-pricing">
-            <span class="mid-cta-price">$13.00</span>
-            <span class="mid-cta-old">$22.00</span>
-          </div>
-          <a href="guide-balloon-vase.html" class="mid-cta-btn">Buy Now &#8594;</a>
-        </div>
-      </div>
-
-      <div class="mid-cta-card mid-cta-card--featured">
-        <div class="mid-cta-img">
-          <img src="thumbnail_rope-planter.jpg" alt="Rope Planter"/>
-          <span class="mid-cta-badge mid-cta-badge--hot">&#128293; Best Value</span>
-        </div>
-        <div class="mid-cta-body">
-          <div class="mid-cta-name">Rope Texture Planter</div>
-          <div class="mid-cta-meta">30 min &middot; Under $30</div>
-          <div class="mid-cta-pricing">
-            <span class="mid-cta-price">$9.99</span>
-            <span class="mid-cta-old">$17.00</span>
-          </div>
-          <a href="guide-rope-planter.html" class="mid-cta-btn">Buy Now &#8594;</a>
-        </div>
-      </div>
-
-      <div class="mid-cta-card">
-        <div class="mid-cta-img">
-          <img src="thumbnail_hand-planter.jpg" alt="Hand Planter"/>
-          <span class="mid-cta-badge">&#127807; Fan Favorite</span>
-        </div>
-        <div class="mid-cta-body">
-          <div class="mid-cta-name">Concrete Hand Planter</div>
-          <div class="mid-cta-meta">20 min &middot; Under $35</div>
-          <div class="mid-cta-pricing">
-            <span class="mid-cta-price">$5.00</span>
-            <span class="mid-cta-old">$9.00</span>
-          </div>
-          <a href="guide-hand-planter.html" class="mid-cta-btn">Buy Now &#8594;</a>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="mid-cta-footer">
-      <a href="shop.html" class="mid-cta-all">See all 12 guides &#8594;</a>
-      <div class="mid-cta-trust">
-        <span>&#128274; Secure checkout</span>
-        <span>&#11015; Instant PDF</span>
-        <span>&#9989; Apple Pay &amp; Google Pay</span>
-      </div>
-    </div>
+<!-- TESTIMONIALS -->
+<section class="testi-section">
+  <div class="testi-eyebrow">Customer Reviews</div>
+  <div class="testi-title">Real Results From Real People</div>
+  <div class="testi-grid">
+    <div class="testi-card reveal"><div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="testi-text">"I made the rope planter last weekend and I can't believe how good it looks. My neighbor thought I bought it at a boutique store. Worth every penny."</div><div class="testi-name">Sandra M. &mdash; Texas</div></div>
+    <div class="testi-card reveal"><div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="testi-text">"The hand planter guide was so clear and detailed. Mine turned out perfect on the first try. Already ordered two more guides!"</div><div class="testi-name">Karen L. &mdash; Ohio</div></div>
+    <div class="testi-card reveal"><div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="testi-text">"The stone wall guide saved me $4,200. My contractor quoted $5,000. I did it myself in 3 days for under $600. Incredible."</div><div class="testi-name">Patricia R. &mdash; Florida</div></div>
   </div>
 </section>
 
-<!-- PROMISE -->
-<section class="promise">
-  <div class="section-label" style="justify-content:center;margin-bottom:1rem">Our Promise</div>
-  <h2>Made for People Who Want to Actually Do It</h2>
-  <p class="promise-intro"><em>"Not just dream about it. Not just save it to Pinterest.<br/>Actually pick up the materials and make something beautiful."</em></p>
-  <div class="promise-grid">
-    <div class="pc reveal"><span class="pc-icon">&#128247;</span><h3>Real Photos, Not Illustrations</h3><p>Every photo was taken during the actual project. You'll see exactly what each step looks like in real life &mdash; not a diagram or a stock photo.</p></div>
-    <div class="pc reveal"><span class="pc-icon">&#129489;&#8205;&#127979;</span><h3>Written Like a Friend Explaining It</h3><p>No confusing technical language. No skipped steps. Written as if someone's standing next to you in the garden, talking you through it.</p></div>
-    <div class="pc reveal"><span class="pc-icon">&#128176;</span><h3>Save Hundreds &mdash; Sometimes Thousands</h3><p>The stone accent wall guide alone could save you $5,000 vs a contractor. Most projects cost a fraction of what they look like they're worth.</p></div>
-    <div class="pc reveal"><span class="pc-icon">&#9201;</span><h3>Projects You Can Actually Finish</h3><p>Every project can be completed in a weekend or less. No month-long commitments &mdash; real, visible results in real time.</p></div>
+<!-- BOTTOM CTA -->
+<section class="bottom-cta">
+  <h2>Ready to Make<br/><em>Something You're Proud Of?</em></h2>
+  <p>Start with one guide. Real instructions, real photos, instant download. From $5.00 &mdash; less than a coffee.</p>
+  <a href="shop.html" class="btn-big-dark">Browse All Guides &#8594;</a>
+  <div class="bottom-trust">
+    <span>&#128274; Secure checkout</span>
+    <span>&#11015; Instant PDF</span>
+    <span>&#9989; Apple Pay &amp; Google Pay</span>
+    <span>&#9854; Yours forever</span>
   </div>
-</section>
-
-<!-- FEATURED -->
-<section class="featured">
-  <div class="featured-inner">
-    <div class="featured-header reveal">
-      <div><div class="section-label">Featured</div><h2>Most Popular Guides</h2></div>
-      <a href="shop.html" class="see-all">See all guides &#8594;</a>
-    </div>
-    <div class="feat-grid">
-      <a href="guide-balloon-vase.html" class="feat-card reveal">
-        <div class="feat-thumb"><img src="thumbnail_balloon-vase.jpg" alt="Concrete Balloon Vase"/></div>
-        <div class="feat-body">
-          <div class="feat-title">DIY Concrete Balloon Vase</div>
-          <div class="feat-desc">Pour concrete into a balloon, cure, pop &mdash; reveal a perfect sphere with a gold interior. Worth $200+ in design stores.</div>
-          <div class="feat-footer">
-            <div><span class="feat-price">$13.00</span><span class="feat-price-old">$22.00</span></div>
-            <div class="feat-cta">Get guide &#8594;</div>
-          </div>
-        </div>
-      </a>
-      <a href="guide-stone-wall.html" class="feat-card reveal">
-        <div class="feat-thumb"><img src="thumbnail_stone_wall.jpg" alt="Stone Accent Wall"/></div>
-        <div class="feat-body">
-          <div class="feat-title">Natural Stone Accent Wall</div>
-          <div class="feat-desc">Save $2,000&ndash;$7,000 vs hiring a contractor. Includes a full lighting guide for the dramatic nighttime effect.</div>
-          <div class="feat-footer">
-            <div><span class="feat-price">$12.99</span><span class="feat-price-old">$22.00</span></div>
-            <div class="feat-cta">Get guide &#8594;</div>
-          </div>
-        </div>
-      </a>
-      <a href="guide-rope-planter.html" class="feat-card reveal">
-        <div class="feat-thumb"><img src="thumbnail_rope-planter.jpg" alt="Rope Texture Planter"/></div>
-        <div class="feat-body">
-          <div class="feat-title">Concrete Rope Texture Planter</div>
-          <div class="feat-desc">Wrap rope around a bucket, pour concrete, unmold &mdash; a stunning nautical planter worth $150 for under $30.</div>
-          <div class="feat-footer">
-            <div><span class="feat-price">$9.99</span><span class="feat-price-old">$17.00</span></div>
-            <div class="feat-cta">Get guide &#8594;</div>
-          </div>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
-<section class="final">
-  <h2>Ready to Make Something<br/>You're Proud Of?</h2>
-  <p>Start with one guide. See how it goes. We think you'll be back for another one pretty soon.</p>
-  <a href="shop.html" class="final-btn">Browse All Guides &#8594;</a>
 </section>
 
 <footer>
-  <div class="footer-logo">&#129704; Made By Hand</div>
-  <p>&#169; 2026 &middot; All guides are digital PDF downloads &middot; <a href="mailto:you@example.com">Contact us</a></p>
+  <div class="footer-logo">Made By Hand</div>
+  <p>&#169; 2026 &middot; Digital PDF downloads &middot; <a href="mailto:you@example.com">Contact</a></p>
 </footer>
 
 <script>
-// Nav shadow
-window.addEventListener('scroll', () => {
-  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
-});
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*60);obs.unobserve(e.target);}});
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-// Scroll reveal
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-// Floating cards parallax
-const fcs = [
-  { el: document.getElementById('fc1'), base: -3, depth: 6 },
-  { el: document.getElementById('fc2'), base: 4, depth: 4 },
-  { el: document.getElementById('fc3'), base: 1, depth: 8 },
-  { el: document.getElementById('fc4'), base: -2, depth: 5 },
+const fcs=[
+  {el:document.getElementById('fc1'),base:-1.5,depth:5},
+  {el:document.getElementById('fc2'),base:2,depth:4},
+  {el:document.getElementById('fc3'),base:1,depth:7},
+  {el:document.getElementById('fc4'),base:-1,depth:4},
 ];
-document.addEventListener('mousemove', e => {
-  const cx = window.innerWidth/2, cy = window.innerHeight/2;
-  const dx = (e.clientX-cx)/cx, dy = (e.clientY-cy)/cy;
-  fcs.forEach(({el, base, depth}) => {
-    if (el.matches(':hover')) return;
-    el.style.transform = `rotate(${base}deg) translate(${dx*depth}px,${dy*depth}px)`;
+document.addEventListener('mousemove',e=>{
+  const cx=window.innerWidth/2,cy=window.innerHeight/2;
+  const dx=(e.clientX-cx)/cx,dy=(e.clientY-cy)/cy;
+  fcs.forEach(({el,base,depth})=>{
+    if(el.matches(':hover'))return;
+    el.style.transform=`rotate(${base}deg) translate(${dx*depth}px,${dy*depth}px)`;
   });
 });
-fcs.forEach(({el, base}) => {
-  el.addEventListener('mouseenter', () => { el.style.transform = `rotate(0deg) scale(1.06)`; });
-  el.addEventListener('mouseleave', () => { el.style.transform = `rotate(${base}deg)`; });
-  el.addEventListener('click', () => { window.location.href='shop.html'; });
+fcs.forEach(({el,base})=>{
+  el.addEventListener('mouseenter',()=>{el.style.transform='rotate(0deg) scale(1.05)';});
+  el.addEventListener('mouseleave',()=>{el.style.transform=`rotate(${base}deg)`;});
+  el.addEventListener('click',()=>{window.location.href='shop.html';});
+});
+
+document.querySelectorAll('.prod-timer[data-mins]').forEach(el=>{
+  let secs=parseInt(el.dataset.mins)*60;
+  function tick(){
+    const m=String(Math.floor(secs/60)).padStart(2,'0');
+    const s=String(secs%60).padStart(2,'0');
+    el.textContent='⏰ '+m+':'+s;
+    if(secs>0)secs--;
+  }
+  tick();setInterval(tick,1000);
 });
 </script>
 </body>
