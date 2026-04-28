@@ -1,29 +1,53 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzLg5Pl7TVpM7OH34QMe3KcD89xqp3lPn6RCFHy-mYo82HHhrAb32Sg922GkeRM3Pho/exec';
+
 exports.handler = async (event) => {
-  if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'Method Not Allowed' };
-  }
+  const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Content-Type': 'application/json',
+  };
+
+  if (event.httpMethod === 'OPTIONS') return { statusCode: 200, headers, body: '' };
+  if (event.httpMethod !== 'POST') return { statusCode: 405, headers, body: JSON.stringify({ error: 'Method Not Allowed' }) };
 
   try {
-    const { amount, currency, email } = JSON.parse(event.body);
+    const { amount, email, currency, product } = JSON.parse(event.body);
 
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount,        // 4500 = $45.00
-      currency,
-      receipt_email: email,
-      metadata: { product: 'The $2K Reels Playbook', email },
+    // Salveaza emailul in Google Sheets (fire and forget)
+    try {
+      await fetch(SHEETS_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email || '',
+          product: product || 'unknown',
+          amount: amount || 500,
+        }),
+      });
+    } catch (e) {
+      console.error('Sheets error:', e.message);
+    }
+
+    // Creeaza Payment Intent
+    const intent = await stripe.paymentIntents.create({
+      amount: amount || 500,
+      currency: currency || 'usd',
+      receipt_email: email || undefined,
+      automatic_payment_methods: { enabled: true },
     });
 
     return {
       statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ clientSecret: paymentIntent.client_secret }),
+      headers,
+      body: JSON.stringify({ clientSecret: intent.client_secret }),
     };
   } catch (err) {
     return {
       statusCode: 500,
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify({ error: err.message }),
     };
   }
