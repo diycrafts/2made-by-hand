@@ -1,7 +1,5 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzLg5Pl7TVpM7OH34QMe3KcD89xqp3lPn6RCFHy-mYo82HHhrAb32Sg922GkeRM3Pho/exec';
-
 exports.handler = async (event) => {
   const headers = {
     'Access-Control-Allow-Origin': '*',
@@ -14,24 +12,8 @@ exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') return { statusCode: 405, headers, body: JSON.stringify({ error: 'Method Not Allowed' }) };
 
   try {
-    const { amount, email, currency, product } = JSON.parse(event.body);
+    const { amount, email, currency } = JSON.parse(event.body);
 
-    // Salveaza emailul in Google Sheets (fire and forget)
-    try {
-      await fetch(SHEETS_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: email || '',
-          product: product || 'unknown',
-          amount: amount || 500,
-        }),
-      });
-    } catch (e) {
-      console.error('Sheets error:', e.message);
-    }
-
-    // Creeaza Payment Intent
     const intent = await stripe.paymentIntents.create({
       amount: amount || 500,
       currency: currency || 'usd',
