@@ -191,7 +191,7 @@ footer a{color:rgba(250,247,242,0.45);text-decoration:none;}
           <div id="payment-element"><p style="color:var(--muted);font-size:0.85rem;padding:0.5rem 0;text-align:center;">&#8593; Enter your email, then click Pay to load card options.</p></div>
         </div>
         <div id="card-err"></div>
-        <button class="pay-btn" id="pay-btn" >Pay $13.00 &amp; Download</button>
+        <button class="pay-btn" id="pay-btn" onclick="pay()">Pay $13.00 &amp; Download</button>
         <div class="secure">&#128274; Secured by Stripe &middot; PDF delivered instantly</div>
       </div>
       <div class="success" id="success-box">
@@ -209,10 +209,12 @@ const STRIPE_KEY = 'pk_live_51TQB5uERLV3AA0mv0dp2i9c6m3Y1oxuGCe0pghanMWYW9Y8gr4t
 const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzLg5Pl7TVpM7OH34QMe3KcD89xqp3lPn6RCFHy-mYo82HHhrAb32Sg922GkeRM3Pho/exec';
 const PRODUCT = 'DIY Concrete Balloon Vase with Gold Interior';
 const AMOUNT = 1300;
-let stripe, elements, paymentEl, clientSecret, emailSaved = false;
+let stripe, elements, emailSaved = false;
 
+// Countdown timer
 (function() {
-  let secs = 37 * 60;
+  const mins = 37;
+  let secs = mins * 60;
   function tick() {
     const m = String(Math.floor(secs/60)).padStart(2,'0');
     const s = String(secs%60).padStart(2,'0');
@@ -220,49 +222,37 @@ let stripe, elements, paymentEl, clientSecret, emailSaved = false;
     if(el) el.textContent = m+':'+s;
     if(secs > 0) secs--;
   }
-  tick(); setInterval(tick, 1000);
+  tick();
+  setInterval(tick, 1000);
 })();
 
 function saveEmail(email) {
   if (emailSaved || !email || !email.includes('@')) return;
   emailSaved = true;
-  fetch(SHEETS_URL, {method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,product:PRODUCT,amount:AMOUNT})}).catch(()=>{});
+  fetch(SHEETS_URL, {
+    method: 'POST', mode: 'no-cors',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({email, product: PRODUCT, amount: AMOUNT}),
+  }).catch(()=>{});
 }
 
-async function openModal() {
+function openModal() {
   emailSaved = false;
   document.getElementById('form-wrap').style.display = 'block';
   document.getElementById('success-box').style.display = 'none';
-  document.getElementById('pay-btn').disabled = true;
-  document.getElementById('pay-btn').textContent = 'Loading...';
+  document.getElementById('pay-btn').disabled = false;
+  document.getElementById('pay-btn').textContent = 'Pay $13.00 & Download';
+  document.getElementById('pay-btn').onclick = pay;
   document.getElementById('card-err').textContent = '';
   document.getElementById('email').value = '';
-  document.getElementById('payment-element').innerHTML = '<p style="color:var(--muted);font-size:0.82rem;padding:0.75rem 0;text-align:center;">&#9203; Loading payment form...</p>';
+  document.getElementById('payment-element').innerHTML = '<p style="color:var(--muted);font-size:0.85rem;padding:0.5rem 0;text-align:center;">&#8593; Enter your email, then click Pay to load card options.</p>';
   document.getElementById('overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
+  elements = null;
   stripe = Stripe(STRIPE_KEY);
-  try {
-    const res = await fetch('/.netlify/functions/create-payment-intent', {
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({amount:AMOUNT, email:'', currency:'usd', product:PRODUCT})
-    });
-    const data = await res.json();
-    if(data.error) throw new Error(data.error);
-    clientSecret = data.clientSecret;
-    elements = stripe.elements({clientSecret, appearance:{theme:'stripe',variables:{colorPrimary:'#8C6B4A',colorBackground:'#FAF7F2',colorText:'#2A2520',fontFamily:"'Nunito', sans-serif",borderRadius:'8px'}}});
-    document.getElementById('payment-element').innerHTML = '';
-    paymentEl = elements.create('payment');
-    paymentEl.mount('#payment-element');
-    document.getElementById('pay-btn').disabled = false;
-    document.getElementById('pay-btn').textContent = 'Pay $13.00 & Download';
-  } catch(err) {
-    document.getElementById('payment-element').innerHTML = '<p style="color:#c0392b;font-size:0.82rem;padding:0.5rem 0;">Could not load payment. Please refresh and try again.</p>';
-    document.getElementById('pay-btn').disabled = false;
-    document.getElementById('pay-btn').textContent = 'Try Again';
-  }
   const emailEl = document.getElementById('email');
-  emailEl.addEventListener('blur', function(){ saveEmail(this.value.trim()); });
-  emailEl.addEventListener('keydown', function(e){ if(e.key==='Enter') saveEmail(this.value.trim()); });
+  emailEl.addEventListener('blur', function() { saveEmail(this.value.trim()); });
+  emailEl.addEventListener('keydown', function(e) { if(e.key==='Enter') saveEmail(this.value.trim()); });
 }
 
 function closeModal() {
@@ -271,41 +261,67 @@ function closeModal() {
 }
 
 document.getElementById('overlay').addEventListener('click', e => {
-  if(e.target === document.getElementById('overlay')) closeModal();
+  if (e.target === document.getElementById('overlay')) closeModal();
 });
 
-document.getElementById('pay-btn').addEventListener('click', async function() {
+async function pay() {
   const email = document.getElementById('email').value.trim();
-  if(!email || !email.includes('@')) {
+  if (!email || !email.includes('@')) {
     document.getElementById('card-err').textContent = 'Please enter a valid email address.';
     return;
   }
   saveEmail(email);
-  const btn = this;
+  const btn = document.getElementById('pay-btn');
   btn.disabled = true;
-  btn.textContent = 'Processing...';
+  btn.textContent = 'Loading payment...';
   document.getElementById('card-err').textContent = '';
   try {
-    const {error} = await stripe.confirmPayment({
-      elements,
-      confirmParams: {return_url: window.location.href, receipt_email: email},
-      redirect: 'if_required'
+    const res = await fetch('/.netlify/functions/create-payment-intent', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({amount: AMOUNT, email, currency: 'usd', product: PRODUCT})
     });
-    if(error) {
-      document.getElementById('card-err').textContent = error.message;
-      btn.disabled = false;
-      btn.textContent = 'Pay $13.00 & Download';
-    } else {
-      document.getElementById('form-wrap').style.display = 'none';
-      document.getElementById('success-box').style.display = 'block';
-    }
+    const {clientSecret, error: sErr} = await res.json();
+    if (sErr) throw new Error(sErr);
+    elements = stripe.elements({
+      clientSecret,
+      appearance: {theme:'stripe', variables:{colorPrimary:'#8C6B4A',colorBackground:'#FAF7F2',colorText:'#2A2520',fontFamily:"'Nunito', sans-serif",borderRadius:'8px'}}
+    });
+    document.getElementById('payment-element').innerHTML = '';
+    const paymentEl = elements.create('payment');
+    paymentEl.mount('#payment-element');
+    btn.disabled = false;
+    btn.textContent = 'Pay $13.00 & Download';
   } catch(err) {
     document.getElementById('card-err').textContent = 'Something went wrong. Please try again.';
     btn.disabled = false;
     btn.textContent = 'Try Again';
+    return;
   }
-});
-
+  btn.onclick = async function() {
+    btn.disabled = true;
+    btn.textContent = 'Processing...';
+    try {
+      const {error} = await stripe.confirmPayment({
+        elements,
+        confirmParams: {return_url: window.location.href, receipt_email: email},
+        redirect: 'if_required'
+      });
+      if (error) {
+        document.getElementById('card-err').textContent = error.message;
+        btn.disabled = false;
+        btn.textContent = 'Try Again';
+      } else {
+        document.getElementById('form-wrap').style.display = 'none';
+        document.getElementById('success-box').style.display = 'block';
+      }
+    } catch(err) {
+      document.getElementById('card-err').textContent = 'Something went wrong. Please try again.';
+      btn.disabled = false;
+      btn.textContent = 'Try Again';
+    }
+  };
+}
 </script>
 </body>
 </html>
