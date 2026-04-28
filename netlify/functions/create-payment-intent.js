@@ -8,23 +8,26 @@ exports.handler = async (event) => {
     'Content-Type': 'application/json',
   };
 
-  if (event.httpMethod === 'OPTIONS') {
-    return { statusCode: 200, headers, body: '' };
-  }
-
-  if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, headers, body: JSON.stringify({ error: 'Method Not Allowed' }) };
-  }
+  if (event.httpMethod === 'OPTIONS') return { statusCode: 200, headers, body: '' };
+  if (event.httpMethod !== 'POST') return { statusCode: 405, headers, body: JSON.stringify({ error: 'Method Not Allowed' }) };
 
   try {
-    const { amount, email, currency } = JSON.parse(event.body);
+    const body = JSON.parse(event.body);
+    const amount = body.amount || 500;
+    const currency = body.currency || 'usd';
 
-    const intent = await stripe.paymentIntents.create({
-      amount: amount || 500,
-      currency: currency || 'usd',
-      receipt_email: email,
+    const intentParams = {
+      amount,
+      currency,
       automatic_payment_methods: { enabled: true },
-    });
+    };
+
+    // Adauga receipt_email doar daca e valid
+    if (body.email && body.email.includes('@')) {
+      intentParams.receipt_email = body.email;
+    }
+
+    const intent = await stripe.paymentIntents.create(intentParams);
 
     return {
       statusCode: 200,
