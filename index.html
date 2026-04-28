@@ -29,103 +29,24 @@ nav.scrolled { box-shadow:0 2px 20px rgba(42,37,32,0.08); }
 .nav-cta { display:inline-flex; align-items:center; gap:0.5rem; background:var(--bark); color:white; font-family:'Nunito',sans-serif; font-size:0.88rem; font-weight:700; padding:0.6rem 1.5rem; border-radius:50px; text-decoration:none; transition:background 0.2s,transform 0.15s; }
 .nav-cta:hover { background:var(--ink); transform:translateY(-1px); }
 
-/* ============================================
-   VIRAL BLUEPRINT BANNER — above the hero
-   ============================================ */
-.vb-banner {
-  margin-top:68px; /* offset for fixed nav */
-  background: linear-gradient(135deg, #0f0f0f 0%, #1a1410 50%, #0f0f0f 100%);
-  padding: 3.5rem 5vw;
-  position: relative;
-  overflow: hidden;
+/* VIRAL BLUEPRINT — slim strip under nav */
+.vb-strip-bar {
+  margin-top:68px;
+  background:#0f0f0f;
+  border-bottom:1px solid rgba(200,150,60,0.3);
+  padding:10px 5vw;
+  display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap;
 }
-.vb-banner::before {
-  content:'';
-  position:absolute; inset:0;
-  background: radial-gradient(ellipse at 70% 50%, rgba(200,150,60,0.08) 0%, transparent 60%);
-  pointer-events:none;
-}
-.vb-inner {
-  max-width:1200px; margin:0 auto;
-  display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center;
-}
-.vb-left {}
-.vb-badge {
-  display:inline-flex; align-items:center; gap:0.5rem;
-  background:var(--gold); color:#1a1410;
-  font-size:0.72rem; font-weight:800; letter-spacing:0.12em; text-transform:uppercase;
-  padding:0.4rem 1rem; border-radius:50px; margin-bottom:1.25rem;
-}
-.vb-title {
-  font-family:'Lora',serif;
-  font-size:clamp(2rem,3.5vw,3rem);
-  font-weight:700; line-height:1.1;
-  color:#fff; margin-bottom:0.5rem;
-}
-.vb-title span { color:#EA7A2D; }
-.vb-subtitle {
-  font-size:1rem; color:rgba(255,255,255,0.6);
-  line-height:1.7; margin-bottom:1.5rem; max-width:420px;
-}
-.vb-stats {
-  display:flex; gap:2rem; margin-bottom:2rem; flex-wrap:wrap;
-}
-.vb-stat {}
-.vb-stat-num {
-  font-family:'Lora',serif; font-size:1.6rem; font-weight:700;
-  color:#F5A623; line-height:1;
-}
-.vb-stat-label {
-  font-size:0.75rem; color:rgba(255,255,255,0.45); font-weight:600;
-  text-transform:uppercase; letter-spacing:0.08em; margin-top:0.2rem;
-}
-.vb-actions { display:flex; align-items:center; gap:1.25rem; flex-wrap:wrap; }
-.vb-btn {
-  display:inline-flex; align-items:center; gap:0.6rem;
-  background:var(--gold); color:#1a1410;
-  font-family:'Nunito',sans-serif; font-size:1rem; font-weight:800;
-  padding:0.9rem 2rem; border-radius:50px; text-decoration:none;
-  box-shadow:0 6px 24px rgba(200,150,60,0.4);
-  transition:background 0.2s, transform 0.2s;
-}
-.vb-btn:hover { background:#daa840; transform:translateY(-2px); }
-.vb-price-info {
-  font-size:0.88rem; color:rgba(255,255,255,0.4); font-weight:600;
-}
-.vb-price-info strong { color:rgba(255,255,255,0.75); }
-
-/* Right side: thumbnail card */
-.vb-right { position:relative; }
-.vb-card {
-  border-radius:16px; overflow:hidden;
-  box-shadow:0 30px 80px rgba(0,0,0,0.5);
-  position:relative;
-  transform:perspective(800px) rotateY(-4deg) rotateX(2deg);
-  transition:transform 0.4s;
-}
-.vb-card:hover {
-  transform:perspective(800px) rotateY(0deg) rotateX(0deg);
-}
-.vb-card img { width:100%; display:block; }
-.vb-card-overlay {
-  position:absolute; inset:0;
-  border:1px solid rgba(200,150,60,0.3);
-  border-radius:16px; pointer-events:none;
-}
-/* glowing corner accent */
-.vb-glow {
-  position:absolute; top:-60px; right:-60px;
-  width:200px; height:200px;
-  background:radial-gradient(circle, rgba(200,150,60,0.15) 0%, transparent 70%);
-  pointer-events:none;
-}
-
-/* ============================================
-   END VIRAL BLUEPRINT BANNER
-   ============================================ */
+.vb-strip-bar a { text-decoration:none; display:flex; align-items:center; gap:14px; flex-wrap:wrap; justify-content:center; }
+.vb-strip-badge { font-size:0.65rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; background:var(--gold); color:#1a1410; padding:3px 10px; border-radius:20px; white-space:nowrap; }
+.vb-strip-text { font-size:0.85rem; font-weight:600; color:rgba(255,255,255,0.75); }
+.vb-strip-text span { color:rgba(255,255,255,0.4); text-decoration:line-through; margin-right:4px; }
+.vb-strip-price { font-family:'Lora',serif; font-size:1rem; font-weight:700; color:#F5A623; }
+.vb-strip-cta { font-size:0.78rem; font-weight:800; background:var(--gold); color:#1a1410; padding:5px 14px; border-radius:20px; white-space:nowrap; transition:background 0.2s; }
+.vb-strip-bar a:hover .vb-strip-cta { background:#daa840; }
 
 /* HERO */
-.hero { min-height:100vh; padding:60px 5vw 60px; display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; max-width:1300px; margin:0 auto; position:relative; }
+.hero { min-height:calc(100vh - 108px); padding:60px 5vw 60px; display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; max-width:1300px; margin:0 auto; position:relative; }
 .tag-pill { display:inline-flex; align-items:center; gap:0.5rem; border:1.5px solid var(--stone); border-radius:50px; padding:0.4rem 1rem; font-size:0.78rem; font-weight:700; color:var(--bark); margin-bottom:1.75rem; animation:fade-up 0.6s 0.1s both; }
 .hero h1 { font-family:'Lora',serif; font-size:clamp(2.8rem,5vw,4.6rem); font-weight:700; line-height:1.1; margin-bottom:1.5rem; animation:fade-up 0.6s 0.2s both; }
 .hero h1 em { font-style:italic; color:var(--bark); }
@@ -152,6 +73,18 @@ nav.scrolled { box-shadow:0 2px 20px rgba(42,37,32,0.08); }
 .fc-4 { width:195px; height:195px; bottom:60px; right:5px; z-index:1; transform:rotate(-2deg); }
 .fc-label { position:absolute; bottom:0; left:0; right:0; padding:1rem 0.85rem 0.75rem; background:linear-gradient(transparent,rgba(42,37,32,0.85)); color:white; font-size:0.72rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; }
 
+/* URGENCY BAR */
+.urgency-strip {
+  background:linear-gradient(135deg,#1a2a1a,#2d4a2d);
+  padding:14px 5vw;
+  display:flex; align-items:center; justify-content:center; gap:20px; flex-wrap:wrap;
+  text-align:center;
+}
+.urgency-strip p { font-size:0.88rem; font-weight:700; color:rgba(255,255,255,0.85); }
+.urgency-strip .pill { background:rgba(255,193,7,0.2); border:1px solid rgba(255,193,7,0.4); color:#FFC107; font-size:0.78rem; font-weight:800; padding:4px 14px; border-radius:20px; }
+.urgency-strip a { background:#FFC107; color:#1a1a1a; font-size:0.85rem; font-weight:800; padding:8px 20px; border-radius:20px; text-decoration:none; transition:background 0.2s; }
+.urgency-strip a:hover { background:#FFD54F; }
+
 @keyframes fade-up { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
 
 /* MARQUEE */
@@ -172,8 +105,6 @@ nav.scrolled { box-shadow:0 2px 20px rgba(42,37,32,0.08); }
 .check-list { list-style:none; margin-top:1.75rem; display:flex; flex-direction:column; gap:0.7rem; }
 .check-list li { display:flex; align-items:flex-start; gap:0.75rem; font-size:0.95rem; font-weight:500; color:var(--ink); }
 .check-list li::before { content:'✓'; color:var(--forest); font-weight:800; font-size:1rem; width:20px; flex-shrink:0; margin-top:1px; }
-
-/* Photo collage */
 .about-photos { display:grid; grid-template-columns:1fr 1fr; gap:0.85rem; }
 .ap { border-radius:14px; overflow:hidden; position:relative; aspect-ratio:1; transition:transform 0.3s; }
 .ap:hover { transform:scale(1.02); }
@@ -192,6 +123,37 @@ nav.scrolled { box-shadow:0 2px 20px rgba(42,37,32,0.08); }
 .step p { font-size:0.88rem; color:var(--muted); line-height:1.7; }
 .how-btn { display:inline-flex; align-items:center; gap:0.65rem; background:var(--ink); color:white; font-family:'Nunito',sans-serif; font-size:1rem; font-weight:700; padding:1rem 2.5rem; border-radius:50px; text-decoration:none; box-shadow:0 4px 20px rgba(42,37,32,0.2); transition:background 0.2s,transform 0.2s; }
 .how-btn:hover { background:var(--bark); transform:translateY(-2px); }
+
+/* MID-PAGE CTA */
+.mid-cta { background:var(--ink); padding:6rem 5vw; }
+.mid-cta-inner { max-width:1100px; margin:0 auto; text-align:center; }
+.mid-cta-label { display:inline-block; font-size:0.72rem; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; color:#ff8a80; background:rgba(192,57,43,0.2); border:1px solid rgba(192,57,43,0.4); padding:5px 16px; border-radius:20px; margin-bottom:1.25rem; }
+.mid-cta-title { font-family:'Lora',serif; font-size:clamp(2rem,4vw,3rem); font-weight:700; color:white; line-height:1.15; margin-bottom:1rem; }
+.mid-cta-title em { font-style:italic; color:var(--gold); }
+.mid-cta-sub { font-size:1rem; color:rgba(255,255,255,0.5); max-width:520px; margin:0 auto 3rem; line-height:1.75; }
+.mid-cta-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; margin-bottom:2.5rem; }
+.mid-cta-card { background:rgba(255,255,255,0.05); border:1.5px solid rgba(255,255,255,0.1); border-radius:18px; overflow:hidden; transition:transform 0.3s,border-color 0.3s,box-shadow 0.3s; text-align:left; }
+.mid-cta-card:hover { transform:translateY(-5px); border-color:rgba(200,150,60,0.6); box-shadow:0 20px 50px rgba(0,0,0,0.4); }
+.mid-cta-card--featured { border-color:rgba(200,150,60,0.5); background:rgba(200,150,60,0.06); }
+.mid-cta-img { position:relative; aspect-ratio:16/9; overflow:hidden; }
+.mid-cta-img img { width:100%; height:100%; object-fit:cover; transition:transform 0.4s; display:block; }
+.mid-cta-card:hover .mid-cta-img img { transform:scale(1.05); }
+.mid-cta-badge { position:absolute; top:10px; left:10px; font-size:0.65rem; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; background:var(--gold); color:#1a1410; padding:4px 10px; border-radius:20px; }
+.mid-cta-badge--hot { background:#c0392b; color:white; }
+.mid-cta-body { padding:1.25rem 1.25rem 1.5rem; }
+.mid-cta-name { font-family:'Lora',serif; font-size:1rem; font-weight:700; color:white; margin-bottom:4px; }
+.mid-cta-meta { font-size:0.78rem; color:rgba(255,255,255,0.4); margin-bottom:0.85rem; }
+.mid-cta-pricing { display:flex; align-items:baseline; gap:8px; margin-bottom:1rem; }
+.mid-cta-price { font-family:'Lora',serif; font-size:1.5rem; font-weight:700; color:#FFC107; }
+.mid-cta-old { font-size:0.85rem; color:rgba(255,255,255,0.3); text-decoration:line-through; }
+.mid-cta-btn { display:inline-flex; align-items:center; gap:6px; background:var(--bark); color:white; font-family:'Nunito',sans-serif; font-size:0.88rem; font-weight:800; padding:10px 20px; border-radius:50px; text-decoration:none; transition:background 0.2s,transform 0.15s; }
+.mid-cta-btn:hover { background:var(--gold); color:#1a1410; transform:translateY(-1px); }
+.mid-cta-footer { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; padding-top:1.5rem; border-top:1px solid rgba(255,255,255,0.08); }
+.mid-cta-all { font-size:0.95rem; font-weight:700; color:var(--gold); text-decoration:none; transition:color 0.2s; }
+.mid-cta-all:hover { color:white; }
+.mid-cta-trust { display:flex; gap:1.25rem; flex-wrap:wrap; }
+.mid-cta-trust span { font-size:0.78rem; color:rgba(255,255,255,0.35); font-weight:600; }
+@media(max-width:900px){ .mid-cta-cards { grid-template-columns:1fr; } .mid-cta-footer { flex-direction:column; align-items:center; text-align:center; } }
 
 /* PROMISE */
 .promise { padding:7rem 5vw; max-width:1000px; margin:0 auto; text-align:center; }
@@ -222,7 +184,8 @@ nav.scrolled { box-shadow:0 2px 20px rgba(42,37,32,0.08); }
 .feat-title { font-family:'Lora',serif; font-size:1.1rem; font-weight:700; margin-bottom:0.4rem; }
 .feat-desc { font-size:0.84rem; color:var(--muted); line-height:1.55; margin-bottom:1rem; }
 .feat-footer { display:flex; align-items:center; justify-content:space-between; }
-.feat-price { font-family:'Lora',serif; font-size:1.3rem; font-weight:700; }
+.feat-price { font-family:'Lora',serif; font-size:1.3rem; font-weight:700; color:#c0392b; }
+.feat-price-old { font-size:0.78rem; color:var(--muted); text-decoration:line-through; margin-left:6px; }
 .feat-cta { font-size:0.8rem; font-weight:700; color:var(--bark); }
 
 /* FINAL CTA */
@@ -244,8 +207,6 @@ footer a { color:rgba(250,247,242,0.45); text-decoration:none; }
 
 /* RESPONSIVE */
 @media(max-width:900px){
-  .vb-inner { grid-template-columns:1fr; gap:2rem; }
-  .vb-right { display:none; }
   .hero { grid-template-columns:1fr; padding-top:40px; gap:2rem; }
   .hero-right { height:320px; }
   .fc-1{width:170px;height:170px;} .fc-2{width:150px;height:150px;} .fc-3{width:145px;height:145px;} .fc-4{width:130px;height:130px;bottom:0;}
@@ -255,80 +216,50 @@ footer a { color:rgba(250,247,242,0.45); text-decoration:none; }
   .promise-grid { grid-template-columns:1fr; }
   .feat-grid { grid-template-columns:1fr 1fr; }
   footer { flex-direction:column; text-align:center; }
+  .urgency-strip { flex-direction:column; gap:10px; }
 }
-@media(max-width:600px){ .feat-grid{grid-template-columns:1fr;} .hero-trust{gap:0.75rem;} }
+@media(max-width:600px){ .feat-grid{grid-template-columns:1fr;} .hero-trust{gap:0.75rem;} .vb-strip-bar{flex-direction:column;gap:8px;} }
 </style>
 </head>
 <body>
 
 <nav id="nav">
   <a href="index.html" class="logo">
-    <div class="logo-mark">🪨</div>Made By Hand
+    <div class="logo-mark">&#129704;</div>Made By Hand
   </a>
-  <a href="shop.html" class="nav-cta">View All Guides →</a>
+  <a href="shop.html" class="nav-cta">View All Guides &#8594;</a>
 </nav>
 
-<!-- ============================================
-     VIRAL BLUEPRINT — BEST SELLER BANNER
-     ============================================ -->
-<section class="vb-banner">
-  <div class="vb-glow"></div>
-  <div class="vb-inner">
-    <div class="vb-left">
-      <div class="vb-badge">★ Best Seller · Digital Guide</div>
-      <h1 class="vb-title">The $2K Reels<br/><span>Playbook</span></h1>
-      <p class="vb-subtitle">
-        How to create content that reaches 3M+ views per video and generates
-        real income — with <strong style="color:rgba(255,255,255,0.85)">$0 ad spend</strong>.
-        Includes the exact system behind $2,453/month from Facebook Reels.
-      </p>
-      <div class="vb-stats">
-        <div class="vb-stat">
-          <div class="vb-stat-num">$2,453</div>
-          <div class="vb-stat-label">Monthly earnings (real proof)</div>
-        </div>
-        <div class="vb-stat">
-          <div class="vb-stat-num">3M+</div>
-          <div class="vb-stat-label">Views per video</div>
-        </div>
-        <div class="vb-stat">
-          <div class="vb-stat-num">$0</div>
-          <div class="vb-stat-label">Ad spend required</div>
-        </div>
-      </div>
-      <div class="vb-actions">
-        <a href="guide-viral-blueprint.html" class="vb-btn">Get the Guide →</a>
-        <span class="vb-price-info">From <strong>$45</strong> · Instant PDF download</span>
-      </div>
-    </div>
-    <div class="vb-right">
-      <div class="vb-card">
-        <img src="thumbnail_viral_blueprint.jpg" alt="The $2K Reels Playbook — $2,453/month from Facebook Reels"/>
-        <div class="vb-card-overlay"></div>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- VIRAL BLUEPRINT — slim strip only -->
+<div class="vb-strip-bar">
+  <a href="guide-viral-blueprint.html">
+    <span class="vb-strip-badge">&#11088; Best Seller</span>
+    <span class="vb-strip-text">The $2K Reels Playbook &mdash; <span>$134</span></span>
+    <span class="vb-strip-price">$67</span>
+    <span class="vb-strip-cta">Get it &#8594;</span>
+  </a>
+</div>
 
-<!-- HERO -->
+<!-- HERO — DIY guides front and center -->
 <section class="hero">
   <div>
-    <div class="tag-pill">✦ Instant PDF Download · No Account Needed</div>
+    <div class="tag-pill">&#10022; Real Projects &middot; Real Photos &middot; Instant Download</div>
     <h1>Beautiful Things<br/>You Can<br/><em>Make Yourself</em></h1>
     <p class="hero-desc">
       Step-by-step guides for real home and garden projects.
-      <strong>Written for people who want results</strong>, not just inspiration —
+      <strong>Written for people who want results</strong>, not just inspiration &mdash;
       every guide is built from an actual project, with real photos at every step.
+      From <strong>$5.00</strong>.
     </p>
     <div class="hero-actions">
-      <a href="shop.html" class="btn-big">View All Guides <span class="arr">→</span></a>
-      <a href="#about" class="btn-ghost">What's inside? ↓</a>
+      <a href="shop.html" class="btn-big">Browse All Guides <span class="arr">&#8594;</span></a>
+      <a href="#about" class="btn-ghost">What's inside? &#8595;</a>
     </div>
     <div class="hero-trust">
-      <div class="trust-chip">🔒 Secure payment</div>
-      <div class="trust-chip">⬇ Instant download</div>
-      <div class="trust-chip">♾️ Yours forever</div>
-      <div class="trust-chip">📸 Real photos</div>
+      <div class="trust-chip">&#128274; Secure payment</div>
+      <div class="trust-chip">&#11015; Instant download</div>
+      <div class="trust-chip">&#9854; Yours forever</div>
+      <div class="trust-chip">&#128247; Real photos</div>
     </div>
   </div>
 
@@ -352,44 +283,49 @@ footer a { color:rgba(250,247,242,0.45); text-decoration:none; }
   </div>
 </section>
 
+<!-- URGENCY STRIP -->
+<div class="urgency-strip">
+  <p>&#128308; Limited-time pricing &mdash; guides from <strong>$5.00</strong> (was $9.00)</p>
+  <span class="pill">&#128293; Prices go up soon</span>
+  <a href="shop.html">See all guides &#8594;</a>
+</div>
+
 <!-- MARQUEE -->
 <div class="marquee-wrap">
   <div class="marquee-track">
-    <div class="marquee-item">🔥 Concrete Fire Bowl <div class="marquee-dot"></div></div>
-    <div class="marquee-item">🪨 Stone Accent Wall <div class="marquee-dot"></div></div>
-    <div class="marquee-item">💎 Glass Mosaic Stones <div class="marquee-dot"></div></div>
-    <div class="marquee-item">🌿 Woven Planter <div class="marquee-dot"></div></div>
-    <div class="marquee-item">🍃 Leaf Stepping Stones <div class="marquee-dot"></div></div>
-    <div class="marquee-item">🕯️ Candle Holder <div class="marquee-dot"></div></div>
-    <div class="marquee-item">🌸 Flower Resin Coasters <div class="marquee-dot"></div></div>
-    <div class="marquee-item">💙 Epoxy River Shelf <div class="marquee-dot"></div></div>
-    <div class="marquee-item">📘 Viral Blueprint <div class="marquee-dot"></div></div>
-    <div class="marquee-item">🔥 Concrete Fire Bowl <div class="marquee-dot"></div></div>
-    <div class="marquee-item">🪨 Stone Accent Wall <div class="marquee-dot"></div></div>
-    <div class="marquee-item">💎 Glass Mosaic Stones <div class="marquee-dot"></div></div>
-    <div class="marquee-item">🌿 Woven Planter <div class="marquee-dot"></div></div>
-    <div class="marquee-item">🍃 Leaf Stepping Stones <div class="marquee-dot"></div></div>
-    <div class="marquee-item">🕯️ Candle Holder <div class="marquee-dot"></div></div>
-    <div class="marquee-item">🌸 Flower Resin Coasters <div class="marquee-dot"></div></div>
-    <div class="marquee-item">💙 Epoxy River Shelf <div class="marquee-dot"></div></div>
-    <div class="marquee-item">📘 Viral Blueprint <div class="marquee-dot"></div></div>
+    <div class="marquee-item">&#128293; Concrete Fire Bowl <div class="marquee-dot"></div></div>
+    <div class="marquee-item">&#129704; Stone Accent Wall <div class="marquee-dot"></div></div>
+    <div class="marquee-item">&#128142; Glass Mosaic Stones <div class="marquee-dot"></div></div>
+    <div class="marquee-item">&#127807; Woven Planter <div class="marquee-dot"></div></div>
+    <div class="marquee-item">&#127807; Leaf Stepping Stones <div class="marquee-dot"></div></div>
+    <div class="marquee-item">&#128557; Candle Holder <div class="marquee-dot"></div></div>
+    <div class="marquee-item">&#127874; Balloon Vase <div class="marquee-dot"></div></div>
+    <div class="marquee-item">&#129322; Rope Texture Planter <div class="marquee-dot"></div></div>
+    <div class="marquee-item">&#128293; Concrete Fire Bowl <div class="marquee-dot"></div></div>
+    <div class="marquee-item">&#129704; Stone Accent Wall <div class="marquee-dot"></div></div>
+    <div class="marquee-item">&#128142; Glass Mosaic Stones <div class="marquee-dot"></div></div>
+    <div class="marquee-item">&#127807; Woven Planter <div class="marquee-dot"></div></div>
+    <div class="marquee-item">&#127807; Leaf Stepping Stones <div class="marquee-dot"></div></div>
+    <div class="marquee-item">&#128557; Candle Holder <div class="marquee-dot"></div></div>
+    <div class="marquee-item">&#127874; Balloon Vase <div class="marquee-dot"></div></div>
+    <div class="marquee-item">&#129322; Rope Texture Planter <div class="marquee-dot"></div></div>
   </div>
 </div>
 
 <!-- ABOUT -->
 <section class="about" id="about">
   <div class="reveal">
-    <div class="section-label">🌱 What This Is All About</div>
+    <div class="section-label">&#127807; What This Is All About</div>
     <h2>We Believe Anyone Can Make Something Extraordinary</h2>
-    <p>There's something deeply satisfying about making something with your own hands — <strong>something that lasts</strong>, something that becomes part of your home and your life. A fire bowl you built yourself. A garden path that glows at night. A stone wall that transforms your living room.</p>
-    <p>These projects aren't complicated. They just <em>look</em> like they are. That's the secret — most beautiful things are simpler than they appear. You just need someone to walk you through it, step by step.</p>
-    <p>That's exactly what every guide in this shop does. No jargon, no skipped steps, no assumed knowledge. Just <strong>clear instructions with real photos</strong> from the actual project — so you always know what to expect.</p>
+    <p>There's something deeply satisfying about making something with your own hands &mdash; <strong>something that lasts</strong>, something that becomes part of your home and your life. A fire bowl you built yourself. A garden path that glows at night. A stone wall that transforms your living room.</p>
+    <p>These projects aren't complicated. They just <em>look</em> like they are. That's the secret &mdash; most beautiful things are simpler than they appear. You just need someone to walk you through it, step by step.</p>
+    <p>That's exactly what every guide in this shop does. No jargon, no skipped steps, no assumed knowledge. Just <strong>clear instructions with real photos</strong> from the actual project.</p>
     <ul class="check-list">
-      <li>Full materials list with costs — no surprises at the hardware store</li>
+      <li>Full materials list with costs &mdash; no surprises at the hardware store</li>
       <li>Real photos taken at every step of the process</li>
-      <li>The most common mistakes — and how to avoid them</li>
+      <li>The most common mistakes &mdash; and how to avoid them</li>
       <li>Troubleshooting for when things don't go perfectly</li>
-      <li>Written for complete beginners — no experience needed</li>
+      <li>Written for complete beginners &mdash; no experience needed</li>
     </ul>
   </div>
   <div class="about-photos reveal">
@@ -403,7 +339,7 @@ footer a { color:rgba(250,247,242,0.45); text-decoration:none; }
 <section class="how">
   <div class="section-label" style="justify-content:center;margin-bottom:1rem">How It Works</div>
   <h2>Three Simple Steps</h2>
-  <p class="how-sub">From choosing a guide to holding your PDF — it takes about 60 seconds.</p>
+  <p class="how-sub">From choosing a guide to holding your PDF &mdash; it takes about 60 seconds.</p>
   <div class="steps">
     <div class="step reveal">
       <div class="step-num">1</div>
@@ -413,15 +349,85 @@ footer a { color:rgba(250,247,242,0.45); text-decoration:none; }
     <div class="step reveal">
       <div class="step-num">2</div>
       <h3>Pay Securely</h3>
-      <p>Payment is handled by Stripe — the same system used by Amazon and Apple. Your card details are never stored. Takes about 30 seconds.</p>
+      <p>Payment is handled by Stripe &mdash; the same system used by Amazon and Apple. Your card details are never stored. Takes about 30 seconds.</p>
     </div>
     <div class="step reveal">
       <div class="step-num">3</div>
-      <h3>Download & Make</h3>
-      <p>Your PDF is available instantly. Print it or keep it on your phone — and start building whenever you're ready. Yours to keep forever.</p>
+      <h3>Download &amp; Make</h3>
+      <p>Your PDF is available instantly. Print it or keep it on your phone &mdash; and start building whenever you're ready. Yours to keep forever.</p>
     </div>
   </div>
-  <a href="shop.html" class="how-btn">Browse All Guides →</a>
+  <a href="shop.html" class="how-btn">Browse All Guides &#8594;</a>
+</section>
+
+<!-- MID-PAGE CTA -->
+<section class="mid-cta">
+  <div class="mid-cta-inner">
+    <div class="mid-cta-label">&#128308; Limited Pricing &mdash; Today Only</div>
+    <h2 class="mid-cta-title">Pick a Project.<br/><em>Make It This Weekend.</em></h2>
+    <p class="mid-cta-sub">Every guide has everything you need — materials list, real photos, step-by-step instructions. No experience needed. Results in 1–2 days.</p>
+
+    <div class="mid-cta-cards">
+
+      <div class="mid-cta-card">
+        <div class="mid-cta-img">
+          <img src="thumbnail_balloon-vase.jpg" alt="Balloon Vase"/>
+          <span class="mid-cta-badge">&#11088; Most Popular</span>
+        </div>
+        <div class="mid-cta-body">
+          <div class="mid-cta-name">Concrete Balloon Vase</div>
+          <div class="mid-cta-meta">30 min &middot; Under $40</div>
+          <div class="mid-cta-pricing">
+            <span class="mid-cta-price">$13.00</span>
+            <span class="mid-cta-old">$22.00</span>
+          </div>
+          <a href="guide-balloon-vase.html" class="mid-cta-btn">Buy Now &#8594;</a>
+        </div>
+      </div>
+
+      <div class="mid-cta-card mid-cta-card--featured">
+        <div class="mid-cta-img">
+          <img src="thumbnail_rope-planter.jpg" alt="Rope Planter"/>
+          <span class="mid-cta-badge mid-cta-badge--hot">&#128293; Best Value</span>
+        </div>
+        <div class="mid-cta-body">
+          <div class="mid-cta-name">Rope Texture Planter</div>
+          <div class="mid-cta-meta">30 min &middot; Under $30</div>
+          <div class="mid-cta-pricing">
+            <span class="mid-cta-price">$9.99</span>
+            <span class="mid-cta-old">$17.00</span>
+          </div>
+          <a href="guide-rope-planter.html" class="mid-cta-btn">Buy Now &#8594;</a>
+        </div>
+      </div>
+
+      <div class="mid-cta-card">
+        <div class="mid-cta-img">
+          <img src="thumbnail_hand-planter.jpg" alt="Hand Planter"/>
+          <span class="mid-cta-badge">&#127807; Fan Favorite</span>
+        </div>
+        <div class="mid-cta-body">
+          <div class="mid-cta-name">Concrete Hand Planter</div>
+          <div class="mid-cta-meta">20 min &middot; Under $35</div>
+          <div class="mid-cta-pricing">
+            <span class="mid-cta-price">$5.00</span>
+            <span class="mid-cta-old">$9.00</span>
+          </div>
+          <a href="guide-hand-planter.html" class="mid-cta-btn">Buy Now &#8594;</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="mid-cta-footer">
+      <a href="shop.html" class="mid-cta-all">See all 12 guides &#8594;</a>
+      <div class="mid-cta-trust">
+        <span>&#128274; Secure checkout</span>
+        <span>&#11015; Instant PDF</span>
+        <span>&#9989; Apple Pay &amp; Google Pay</span>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- PROMISE -->
@@ -430,10 +436,10 @@ footer a { color:rgba(250,247,242,0.45); text-decoration:none; }
   <h2>Made for People Who Want to Actually Do It</h2>
   <p class="promise-intro"><em>"Not just dream about it. Not just save it to Pinterest.<br/>Actually pick up the materials and make something beautiful."</em></p>
   <div class="promise-grid">
-    <div class="pc reveal"><span class="pc-icon">📸</span><h3>Real Photos, Not Illustrations</h3><p>Every photo was taken during the actual project. You'll see exactly what each step looks like in real life — not a diagram or a stock photo.</p></div>
-    <div class="pc reveal"><span class="pc-icon">🧑‍🏫</span><h3>Written Like a Friend Explaining It</h3><p>No confusing technical language. No skipped steps. Written as if someone's standing next to you in the garden, talking you through it.</p></div>
-    <div class="pc reveal"><span class="pc-icon">💰</span><h3>Save Hundreds — Sometimes Thousands</h3><p>The stone accent wall guide alone could save you $5,000 vs a contractor. Most projects cost a fraction of what they look like they're worth.</p></div>
-    <div class="pc reveal"><span class="pc-icon">⏱️</span><h3>Projects You Can Actually Finish</h3><p>Every project can be completed in a weekend or less. No month-long commitments — real, visible results in real time.</p></div>
+    <div class="pc reveal"><span class="pc-icon">&#128247;</span><h3>Real Photos, Not Illustrations</h3><p>Every photo was taken during the actual project. You'll see exactly what each step looks like in real life &mdash; not a diagram or a stock photo.</p></div>
+    <div class="pc reveal"><span class="pc-icon">&#129489;&#8205;&#127979;</span><h3>Written Like a Friend Explaining It</h3><p>No confusing technical language. No skipped steps. Written as if someone's standing next to you in the garden, talking you through it.</p></div>
+    <div class="pc reveal"><span class="pc-icon">&#128176;</span><h3>Save Hundreds &mdash; Sometimes Thousands</h3><p>The stone accent wall guide alone could save you $5,000 vs a contractor. Most projects cost a fraction of what they look like they're worth.</p></div>
+    <div class="pc reveal"><span class="pc-icon">&#9201;</span><h3>Projects You Can Actually Finish</h3><p>Every project can be completed in a weekend or less. No month-long commitments &mdash; real, visible results in real time.</p></div>
   </div>
 </section>
 
@@ -442,31 +448,40 @@ footer a { color:rgba(250,247,242,0.45); text-decoration:none; }
   <div class="featured-inner">
     <div class="featured-header reveal">
       <div><div class="section-label">Featured</div><h2>Most Popular Guides</h2></div>
-      <a href="shop.html" class="see-all">See all guides →</a>
+      <a href="shop.html" class="see-all">See all guides &#8594;</a>
     </div>
     <div class="feat-grid">
-      <a href="shop.html" class="feat-card reveal">
-        <div class="feat-thumb"><img src="thumbnail_glass_stones_facebook.jpg" alt="Glass Mosaic Stones"/></div>
+      <a href="guide-balloon-vase.html" class="feat-card reveal">
+        <div class="feat-thumb"><img src="thumbnail_balloon-vase.jpg" alt="Concrete Balloon Vase"/></div>
         <div class="feat-body">
-          <div class="feat-title">Glass Mosaic Stepping Stones</div>
-          <div class="feat-desc">They glow at night like stained glass windows. One of the most spectacular projects in the collection.</div>
-          <div class="feat-footer"><div class="feat-price">$3.00</div><div class="feat-cta">Get guide →</div></div>
+          <div class="feat-title">DIY Concrete Balloon Vase</div>
+          <div class="feat-desc">Pour concrete into a balloon, cure, pop &mdash; reveal a perfect sphere with a gold interior. Worth $200+ in design stores.</div>
+          <div class="feat-footer">
+            <div><span class="feat-price">$13.00</span><span class="feat-price-old">$22.00</span></div>
+            <div class="feat-cta">Get guide &#8594;</div>
+          </div>
         </div>
       </a>
-      <a href="shop.html" class="feat-card reveal">
+      <a href="guide-stone-wall.html" class="feat-card reveal">
         <div class="feat-thumb"><img src="thumbnail_stone_wall.jpg" alt="Stone Accent Wall"/></div>
         <div class="feat-body">
           <div class="feat-title">Natural Stone Accent Wall</div>
-          <div class="feat-desc">Save $2,000–$7,000 vs hiring a contractor. Includes a full lighting guide for the dramatic nighttime effect.</div>
-          <div class="feat-footer"><div class="feat-price">$12.99</div><div class="feat-cta">Get guide →</div></div>
+          <div class="feat-desc">Save $2,000&ndash;$7,000 vs hiring a contractor. Includes a full lighting guide for the dramatic nighttime effect.</div>
+          <div class="feat-footer">
+            <div><span class="feat-price">$12.99</span><span class="feat-price-old">$22.00</span></div>
+            <div class="feat-cta">Get guide &#8594;</div>
+          </div>
         </div>
       </a>
-      <a href="shop.html" class="feat-card reveal">
-        <div class="feat-thumb"><img src="thumbnail_planter_facebook.jpg" alt="Woven Planter"/></div>
+      <a href="guide-rope-planter.html" class="feat-card reveal">
+        <div class="feat-thumb"><img src="thumbnail_rope-planter.jpg" alt="Rope Texture Planter"/></div>
         <div class="feat-body">
-          <div class="feat-title">Woven Texture Concrete Planter</div>
-          <div class="feat-desc">A $5 laundry basket transfers a beautiful woven pattern onto concrete. Looks like a $100 planter — costs under $20.</div>
-          <div class="feat-footer"><div class="feat-price">$3.99</div><div class="feat-cta">Get guide →</div></div>
+          <div class="feat-title">Concrete Rope Texture Planter</div>
+          <div class="feat-desc">Wrap rope around a bucket, pour concrete, unmold &mdash; a stunning nautical planter worth $150 for under $30.</div>
+          <div class="feat-footer">
+            <div><span class="feat-price">$9.99</span><span class="feat-price-old">$17.00</span></div>
+            <div class="feat-cta">Get guide &#8594;</div>
+          </div>
         </div>
       </a>
     </div>
@@ -477,12 +492,12 @@ footer a { color:rgba(250,247,242,0.45); text-decoration:none; }
 <section class="final">
   <h2>Ready to Make Something<br/>You're Proud Of?</h2>
   <p>Start with one guide. See how it goes. We think you'll be back for another one pretty soon.</p>
-  <a href="shop.html" class="final-btn">Browse All Guides →</a>
+  <a href="shop.html" class="final-btn">Browse All Guides &#8594;</a>
 </section>
 
 <footer>
-  <div class="footer-logo">🪨 Made By Hand</div>
-  <p>© 2026 · All guides are digital PDF downloads · <a href="mailto:you@example.com">Contact us</a></p>
+  <div class="footer-logo">&#129704; Made By Hand</div>
+  <p>&#169; 2026 &middot; All guides are digital PDF downloads &middot; <a href="mailto:you@example.com">Contact us</a></p>
 </footer>
 
 <script>
@@ -497,7 +512,7 @@ const obs = new IntersectionObserver(entries => {
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-// Floating cards parallax on mouse move
+// Floating cards parallax
 const fcs = [
   { el: document.getElementById('fc1'), base: -3, depth: 6 },
   { el: document.getElementById('fc2'), base: 4, depth: 4 },
