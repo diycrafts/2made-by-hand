@@ -11,69 +11,91 @@
 :root{--cream:#FAF7F2;--warm:#F0EBE1;--stone:#D6CEC2;--bark:#8C6B4A;--forest:#4A6741;--ink:#2A2520;--muted:#8A7E72;--white:#FFFFFF;--gold:#C8963C;}
 html{scroll-behavior:smooth;}
 body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden;}
+
+/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;background:rgba(250,247,242,0.95);backdrop-filter:blur(14px);border-bottom:1px solid rgba(214,206,194,0.5);}
 .logo{font-family:'Lora',serif;font-size:1.25rem;font-weight:700;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:0.6rem;}
 .logo-mark{width:34px;height:34px;background:var(--bark);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
 .back{display:flex;align-items:center;gap:0.4rem;font-size:0.88rem;font-weight:600;color:var(--muted);text-decoration:none;transition:color 0.2s;}
 .back:hover{color:var(--ink);}
-.page-top{padding:100px 5vw 3rem;text-align:center;}
-.eyebrow{font-size:0.75rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--forest);margin-bottom:0.75rem;}
-.page-top h1{font-family:'Lora',serif;font-size:clamp(2.2rem,5vw,3.8rem);font-weight:700;margin-bottom:0.75rem;}
+
+/* TOP CTA BANNER */
+.top-cta-banner{background:linear-gradient(135deg,#1a2a1a 0%,#2d4a2d 100%);padding:48px 5vw 40px;text-align:center;margin-top:68px;}
+.top-cta-banner .eyebrow{font-size:0.7rem;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:#8BC34A;margin-bottom:12px;}
+.top-cta-banner h2{font-family:'Lora',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;color:white;margin-bottom:10px;line-height:1.2;}
+.top-cta-banner h2 em{font-style:italic;color:#FFC107;}
+.top-cta-banner p{color:rgba(255,255,255,0.6);font-size:0.95rem;max-width:520px;margin:0 auto 24px;line-height:1.7;}
+.cta-pills{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:28px;}
+.cta-pill{font-size:0.8rem;font-weight:700;padding:6px 16px;border-radius:20px;background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.8);border:1px solid rgba(255,255,255,0.15);}
+.cta-pill.hot{background:rgba(192,57,43,0.3);border-color:rgba(192,57,43,0.6);color:#ff8a80;}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;background:#FFC107;color:#1a1a1a;font-family:'Nunito',sans-serif;font-size:1rem;font-weight:800;padding:14px 32px;border-radius:50px;text-decoration:none;transition:background 0.2s,transform 0.2s;box-shadow:0 6px 24px rgba(255,193,7,0.35);}
+.cta-btn:hover{background:#FFD54F;transform:translateY(-2px);}
+
+/* PAGE TOP */
+.page-top{padding:48px 5vw 2rem;text-align:center;}
+.eyebrow-sm{font-size:0.75rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--forest);margin-bottom:0.75rem;}
+.page-top h1{font-family:'Lora',serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;margin-bottom:0.75rem;}
 .page-top h1 em{font-style:italic;color:var(--bark);}
 .page-top p{font-size:1rem;color:var(--muted);max-width:520px;margin:0 auto;line-height:1.75;}
+
+/* FILTERS */
 .filters{display:flex;gap:0.6rem;justify-content:center;padding:1.5rem 5vw 2.5rem;flex-wrap:wrap;}
 .fb{padding:0.6rem 1.4rem;border-radius:50px;border:1.5px solid var(--stone);background:transparent;font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:600;color:var(--muted);cursor:pointer;transition:all 0.2s;}
 .fb:hover{border-color:var(--bark);color:var(--bark);}
 .fb.active{background:var(--ink);border-color:var(--ink);color:white;}
+
 .shop-wrap{max-width:1200px;margin:0 auto;padding:0 5vw 7rem;}
-.pinned-banner-wrap{display:flex;flex-direction:column;align-items:center;margin-bottom:2.5rem;}
-.pinned-banner-label{display:flex;align-items:center;gap:0.6rem;font-size:0.7rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:0.7rem;}
-.pinned-banner-label::before,.pinned-banner-label::after{content:'';width:40px;height:1px;background:var(--stone);}
-.vb-card-pinned{width:100%;max-width:680px;background:#0f0f0f;border:1.5px solid rgba(200,150,60,0.5);border-radius:14px;overflow:hidden;text-decoration:none;color:inherit;display:flex;flex-direction:row;box-shadow:0 4px 24px rgba(0,0,0,0.18);transition:transform 0.25s,box-shadow 0.25s,border-color 0.25s;opacity:0;transform:translateY(12px);}
-.vb-card-pinned.visible{opacity:1;transform:translateY(0);}
-.vb-card-pinned:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,0.28);border-color:rgba(200,150,60,0.9);}
-.vb-thumb{width:200px;min-width:200px;overflow:hidden;position:relative;flex-shrink:0;}
-.vb-thumb img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s;display:block;}
-.vb-card-pinned:hover .vb-thumb img{transform:scale(1.05);}
-.vb-pin-badge{position:absolute;top:8px;left:8px;z-index:2;display:inline-flex;align-items:center;gap:0.3rem;background:var(--gold);color:#1a1410;font-size:0.62rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;padding:0.22rem 0.6rem;border-radius:50px;}
-.vb-pin-body{padding:1rem 1.25rem;display:flex;flex-direction:column;justify-content:center;flex:1;}
-.vb-pin-title{font-family:'Lora',serif;font-size:1rem;font-weight:700;color:#fff;margin-bottom:0.25rem;line-height:1.3;}
-.vb-pin-desc{font-size:0.78rem;color:rgba(255,255,255,0.42);line-height:1.5;margin-bottom:0.75rem;}
-.vb-pin-footer{display:flex;align-items:center;justify-content:space-between;gap:0.75rem;}
-.vb-pin-price{display:flex;align-items:baseline;gap:0.45rem;}
-.vb-pin-price .current{font-family:'Lora',serif;font-size:1.3rem;font-weight:700;color:#F5A623;}
-.vb-pin-price .original{font-size:0.8rem;color:rgba(255,255,255,0.28);text-decoration:line-through;}
-.vb-pin-price .save{font-size:0.65rem;font-weight:800;color:#4A6741;background:rgba(74,103,65,0.25);padding:0.15rem 0.4rem;border-radius:50px;}
-.vb-pin-btn{display:inline-flex;align-items:center;gap:0.35rem;flex-shrink:0;background:var(--gold);color:#1a1410;font-family:'Nunito',sans-serif;font-size:0.82rem;font-weight:800;padding:0.5rem 1rem;border-radius:50px;transition:background 0.2s;}
-.vb-card-pinned:hover .vb-pin-btn{background:#daa840;}
-@media(max-width:600px){.vb-card-pinned{flex-direction:column;max-width:100%;}.vb-thumb{width:100%;min-width:unset;height:140px;}}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.75rem;}
-.card{background:var(--white);border:1.5px solid var(--stone);border-radius:18px;overflow:hidden;transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s;opacity:0;transform:translateY(16px);text-decoration:none;color:inherit;display:block;}
+
+/* VIRAL BLUEPRINT — small strip */
+.vb-strip{display:flex;align-items:center;gap:1rem;background:#0f0f0f;border:1px solid rgba(200,150,60,0.4);border-radius:12px;padding:0.9rem 1.25rem;margin-bottom:2.5rem;text-decoration:none;color:inherit;transition:border-color 0.2s,transform 0.2s;max-width:100%;}
+.vb-strip:hover{border-color:rgba(200,150,60,0.9);transform:translateY(-1px);}
+.vb-strip-badge{font-size:0.62rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;background:var(--gold);color:#1a1410;padding:3px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0;}
+.vb-strip-title{font-family:'Lora',serif;font-size:0.95rem;font-weight:700;color:white;flex:1;}
+.vb-strip-desc{font-size:0.78rem;color:rgba(255,255,255,0.4);display:none;}
+.vb-strip-price{display:flex;align-items:baseline;gap:6px;flex-shrink:0;}
+.vb-strip-price .cur{font-family:'Lora',serif;font-size:1.1rem;font-weight:700;color:#F5A623;}
+.vb-strip-price .old{font-size:0.75rem;color:rgba(255,255,255,0.28);text-decoration:line-through;}
+.vb-strip-btn{display:inline-flex;align-items:center;background:var(--gold);color:#1a1410;font-family:'Nunito',sans-serif;font-size:0.78rem;font-weight:800;padding:6px 14px;border-radius:20px;white-space:nowrap;flex-shrink:0;transition:background 0.2s;}
+.vb-strip:hover .vb-strip-btn{background:#daa840;}
+@media(min-width:600px){.vb-strip-desc{display:block;}}
+
+/* GRID */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;}
+.card{background:var(--white);border:1.5px solid var(--stone);border-radius:18px;overflow:hidden;transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s;opacity:0;transform:translateY(16px);text-decoration:none;color:inherit;display:block;position:relative;}
 .card.visible{opacity:1;transform:translateY(0);}
-.card:not(.soon):hover{transform:translateY(-6px);box-shadow:0 16px 50px rgba(42,37,32,0.12);border-color:var(--bark);}
+.card:not(.soon):hover{transform:translateY(-5px);box-shadow:0 16px 50px rgba(42,37,32,0.12);border-color:var(--bark);}
 .card.hidden{display:none!important;}
 .card.soon{opacity:0.5;pointer-events:none;}
 .thumb{width:100%;aspect-ratio:16/9;overflow:hidden;position:relative;}
-.thumb img{width:100%;height:100%;object-fit:cover;transition:transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94);}
+.thumb img{width:100%;height:100%;object-fit:cover;transition:transform 0.45s;}
 .card:hover .thumb img{transform:scale(1.06);}
 .cat-tag{position:absolute;top:0.8rem;left:0.8rem;font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:0.3rem 0.75rem;border-radius:50px;background:rgba(250,247,242,0.92);color:var(--ink);backdrop-filter:blur(4px);}
 .new-tag{position:absolute;top:0.8rem;right:0.8rem;font-size:0.7rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;padding:0.3rem 0.75rem;border-radius:50px;background:#4A6741;color:white;}
 .soon-tag{position:absolute;top:0.8rem;right:0.8rem;font-size:0.7rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:0.3rem 0.75rem;border-radius:50px;background:var(--gold);color:white;}
-.card-body{padding:1.5rem 1.5rem 1.75rem;}
-.card-title{font-family:'Lora',serif;font-size:1.25rem;font-weight:700;color:var(--ink);margin-bottom:0.5rem;line-height:1.3;}
-.card-desc{font-size:0.9rem;color:var(--muted);line-height:1.65;margin-bottom:1.2rem;}
-.card-tags{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1.2rem;}
-.ctag{font-size:0.73rem;font-weight:600;color:var(--muted);background:var(--warm);padding:0.25rem 0.65rem;border-radius:50px;border:1px solid var(--stone);}
-.card-footer{display:flex;align-items:center;justify-content:space-between;padding-top:1.2rem;border-top:1.5px solid var(--warm);}
-.price{font-family:'Lora',serif;font-size:1.6rem;font-weight:700;color:var(--ink);line-height:1;}
-.price sup{font-family:'Nunito',sans-serif;font-size:0.9rem;font-weight:400;color:var(--muted);vertical-align:super;}
-.view-btn{display:inline-flex;align-items:center;gap:0.5rem;background:var(--bark);color:white;font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:700;padding:0.7rem 1.4rem;border-radius:50px;border:none;cursor:pointer;transition:background 0.2s,transform 0.15s;text-decoration:none;}
+.card-body{padding:1.25rem 1.5rem 1.5rem;}
+.card-title{font-family:'Lora',serif;font-size:1.15rem;font-weight:700;color:var(--ink);margin-bottom:0.4rem;line-height:1.3;}
+.card-desc{font-size:0.88rem;color:var(--muted);line-height:1.6;margin-bottom:1rem;}
+.card-tags{display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:1rem;}
+.ctag{font-size:0.72rem;font-weight:600;color:var(--muted);background:var(--warm);padding:0.2rem 0.6rem;border-radius:50px;border:1px solid var(--stone);}
+
+/* URGENCY ROW */
+.urgency-row{display:flex;align-items:center;gap:8px;margin-bottom:0.8rem;flex-wrap:wrap;}
+.stock-alert{font-size:0.72rem;font-weight:800;color:#c0392b;display:flex;align-items:center;gap:4px;}
+.timer-badge{font-size:0.7rem;font-weight:700;background:#fff3cd;color:#856404;border:1px solid #ffc107;padding:2px 8px;border-radius:10px;}
+
+.card-footer{display:flex;align-items:center;justify-content:space-between;padding-top:1rem;border-top:1.5px solid var(--warm);}
+.price-wrap{display:flex;flex-direction:column;}
+.price{font-family:'Lora',serif;font-size:1.5rem;font-weight:700;color:#c0392b;line-height:1;}
+.price sup{font-family:'Nunito',sans-serif;font-size:0.85rem;font-weight:400;vertical-align:super;}
+.price-old{font-size:0.78rem;color:var(--muted);text-decoration:line-through;}
+.view-btn{display:inline-flex;align-items:center;gap:0.5rem;background:var(--bark);color:white;font-family:'Nunito',sans-serif;font-size:0.85rem;font-weight:700;padding:0.65rem 1.3rem;border-radius:50px;border:none;cursor:pointer;transition:background 0.2s,transform 0.15s;text-decoration:none;}
 .view-btn:hover{background:var(--ink);transform:scale(1.03);}
+
 footer{background:var(--ink);padding:2.5rem 5vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
 .fl{font-family:'Lora',serif;font-size:1.1rem;font-weight:700;color:rgba(250,247,242,0.65);}
 footer p{font-size:0.8rem;color:rgba(250,247,242,0.3);}
 footer a{color:rgba(250,247,242,0.45);text-decoration:none;}
-@media(max-width:600px){.grid{grid-template-columns:1fr;}footer{flex-direction:column;text-align:center;}}
+@media(max-width:600px){.grid{grid-template-columns:1fr;}footer{flex-direction:column;text-align:center;}.vb-strip{flex-wrap:wrap;}}
 </style>
 </head>
 <body>
@@ -83,8 +105,22 @@ footer a{color:rgba(250,247,242,0.45);text-decoration:none;}
   <a href="index.html" class="back">&#8592; Back to Home</a>
 </nav>
 
+<!-- TOP CTA BANNER -->
+<div class="top-cta-banner">
+  <div class="eyebrow">&#128293; Limited Time Pricing</div>
+  <h2>Real DIY Projects. <em>Real Results.</em><br/>Step-by-Step Guides From $5</h2>
+  <p>Every guide comes from a real project with real photos. Full materials list, exact steps, and pro tips — everything you need to actually make it.</p>
+  <div class="cta-pills">
+    <span class="cta-pill">&#9989; Instant PDF download</span>
+    <span class="cta-pill">&#9989; Real project photos</span>
+    <span class="cta-pill hot">&#128293; Prices going up soon</span>
+    <span class="cta-pill">&#9989; Apple Pay &amp; Google Pay</span>
+  </div>
+  <a href="#grid" class="cta-btn">&#11015; Browse All Guides</a>
+</div>
+
 <div class="page-top">
-  <div class="eyebrow">The Collection</div>
+  <div class="eyebrow-sm">The Collection</div>
   <h1>All <em>DIY Guides</em></h1>
   <p>Every guide is built from a real project — real photos, full materials list, and clear steps anyone can follow.</p>
 </div>
@@ -99,31 +135,19 @@ footer a{color:rgba(250,247,242,0.45);text-decoration:none;}
 
 <div class="shop-wrap">
 
-  <div class="pinned-banner-wrap">
-    <div class="pinned-banner-label">&#128204; Pinned &middot; Best Seller</div>
-    <a href="guide-viral-blueprint.html" class="vb-card-pinned" id="vb-pinned">
-      <div class="vb-thumb">
-        <img src="thumbnail_viral_blueprint.jpg" alt="The $2K Reels Playbook"/>
-        <div class="vb-pin-badge">&#11088; Best Seller</div>
-      </div>
-      <div class="vb-pin-body">
-        <div class="vb-pin-title">The $2K Reels Playbook</div>
-        <div class="vb-pin-desc">$2,453/month from Facebook Reels — $0 ad spend. The exact system behind 3M+ views per video.</div>
-        <div class="vb-pin-footer">
-          <div class="vb-pin-price">
-            <span class="current">$45</span>
-            <span class="original">$90</span>
-            <span class="save">50% OFF</span>
-          </div>
-          <span class="vb-pin-btn">Get Guide &#8594;</span>
-        </div>
-      </div>
-    </a>
-  </div>
+  <!-- VIRAL BLUEPRINT — slim strip -->
+  <a href="guide-viral-blueprint.html" class="vb-strip">
+    <span class="vb-strip-badge">&#11088; Best Seller</span>
+    <span class="vb-strip-title">The $2K Reels Playbook</span>
+    <span class="vb-strip-desc">$2,453/month from Facebook Reels — $0 ad spend.</span>
+    <span class="vb-strip-price"><span class="cur">$67</span><span class="old">$134</span></span>
+    <span class="vb-strip-btn">Get it &#8594;</span>
+  </a>
 
+  <!-- GRID -->
   <div class="grid" id="grid">
 
-            <!-- ===== NOU — PRIMUL in grila ===== -->
+    <!-- 1. Balloon Vase — NEW -->
     <a href="guide-balloon-vase.html" class="card" data-cat="concrete interior">
       <div class="thumb">
         <img src="thumbnail_balloon-vase.jpg" alt="DIY Concrete Balloon Vase with Gold Interior"/>
@@ -132,19 +156,27 @@ footer a{color:rgba(250,247,242,0.45);text-decoration:none;}
       </div>
       <div class="card-body">
         <div class="card-title">DIY Concrete Balloon Vase with Gold Interior</div>
-        <div class="card-desc">Pour concrete into a balloon, cure, pop it — reveal a perfect sphere. Paint inside gold for a $200 designer vase made for under $40.</div>
+        <div class="card-desc">Pour concrete into a balloon, cure, pop — reveal a perfect sphere. Paint inside gold for a $200 designer vase made for under $40.</div>
         <div class="card-tags">
           <span class="ctag">&#9201; 30 min + 48h cure</span>
           <span class="ctag">&#128176; $20&ndash;$40</span>
           <span class="ctag">&#127968; Beginner</span>
         </div>
+        <div class="urgency-row">
+          <span class="stock-alert">&#128308; Only 3 left at this price</span>
+          <span class="timer-badge" data-mins="37">&#9200; 37:00</span>
+        </div>
         <div class="card-footer">
-          <div class="price"><sup>$</sup>13.00</div>
+          <div class="price-wrap">
+            <span class="price-old">Was $22.00</span>
+            <div class="price"><sup>$</sup>13.00</div>
+          </div>
           <span class="view-btn">View Guide &#8594;</span>
         </div>
       </div>
     </a>
 
+    <!-- 2. Rope Planter -->
     <a href="guide-rope-planter.html" class="card" data-cat="concrete garden">
       <div class="thumb">
         <img src="thumbnail_rope-planter.jpg" alt="DIY Concrete Rope Texture Planter"/>
@@ -152,19 +184,27 @@ footer a{color:rgba(250,247,242,0.45);text-decoration:none;}
       </div>
       <div class="card-body">
         <div class="card-title">DIY Concrete Rope Texture Planter</div>
-        <div class="card-desc">Wrap rope around a bucket, pour concrete, unmold — and reveal a stunning nautical-textured planter worth $150, made for under $30.</div>
+        <div class="card-desc">Wrap rope around a bucket, pour concrete, unmold — a stunning nautical-textured planter worth $150, made for under $30.</div>
         <div class="card-tags">
           <span class="ctag">&#9201; 30 min + 48h cure</span>
           <span class="ctag">&#128176; $25&ndash;$45</span>
           <span class="ctag">&#127807; Beginner</span>
         </div>
+        <div class="urgency-row">
+          <span class="stock-alert">&#128308; Only 2 left at this price</span>
+          <span class="timer-badge" data-mins="52">&#9200; 52:00</span>
+        </div>
         <div class="card-footer">
-          <div class="price"><sup>$</sup>9.99</div>
+          <div class="price-wrap">
+            <span class="price-old">Was $17.00</span>
+            <div class="price"><sup>$</sup>9.99</div>
+          </div>
           <span class="view-btn">View Guide &#8594;</span>
         </div>
       </div>
     </a>
 
+    <!-- 3. Hand Planter -->
     <a href="guide-hand-planter.html" class="card" data-cat="concrete garden">
       <div class="thumb">
         <img src="thumbnail_hand-planter.jpg" alt="DIY Concrete Hand Planter"/>
@@ -178,13 +218,21 @@ footer a{color:rgba(250,247,242,0.45);text-decoration:none;}
           <span class="ctag">&#128176; $15&ndash;$35</span>
           <span class="ctag">&#127807; Beginner</span>
         </div>
+        <div class="urgency-row">
+          <span class="stock-alert">&#128308; Only 4 left at this price</span>
+          <span class="timer-badge" data-mins="44">&#9200; 44:00</span>
+        </div>
         <div class="card-footer">
-          <div class="price"><sup>$</sup>5.00</div>
+          <div class="price-wrap">
+            <span class="price-old">Was $9.00</span>
+            <div class="price"><sup>$</sup>5.00</div>
+          </div>
           <span class="view-btn">View Guide &#8594;</span>
         </div>
       </div>
     </a>
 
+    <!-- 4. Bottle Edging -->
     <a href="guide-bottle-edging.html" class="card" data-cat="concrete garden">
       <div class="thumb">
         <img src="thumbnail_bottle-edging.jpg" alt="DIY Concrete Bottle Glass Garden Edging"/>
@@ -198,13 +246,21 @@ footer a{color:rgba(250,247,242,0.45);text-decoration:none;}
           <span class="ctag">&#128176; $25&ndash;$60</span>
           <span class="ctag">&#127807; Beginner</span>
         </div>
+        <div class="urgency-row">
+          <span class="stock-alert">&#128308; Only 3 left at this price</span>
+          <span class="timer-badge" data-mins="29">&#9200; 29:00</span>
+        </div>
         <div class="card-footer">
-          <div class="price"><sup>$</sup>5.00</div>
+          <div class="price-wrap">
+            <span class="price-old">Was $9.00</span>
+            <div class="price"><sup>$</sup>5.00</div>
+          </div>
           <span class="view-btn">View Guide &#8594;</span>
         </div>
       </div>
     </a>
 
+    <!-- 5. Creek Bridge -->
     <a href="guide-creek-bridge.html" class="card" data-cat="garden">
       <div class="thumb">
         <img src="thumbnail_creek-bridge.jpg" alt="DIY Dry Creek Stream and Garden Bridge"/>
@@ -212,19 +268,27 @@ footer a{color:rgba(250,247,242,0.45);text-decoration:none;}
       </div>
       <div class="card-body">
         <div class="card-title">DIY Dry Creek Stream &amp; Garden Bridge</div>
-        <div class="card-desc">Turn a flat backyard into a stunning natural stream with a handmade arched wooden bridge. One weekend, $80&ndash;130 in materials.</div>
+        <div class="card-desc">Turn a flat backyard into a stunning natural stream with a handmade arched wooden bridge. One weekend, $80–130 in materials.</div>
         <div class="card-tags">
           <span class="ctag">&#9201; 1 weekend</span>
           <span class="ctag">&#128176; $80&ndash;$130</span>
           <span class="ctag">&#127807; Beginner</span>
         </div>
+        <div class="urgency-row">
+          <span class="stock-alert">&#128308; Only 2 left at this price</span>
+          <span class="timer-badge" data-mins="61">&#9200; 61:00</span>
+        </div>
         <div class="card-footer">
-          <div class="price"><sup>$</sup>5.00</div>
+          <div class="price-wrap">
+            <span class="price-old">Was $9.00</span>
+            <div class="price"><sup>$</sup>5.00</div>
+          </div>
           <span class="view-btn">View Guide &#8594;</span>
         </div>
       </div>
     </a>
 
+    <!-- 6. Mosaic Table -->
     <a href="guide-mosaic-table.html" class="card" data-cat="garden">
       <div class="thumb">
         <img src="thumbnail_mosaic_table.jpg" alt="DIY Mosaic Patio Table"/>
@@ -238,13 +302,21 @@ footer a{color:rgba(250,247,242,0.45);text-decoration:none;}
           <span class="ctag">&#128176; Under $50</span>
           <span class="ctag">&#127807; Beginner</span>
         </div>
+        <div class="urgency-row">
+          <span class="stock-alert">&#128308; Only 3 left at this price</span>
+          <span class="timer-badge" data-mins="48">&#9200; 48:00</span>
+        </div>
         <div class="card-footer">
-          <div class="price"><sup>$</sup>5.00</div>
+          <div class="price-wrap">
+            <span class="price-old">Was $9.00</span>
+            <div class="price"><sup>$</sup>5.00</div>
+          </div>
           <span class="view-btn">View Guide &#8594;</span>
         </div>
       </div>
     </a>
 
+    <!-- 7. Leaf Stones -->
     <a href="guide-leaf-stones.html" class="card" data-cat="concrete garden">
       <div class="thumb">
         <img src="thumbnail_leaf_stones.jpg" alt="Leaf Imprint Stepping Stones"/>
@@ -258,13 +330,21 @@ footer a{color:rgba(250,247,242,0.45);text-decoration:none;}
           <span class="ctag">&#128176; Under $5 each</span>
           <span class="ctag">&#127807; Beginner</span>
         </div>
+        <div class="urgency-row">
+          <span class="stock-alert">&#128308; Only 4 left at this price</span>
+          <span class="timer-badge" data-mins="33">&#9200; 33:00</span>
+        </div>
         <div class="card-footer">
-          <div class="price"><sup>$</sup>5.00</div>
+          <div class="price-wrap">
+            <span class="price-old">Was $9.00</span>
+            <div class="price"><sup>$</sup>5.00</div>
+          </div>
           <span class="view-btn">View Guide &#8594;</span>
         </div>
       </div>
     </a>
 
+    <!-- 8. Glass Stones -->
     <a href="guide-glass-stones.html" class="card" data-cat="glass garden">
       <div class="thumb">
         <img src="thumbnail_glass_stones_facebook.jpg" alt="Glass Mosaic Stepping Stones"/>
@@ -275,16 +355,24 @@ footer a{color:rgba(250,247,242,0.45);text-decoration:none;}
         <div class="card-desc">Coloured glass pressed into polished concrete. Stunning by day — at night with a light beneath each stone, they glow like stained glass.</div>
         <div class="card-tags">
           <span class="ctag">&#9201; 30 min per stone</span>
-          <span class="ctag">&#128176; $8&ndash;15 each</span>
+          <span class="ctag">&#128176; $8&ndash;$15 each</span>
           <span class="ctag">&#127807; Beginner</span>
         </div>
+        <div class="urgency-row">
+          <span class="stock-alert">&#128308; Only 2 left at this price</span>
+          <span class="timer-badge" data-mins="41">&#9200; 41:00</span>
+        </div>
         <div class="card-footer">
-          <div class="price"><sup>$</sup>5.00</div>
+          <div class="price-wrap">
+            <span class="price-old">Was $9.00</span>
+            <div class="price"><sup>$</sup>5.00</div>
+          </div>
           <span class="view-btn">View Guide &#8594;</span>
         </div>
       </div>
     </a>
 
+    <!-- 9. Candle -->
     <a href="guide-candle.html" class="card" data-cat="concrete">
       <div class="thumb">
         <img src="thumbnail_candle_facebook.jpg" alt="Concrete Candle Holder"/>
@@ -298,13 +386,21 @@ footer a{color:rgba(250,247,242,0.45);text-decoration:none;}
           <span class="ctag">&#128176; Under $10</span>
           <span class="ctag">&#127807; Perfect first project</span>
         </div>
+        <div class="urgency-row">
+          <span class="stock-alert">&#128308; Only 5 left at this price</span>
+          <span class="timer-badge" data-mins="55">&#9200; 55:00</span>
+        </div>
         <div class="card-footer">
-          <div class="price"><sup>$</sup>5.00</div>
+          <div class="price-wrap">
+            <span class="price-old">Was $9.00</span>
+            <div class="price"><sup>$</sup>5.00</div>
+          </div>
           <span class="view-btn">View Guide &#8594;</span>
         </div>
       </div>
     </a>
 
+    <!-- 10. Planter -->
     <a href="guide-planter.html" class="card" data-cat="concrete garden">
       <div class="thumb">
         <img src="thumbnail_planter_facebook.jpg" alt="Woven Concrete Planter"/>
@@ -318,13 +414,21 @@ footer a{color:rgba(250,247,242,0.45);text-decoration:none;}
           <span class="ctag">&#128176; Under $20</span>
           <span class="ctag">&#127807; Beginner</span>
         </div>
+        <div class="urgency-row">
+          <span class="stock-alert">&#128308; Only 3 left at this price</span>
+          <span class="timer-badge" data-mins="38">&#9200; 38:00</span>
+        </div>
         <div class="card-footer">
-          <div class="price"><sup>$</sup>5.00</div>
+          <div class="price-wrap">
+            <span class="price-old">Was $9.00</span>
+            <div class="price"><sup>$</sup>5.00</div>
+          </div>
           <span class="view-btn">View Guide &#8594;</span>
         </div>
       </div>
     </a>
 
+    <!-- 11. Stone Wall -->
     <a href="guide-stone-wall.html" class="card" data-cat="interior">
       <div class="thumb">
         <img src="thumbnail_stone_wall.jpg" alt="Natural Stone Accent Wall"/>
@@ -332,19 +436,27 @@ footer a{color:rgba(250,247,242,0.45);text-decoration:none;}
       </div>
       <div class="card-body">
         <div class="card-title">Natural Stone Accent Wall</div>
-        <div class="card-desc">Install a full natural stone feature wall yourself and save $2,000&ndash;$7,000 vs a contractor. Includes lighting guide.</div>
+        <div class="card-desc">Install a full natural stone feature wall yourself and save $2,000–$7,000 vs a contractor. Includes lighting guide.</div>
         <div class="card-tags">
           <span class="ctag">&#9201; 2&ndash;3 days</span>
-          <span class="ctag">&#128176; $300&ndash;600</span>
-          <span class="ctag">&#127807; No experience needed</span>
+          <span class="ctag">&#128176; $300&ndash;$600</span>
+          <span class="ctag">&#127968; No experience needed</span>
+        </div>
+        <div class="urgency-row">
+          <span class="stock-alert">&#128308; Only 2 left at this price</span>
+          <span class="timer-badge" data-mins="43">&#9200; 43:00</span>
         </div>
         <div class="card-footer">
-          <div class="price"><sup>$</sup>12.99</div>
+          <div class="price-wrap">
+            <span class="price-old">Was $22.00</span>
+            <div class="price"><sup>$</sup>12.99</div>
+          </div>
           <span class="view-btn">View Guide &#8594;</span>
         </div>
       </div>
     </a>
 
+    <!-- 12. Fire Bowl -->
     <a href="guide-fire-bowl.html" class="card" data-cat="concrete">
       <div class="thumb">
         <img src="thumbnail_fire_bowl.jpg" alt="Concrete Fire Bowl"/>
@@ -358,13 +470,21 @@ footer a{color:rgba(250,247,242,0.45);text-decoration:none;}
           <span class="ctag">&#128176; Under $30</span>
           <span class="ctag">&#127807; Beginner</span>
         </div>
+        <div class="urgency-row">
+          <span class="stock-alert">&#128308; Only 3 left at this price</span>
+          <span class="timer-badge" data-mins="26">&#9200; 26:00</span>
+        </div>
         <div class="card-footer">
-          <div class="price"><sup>$</sup>5.00</div>
+          <div class="price-wrap">
+            <span class="price-old">Was $9.00</span>
+            <div class="price"><sup>$</sup>5.00</div>
+          </div>
           <span class="view-btn">View Guide &#8594;</span>
         </div>
       </div>
     </a>
 
+    <!-- Coming Soon -->
     <div class="card soon" data-cat="glass">
       <div class="thumb">
         <img src="thumbnail_resin_facebook.jpg" alt="Flower Resin Coasters"/>
@@ -374,7 +494,7 @@ footer a{color:rgba(250,247,242,0.45);text-decoration:none;}
       <div class="card-body">
         <div class="card-title">Flower Resin Coasters</div>
         <div class="card-footer">
-          <div class="price"><sup>$</sup>5.00</div>
+          <div class="price-wrap"><div class="price"><sup>$</sup>5.00</div></div>
           <span class="view-btn">Coming Soon</span>
         </div>
       </div>
@@ -389,6 +509,7 @@ footer a{color:rgba(250,247,242,0.45);text-decoration:none;}
 </footer>
 
 <script>
+// Filter
 function doFilter(cat, btn) {
   document.querySelectorAll('.fb').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
@@ -396,17 +517,32 @@ function doFilter(cat, btn) {
     c.classList.toggle('hidden', cat !== 'all' && !(c.dataset.cat||'').includes(cat));
   });
 }
+
+// Animate cards
 const obs = new IntersectionObserver(entries => {
   entries.forEach((e, i) => {
     if (e.isIntersecting) {
-      setTimeout(() => e.target.classList.add('visible'), i * 60);
+      setTimeout(() => e.target.classList.add('visible'), i * 50);
       obs.unobserve(e.target);
     }
   });
-}, { threshold: 0.1 });
-document.querySelectorAll('.card, .vb-card-pinned').forEach(c => {
+}, { threshold: 0.05 });
+document.querySelectorAll('.card').forEach(c => {
   c.style.transition = 'opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s, border-color 0.3s';
   obs.observe(c);
+});
+
+// Individual countdown timers per card
+document.querySelectorAll('.timer-badge[data-mins]').forEach(el => {
+  let secs = parseInt(el.dataset.mins) * 60;
+  function tick() {
+    const m = String(Math.floor(secs/60)).padStart(2,'0');
+    const s = String(secs%60).padStart(2,'0');
+    el.textContent = '⏰ ' + m + ':' + s;
+    if (secs > 0) secs--;
+  }
+  tick();
+  setInterval(tick, 1000);
 });
 </script>
 </body>

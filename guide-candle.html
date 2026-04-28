@@ -17,21 +17,28 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;display:flex;ali
 .logo-mark{width:34px;height:34px;background:var(--bark);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
 .back{display:flex;align-items:center;gap:0.4rem;font-size:0.88rem;font-weight:600;color:var(--muted);text-decoration:none;transition:color 0.2s;}
 .back:hover{color:var(--ink);}
-.guide-hero{min-height:70vh;padding:90px 5vw 4rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;max-width:1200px;margin:0 auto;}
+/* URGENCY BAR */
+.urgency-bar{background:#c0392b;color:white;text-align:center;padding:10px 20px;font-size:0.85rem;font-weight:700;letter-spacing:0.02em;position:sticky;top:68px;z-index:100;display:flex;align-items:center;justify-content:center;gap:12px;}
+.urgency-bar .timer{font-family:'Lora',serif;font-size:1rem;background:rgba(0,0,0,0.25);padding:3px 10px;border-radius:20px;}
+.stock-badge{background:rgba(255,255,255,0.2);padding:3px 10px;border-radius:20px;font-size:0.8rem;}
+.guide-hero{min-height:70vh;padding:32px 5vw 4rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;max-width:1200px;margin:0 auto;}
 .hero-img{border-radius:20px;overflow:hidden;aspect-ratio:4/3;box-shadow:0 20px 60px rgba(42,37,32,0.15);}
 .hero-img img{width:100%;height:100%;object-fit:cover;}
 .hero-text .eyebrow{font-size:0.75rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--forest);margin-bottom:1rem;display:block;}
 .hero-text h1{font-family:'Lora',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:700;line-height:1.15;margin-bottom:1.25rem;}
 .hero-text h1 em{font-style:italic;color:var(--bark);}
 .hero-text p{font-size:1rem;color:var(--muted);line-height:1.85;margin-bottom:2rem;}
-.meta-row{display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:2rem;}
+.meta-row{display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:1.5rem;}
 .meta-chip{font-size:0.82rem;font-weight:600;color:var(--muted);background:var(--warm);padding:0.4rem 1rem;border-radius:50px;border:1px solid var(--stone);}
-.price-row{display:flex;align-items:center;gap:1.5rem;margin-bottom:0.75rem;flex-wrap:wrap;}
-.big-price{font-family:'Lora',serif;font-size:2.5rem;font-weight:700;color:var(--ink);}
-.big-price sup{font-size:1.2rem;font-weight:400;color:var(--muted);vertical-align:super;}
+.price-block{margin-bottom:1.5rem;}
+.price-was{font-size:0.9rem;color:var(--muted);margin-bottom:4px;}.price-was span{text-decoration:line-through;}
+.price-now{display:flex;align-items:baseline;gap:12px;}
+.big-price{font-family:'Lora',serif;font-size:2.8rem;font-weight:700;color:#c0392b;}
+.big-price sup{font-size:1.2rem;font-weight:400;vertical-align:super;}
+.save-pill{background:#c0392b;color:white;font-size:0.75rem;font-weight:800;padding:4px 12px;border-radius:20px;}
 .buy-big{display:inline-flex;align-items:center;gap:0.65rem;background:var(--bark);color:white;font-family:'Nunito',sans-serif;font-size:1.05rem;font-weight:800;padding:1rem 2.4rem;border-radius:50px;border:none;cursor:pointer;box-shadow:0 6px 24px rgba(140,107,74,0.35);transition:background 0.2s,transform 0.2s;}
 .buy-big:hover{background:var(--ink);transform:translateY(-2px);}
-.trust-note{font-size:0.78rem;color:var(--muted);display:flex;align-items:center;gap:0.4rem;flex-wrap:wrap;}
+.trust-note{font-size:0.78rem;color:var(--muted);display:flex;align-items:center;gap:0.4rem;margin-top:12px;}
 .inside-section{background:var(--warm);padding:5rem 5vw;}
 .inside-inner{max-width:900px;margin:0 auto;}
 .section-label{font-size:0.75rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--forest);margin-bottom:1rem;display:block;}
@@ -55,23 +62,26 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;display:flex;ali
 .bottom-cta p{color:rgba(250,247,242,0.55);font-size:1rem;max-width:480px;margin:0 auto 2.5rem;line-height:1.75;}
 .bottom-btn{display:inline-flex;align-items:center;gap:0.65rem;background:var(--gold);color:var(--ink);font-family:'Nunito',sans-serif;font-size:1.1rem;font-weight:800;padding:1.1rem 2.8rem;border-radius:50px;border:none;cursor:pointer;box-shadow:0 6px 24px rgba(200,150,60,0.4);transition:background 0.2s,transform 0.2s;}
 .bottom-btn:hover{background:#daa840;transform:translateY(-2px);}
+/* MODAL */
 .overlay{display:none;position:fixed;inset:0;background:rgba(42,37,32,0.65);z-index:500;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(8px);}
 .overlay.open{display:flex;}
-.modal{background:var(--white);border-radius:20px;width:100%;max-width:500px;overflow:hidden;box-shadow:0 30px 80px rgba(42,37,32,0.25);animation:pop 0.3s cubic-bezier(0.34,1.56,0.64,1);max-height:90vh;overflow-y:auto;}
+.modal{background:var(--white);border-radius:20px;width:100%;max-width:480px;overflow:hidden;box-shadow:0 30px 80px rgba(42,37,32,0.25);animation:pop 0.3s cubic-bezier(0.34,1.56,0.64,1);max-height:90vh;overflow-y:auto;}
 @keyframes pop{from{opacity:0;transform:scale(0.93) translateY(16px)}to{opacity:1;transform:scale(1) translateY(0)}}
-.modal-top{background:var(--ink);padding:1.75rem 2rem;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;position:sticky;top:0;z-index:1;}
-.m-name{font-family:'Lora',serif;font-size:1.1rem;font-weight:600;color:var(--cream);margin-bottom:0.3rem;}
-.m-price{font-family:'Lora',serif;font-size:1.6rem;font-weight:700;color:#E8C878;}
+.modal-top{background:var(--ink);padding:1.5rem 2rem;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;position:sticky;top:0;z-index:1;}
+.m-name{font-family:'Lora',serif;font-size:1rem;font-weight:600;color:var(--cream);margin-bottom:0.2rem;}
+.m-price-wrap{display:flex;align-items:baseline;gap:8px;}
+.m-price{font-family:'Lora',serif;font-size:1.5rem;font-weight:700;color:#E8C878;}
+.m-old-price{font-size:0.85rem;color:rgba(255,255,255,0.35);text-decoration:line-through;}
 .m-close{background:none;border:none;color:rgba(250,247,242,0.4);font-size:1.5rem;cursor:pointer;padding:0;line-height:1;flex-shrink:0;}
 .m-close:hover{color:var(--cream);}
-.modal-body{padding:1.75rem 2rem 2rem;}
-.field{margin-bottom:1.25rem;}
+.modal-body{padding:1.5rem 2rem 2rem;}
+.field{margin-bottom:1rem;}
 .field label{display:block;font-size:0.78rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;}
 .field input{width:100%;background:var(--cream);border:1.5px solid var(--stone);border-radius:8px;padding:0.8rem 1rem;color:var(--ink);font-size:1rem;font-family:'Nunito',sans-serif;outline:none;transition:border-color 0.2s;}
 .field input:focus{border-color:var(--bark);}
-#payment-element{margin-bottom:0.5rem;}
-#card-err{font-size:0.82rem;color:#C0392B;margin-top:0.4rem;min-height:1.2em;margin-bottom:0.5rem;}
-.pay-btn{width:100%;background:var(--bark);color:white;border:none;border-radius:50px;padding:1rem;font-size:1rem;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;margin-top:1rem;transition:background 0.2s;}
+#payment-element{margin-bottom:0.5rem;min-height:44px;}
+#card-err{font-size:0.82rem;color:#C0392B;margin-top:0.4rem;min-height:1.2em;}
+.pay-btn{width:100%;background:var(--bark);color:white;border:none;border-radius:50px;padding:1rem;font-size:1rem;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;margin-top:1.25rem;transition:background 0.2s;}
 .pay-btn:hover:not(:disabled){background:var(--ink);}
 .pay-btn:disabled{opacity:0.5;cursor:not-allowed;}
 .secure{display:flex;align-items:center;justify-content:center;gap:0.4rem;font-size:0.78rem;color:var(--muted);margin-top:1rem;padding-top:1rem;border-top:1px solid var(--warm);}
@@ -84,151 +94,165 @@ footer{background:var(--ink);padding:2.5rem 5vw;display:flex;align-items:center;
 .fl{font-family:'Lora',serif;font-size:1.1rem;font-weight:700;color:rgba(250,247,242,0.65);}
 footer p{font-size:0.8rem;color:rgba(250,247,242,0.3);}
 footer a{color:rgba(250,247,242,0.45);text-decoration:none;}
-@media(max-width:800px){.guide-hero{grid-template-columns:1fr;padding-top:90px;}.hero-img{aspect-ratio:16/9;}.inside-grid{grid-template-columns:1fr;}footer{flex-direction:column;text-align:center;}}
+@media(max-width:800px){.guide-hero{grid-template-columns:1fr;padding-top:24px;}.hero-img{aspect-ratio:16/9;}.inside-grid{grid-template-columns:1fr;}footer{flex-direction:column;text-align:center;}}
 </style>
 </head>
 <body>
+
 <nav>
-  <a href="index.html" class="logo"><div class="logo-mark">🪨</div>Made By Hand</a>
-  <a href="shop.html" class="back">← All Guides</a>
+  <a href="index.html" class="logo"><div class="logo-mark">&#129704;</div>Made By Hand</a>
+  <a href="shop.html" class="back">&#8592; All Guides</a>
 </nav>
+
+<div class="urgency-bar">
+  <span>&#9888; Only <strong>5 copies</strong> left at this price &mdash;</span>
+  <span class="timer" id="countdown">--:--</span>
+  <span class="stock-badge">&#128293; Selling fast</span>
+</div>
+
 <section class="guide-hero">
-  <div class="hero-img"><img src="thumbnail_candle_facebook.jpg" alt="Concrete Candle Holder"/></div>
+  <div class="hero-img">
+    <img src="thumbnail_candle_facebook.jpg" alt="Concrete Candle Holder"/>
+  </div>
   <div class="hero-text">
-    <span class="eyebrow">Concrete · Home Decor</span>
-    <h1>Concrete Candle Holder</h1>
-    <p>Two nested plastic cups, concrete poured between them, 48 hours of patience — and you have a sleek minimal candle holder that looks Scandinavian and expensive.</p>
-    <div class="meta-row"><span class="meta-chip">⏱ 20 min active</span><span class="meta-chip">⏳ 48h curing</span><span class="meta-chip">💰 Under $10</span><span class="meta-chip">🌱 Perfect first project</span></div>
-    <div class="price-row">
-      <div class="big-price"><sup>$</sup>5.00</div>
-      <button class="buy-big" onclick="openModal()">⬇ Buy & Download</button>
+    <span class="eyebrow">Concrete · Interior</span>
+    <h1>Concrete Candle Holder <em></em></h1>
+    <p>Two plastic cups and a bag of concrete. The easiest project in the collection, and one of the most satisfying to unmold. Perfect first concrete project.</p>
+    <div class="meta-row"><span class="meta-chip">&#9201; 20 min active</span><span class="meta-chip">&#128176; Under $10</span><span class="meta-chip">&#127807; Perfect first project</span></div>
+    <div class="price-block">
+      <div class="price-was">Was: <span>$9.00</span></div>
+      <div class="price-now">
+        <div class="big-price"><sup>$</sup>5.00</div>
+        <span class="save-pill">LIMITED OFFER</span>
+      </div>
     </div>
-    <div class="trust-note">🔒 Secure · ⬇ Instant PDF · 🍎 Apple Pay · G Google Pay · 💳 Card</div>
+    <button class="buy-big" onclick="openModal()">&#11015; Buy &amp; Download</button>
+    <div class="trust-note">&#128274; Secure payment &middot; Instant PDF &middot; Only 5 left at this price</div>
   </div>
 </section>
+
 <section class="inside-section">
   <div class="inside-inner">
     <span class="section-label">What's Inside</span>
     <h2>Everything You Need to Make This</h2>
-    <div class="inside-grid"><div class="inside-card"><div class="ic-icon">📋</div><div class="ic-text"><strong>Materials list</strong><span>Everything under $10 — most things you already have at home</span></div></div>
-<div class="inside-card"><div class="ic-icon">📸</div><div class="ic-text"><strong>Real photos every step</strong><span>From empty cups to the finished glowing result</span></div></div>
-<div class="inside-card"><div class="ic-icon">🕯️</div><div class="ic-text"><strong>Cup size guide</strong><span>Which combinations work best for different candle sizes</span></div></div>
-<div class="inside-card"><div class="ic-icon">🔧</div><div class="ic-text"><strong>Release technique</strong><span>How to remove the inner cup cleanly every time</span></div></div>
-<div class="inside-card"><div class="ic-icon">✨</div><div class="ic-text"><strong>Finishing guide</strong><span>Sanding progressively for the smoothest surface</span></div></div>
-<div class="inside-card"><div class="ic-icon">💡</div><div class="ic-text"><strong>Size variations</strong><span>How to make a matching set in 3 different sizes</span></div></div>
-</div>
+    <div class="inside-grid">
+      <div class="inside-card"><div class="ic-icon">&#128203;</div><div class="ic-text"><strong>Full materials list</strong><span>Two cups, concrete, water. Everything under $10. Most people already have half of it at home.</span></div></div>
+      <div class="inside-card"><div class="ic-icon">&#129359;</div><div class="ic-text"><strong>Cup sizing guide</strong><span>Which cup sizes give which candle sizes — tea light, pillar, or taper. How to weight the inner cup.</span></div></div>
+      <div class="inside-card"><div class="ic-icon">&#128167;</div><div class="ic-text"><strong>Concrete mix guide</strong><span>The exact water ratio for a smooth, bubble-free pour that demolds cleanly every single time.</span></div></div>
+      <div class="inside-card"><div class="ic-icon">&#127775;</div><div class="ic-text"><strong>Finishing options</strong><span>Sand smooth for modern look, leave rough for rustic style, or paint for any color you want.</span></div></div>
+      <div class="inside-card"><div class="ic-icon">&#128161;</div><div class="ic-text"><strong>Pro tips & variations</strong><span>Add pebbles for texture, press rope around the outside, or use a square carton for a geometric look.</span></div></div>
+      <div class="inside-card"><div class="ic-icon">&#128295;</div><div class="ic-text"><strong>Troubleshooting</strong><span>Air bubbles? Inner cup floating? Concrete stuck? Every beginner problem solved step by step.</span></div></div>
+    </div>
   </div>
 </section>
+
 <section class="steps-section">
   <h2>The Steps — At a Glance</h2>
-  <div class="steps-list"><div class="step-row"><div class="step-n">1</div><div class="step-t"><strong>Oil the inner cup thoroughly</strong><span>Every surface — the most important step</span></div></div>
-<div class="step-row"><div class="step-n">2</div><div class="step-t"><strong>Mix concrete smoothly</strong><span>Thick peanut butter consistency, no dry lumps</span></div></div>
-<div class="step-row"><div class="step-n">3</div><div class="step-t"><strong>Pour base layer and place inner cup</strong><span>1 inch base, center the cup, fill the gap</span></div></div>
-<div class="step-row"><div class="step-n">4</div><div class="step-t"><strong>Tape the inner cup in place</strong><span>Stops it shifting while concrete sets</span></div></div>
-<div class="step-row"><div class="step-n">5</div><div class="step-t"><strong>Cure for 48 hours</strong><span>Cover with damp cloth, keep away from sun and wind</span></div></div>
-<div class="step-row"><div class="step-n">6</div><div class="step-t"><strong>Twist and remove inner cup</strong><span>Warm water helps if stuck — then peel the outer</span></div></div>
-<div class="step-row"><div class="step-n">7</div><div class="step-t"><strong>Sand and finish</strong><span>120 grit then 220 grit for a silky smooth surface</span></div></div>
-</div>
+  <div class="steps-list">
+    <div class="step-row"><div class="step-n">1</div><div class="step-t"><strong>Mix the concrete</strong><span>Mix to thick, smooth yogurt consistency. A little thicker than you think — this reduces bubbles and gives a clean finish.</span></div></div>
+    <div class="step-row"><div class="step-n">2</div><div class="step-t"><strong>Pour into the outer cup</strong><span>Fill the larger cup about 1/3 full with concrete. Tap the cup on the table 10 times to release air bubbles.</span></div></div>
+    <div class="step-row"><div class="step-n">3</div><div class="step-t"><strong>Insert the inner cup</strong><span>Press the smaller cup into the center. Weight it with stones or water so it doesn't float. Tape across the top to hold it centered.</span></div></div>
+    <div class="step-row"><div class="step-n">4</div><div class="step-t"><strong>Cure for 24–48 hours</strong><span>Cover loosely and leave in a cool place. Do not move. The longer you wait, the cleaner the unmold.</span></div></div>
+    <div class="step-row"><div class="step-n">5</div><div class="step-t"><strong>Unmold & finish</strong><span>Tear away both cups. Sand any rough edges with 120 grit paper. Add a tea light and enjoy! 🕯️</span></div></div>
+  </div>
 </section>
+
 <section class="bottom-cta">
   <h2>Ready to Make This?</h2>
-  <p>Instant PDF download. Pay once, keep forever. Real photos at every step.</p>
-  <button class="bottom-btn" onclick="openModal()">⬇ Buy Guide — $5.00</button>
+  <p>Instant PDF download. 4 beautifully designed pages. Real photos at every step. Only 5 copies left at this price.</p>
+  <button class="bottom-btn" onclick="openModal()">&#11015; Buy Guide &mdash; $5.00</button>
 </section>
+
 <footer>
-  <div class="fl">🪨 Made By Hand</div>
-  <p>© 2026 · All guides are digital PDF downloads · <a href="mailto:you@example.com">Contact us</a></p>
+  <div class="fl">&#129704; Made By Hand</div>
+  <p>&#169; 2026 &middot; All guides are digital PDF downloads &middot; <a href="mailto:you@example.com">Contact us</a></p>
 </footer>
+
 <div class="overlay" id="overlay">
   <div class="modal">
     <div class="modal-top">
       <div>
-        <div class="m-name" id="m-name">Guide</div>
-        <div class="m-price" id="m-price">$5.00</div>
+        <div class="m-name">Concrete Candle Holder</div>
+        <div class="m-price-wrap">
+          <span class="m-price">$5.00</span>
+          <span class="m-old-price">$9.00</span>
+        </div>
       </div>
-      <button class="m-close" onclick="closeModal()">✕</button>
+      <button class="m-close" onclick="closeModal()">&#10005;</button>
     </div>
     <div class="modal-body">
       <div id="form-wrap">
         <div class="field">
-          <label>Your email — for your receipt</label>
-          <input type="email" id="email" placeholder="your@email.com" oninput="clearErr()"/>
+          <label>Your email &mdash; for your receipt</label>
+          <input type="email" id="email" placeholder="your@email.com"/>
         </div>
-        <div id="payment-element"></div>
+        <div class="field">
+          <label>Payment details</label>
+          <div id="payment-element"><p style="color:var(--muted);font-size:0.85rem;padding:0.5rem 0;text-align:center;">&#8593; Enter your email, then click Pay to load card options.</p></div>
+        </div>
         <div id="card-err"></div>
-        <button class="pay-btn" id="pay-btn" onclick="pay()">Pay $5.00 & Download</button>
-        <div class="secure">🔒 Secured by Stripe · PDF delivered instantly</div>
+        <button class="pay-btn" id="pay-btn" onclick="pay()">Pay $5.00 &amp; Download</button>
+        <div class="secure">&#128274; Secured by Stripe &middot; PDF delivered instantly</div>
       </div>
       <div class="success" id="success-box">
-        <span class="icon">🎉</span>
+        <span class="icon">&#127881;</span>
         <h3>You're all set!</h3>
         <p>Your PDF guide is ready to download.<br/>A receipt has been sent to your email.</p>
-        <a id="dl-link" href="#" download class="dl">⬇ Download Your Guide</a>
+        <a href="DIY_Concrete_Candle_Holder_Guide.pdf" download class="dl">&#11015; Download Your Guide</a>
       </div>
     </div>
   </div>
 </div>
+
 <script>
 const STRIPE_KEY = 'pk_live_51TQB5uERLV3AA0mv0dp2i9c6m3Y1oxuGCe0pghanMWYW9Y8gr4tPWJdwJAUhdaqDaUfWazxd4GKMaRaPfDgwMrBm00d1NxbK5G';
-let stripe, elements, paymentEl, pdfFile = 'DIY_Concrete_Candle_Holder_Guide.pdf';
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzLg5Pl7TVpM7OH34QMe3KcD89xqp3lPn6RCFHy-mYo82HHhrAb32Sg922GkeRM3Pho/exec';
+const PRODUCT = 'Concrete Candle Holder';
+const AMOUNT = 500;
+let stripe, elements, emailSaved = false;
 
-function clearErr() {
-  document.getElementById('card-err').textContent = '';
-}
-
-async function initStripe() {
-  if (elements) return;
-  stripe = Stripe(STRIPE_KEY);
-
-  const email = document.getElementById('email').value.trim();
-
-  try {
-    const res = await fetch('/.netlify/functions/create-payment-intent', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ amount: 500, email: email || 'pending@example.com', currency: 'usd' })
-    });
-    const data = await res.json();
-    if (data.error) throw new Error(data.error);
-
-    window._clientSecret = data.clientSecret;
-
-    elements = stripe.elements({
-      clientSecret: data.clientSecret,
-      appearance: {
-        theme: 'stripe',
-        variables: {
-          colorPrimary: '#8C6B4A',
-          colorBackground: '#FAF7F2',
-          colorText: '#2A2520',
-          fontFamily: "'Nunito', sans-serif",
-          borderRadius: '8px',
-          spacingUnit: '4px',
-        }
-      }
-    });
-
-    paymentEl = elements.create('payment', {
-      layout: 'tabs',
-    });
-    paymentEl.mount('#payment-element');
-  } catch(err) {
-    document.getElementById('card-err').textContent = 'Could not load payment form. Please refresh and try again.';
+// Countdown timer
+(function() {
+  const mins = 55;
+  let secs = mins * 60;
+  function tick() {
+    const m = String(Math.floor(secs/60)).padStart(2,'0');
+    const s = String(secs%60).padStart(2,'0');
+    const el = document.getElementById('countdown');
+    if(el) el.textContent = m+':'+s;
+    if(secs > 0) secs--;
   }
+  tick();
+  setInterval(tick, 1000);
+})();
+
+function saveEmail(email) {
+  if (emailSaved || !email || !email.includes('@')) return;
+  emailSaved = true;
+  fetch(SHEETS_URL, {
+    method: 'POST', mode: 'no-cors',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({email, product: PRODUCT, amount: AMOUNT}),
+  }).catch(()=>{});
 }
 
 function openModal() {
+  emailSaved = false;
   document.getElementById('form-wrap').style.display = 'block';
   document.getElementById('success-box').style.display = 'none';
   document.getElementById('pay-btn').disabled = false;
   document.getElementById('pay-btn').textContent = 'Pay $5.00 & Download';
+  document.getElementById('pay-btn').onclick = pay;
   document.getElementById('card-err').textContent = '';
   document.getElementById('email').value = '';
-  document.getElementById('payment-element').innerHTML = '';
-  elements = null;
+  document.getElementById('payment-element').innerHTML = '<p style="color:var(--muted);font-size:0.85rem;padding:0.5rem 0;text-align:center;">&#8593; Enter your email, then click Pay to load card options.</p>';
   document.getElementById('overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
-  setTimeout(initStripe, 150);
+  elements = null;
+  stripe = Stripe(STRIPE_KEY);
+  const emailEl = document.getElementById('email');
+  emailEl.addEventListener('blur', function() { saveEmail(this.value.trim()); });
+  emailEl.addEventListener('keydown', function(e) { if(e.key==='Enter') saveEmail(this.value.trim()); });
 }
 
 function closeModal() {
@@ -236,10 +260,8 @@ function closeModal() {
   document.body.style.overflow = '';
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('overlay').addEventListener('click', e => {
-    if (e.target === document.getElementById('overlay')) closeModal();
-  });
+document.getElementById('overlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('overlay')) closeModal();
 });
 
 async function pay() {
@@ -248,47 +270,58 @@ async function pay() {
     document.getElementById('card-err').textContent = 'Please enter a valid email address.';
     return;
   }
-
+  saveEmail(email);
   const btn = document.getElementById('pay-btn');
   btn.disabled = true;
-  btn.textContent = 'Processing...';
-
+  btn.textContent = 'Loading payment...';
+  document.getElementById('card-err').textContent = '';
   try {
-    const { error } = await stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        return_url: window.location.href + '?success=1',
-        receipt_email: email,
-      },
-      redirect: 'if_required',
+    const res = await fetch('/.netlify/functions/create-payment-intent', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({amount: AMOUNT, email, currency: 'usd', product: PRODUCT})
     });
-
-    if (error) {
-      document.getElementById('card-err').textContent = error.message;
-      btn.disabled = false;
-      btn.textContent = 'Try Again';
-    } else {
-      document.getElementById('form-wrap').style.display = 'none';
-      document.getElementById('success-box').style.display = 'block';
-      document.getElementById('dl-link').href = pdfFile;
-    }
+    const {clientSecret, error: sErr} = await res.json();
+    if (sErr) throw new Error(sErr);
+    elements = stripe.elements({
+      clientSecret,
+      appearance: {theme:'stripe', variables:{colorPrimary:'#8C6B4A',colorBackground:'#FAF7F2',colorText:'#2A2520',fontFamily:"'Nunito', sans-serif",borderRadius:'8px'}}
+    });
+    document.getElementById('payment-element').innerHTML = '';
+    const paymentEl = elements.create('payment');
+    paymentEl.mount('#payment-element');
+    btn.disabled = false;
+    btn.textContent = 'Pay $5.00 & Download';
   } catch(err) {
     document.getElementById('card-err').textContent = 'Something went wrong. Please try again.';
     btn.disabled = false;
     btn.textContent = 'Try Again';
+    return;
   }
+  btn.onclick = async function() {
+    btn.disabled = true;
+    btn.textContent = 'Processing...';
+    try {
+      const {error} = await stripe.confirmPayment({
+        elements,
+        confirmParams: {return_url: window.location.href, receipt_email: email},
+        redirect: 'if_required'
+      });
+      if (error) {
+        document.getElementById('card-err').textContent = error.message;
+        btn.disabled = false;
+        btn.textContent = 'Try Again';
+      } else {
+        document.getElementById('form-wrap').style.display = 'none';
+        document.getElementById('success-box').style.display = 'block';
+      }
+    } catch(err) {
+      document.getElementById('card-err').textContent = 'Something went wrong. Please try again.';
+      btn.disabled = false;
+      btn.textContent = 'Try Again';
+    }
+  };
 }
-
-// Handle return from redirect-based payment (e.g. bank redirect)
-window.addEventListener('DOMContentLoaded', async () => {
-  const params = new URLSearchParams(window.location.search);
-  if (params.get('success') === '1') {
-    document.getElementById('overlay').classList.add('open');
-    document.getElementById('form-wrap').style.display = 'none';
-    document.getElementById('success-box').style.display = 'block';
-    document.getElementById('dl-link').href = pdfFile;
-  }
-});
 </script>
 </body>
 </html>
