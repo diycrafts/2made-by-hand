@@ -5,304 +5,320 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Concrete Fire Bowl — Made By Hand</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100;0,9..144,300;0,9..144,400;1,9..144,100;1,9..144,300&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
 <script src="https://js.stripe.com/v3/"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-:root{--cream:#FAF7F2;--warm:#F0EBE1;--stone:#D6CEC2;--bark:#8C6B4A;--forest:#4A6741;--ink:#2A2520;--muted:#8A7E72;--white:#FFFFFF;--gold:#C8963C;}
-html{scroll-behavior:smooth;}
-body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden;}
-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;background:rgba(250,247,242,0.95);backdrop-filter:blur(14px);border-bottom:1px solid rgba(214,206,194,0.5);}
-.logo{font-family:'Lora',serif;font-size:1.25rem;font-weight:700;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:0.6rem;}
-.logo-mark{width:34px;height:34px;background:var(--bark);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
-.back{display:flex;align-items:center;gap:0.4rem;font-size:0.88rem;font-weight:600;color:var(--muted);text-decoration:none;transition:color 0.2s;}
-.back:hover{color:var(--ink);}
+:root{--bg:#0C0B09;--bg2:#131210;--surface:#201E1B;--surface2:#282420;--line:rgba(255,255,255,0.07);--line2:rgba(255,255,255,0.12);--text:#F0EDE8;--text2:#A09890;--text3:#6A6058;--accent:#C8963C;--accent2:#E8B85C;--green:#5A8A50;--green2:#7AB870;--red:#B84040;}
+html{scroll-behavior:smooth;cursor:none;}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;font-weight:300;}
+
+.cursor{position:fixed;top:0;left:0;z-index:9999;pointer-events:none;mix-blend-mode:exclusion;}
+.cursor-dot{width:8px;height:8px;background:#fff;border-radius:50%;position:absolute;transform:translate(-50%,-50%);}
+.cursor-ring{width:40px;height:40px;border:1px solid rgba(255,255,255,0.4);border-radius:50%;position:absolute;transform:translate(-50%,-50%);transition:width 0.3s,height 0.3s,border-color 0.3s;}
+.cursor-ring.hover{width:60px;height:60px;border-color:var(--accent);background:rgba(200,150,60,0.06);}
+
+.ann{background:var(--accent);padding:9px 5vw;display:flex;align-items:center;justify-content:center;gap:20px;font-size:0.68rem;font-weight:400;letter-spacing:0.16em;text-transform:uppercase;color:rgba(12,11,9,0.75);flex-wrap:wrap;}
+.ann a{color:var(--bg);text-decoration:none;font-weight:500;border-bottom:1px solid rgba(12,11,9,0.25);}
+
+nav{position:sticky;top:0;z-index:500;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;background:rgba(12,11,9,0.94);backdrop-filter:blur(28px);border-bottom:1px solid var(--line);}
+.logo{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:300;letter-spacing:0.02em;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:10px;}
+.logo-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);}
+.nav-back{font-size:0.65rem;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;color:var(--text3);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color 0.2s;}
+.nav-back:hover{color:var(--accent);}
+
 /* URGENCY BAR */
-.urgency-bar{background:#c0392b;color:white;text-align:center;padding:10px 20px;font-size:0.85rem;font-weight:700;letter-spacing:0.02em;position:sticky;top:68px;z-index:100;display:flex;align-items:center;justify-content:center;gap:12px;}
-.urgency-bar .timer{font-family:'Lora',serif;font-size:1rem;background:rgba(0,0,0,0.25);padding:3px 10px;border-radius:20px;}
-.stock-badge{background:rgba(255,255,255,0.2);padding:3px 10px;border-radius:20px;font-size:0.8rem;}
-.guide-hero{min-height:70vh;padding:32px 5vw 4rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;max-width:1200px;margin:0 auto;}
-.hero-img{border-radius:20px;overflow:hidden;aspect-ratio:4/3;box-shadow:0 20px 60px rgba(42,37,32,0.15);}
-.hero-img img{width:100%;height:100%;object-fit:cover;}
-.hero-text .eyebrow{font-size:0.75rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--forest);margin-bottom:1rem;display:block;}
-.hero-text h1{font-family:'Lora',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:700;line-height:1.15;margin-bottom:1.25rem;}
-.hero-text h1 em{font-style:italic;color:var(--bark);}
-.hero-text p{font-size:1rem;color:var(--muted);line-height:1.85;margin-bottom:2rem;}
-.meta-row{display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:1.5rem;}
-.meta-chip{font-size:0.82rem;font-weight:600;color:var(--muted);background:var(--warm);padding:0.4rem 1rem;border-radius:50px;border:1px solid var(--stone);}
-.price-block{margin-bottom:1.5rem;}
-.price-was{font-size:0.9rem;color:var(--muted);margin-bottom:4px;}.price-was span{text-decoration:line-through;}
-.price-now{display:flex;align-items:baseline;gap:12px;}
-.big-price{font-family:'Lora',serif;font-size:2.8rem;font-weight:700;color:#c0392b;}
-.big-price sup{font-size:1.2rem;font-weight:400;vertical-align:super;}
-.save-pill{background:#c0392b;color:white;font-size:0.75rem;font-weight:800;padding:4px 12px;border-radius:20px;}
-.buy-big{display:inline-flex;align-items:center;gap:0.65rem;background:var(--bark);color:white;font-family:'Nunito',sans-serif;font-size:1.05rem;font-weight:800;padding:1rem 2.4rem;border-radius:50px;border:none;cursor:pointer;box-shadow:0 6px 24px rgba(140,107,74,0.35);transition:background 0.2s,transform 0.2s;}
-.buy-big:hover{background:var(--ink);transform:translateY(-2px);}
-.trust-note{font-size:0.78rem;color:var(--muted);display:flex;align-items:center;gap:0.4rem;margin-top:12px;}
-.inside-section{background:var(--warm);padding:5rem 5vw;}
-.inside-inner{max-width:900px;margin:0 auto;}
-.section-label{font-size:0.75rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--forest);margin-bottom:1rem;display:block;}
-.inside-section h2{font-family:'Lora',serif;font-size:clamp(1.8rem,3vw,2.5rem);font-weight:700;margin-bottom:2.5rem;}
-.inside-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
-.inside-card{background:var(--white);border:1.5px solid var(--stone);border-radius:14px;padding:1.5rem;display:flex;gap:1rem;align-items:flex-start;transition:border-color 0.2s,transform 0.2s;}
-.inside-card:hover{border-color:var(--bark);transform:translateY(-2px);}
-.ic-icon{font-size:1.6rem;flex-shrink:0;}
-.ic-text strong{display:block;font-size:0.95rem;font-weight:700;margin-bottom:0.3rem;}
-.ic-text span{font-size:0.85rem;color:var(--muted);line-height:1.5;}
-.steps-section{padding:5rem 5vw;max-width:900px;margin:0 auto;}
-.steps-section h2{font-family:'Lora',serif;font-size:clamp(1.8rem,3vw,2.5rem);font-weight:700;margin-bottom:2.5rem;}
-.steps-list{display:flex;flex-direction:column;gap:1rem;}
-.step-row{display:flex;gap:1.25rem;align-items:flex-start;padding:1.25rem 1.5rem;background:var(--white);border:1.5px solid var(--stone);border-radius:14px;transition:border-color 0.2s;}
-.step-row:hover{border-color:var(--bark);}
-.step-n{width:36px;height:36px;background:var(--bark);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Lora',serif;font-size:1rem;font-weight:700;flex-shrink:0;margin-top:2px;}
-.step-t strong{display:block;font-size:0.95rem;font-weight:700;margin-bottom:0.25rem;}
-.step-t span{font-size:0.85rem;color:var(--muted);line-height:1.5;}
-.bottom-cta{background:var(--ink);padding:5rem 5vw;text-align:center;}
-.bottom-cta h2{font-family:'Lora',serif;font-size:clamp(1.8rem,3vw,2.8rem);font-weight:700;color:var(--cream);margin-bottom:1rem;}
-.bottom-cta p{color:rgba(250,247,242,0.55);font-size:1rem;max-width:480px;margin:0 auto 2.5rem;line-height:1.75;}
-.bottom-btn{display:inline-flex;align-items:center;gap:0.65rem;background:var(--gold);color:var(--ink);font-family:'Nunito',sans-serif;font-size:1.1rem;font-weight:800;padding:1.1rem 2.8rem;border-radius:50px;border:none;cursor:pointer;box-shadow:0 6px 24px rgba(200,150,60,0.4);transition:background 0.2s,transform 0.2s;}
-.bottom-btn:hover{background:#daa840;transform:translateY(-2px);}
+.urgency{background:var(--red);color:#fff;text-align:center;padding:10px 20px;font-size:0.72rem;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;}
+.urgency-timer{font-family:'Fraunces',serif;font-size:0.9rem;background:rgba(0,0,0,0.25);padding:3px 12px;}
+
+/* HERO */
+.guide-hero{display:grid;grid-template-columns:1fr 1fr;min-height:80vh;border-bottom:1px solid var(--line);}
+.gh-img{position:relative;overflow:hidden;}
+.gh-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.7s;}
+.gh-img:hover img{transform:scale(1.03);}
+.gh-img-overlay{position:absolute;inset:0;background:linear-gradient(90deg,transparent 60%,var(--bg) 100%);}
+
+.gh-body{padding:5vw;display:flex;flex-direction:column;justify-content:center;}
+.gh-eyebrow{font-size:0.62rem;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:var(--green2);margin-bottom:1.5rem;display:flex;align-items:center;gap:10px;}
+.gh-eyebrow::before{content:'';width:16px;height:1px;background:var(--green2);}
+.gh-title{font-family:'Fraunces',serif;font-size:clamp(2.2rem,4vw,4rem);font-weight:100;line-height:0.95;letter-spacing:-0.02em;color:var(--text);margin-bottom:1.5rem;}
+.gh-title em{font-style:italic;color:var(--accent);}
+.gh-desc{font-size:0.92rem;font-weight:300;color:var(--text2);line-height:1.85;margin-bottom:2rem;max-width:420px;}
+.gh-chips{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:2rem;}
+.gh-chip{font-size:0.6rem;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;border:1px solid var(--line2);color:var(--text3);padding:6px 12px;}
+.gh-price-block{margin-bottom:2rem;}
+.gh-was{font-size:0.72rem;color:var(--text3);text-decoration:line-through;margin-bottom:4px;}
+.gh-price-row{display:flex;align-items:baseline;gap:12px;margin-bottom:8px;}
+.gh-price{font-family:'Fraunces',serif;font-size:3rem;font-weight:100;color:var(--text);line-height:1;}
+.gh-save{font-size:0.6rem;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;border:1px solid rgba(200,150,60,0.35);color:var(--accent);padding:4px 10px;}
+.gh-stock{font-size:0.65rem;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:6px;}
+.gh-stock::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--red);}
+.gh-buy{display:inline-flex;align-items:center;gap:10px;font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:400;letter-spacing:0.2em;text-transform:uppercase;background:var(--accent);color:var(--bg);padding:15px 32px;border:none;cursor:pointer;margin-top:1.5rem;position:relative;overflow:hidden;transition:transform 0.2s;}
+.gh-buy::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,0.12);transform:translateX(-100%);transition:transform 0.35s;}
+.gh-buy:hover::after{transform:translateX(0);}
+.gh-buy:hover{transform:translateY(-1px);}
+.gh-trust{font-size:0.62rem;font-weight:300;color:var(--text3);letter-spacing:0.1em;margin-top:1rem;}
+
+/* INSIDE SECTION */
+.inside-sec{padding:6rem 5vw;border-bottom:1px solid var(--line);max-width:1200px;margin:0 auto;}
+.sec-label{font-size:0.62rem;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:var(--green2);margin-bottom:1rem;display:flex;align-items:center;gap:10px;}
+.sec-label::before{content:'';width:16px;height:1px;background:var(--green2);}
+.sec-title{font-family:'Fraunces',serif;font-size:clamp(2rem,3vw,3rem);font-weight:100;color:var(--text);margin-bottom:2.5rem;}
+.inside-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--line);}
+.ic{background:var(--bg);padding:1.75rem;border-top:2px solid transparent;transition:border-color 0.25s,background 0.25s;}
+.ic:hover{background:var(--surface);border-top-color:var(--accent);}
+.ic-icon{font-size:1.5rem;margin-bottom:1rem;display:block;}
+.ic h4{font-family:'Fraunces',serif;font-size:1rem;font-weight:300;color:var(--text);margin-bottom:6px;}
+.ic p{font-size:0.78rem;font-weight:300;color:var(--text3);line-height:1.65;}
+
+/* STEPS */
+.steps-sec{padding:6rem 5vw;border-bottom:1px solid var(--line);max-width:900px;margin:0 auto;}
+.steps-list{display:flex;flex-direction:column;}
+.step{display:grid;grid-template-columns:60px 1fr;gap:1.5rem;padding:1.75rem 0;border-bottom:1px solid var(--line);align-items:start;transition:padding-left 0.3s;}
+.step:first-child{border-top:1px solid var(--line);}
+.step:hover{padding-left:0.75rem;}
+.step-n{font-family:'Fraunces',serif;font-size:0.8rem;font-weight:300;color:var(--text3);letter-spacing:0.1em;margin-top:4px;}
+.step h4{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:300;color:var(--text);margin-bottom:6px;}
+.step p{font-size:0.82rem;font-weight:300;color:var(--text3);line-height:1.65;}
+
+/* BOTTOM CTA */
+.bottom-cta{padding:6rem 5vw;text-align:center;background:var(--bg2);border-bottom:1px solid var(--line);}
+.bottom-cta h2{font-family:'Fraunces',serif;font-size:clamp(2rem,4vw,4rem);font-weight:100;color:var(--text);margin-bottom:1rem;line-height:1;}
+.bottom-cta h2 em{font-style:italic;color:var(--accent);}
+.bottom-cta p{font-size:0.9rem;font-weight:300;color:var(--text2);max-width:400px;margin:0 auto 2.5rem;line-height:1.8;}
+
 /* MODAL */
-.overlay{display:none;position:fixed;inset:0;background:rgba(42,37,32,0.65);z-index:500;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(8px);}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:1000;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(12px);}
 .overlay.open{display:flex;}
-.modal{background:var(--white);border-radius:20px;width:100%;max-width:480px;overflow:hidden;box-shadow:0 30px 80px rgba(42,37,32,0.25);animation:pop 0.3s cubic-bezier(0.34,1.56,0.64,1);max-height:90vh;overflow-y:auto;}
-@keyframes pop{from{opacity:0;transform:scale(0.93) translateY(16px)}to{opacity:1;transform:scale(1) translateY(0)}}
-.modal-top{background:var(--ink);padding:1.5rem 2rem;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;position:sticky;top:0;z-index:1;}
-.m-name{font-family:'Lora',serif;font-size:1rem;font-weight:600;color:var(--cream);margin-bottom:0.2rem;}
-.m-price-wrap{display:flex;align-items:baseline;gap:8px;}
-.m-price{font-family:'Lora',serif;font-size:1.5rem;font-weight:700;color:#E8C878;}
-.m-old-price{font-size:0.85rem;color:rgba(255,255,255,0.35);text-decoration:line-through;}
-.m-close{background:none;border:none;color:rgba(250,247,242,0.4);font-size:1.5rem;cursor:pointer;padding:0;line-height:1;flex-shrink:0;}
-.m-close:hover{color:var(--cream);}
-.modal-body{padding:1.5rem 2rem 2rem;}
-.field{margin-bottom:1rem;}
+.modal{background:var(--bg2);border:1px solid var(--line2);width:100%;max-width:480px;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,0.6);animation:pop 0.35s cubic-bezier(0.34,1.56,0.64,1);}
+@keyframes pop{from{opacity:0;transform:scale(0.92) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.modal-top{background:var(--surface);padding:1.75rem 2rem;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;border-bottom:1px solid var(--line);}
+.m-title{font-family:'Fraunces',serif;font-size:1rem;font-weight:300;color:var(--text);margin-bottom:4px;}
+.m-price-row{display:flex;align-items:baseline;gap:8px;}
+.m-price{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:300;color:var(--accent);}
+.m-was{font-size:0.78rem;color:var(--text3);text-decoration:line-through;}
+.m-close{background:none;border:none;color:var(--text3);font-size:1.4rem;cursor:pointer;line-height:1;padding:0;transition:color 0.2s;flex-shrink:0;}
+.m-close:hover{color:var(--text);}
+.modal-body{padding:2rem;}
+#payment-element{min-height:44px;margin-bottom:0.5rem;}
+#payment-element p{font-size:0.82rem;color:var(--text3);padding:1rem 0;text-align:center;}
+#card-err{font-size:0.78rem;color:var(--red);margin-top:0.5rem;min-height:1.2em;}
+.pay-btn{width:100%;background:var(--accent);color:var(--bg);border:none;padding:14px;font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;margin-top:1.25rem;transition:background 0.2s;}
+.pay-btn:hover:not(:disabled){background:var(--accent2);}
+.pay-btn:disabled{opacity:0.4;cursor:not-allowed;}
+.m-secure{font-size:0.6rem;font-weight:300;color:var(--text3);letter-spacing:0.12em;text-transform:uppercase;text-align:center;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line);}
+.success{display:none;text-align:center;padding:2rem 0 1rem;}
+.success-icon{font-size:3rem;margin-bottom:1rem;display:block;}
+.success h3{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:300;color:var(--accent);margin-bottom:0.75rem;}
+.success p{font-size:0.85rem;color:var(--text3);margin-bottom:1.5rem;}
+.dl-btn{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:400;letter-spacing:0.16em;text-transform:uppercase;padding:12px 24px;text-decoration:none;transition:background 0.2s;}
+.dl-btn:hover{background:var(--green2);}
 
+footer{background:var(--surface);padding:2.5rem 5vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;border-top:1px solid var(--line);}
+.f-logo{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:300;color:var(--text3);}
+footer p{font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text3);}
+footer a{color:var(--text3);text-decoration:none;}
 
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
 
-#payment-element{margin-bottom:0.5rem;min-height:44px;}
-#card-err{font-size:0.82rem;color:#C0392B;margin-top:0.4rem;min-height:1.2em;}
-.pay-btn{width:100%;background:var(--bark);color:white;border:none;border-radius:50px;padding:1rem;font-size:1rem;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;margin-top:1.25rem;transition:background 0.2s;}
-.pay-btn:hover:not(:disabled){background:var(--ink);}
-.pay-btn:disabled{opacity:0.5;cursor:not-allowed;}
-.secure{display:flex;align-items:center;justify-content:center;gap:0.4rem;font-size:0.78rem;color:var(--muted);margin-top:1rem;padding-top:1rem;border-top:1px solid var(--warm);}
-.success{display:none;text-align:center;padding:1.5rem 0 0.5rem;}
-.success .icon{font-size:3.5rem;display:block;margin-bottom:1rem;}
-.success h3{font-family:'Lora',serif;font-size:1.5rem;font-weight:700;color:var(--forest);margin-bottom:0.75rem;}
-.success p{font-size:0.9rem;color:var(--muted);line-height:1.6;margin-bottom:1.5rem;}
-.dl{display:inline-flex;align-items:center;gap:0.5rem;background:var(--forest);color:white;font-weight:700;font-family:'Nunito',sans-serif;padding:0.9rem 2rem;border-radius:50px;text-decoration:none;font-size:0.95rem;}
-footer{background:var(--ink);padding:2.5rem 5vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
-.fl{font-family:'Lora',serif;font-size:1.1rem;font-weight:700;color:rgba(250,247,242,0.65);}
-footer p{font-size:0.8rem;color:rgba(250,247,242,0.3);}
-footer a{color:rgba(250,247,242,0.45);text-decoration:none;}
-@media(max-width:800px){.guide-hero{grid-template-columns:1fr;padding-top:24px;}.hero-img{aspect-ratio:16/9;}.inside-grid{grid-template-columns:1fr;}footer{flex-direction:column;text-align:center;}}
+@media(max-width:900px){
+  html{cursor:auto;}.cursor{display:none;}
+  .guide-hero{grid-template-columns:1fr;}
+  .gh-img{height:60vw;}.gh-img-overlay{display:none;}
+  .inside-grid{grid-template-columns:1fr 1fr;}
+  footer{flex-direction:column;text-align:center;}
+}
+@media(max-width:600px){.inside-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
 
+<div class="cursor" id="cursor">
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+</div>
+
+<div class="ann">
+  <span>&#128308; Limited Pricing — Only 3 left at this price</span>
+  <span>&#8212;</span>
+  <a href="shop.html">&#8592; All Guides</a>
+</div>
+
 <nav>
-  <a href="index.html" class="logo"><div class="logo-mark">&#129704;</div>Made By Hand</a>
-  <a href="shop.html" class="back">&#8592; All Guides</a>
+  <a href="index.html" class="logo"><div class="logo-dot"></div>Made By Hand</a>
+  <a href="shop.html" class="nav-back">&#8592; All Guides</a>
 </nav>
 
-<div class="urgency-bar">
+<div class="urgency">
   <span>&#9888; Only <strong>3 copies</strong> left at this price &mdash;</span>
-  <span class="timer" id="countdown">--:--</span>
-  <span class="stock-badge">&#128293; Selling fast</span>
+  <span class="urgency-timer" id="countdown">26:00</span>
+  <span>&#128293; Selling fast</span>
 </div>
 
 <section class="guide-hero">
-  <div class="hero-img">
+  <div class="gh-img">
     <img src="thumbnail_fire_bowl.jpg" alt="Concrete Fire Bowl"/>
+    <div class="gh-img-overlay"></div>
   </div>
-  <div class="hero-text">
-    <span class="eyebrow">Concrete · Garden</span>
-    <h1>Concrete Fire Bowl <em></em></h1>
-    <p>A $3 plastic basin becomes a stunning outdoor fire bowl. Heavy, weather-resistant, and looks like it belongs in a $500 garden store.</p>
-    <div class="meta-row"><span class="meta-chip">&#9201; 30 min active</span><span class="meta-chip">&#128176; Under $30</span><span class="meta-chip">&#127807; Beginner</span></div>
-    <div class="price-block">
-      <div class="price-was">Was: <span>$9.00</span></div>
-      <div class="price-now">
-        <div class="big-price"><sup>$</sup>5.00</div>
-        <span class="save-pill">LIMITED OFFER</span>
-      </div>
+  <div class="gh-body">
+    <div class="gh-eyebrow">Concrete · Garden</div>
+    <div class="gh-title">Concrete<br/><em>Fire Bowl</em></div>
+    <p class="gh-desc">A $3 plastic basin becomes a stunning outdoor fire bowl. Heavy, weather-resistant, and looks like it belongs in a $500 garden store.</p>
+    <div class="gh-chips">
+      <span class="gh-chip">30 min active</span>
+      <span class="gh-chip">Under $30</span>
+      <span class="gh-chip">Beginner</span>
     </div>
-    <button class="buy-big" onclick="openModal()">&#11015; Buy &amp; Download</button>
-    <div class="trust-note">&#128274; Secure payment &middot; Instant PDF &middot; Only 3 left at this price</div>
+    <div class="gh-price-block">
+      <div class="gh-was">Was $9.00</div>
+      <div class="gh-price-row">
+        <div class="gh-price">$5.00</div>
+        <span class="gh-save">44% Off</span>
+      </div>
+      <div class="gh-stock">Only 3 left at this price</div>
+    </div>
+    <button class="gh-buy" onclick="openModal()">&#11015; Buy &amp; Download</button>
+    <div class="gh-trust">&#128274; Secure Stripe &middot; Instant PDF &middot; Yours forever</div>
   </div>
 </section>
 
 <section class="inside-section">
-  <div class="inside-inner">
-    <span class="section-label">What's Inside</span>
-    <h2>Everything You Need to Make This</h2>
+  <div class="inside-sec">
+    <div class="sec-label">What's Inside</div>
+    <div class="sec-title">Everything You Need to Make This</div>
     <div class="inside-grid">
-      <div class="inside-card"><div class="ic-icon">&#128203;</div><div class="ic-text"><strong>Full materials list</strong><span>Plastic basin, concrete, fire gel — everything under $30. Simple and cheap to make.</span></div></div>
-      <div class="inside-card"><div class="ic-icon">&#128293;</div><div class="ic-text"><strong>Fire safety guide</strong><span>Which fire gel or burner insert to use safely inside concrete, and how to set it up correctly.</span></div></div>
-      <div class="inside-card"><div class="ic-icon">&#128167;</div><div class="ic-text"><strong>Concrete mix guide</strong><span>The exact mix for a heavy, crack-resistant bowl that handles outdoor heat and weather long-term.</span></div></div>
-      <div class="inside-card"><div class="ic-icon">&#127775;</div><div class="ic-text"><strong>Finishing options</strong><span>Paint, stain, or leave natural. How to seal for outdoor use and prevent surface weathering.</span></div></div>
-      <div class="inside-card"><div class="ic-icon">&#128161;</div><div class="ic-text"><strong>Pro tips & variations</strong><span>Add pebbles inside, use colored fire glass, or embed LED lights around the rim for evening ambiance.</span></div></div>
-      <div class="inside-card"><div class="ic-icon">&#128295;</div><div class="ic-text"><strong>Troubleshooting</strong><span>Bowl cracking? Too heavy? Mold stuck? Every common problem solved with simple clear fixes.</span></div></div>
+      <div class="ic"><span class="ic-icon">&#128203;</span><h4>Full Materials List</h4><p>Every item with exact quantities and costs. No surprises at the hardware store.</p></div>
+      <div class="ic"><span class="ic-icon">&#128247;</span><h4>Real Photos Every Step</h4><p>Every photo was taken during the actual project. You'll always know what to expect.</p></div>
+      <div class="ic"><span class="ic-icon">&#128161;</span><h4>Pro Tips &amp; Variations</h4><p>The mistakes we made and how to avoid them — plus creative variations on the design.</p></div>
+      <div class="ic"><span class="ic-icon">&#128295;</span><h4>Troubleshooting Guide</h4><p>Every common problem solved with clear, tested fixes so your first attempt succeeds.</p></div>
+      <div class="ic"><span class="ic-icon">&#9201;</span><h4>Weekend-Friendly</h4><p>Designed to be completed in 1–2 days. Real, visible results — fast.</p></div>
+      <div class="ic"><span class="ic-icon">&#127807;</span><h4>Beginner Friendly</h4><p>No jargon, no skipped steps. If you can follow a recipe, you can do this.</p></div>
     </div>
   </div>
 </section>
 
 <section class="steps-section">
-  <h2>The Steps — At a Glance</h2>
-  <div class="steps-list">
-    <div class="step-row"><div class="step-n">1</div><div class="step-t"><strong>Prepare the mold</strong><span>Spray the inside of the larger basin and outside of the smaller basin generously with cooking spray. This is critical for demolding.</span></div></div>
-    <div class="step-row"><div class="step-n">2</div><div class="step-t"><strong>Pour concrete into the gap</strong><span>Fill the space between the two basins with concrete. Tap the outside basin firmly every few minutes to release bubbles.</span></div></div>
-    <div class="step-row"><div class="step-n">3</div><div class="step-t"><strong>Weigh down the inner basin</strong><span>Place a heavy object inside the inner basin to stop it floating. Check it's centered. Leave to set 10 minutes.</span></div></div>
-    <div class="step-row"><div class="step-n">4</div><div class="step-t"><strong>Cure 48 hours</strong><span>Cover with plastic and leave in shade. Do not move or flex. The longer you wait, the stronger the bowl.</span></div></div>
-    <div class="step-row"><div class="step-n">5</div><div class="step-t"><strong>Demold, seal & fire it up</strong><span>Remove inner basin, peel outer mold, sand edges smooth. Seal with outdoor concrete sealer. Add fire gel and enjoy! 🔥</span></div></div>
+  <div class="steps-sec">
+    <div class="sec-label">The Process</div>
+    <div class="sec-title">How It All Comes Together</div>
+    <div class="steps-list">
+      <div class="step"><div class="step-n">01</div><div><h4>Prepare Your Materials</h4><p>Gather everything from the full materials list — the guide tells you exactly what you need, in what quantities, and where to find it cheapest.</p></div></div>
+      <div class="step"><div class="step-n">02</div><div><h4>Set Up Your Workspace</h4><p>Follow the setup instructions to prepare your molds, surfaces, and tools before you start. A good setup makes everything easier.</p></div></div>
+      <div class="step"><div class="step-n">03</div><div><h4>Build Step by Step</h4><p>Follow the detailed instructions with real photos at every stage. Each step is clear, tested, and written for complete beginners.</p></div></div>
+      <div class="step"><div class="step-n">04</div><div><h4>Cure &amp; Finish</h4><p>Let the project cure properly, then follow the finishing steps — sanding, sealing, and any final touches that make it look professional.</p></div></div>
+      <div class="step"><div class="step-n">05</div><div><h4>Display &amp; Enjoy</h4><p>Place your finished piece in your home or garden and admire your work. Share it — people will ask where you bought it. &#127775;</p></div></div>
+    </div>
   </div>
 </section>
 
 <section class="bottom-cta">
-  <h2>Ready to Make This?</h2>
-  <p>Instant PDF download. 4 beautifully designed pages. Real photos at every step. Only 3 copies left at this price.</p>
-  <button class="bottom-btn" onclick="openModal()">&#11015; Buy Guide &mdash; $5.00</button>
+  <h2>Ready to <em>Make This?</em></h2>
+  <p>Instant PDF download. Real photos. Everything you need. Only 3 copies left at this price.</p>
+  <button class="gh-buy" onclick="openModal()" style="margin:0 auto;display:inline-flex;">&#11015; Buy Guide &mdash; $5.00</button>
 </section>
 
 <footer>
-  <div class="fl">&#129704; Made By Hand</div>
-  <p>&#169; 2026 &middot; All guides are digital PDF downloads &middot; <a href="mailto:you@example.com">Contact us</a></p>
+  <div class="f-logo">Made By Hand</div>
+  <p>&#169; 2026 &middot; Digital PDF Downloads &middot; <a href="mailto:you@example.com">Contact</a></p>
 </footer>
 
-
-</div>
-
-
-</body>
-
-
+<!-- MODAL -->
 <div class="overlay" id="overlay">
   <div class="modal">
     <div class="modal-top">
       <div>
-        <div class="m-name">Concrete Fire Bowl</div>
-        <div class="m-price-wrap">
+        <div class="m-title">Concrete Fire Bowl</div>
+        <div class="m-price-row">
           <span class="m-price">$5.00</span>
+          <span class="m-was">$9.00</span>
         </div>
       </div>
       <button class="m-close" onclick="closeModal()">&#10005;</button>
     </div>
     <div class="modal-body">
       <div id="form-wrap">
-        <div id="payment-element"><p style="color:var(--muted);font-size:0.85rem;padding:1rem 0;text-align:center;">&#9203; Loading secure payment...</p></div>
+        <div id="payment-element"><p>&#9203; Loading secure payment...</p></div>
         <div id="card-err"></div>
         <button class="pay-btn" id="pay-btn" disabled>Loading...</button>
-        <div class="secure">&#128274; Secured by Stripe &middot; PDF delivered instantly</div>
+        <div class="m-secure">&#128274; Secured by Stripe &middot; PDF delivered instantly</div>
       </div>
       <div class="success" id="success-box">
-        <span class="icon">&#127881;</span>
-        <h3>You're all set!</h3>
-        <p>Your PDF guide is ready to download.<br/>Thank you!</p>
-        <a href="DIY_Concrete_Fire_Bowl_Guide.pdf" download class="dl">&#11015; Download Your Guide</a>
+        <span class="success-icon">&#127881;</span>
+        <h3>All Set!</h3>
+        <p>Your guide is ready. Thank you!</p>
+        <a href="DIY_Concrete_Fire_Bowl_Guide.pdf" download class="dl-btn">&#11015; Download Your Guide</a>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-const STRIPE_KEY = 'pk_live_51TQB5uERLV3AA0mv0dp2i9c6m3Y1oxuGCe0pghanMWYW9Y8gr4tPWJdwJAUhdaqDaUfWazxd4GKMaRaPfDgwMrBm00d1NxbK5G';
-const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzLg5Pl7TVpM7OH34QMe3KcD89xqp3lPn6RCFHy-mYo82HHhrAb32Sg922GkeRM3Pho/exec';
-const PRODUCT = 'Concrete Fire Bowl';
-const AMOUNT = 500;
-let stripe, elements;
+const STRIPE_KEY='pk_live_51TQB5uERLV3AA0mv0dp2i9c6m3Y1oxuGCe0pghanMWYW9Y8gr4tPWJdwJAUhdaqDaUfWazxd4GKMaRaPfDgwMrBm00d1NxbK5G';
+const AMOUNT=500;
+const PRODUCT='Concrete Fire Bowl';
+let stripe,elements;
 
-(function() {
-  let secs = 26 * 60;
-  function tick() {
-    const m = String(Math.floor(secs/60)).padStart(2,'0');
-    const s = String(secs%60).padStart(2,'0');
-    const el = document.getElementById('countdown');
-    if(el) el.textContent = m+':'+s;
-    if(secs > 0) secs--;
-  }
-  tick(); setInterval(tick, 1000);
+// Cursor
+const dot=document.getElementById('cursorDot'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});
+function animC(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animC);}
+animC();
+document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>ring.classList.add('hover'));el.addEventListener('mouseleave',()=>ring.classList.remove('hover'));});
+
+// Timer
+(function(){
+  let secs=26*60;
+  function tick(){const m=String(Math.floor(secs/60)).padStart(2,'0'),s=String(secs%60).padStart(2,'0');const el=document.getElementById('countdown');if(el)el.textContent=m+':'+s;if(secs>0)secs--;}
+  tick();setInterval(tick,1000);
 })();
 
-async function openModal() {
-  document.getElementById('form-wrap').style.display = 'block';
-  document.getElementById('success-box').style.display = 'none';
-  document.getElementById('pay-btn').disabled = true;
-  document.getElementById('pay-btn').textContent = 'Loading...';
-  document.getElementById('card-err').textContent = '';
-  document.getElementById('payment-element').innerHTML = '<p style="color:var(--muted);font-size:0.85rem;padding:1rem 0;text-align:center;">&#9203; Loading secure payment...</p>';
+// Reveal
+const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*80);obs.unobserve(e.target);}});},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// Modal
+async function openModal(){
+  document.getElementById('form-wrap').style.display='block';
+  document.getElementById('success-box').style.display='none';
+  document.getElementById('pay-btn').disabled=true;
+  document.getElementById('pay-btn').textContent='Loading...';
+  document.getElementById('card-err').textContent='';
+  document.getElementById('payment-element').innerHTML='<p>&#9203; Loading secure payment...</p>';
   document.getElementById('overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-
-  stripe = Stripe(STRIPE_KEY);
-  try {
-    const res = await fetch('/.netlify/functions/create-payment-intent', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({amount: AMOUNT, email: '', currency: 'usd', product: PRODUCT})
-    });
-    const data = await res.json();
-    if(data.error) throw new Error(data.error);
-
-    elements = stripe.elements({
-      clientSecret: data.clientSecret,
-      appearance: {
-        theme: 'stripe',
-        variables: {
-          colorPrimary: '#8C6B4A',
-          colorBackground: '#FAF7F2',
-          colorText: '#2A2520',
-          fontFamily: "'Nunito', sans-serif",
-          borderRadius: '8px'
-        }
-      }
-    });
-    document.getElementById('payment-element').innerHTML = '';
+  document.body.style.overflow='hidden';
+  stripe=Stripe(STRIPE_KEY);
+  try{
+    const res=await fetch('/.netlify/functions/create-payment-intent',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({amount:AMOUNT,currency:'usd',product:PRODUCT})});
+    const data=await res.json();
+    if(data.error)throw new Error(data.error);
+    elements=stripe.elements({clientSecret:data.clientSecret,appearance:{theme:'night',variables:{colorPrimary:'#C8963C',fontFamily:"'Outfit', sans-serif",borderRadius:'0px',colorBackground:'#201E1B',colorText:'#F0EDE8'}}});
+    document.getElementById('payment-element').innerHTML='';
     elements.create('payment').mount('#payment-element');
-    document.getElementById('pay-btn').disabled = false;
-    document.getElementById('pay-btn').textContent = 'Pay $5.00 & Download';
-  } catch(err) {
-    document.getElementById('payment-element').innerHTML = '<p style="color:#c0392b;font-size:0.85rem;padding:0.5rem 0;">Could not load payment. Please try again.</p>';
-    document.getElementById('pay-btn').textContent = 'Try Again';
-    document.getElementById('pay-btn').disabled = false;
-    document.getElementById('pay-btn').onclick = openModal;
+    document.getElementById('pay-btn').disabled=false;
+    document.getElementById('pay-btn').textContent='Pay $5.00 & Download';
+  }catch(err){
+    document.getElementById('payment-element').innerHTML='<p style="color:#B84040">Could not load payment. Please try again.</p>';
+    document.getElementById('pay-btn').textContent='Try Again';
+    document.getElementById('pay-btn').disabled=false;
+    document.getElementById('pay-btn').onclick=openModal;
   }
 }
 
-function closeModal() {
-  document.getElementById('overlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
+function closeModal(){document.getElementById('overlay').classList.remove('open');document.body.style.overflow='';}
+document.getElementById('overlay').addEventListener('click',e=>{if(e.target===document.getElementById('overlay'))closeModal();});
 
-document.getElementById('overlay').addEventListener('click', e => {
-  if(e.target === document.getElementById('overlay')) closeModal();
+document.getElementById('pay-btn').addEventListener('click',async function(){
+  if(this.textContent.includes('Loading')||this.textContent.includes('Try'))return;
+  const btn=this;btn.disabled=true;btn.textContent='Processing...';
+  document.getElementById('card-err').textContent='';
+  try{
+    const {error}=await stripe.confirmPayment({elements,confirmParams:{return_url:window.location.href},redirect:'if_required'});
+    if(error){document.getElementById('card-err').textContent=error.message;btn.disabled=false;btn.textContent='Pay $5.00 & Download';}
+    else{document.getElementById('form-wrap').style.display='none';document.getElementById('success-box').style.display='block';}
+  }catch(err){document.getElementById('card-err').textContent='Something went wrong. Please try again.';btn.disabled=false;btn.textContent='Try Again';}
 });
-
-document.getElementById('pay-btn').addEventListener('click', async function() {
-  if(this.textContent.includes('Loading')) return;
-  const btn = this;
-  btn.disabled = true;
-  btn.textContent = 'Processing...';
-  document.getElementById('card-err').textContent = '';
-  try {
-    const {error} = await stripe.confirmPayment({
-      elements,
-      confirmParams: {return_url: window.location.href},
-      redirect: 'if_required'
-    });
-    if(error) {
-      document.getElementById('card-err').textContent = error.message;
-      btn.disabled = false;
-      btn.textContent = 'Pay $5.00 & Download';
-    } else {
-      document.getElementById('form-wrap').style.display = 'none';
-      document.getElementById('success-box').style.display = 'block';
-    }
-  } catch(err) {
-    document.getElementById('card-err').textContent = 'Something went wrong. Please try again.';
-    btn.disabled = false;
-    btn.textContent = 'Try Again';
-  }
-});
-
 </script>
 </body>
 </html>
