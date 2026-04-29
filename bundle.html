@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Exclusive Bundle — Made By Hand</title>
+<!-- No index for search engines -->
+<meta name="robots" content="noindex, nofollow"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100;0,9..144,300;0,9..144,400;1,9..144,100;1,9..144,300&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+<script src="https://js.stripe.com/v3/"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--bg:#0C0B09;--bg2:#131210;--surface:#201E1B;--line:rgba(255,255,255,0.07);--line2:rgba(255,255,255,0.12);--text:#F0EDE8;--text2:#A09890;--text3:#6A6058;--accent:#C8963C;--accent2:#E8B85C;--green:#5A8A50;--green2:#7AB870;--red:#B84040;}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;font-weight:300;}
+
+nav{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;background:rgba(12,11,9,0.95);border-bottom:1px solid var(--line);}
+.logo{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:300;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:8px;}
+.logo-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);}
+
+/* HERO */
+.hero{padding:5rem 5vw 4rem;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid var(--line);}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(200,150,60,0.08) 0%,transparent 60%);pointer-events:none;}
+.exclusive-badge{display:inline-flex;align-items:center;gap:8px;font-size:0.62rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);background:rgba(200,150,60,0.1);border:1px solid rgba(200,150,60,0.25);padding:6px 16px;margin-bottom:2rem;}
+.hero h1{font-family:'Fraunces',serif;font-size:clamp(2.8rem,6vw,5.5rem);font-weight:100;line-height:0.95;letter-spacing:-0.02em;color:var(--text);margin-bottom:1.5rem;}
+.hero h1 em{font-style:italic;color:var(--accent);}
+.hero-desc{font-size:1rem;font-weight:300;color:var(--text2);max-width:520px;margin:0 auto 2.5rem;line-height:1.85;}
+.hero-desc strong{color:var(--text);font-weight:500;}
+
+/* PRICE BOX */
+.price-box{display:inline-flex;flex-direction:column;align-items:center;background:var(--surface);border:1px solid rgba(200,150,60,0.3);padding:2rem 3rem;margin-bottom:2rem;position:relative;}
+.price-box::before{content:'EXCLUSIVE OFFER';position:absolute;top:-10px;left:50%;transform:translateX(-50%);font-size:0.58rem;font-weight:600;letter-spacing:0.18em;background:var(--accent);color:var(--bg);padding:3px 12px;}
+.price-was{font-size:0.85rem;color:var(--text3);text-decoration:line-through;margin-bottom:4px;}
+.price-now{font-family:'Fraunces',serif;font-size:4rem;font-weight:100;color:#FFFFFF;line-height:1;margin-bottom:4px;}
+.price-per{font-size:0.72rem;color:var(--text3);letter-spacing:0.12em;text-transform:uppercase;}
+.price-save{font-size:0.7rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;background:var(--red);color:white;padding:4px 12px;margin-top:8px;}
+
+/* BUY BUTTON */
+.buy-wrap{position:relative;margin-bottom:1rem;}
+.buy-pulse{position:absolute;inset:-6px;border:2px solid rgba(200,150,60,0.7);animation:pulse 1.6s ease-out infinite;pointer-events:none;}
+.buy-pulse::before{content:'';position:absolute;inset:-8px;border:1.5px solid rgba(200,150,60,0.35);animation:pulse 1.6s ease-out 0.4s infinite;}
+@keyframes pulse{0%{opacity:1;transform:scale(1);}100%{opacity:0;transform:scale(1.1);}}
+.buy-btn{
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  width:100%;max-width:480px;margin:0 auto;
+  font-family:'Outfit',sans-serif;font-size:0.88rem;font-weight:600;
+  letter-spacing:0.18em;text-transform:uppercase;
+  background:linear-gradient(135deg,#D4A843,#C8963C,#B8820A);
+  color:var(--bg);padding:20px 32px;border:none;cursor:pointer;
+  box-shadow:0 0 40px rgba(200,150,60,0.4),0 0 80px rgba(200,150,60,0.15);
+  position:relative;overflow:hidden;transition:transform 0.2s;
+}
+.buy-btn::before{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);animation:shimmer 2.5s ease-in-out infinite;}
+@keyframes shimmer{0%{left:-100%;}60%,100%{left:150%;}}
+.buy-btn:hover{transform:translateY(-2px);}
+.trust{font-size:0.65rem;color:var(--text3);letter-spacing:0.1em;text-align:center;margin-top:0.85rem;}
+
+/* GUIDES GRID */
+.guides-section{padding:5rem 5vw;max-width:1200px;margin:0 auto;}
+.sec-label{font-size:0.62rem;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:var(--green2);margin-bottom:0.75rem;display:flex;align-items:center;gap:10px;}
+.sec-label::before{content:'';width:16px;height:1px;background:var(--green2);}
+.sec-title{font-family:'Fraunces',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:100;color:var(--text);margin-bottom:2.5rem;}
+.sec-title em{font-style:italic;color:var(--accent);}
+
+.guides-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);}
+.guide-card{background:var(--bg);display:flex;gap:1rem;padding:1.25rem;align-items:flex-start;transition:background 0.2s;border-top:2px solid transparent;}
+.guide-card:hover{background:var(--surface);border-top-color:var(--accent);}
+.gc-num{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:100;color:var(--text3);flex-shrink:0;width:32px;line-height:1;}
+.gc-body{}
+.gc-name{font-family:'Fraunces',serif;font-size:0.92rem;font-weight:300;color:var(--text);margin-bottom:4px;line-height:1.3;}
+.gc-desc{font-size:0.72rem;font-weight:300;color:var(--text3);line-height:1.5;margin-bottom:6px;}
+.gc-price{font-size:0.65rem;color:var(--text3);}
+.gc-price span{color:var(--accent);font-weight:500;}
+
+/* WHAT YOU GET */
+.what-section{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:4rem 5vw;}
+.what-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);max-width:900px;margin:2rem auto 0;}
+.wc{background:var(--bg2);padding:1.75rem;text-align:center;}
+.wc-icon{font-size:1.75rem;margin-bottom:0.75rem;display:block;}
+.wc h4{font-family:'Fraunces',serif;font-size:1rem;font-weight:300;color:var(--text);margin-bottom:6px;}
+.wc p{font-size:0.78rem;font-weight:300;color:var(--text3);line-height:1.6;}
+
+/* BOTTOM CTA */
+.bottom-cta{padding:5rem 5vw;text-align:center;border-top:1px solid var(--line);}
+.bottom-cta h2{font-family:'Fraunces',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:100;color:var(--text);margin-bottom:1rem;line-height:1;}
+.bottom-cta h2 em{font-style:italic;color:var(--accent);}
+.bottom-cta p{font-size:0.92rem;color:var(--text2);max-width:420px;margin:0 auto 2.5rem;line-height:1.8;}
+
+/* MODAL */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:1000;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(16px);}
+.overlay.open{display:flex;}
+.modal{background:var(--bg2);border:1px solid var(--line2);width:100%;max-width:480px;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,0.6);animation:pop 0.35s cubic-bezier(0.34,1.56,0.64,1);}
+@keyframes pop{from{opacity:0;transform:scale(0.92) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.modal-top{background:var(--surface);padding:1.5rem 2rem;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;border-bottom:1px solid var(--line);}
+.m-title{font-family:'Fraunces',serif;font-size:1rem;font-weight:300;color:var(--text);margin-bottom:4px;}
+.m-price{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:100;color:#FFFFFF;}
+.m-was{font-size:0.78rem;color:var(--text3);text-decoration:line-through;margin-left:8px;}
+.m-close{background:none;border:none;color:var(--text3);font-size:1.4rem;cursor:pointer;padding:0;transition:color 0.2s;}
+.m-close:hover{color:var(--text);}
+.modal-body{padding:1.75rem 2rem 2rem;}
+#payment-element{min-height:44px;margin-bottom:0.5rem;}
+#payment-element p{font-size:0.82rem;color:var(--text3);padding:1rem 0;text-align:center;}
+#card-err{font-size:0.78rem;color:var(--red);margin-top:0.5rem;min-height:1.2em;}
+.pay-btn{width:100%;background:var(--accent);color:var(--bg);border:none;padding:15px;font-family:'Outfit',sans-serif;font-size:0.78rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;margin-top:1.25rem;transition:background 0.2s;}
+.pay-btn:hover:not(:disabled){background:var(--accent2);}
+.pay-btn:disabled{opacity:0.4;cursor:not-allowed;}
+.m-secure{font-size:0.6rem;color:var(--text3);letter-spacing:0.12em;text-transform:uppercase;text-align:center;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line);}
+.success{display:none;text-align:center;padding:2rem 0 1rem;}
+.success-icon{font-size:3rem;margin-bottom:1rem;display:block;}
+.success h3{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:300;color:var(--accent);margin-bottom:0.75rem;}
+.success p{font-size:0.85rem;color:var(--text3);margin-bottom:1.5rem;line-height:1.6;}
+.dl-btn{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;padding:12px 24px;text-decoration:none;}
+
+footer{background:var(--surface);padding:2rem 5vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;border-top:1px solid var(--line);}
+.f-logo{font-family:'Fraunces',serif;font-size:1rem;font-weight:300;color:var(--text3);}
+footer p{font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text3);}
+
+@media(max-width:900px){.guides-grid{grid-template-columns:1fr 1fr;}.what-grid{grid-template-columns:1fr;}}
+@media(max-width:600px){.guides-grid{grid-template-columns:1fr;}.price-box{padding:1.5rem 2rem;}footer{flex-direction:column;text-align:center;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo"><div class="logo-dot"></div>Made By Hand</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="exclusive-badge">&#128274; Exclusive Offer &mdash; Not Available in Shop</div>
+  <h1>The Complete<br/><em>DIY Collection</em></h1>
+  <p class="hero-desc">All <strong>15 step-by-step PDF guides</strong> in one exclusive bundle. Everything you need to transform your home and garden — at a price reserved for our customers only.</p>
+
+  <div class="price-box">
+    <div class="price-was">Individual value: $142.00</div>
+    <div class="price-now">$37.00</div>
+    <div class="price-per">All 15 guides &middot; Instant download &middot; Yours forever</div>
+    <div class="price-save">74% OFF — Exclusive customer price</div>
+  </div>
+
+  <div class="buy-wrap">
+    <div class="buy-pulse"></div>
+    <button class="buy-btn" onclick="openModal()">
+      &#11015; Get All 15 Guides for $37
+    </button>
+  </div>
+  <div class="trust">&#128274; Secure Stripe &middot; &#9989; Apple Pay &amp; Google Pay &middot; &#11015; Instant PDF download</div>
+</section>
+
+<!-- WHAT YOU GET -->
+<section class="what-section">
+  <div style="max-width:900px;margin:0 auto;text-align:center;">
+    <div class="sec-label" style="justify-content:center;">What's included</div>
+    <div class="sec-title">15 Guides. <em>One Price.</em> Forever.</div>
+  </div>
+  <div class="what-grid">
+    <div class="wc"><span class="wc-icon">&#128247;</span><h4>Real Photos Every Step</h4><p>Every photo taken during the actual project. No illustrations, no stock photos.</p></div>
+    <div class="wc"><span class="wc-icon">&#128203;</span><h4>Full Materials Lists</h4><p>Every guide includes exact quantities and costs — no surprises at the store.</p></div>
+    <div class="wc"><span class="wc-icon">&#9854;</span><h4>Yours Forever</h4><p>Download all 15 PDFs instantly. Keep them, print them, build from them anytime.</p></div>
+  </div>
+</section>
+
+<!-- GUIDES LIST -->
+<section class="guides-section">
+  <div class="sec-label">The Collection</div>
+  <div class="sec-title">All <em>15 Guides</em> Included</div>
+
+  <div class="guides-grid">
+
+    <div class="guide-card">
+      <div class="gc-num">01</div>
+      <div class="gc-body">
+        <div class="gc-name">Concrete House Number Sign</div>
+        <div class="gc-desc">River stone numbers in dark concrete. Stunning at your front door.</div>
+        <div class="gc-price">Individual price: <span>$13.00</span></div>
+      </div>
+    </div>
+
+    <div class="guide-card">
+      <div class="gc-num">02</div>
+      <div class="gc-body">
+        <div class="gc-name">Concrete Bird Bath with Fabric Drape</div>
+        <div class="gc-desc">Old bag + bucket + concrete = a breathtaking bird bath.</div>
+        <div class="gc-price">Individual price: <span>$11.00</span></div>
+      </div>
+    </div>
+
+    <div class="guide-card">
+      <div class="gc-num">03</div>
+      <div class="gc-body">
+        <div class="gc-name">River Stone Candle Holder</div>
+        <div class="gc-desc">Embedded pebbles that glow like a lantern at night.</div>
+        <div class="gc-price">Individual price: <span>$11.00</span></div>
+      </div>
+    </div>
+
+    <div class="guide-card">
+      <div class="gc-num">04</div>
+      <div class="gc-body">
+        <div class="gc-name">Balloon Vase with Gold Interior</div>
+        <div class="gc-desc">Pour into a balloon, cure, pop — paint inside gold.</div>
+        <div class="gc-price">Individual price: <span>$13.00</span></div>
+      </div>
+    </div>
+
+    <div class="guide-card">
+      <div class="gc-num">05</div>
+      <div class="gc-body">
+        <div class="gc-name">Rope Texture Planter</div>
+        <div class="gc-desc">Wrap rope, pour concrete — a $150 planter for under $30.</div>
+        <div class="gc-price">Individual price: <span>$9.99</span></div>
+      </div>
+    </div>
+
+    <div class="guide-card">
+      <div class="gc-num">06</div>
+      <div class="gc-body">
+        <div class="gc-name">Concrete Hand Planter</div>
+        <div class="gc-desc">Cast your hand in concrete with a rubber glove. Jaw-dropping.</div>
+        <div class="gc-price">Individual price: <span>$5.00</span></div>
+      </div>
+    </div>
+
+    <div class="guide-card">
+      <div class="gc-num">07</div>
+      <div class="gc-body">
+        <div class="gc-name">Bottle Glass Garden Edging</div>
+        <div class="gc-desc">100+ recycled bottles in concrete — glows like stained glass.</div>
+        <div class="gc-price">Individual price: <span>$5.00</span></div>
+      </div>
+    </div>
+
+    <div class="guide-card">
+      <div class="gc-num">08</div>
+      <div class="gc-body">
+        <div class="gc-name">Dry Creek Stream &amp; Garden Bridge</div>
+        <div class="gc-desc">Transform a flat backyard into a stunning stream with a bridge.</div>
+        <div class="gc-price">Individual price: <span>$5.00</span></div>
+      </div>
+    </div>
+
+    <div class="guide-card">
+      <div class="gc-num">09</div>
+      <div class="gc-body">
+        <div class="gc-name">Mosaic Patio Table</div>
+        <div class="gc-desc">Broken tiles into a stunning centrepiece. Looks like $500.</div>
+        <div class="gc-price">Individual price: <span>$5.00</span></div>
+      </div>
+    </div>
+
+    <div class="guide-card">
+      <div class="gc-num">10</div>
+      <div class="gc-body">
+        <div class="gc-name">Leaf Imprint Stepping Stones</div>
+        <div class="gc-desc">Press a leaf into concrete — every vein transfers perfectly.</div>
+        <div class="gc-price">Individual price: <span>$5.00</span></div>
+      </div>
+    </div>
+
+    <div class="guide-card">
+      <div class="gc-num">11</div>
+      <div class="gc-body">
+        <div class="gc-name">Glass Mosaic Stepping Stones</div>
+        <div class="gc-desc">Coloured glass in concrete — glows like stained glass at night.</div>
+        <div class="gc-price">Individual price: <span>$5.00</span></div>
+      </div>
+    </div>
+
+    <div class="guide-card">
+      <div class="gc-num">12</div>
+      <div class="gc-body">
+        <div class="gc-name">Concrete Candle Holder</div>
+        <div class="gc-desc">Two cups and a bag of concrete. The perfect first project.</div>
+        <div class="gc-price">Individual price: <span>$5.00</span></div>
+      </div>
+    </div>
+
+    <div class="guide-card">
+      <div class="gc-num">13</div>
+      <div class="gc-body">
+        <div class="gc-name">Woven Texture Concrete Planter</div>
+        <div class="gc-desc">A $5 basket transfers a beautiful woven texture. Looks like $100.</div>
+        <div class="gc-price">Individual price: <span>$5.00</span></div>
+      </div>
+    </div>
+
+    <div class="guide-card">
+      <div class="gc-num">14</div>
+      <div class="gc-body">
+        <div class="gc-name">Natural Stone Accent Wall</div>
+        <div class="gc-desc">Save $2,000–$7,000 vs a contractor. Full lighting guide included.</div>
+        <div class="gc-price">Individual price: <span>$12.99</span></div>
+      </div>
+    </div>
+
+    <div class="guide-card">
+      <div class="gc-num">15</div>
+      <div class="gc-body">
+        <div class="gc-name">Concrete Fire Bowl</div>
+        <div class="gc-desc">A $3 basin becomes a stunning outdoor fire bowl.</div>
+        <div class="gc-price">Individual price: <span>$5.00</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="bottom-cta">
+  <h2>All 15 Guides.<br/><em>One Price. Forever.</em></h2>
+  <p>Instant download. Yours to keep. Build whenever you're ready.</p>
+  <div class="buy-wrap" style="max-width:480px;margin:0 auto 1rem;">
+    <div class="buy-pulse"></div>
+    <button class="buy-btn" onclick="openModal()">&#11015; Get All 15 Guides for $37</button>
+  </div>
+  <div class="trust">&#128274; Secure Stripe &middot; &#9989; Apple Pay &amp; Google Pay &middot; &#9854; Yours forever</div>
+</section>
+
+<footer>
+  <div class="f-logo">Made By Hand</div>
+  <p>&#169; 2026 &middot; Digital PDF Downloads &middot; <a href="mailto:madebyhand010@gmail.com" style="color:var(--text3);text-decoration:none;">Contact</a></p>
+</footer>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <div class="modal-top">
+      <div>
+        <div class="m-title">The Complete DIY Collection</div>
+        <div style="display:flex;align-items:baseline;gap:8px;">
+          <span class="m-price">$37.00</span>
+          <span class="m-was">$142.00</span>
+        </div>
+      </div>
+      <button class="m-close" onclick="closeModal()">&#10005;</button>
+    </div>
+    <div class="modal-body">
+      <div id="form-wrap">
+        <div id="payment-element"><p>&#9203; Loading secure payment...</p></div>
+        <div id="card-err"></div>
+        <button class="pay-btn" id="pay-btn" disabled>Loading...</button>
+        <div class="m-secure">&#128274; Secured by Stripe &middot; All 15 PDFs delivered instantly</div>
+      </div>
+      <div class="success" id="success-box">
+        <span class="success-icon">&#127881;</span>
+        <h3>You're all set!</h3>
+        <p>All 15 guides are ready to download.<br/>Check your email too — we sent them there as well.</p>
+        <a href="DIY_Complete_Bundle.pdf" download class="dl-btn">&#11015; Download All 15 Guides</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const STRIPE_KEY='pk_live_51TQB5uERLV3AA0mv0dp2i9c6m3Y1oxuGCe0pghanMWYW9Y8gr4tPWJdwJAUhdaqDaUfWazxd4GKMaRaPfDgwMrBm00d1NxbK5G';
+const PRODUCT='The Complete DIY Collection — All 15 Guides';
+const AMOUNT=3700;
+let stripe,elements;
+
+async function openModal(){
+  document.getElementById('form-wrap').style.display='block';
+  document.getElementById('success-box').style.display='none';
+  document.getElementById('pay-btn').disabled=true;
+  document.getElementById('pay-btn').textContent='Loading...';
+  document.getElementById('card-err').textContent='';
+  document.getElementById('payment-element').innerHTML='<p>&#9203; Loading secure payment...</p>';
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  stripe=Stripe(STRIPE_KEY);
+  try{
+    const res=await fetch('/.netlify/functions/create-payment-intent',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({amount:AMOUNT,currency:'usd',product:PRODUCT})});
+    const data=await res.json();
+    if(data.error)throw new Error(data.error);
+    elements=stripe.elements({clientSecret:data.clientSecret,appearance:{theme:'night',variables:{colorPrimary:'#C8963C',fontFamily:"'Outfit',sans-serif",borderRadius:'0px',colorBackground:'#201E1B',colorText:'#F0EDE8'}}});
+    document.getElementById('payment-element').innerHTML='';
+    elements.create('payment').mount('#payment-element');
+    document.getElementById('pay-btn').disabled=false;
+    document.getElementById('pay-btn').textContent='Pay $37.00 — Get All 15 Guides';
+  }catch(err){
+    document.getElementById('payment-element').innerHTML='<p style="color:#B84040">Could not load payment. Please try again.</p>';
+    document.getElementById('pay-btn').textContent='Try Again';
+    document.getElementById('pay-btn').disabled=false;
+    document.getElementById('pay-btn').onclick=openModal;
+  }
+}
+
+function closeModal(){document.getElementById('overlay').classList.remove('open');document.body.style.overflow='';}
+document.getElementById('overlay').addEventListener('click',e=>{if(e.target===document.getElementById('overlay'))closeModal();});
+
+document.getElementById('pay-btn').addEventListener('click',async function(){
+  if(this.textContent.includes('Loading')||this.textContent.includes('Try'))return;
+  const btn=this;btn.disabled=true;btn.textContent='Processing...';
+  document.getElementById('card-err').textContent='';
+  try{
+    const{error}=await stripe.confirmPayment({elements,confirmParams:{return_url:window.location.href},redirect:'if_required'});
+    if(error){document.getElementById('card-err').textContent=error.message;btn.disabled=false;btn.textContent='Pay $37.00 — Get All 15 Guides';}
+    else{document.getElementById('form-wrap').style.display='none';document.getElementById('success-box').style.display='block';}
+  }catch(err){document.getElementById('card-err').textContent='Something went wrong. Please try again.';btn.disabled=false;btn.textContent='Try Again';}
+});
+</script>
+</body>
+</html>
