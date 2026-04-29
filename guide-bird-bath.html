@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Concrete Bird Bath with Fabric Drape — Made By Hand</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100;0,9..144,300;0,9..144,400;1,9..144,100;1,9..144,300&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+<script src="https://js.stripe.com/v3/"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--bg:#0C0B09;--bg2:#131210;--surface:#201E1B;--surface2:#282420;--line:rgba(255,255,255,0.07);--line2:rgba(255,255,255,0.12);--text:#F0EDE8;--text2:#A09890;--text3:#6A6058;--accent:#C8963C;--accent2:#E8B85C;--green:#5A8A50;--green2:#7AB870;--red:#B84040;}
+html{scroll-behavior:smooth;cursor:none;}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;font-weight:300;}
+
+.cursor{position:fixed;top:0;left:0;z-index:9999;pointer-events:none;mix-blend-mode:exclusion;}
+.cursor-dot{width:8px;height:8px;background:#fff;border-radius:50%;position:absolute;transform:translate(-50%,-50%);}
+.cursor-ring{width:40px;height:40px;border:1px solid rgba(255,255,255,0.4);border-radius:50%;position:absolute;transform:translate(-50%,-50%);transition:width 0.3s,height 0.3s,border-color 0.3s;}
+.cursor-ring.hover{width:60px;height:60px;border-color:var(--accent);background:rgba(200,150,60,0.06);}
+
+.ann{background:var(--accent);padding:9px 5vw;display:flex;align-items:center;justify-content:center;gap:20px;font-size:0.68rem;font-weight:400;letter-spacing:0.16em;text-transform:uppercase;color:rgba(12,11,9,0.75);flex-wrap:wrap;}
+.ann a{color:var(--bg);text-decoration:none;font-weight:500;border-bottom:1px solid rgba(12,11,9,0.25);}
+
+nav{position:sticky;top:0;z-index:500;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;background:rgba(12,11,9,0.94);backdrop-filter:blur(28px);border-bottom:1px solid var(--line);}
+.logo{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:300;letter-spacing:0.02em;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:10px;}
+.logo-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);}
+.nav-back{font-size:0.65rem;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;color:var(--text3);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color 0.2s;}
+.nav-back:hover{color:var(--accent);}
+
+/* URGENCY BAR */
+.urgency{background:var(--red);color:#fff;text-align:center;padding:10px 20px;font-size:0.72rem;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;}
+.urgency-timer{font-family:'Fraunces',serif;font-size:0.9rem;background:rgba(0,0,0,0.25);padding:3px 12px;}
+
+/* HERO */
+.guide-hero{display:grid;grid-template-columns:1fr 1fr;min-height:80vh;border-bottom:1px solid var(--line);}
+.gh-img{position:relative;overflow:hidden;}
+.gh-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.7s;}
+.gh-img:hover img{transform:scale(1.03);}
+.gh-img-overlay{position:absolute;inset:0;background:linear-gradient(90deg,transparent 60%,var(--bg) 100%);}
+
+.gh-body{padding:5vw;display:flex;flex-direction:column;justify-content:center;}
+.gh-eyebrow{font-size:0.62rem;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:var(--green2);margin-bottom:1.5rem;display:flex;align-items:center;gap:10px;}
+.gh-eyebrow::before{content:'';width:16px;height:1px;background:var(--green2);}
+.gh-title{font-family:'Fraunces',serif;font-size:clamp(2.2rem,4vw,4rem);font-weight:100;line-height:0.95;letter-spacing:-0.02em;color:var(--text);margin-bottom:1.5rem;}
+.gh-title em{font-style:italic;color:var(--accent);}
+.gh-desc{font-size:0.92rem;font-weight:300;color:var(--text2);line-height:1.85;margin-bottom:2rem;max-width:420px;}
+.gh-chips{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:2rem;}
+.gh-chip{font-size:0.6rem;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;border:1px solid var(--line2);color:var(--text3);padding:6px 12px;}
+.gh-price-block{margin-bottom:2rem;}
+.gh-was{font-size:0.72rem;color:var(--text3);text-decoration:line-through;margin-bottom:4px;}
+.gh-price-row{display:flex;align-items:baseline;gap:12px;margin-bottom:8px;}
+.gh-price{font-family:'Fraunces',serif;font-size:3rem;font-weight:100;color:var(--text);line-height:1;}
+.gh-save{font-size:0.6rem;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;border:1px solid rgba(200,150,60,0.35);color:var(--accent);padding:4px 10px;}
+.gh-stock{font-size:0.65rem;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:6px;}
+.gh-stock::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--red);}
+
+/* ── BUY BUTTON — imposibil de ratat ─────── */
+.gh-buy-wrap{
+  position:relative;margin-top:1.75rem;
+}
+/* 3 inele concentrice care pulseaza */
+.gh-buy-pulse{
+  position:absolute;inset:-6px;
+  border:2px solid rgba(200,150,60,0.7);
+  animation:pulse-ring 1.6s ease-out infinite;
+  pointer-events:none;
+}
+.gh-buy-pulse::before{
+  content:'';position:absolute;inset:-8px;
+  border:1.5px solid rgba(200,150,60,0.35);
+  animation:pulse-ring 1.6s ease-out 0.4s infinite;
+}
+.gh-buy-pulse::after{
+  content:'';position:absolute;inset:-16px;
+  border:1px solid rgba(200,150,60,0.15);
+  animation:pulse-ring 1.6s ease-out 0.8s infinite;
+}
+@keyframes pulse-ring{
+  0%{opacity:1;transform:scale(1);}
+  100%{opacity:0;transform:scale(1.12);}
+}
+.gh-buy{
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  width:100%;
+  font-family:'Outfit',sans-serif;font-size:0.9rem;font-weight:600;
+  letter-spacing:0.2em;text-transform:uppercase;
+  background:linear-gradient(135deg, #D4A843 0%, #C8963C 50%, #B8820A 100%);
+  color:#0C0B09;
+  padding:22px 32px;border:none;cursor:pointer;
+  position:relative;overflow:hidden;
+  transition:transform 0.2s,box-shadow 0.2s;
+  box-shadow:
+    0 0 0 1px rgba(200,150,60,0.6),
+    0 0 30px rgba(200,150,60,0.5),
+    0 0 70px rgba(200,150,60,0.25),
+    0 8px 32px rgba(0,0,0,0.4);
+}
+/* shimmer sweep */
+.gh-buy::before{
+  content:'';position:absolute;top:0;left:-100%;
+  width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.25),transparent);
+  animation:shimmer 2.5s ease-in-out infinite;
+}
+@keyframes shimmer{
+  0%{left:-100%;}
+  60%,100%{left:150%;}
+}
+.gh-buy:hover{
+  transform:translateY(-3px);
+  box-shadow:
+    0 0 0 1px rgba(200,150,60,0.8),
+    0 0 50px rgba(200,150,60,0.7),
+    0 0 100px rgba(200,150,60,0.35),
+    0 12px 40px rgba(0,0,0,0.5);
+}
+.gh-buy-icon{font-size:1.2rem;}
+.gh-buy-text{display:flex;flex-direction:column;align-items:flex-start;gap:1px;}
+.gh-buy-main{font-size:0.88rem;font-weight:600;letter-spacing:0.16em;}
+.gh-buy-sub{font-size:0.62rem;font-weight:400;letter-spacing:0.1em;opacity:0.75;text-transform:none;}
+.gh-buy-arrow{font-size:1.2rem;transition:transform 0.2s;margin-left:auto;}
+.gh-buy:hover .gh-buy-arrow{transform:translateX(5px);}
+.gh-trust{font-size:0.62rem;font-weight:300;color:var(--text3);letter-spacing:0.1em;text-align:center;margin-top:1rem;}
+
+.gh-buy::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,0.12);transform:translateX(-100%);transition:transform 0.35s;}
+.gh-buy:hover::after{transform:translateX(0);}
+.gh-buy:hover{transform:translateY(-1px);}
+.gh-trust{font-size:0.62rem;font-weight:300;color:var(--text3);letter-spacing:0.1em;margin-top:1rem;}
+
+/* INSIDE SECTION */
+.inside-sec{padding:6rem 5vw;border-bottom:1px solid var(--line);max-width:1200px;margin:0 auto;}
+.sec-label{font-size:0.62rem;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:var(--green2);margin-bottom:1rem;display:flex;align-items:center;gap:10px;}
+.sec-label::before{content:'';width:16px;height:1px;background:var(--green2);}
+.sec-title{font-family:'Fraunces',serif;font-size:clamp(2rem,3vw,3rem);font-weight:100;color:var(--text);margin-bottom:2.5rem;}
+.inside-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--line);}
+.ic{background:var(--bg);padding:1.75rem;border-top:2px solid transparent;transition:border-color 0.25s,background 0.25s;}
+.ic:hover{background:var(--surface);border-top-color:var(--accent);}
+.ic-icon{font-size:1.5rem;margin-bottom:1rem;display:block;}
+.ic h4{font-family:'Fraunces',serif;font-size:1rem;font-weight:300;color:var(--text);margin-bottom:6px;}
+.ic p{font-size:0.78rem;font-weight:300;color:var(--text3);line-height:1.65;}
+
+/* STEPS */
+.steps-sec{padding:6rem 5vw;border-bottom:1px solid var(--line);max-width:900px;margin:0 auto;}
+.steps-list{display:flex;flex-direction:column;}
+.step{display:grid;grid-template-columns:60px 1fr;gap:1.5rem;padding:1.75rem 0;border-bottom:1px solid var(--line);align-items:start;transition:padding-left 0.3s;}
+.step:first-child{border-top:1px solid var(--line);}
+.step:hover{padding-left:0.75rem;}
+.step-n{font-family:'Fraunces',serif;font-size:0.8rem;font-weight:300;color:var(--text3);letter-spacing:0.1em;margin-top:4px;}
+.step h4{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:300;color:var(--text);margin-bottom:6px;}
+.step p{font-size:0.82rem;font-weight:300;color:var(--text3);line-height:1.65;}
+
+/* BOTTOM CTA */
+.bottom-cta{padding:6rem 5vw;text-align:center;background:var(--bg2);border-bottom:1px solid var(--line);}
+.bottom-cta h2{font-family:'Fraunces',serif;font-size:clamp(2rem,4vw,4rem);font-weight:100;color:var(--text);margin-bottom:1rem;line-height:1;}
+.bottom-cta h2 em{font-style:italic;color:var(--accent);}
+.bottom-cta p{font-size:0.9rem;font-weight:300;color:var(--text2);max-width:400px;margin:0 auto 2.5rem;line-height:1.8;}
+
+/* MODAL */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:1000;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(12px);}
+.overlay.open{display:flex;}
+.modal{background:var(--bg2);border:1px solid var(--line2);width:100%;max-width:480px;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,0.6);animation:pop 0.35s cubic-bezier(0.34,1.56,0.64,1);}
+@keyframes pop{from{opacity:0;transform:scale(0.92) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.modal-top{background:var(--surface);padding:1.75rem 2rem;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;border-bottom:1px solid var(--line);}
+.m-title{font-family:'Fraunces',serif;font-size:1rem;font-weight:300;color:var(--text);margin-bottom:4px;}
+.m-price-row{display:flex;align-items:baseline;gap:8px;}
+.m-price{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:300;color:var(--accent);}
+.m-was{font-size:0.78rem;color:var(--text3);text-decoration:line-through;}
+.m-close{background:none;border:none;color:var(--text3);font-size:1.4rem;cursor:pointer;line-height:1;padding:0;transition:color 0.2s;flex-shrink:0;}
+.m-close:hover{color:var(--text);}
+.modal-body{padding:2rem;}
+#payment-element{min-height:44px;margin-bottom:0.5rem;}
+#payment-element p{font-size:0.82rem;color:var(--text3);padding:1rem 0;text-align:center;}
+#card-err{font-size:0.78rem;color:var(--red);margin-top:0.5rem;min-height:1.2em;}
+.pay-btn{width:100%;background:var(--accent);color:var(--bg);border:none;padding:14px;font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;margin-top:1.25rem;transition:background 0.2s;}
+.pay-btn:hover:not(:disabled){background:var(--accent2);}
+.pay-btn:disabled{opacity:0.4;cursor:not-allowed;}
+.m-secure{font-size:0.6rem;font-weight:300;color:var(--text3);letter-spacing:0.12em;text-transform:uppercase;text-align:center;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line);}
+.success{display:none;text-align:center;padding:2rem 0 1rem;}
+.success-icon{font-size:3rem;margin-bottom:1rem;display:block;}
+.success h3{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:300;color:var(--accent);margin-bottom:0.75rem;}
+.success p{font-size:0.85rem;color:var(--text3);margin-bottom:1.5rem;}
+.dl-btn{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:400;letter-spacing:0.16em;text-transform:uppercase;padding:12px 24px;text-decoration:none;transition:background 0.2s;}
+.dl-btn:hover{background:var(--green2);}
+
+footer{background:var(--surface);padding:2.5rem 5vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;border-top:1px solid var(--line);}
+.f-logo{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:300;color:var(--text3);}
+footer p{font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text3);}
+footer a{color:var(--text3);text-decoration:none;}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+@media(max-width:900px){
+  html{cursor:auto;}.cursor{display:none;}
+  .guide-hero{grid-template-columns:1fr;}
+  .gh-img{height:60vw;}.gh-img-overlay{display:none;}
+  .inside-grid{grid-template-columns:1fr 1fr;}
+  footer{flex-direction:column;text-align:center;}
+}
+@media(max-width:600px){.inside-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor">
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+</div>
+
+<div class="ann">
+  <span>&#128308; Limited Pricing — Only 3 left at this price</span>
+  <span>&#8212;</span>
+  <a href="shop.html">&#8592; All Guides</a>
+</div>
+
+<nav>
+  <a href="index.html" class="logo"><div class="logo-dot"></div>Made By Hand</a>
+  <a href="shop.html" class="nav-back">&#8592; All Guides</a>
+</nav>
+
+<div class="urgency">
+  <span>&#9888; Only <strong>4 copies</strong> left at this price &mdash;</span>
+  <span class="urgency-timer" id="countdown">47:00</span>
+  <span>&#128293; Selling fast</span>
+</div>
+
+<section class="guide-hero">
+  <div class="gh-img">
+    <img src="thumbnail_bird-bath.jpg" alt="Concrete Bird Bath with Fabric Drape"/>
+    <div class="gh-img-overlay"></div>
+  </div>
+  <div class="gh-body">
+    <div class="gh-eyebrow">Concrete · Interior</div>
+    <div class="gh-title">River Stone<br/><em>Candle Holder</em></div>
+    <p class="gh-desc">Drape an old hessian bag over a bucket, pour concrete over it — flip after 48 hours to reveal a stunning bird bath with organic fabric folds. A bird showed up the SAME day!</p>
+    <div class="gh-chips">
+      <span class="gh-chip">30 min + 48h cure</span>
+      <span class="gh-chip">$10–$20</span>
+      <span class="gh-chip">Beginner</span>
+    </div>
+    <div class="gh-price-block">
+      <div class="gh-was">Was $28.00</div>
+      <div class="gh-price-row">
+        <div class="gh-price">$11.00</div>
+        <span class="gh-save">61% Off</span>
+      </div>
+      <div class="gh-stock">Only 3 left at this price</div>
+    </div>
+        <div class="gh-buy-wrap">
+      <div class="gh-buy-pulse"></div>
+      <button class="gh-buy" onclick="openModal()">
+          <span class="gh-buy-icon">&#11015;</span>
+          <span class="gh-buy-text">
+            <span class="gh-buy-main">Buy Guide &amp; Download PDF</span>
+            <span class="gh-buy-sub">Instant download · Yours forever</span>
+          </span>
+          <span class="gh-buy-arrow">&#8594;</span>
+        </button>
+    </div>
+    <div class="gh-trust">&#128274; Secure Stripe &middot; Instant PDF &middot; Yours forever</div>
+  </div>
+</section>
+
+<section class="inside-section">
+  <div class="inside-sec">
+    <div class="sec-label">What's Inside</div>
+    <div class="sec-title">Everything You Need to Make This</div>
+    <div class="inside-grid">
+      <div class="ic"><span class="ic-icon">&#128203;</span><h4>Full Materials List</h4><p>Every item with exact quantities and costs. No surprises at the hardware store.</p></div>
+      <div class="ic"><span class="ic-icon">&#128247;</span><h4>Real Photos Every Step</h4><p>Every photo was taken during the actual project. You'll always know what to expect.</p></div>
+      <div class="ic"><span class="ic-icon">&#128161;</span><h4>Pro Tips &amp; Variations</h4><p>The mistakes we made and how to avoid them — plus creative variations on the design.</p></div>
+      <div class="ic"><span class="ic-icon">&#128295;</span><h4>Troubleshooting Guide</h4><p>Every common problem solved with clear, tested fixes so your first attempt succeeds.</p></div>
+      <div class="ic"><span class="ic-icon">&#9201;</span><h4>Weekend-Friendly</h4><p>Designed to be completed in 1–2 days. Real, visible results — fast.</p></div>
+      <div class="ic"><span class="ic-icon">&#127807;</span><h4>Beginner Friendly</h4><p>No jargon, no skipped steps. If you can follow a recipe, you can do this.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="steps-section">
+  <div class="steps-sec">
+    <div class="sec-label">The Process</div>
+    <div class="sec-title">How It All Comes Together</div>
+    <div class="steps-list">
+      <div class="step"><div class="step-n">01</div><div><h4>Set Up Bucket &amp; Soak Fabric</h4><p>Place bucket upside-down outdoors. Spray outside with cooking spray. Soak hessian/burlap in water until fully saturated then wring lightly.</p></div></div>
+      <div class="step"><div class="step-n">02</div><div><h4>Set Up Your Workspace</h4><p>Follow the setup instructions to prepare your molds, surfaces, and tools before you start. A good setup makes everything easier.</p></div></div>
+      <div class="step"><div class="step-n">03</div><div><h4>Mix &amp; Pat Concrete Into Fabric</h4><p>Mix to thick oatmeal consistency. Pat firmly into the draped fabric using gloved hands — build up 1–1.5 inches thick. Form a bowl depression in the centre.</p></div></div>
+      <div class="step"><div class="step-n">04</div><div><h4>Cure &amp; Finish</h4><p>Let the project cure properly, then follow the finishing steps — sanding, sealing, and any final touches that make it look professional.</p></div></div>
+      <div class="step"><div class="step-n">05</div><div><h4>Peel, Seal &amp; Watch the Birds Arrive</h4><p>Peel the fabric away — the concrete holds the draped shape permanently! Sand rough edges, seal with outdoor concrete sealer, fill with water. Birds will find it the same day. &#128038;</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="bottom-cta">
+  <h2>Ready to <em>Make This?</em></h2>
+  <p>Instant PDF download. Real photos. Everything you need. Only 3 copies left at this price.</p>
+  <button class="gh-buy" onclick="openModal()" style="max-width:480px;margin:0 auto;">&#11015; Buy Guide &mdash; $11.00</button>
+</section>
+
+<footer>
+  <div class="f-logo">Made By Hand</div>
+  <p>&#169; 2026 &middot; Digital PDF Downloads &middot; <a href="mailto:you@example.com">Contact</a></p>
+</footer>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <div class="modal-top">
+      <div>
+        <div class="m-title">Concrete Bird Bath with Fabric Drape</div>
+        <div class="m-price-row">
+          <span class="m-price">$11.00</span>
+          <span class="m-was">$28.00</span>
+        </div>
+      </div>
+      <button class="m-close" onclick="closeModal()">&#10005;</button>
+    </div>
+    <div class="modal-body">
+      <div id="form-wrap">
+        <div id="payment-element"><p>&#9203; Loading secure payment...</p></div>
+        <div id="card-err"></div>
+        <button class="pay-btn" id="pay-btn" disabled>Loading...</button>
+        <div class="m-secure">&#128274; Secured by Stripe &middot; PDF delivered instantly</div>
+      </div>
+      <div class="success" id="success-box">
+        <span class="success-icon">&#127881;</span>
+        <h3>All Set!</h3>
+        <p>Your guide is ready. Thank you!</p>
+        <a href="DIY_Concrete_Bird_Bath_Guide.pdf" download class="dl-btn">&#11015; Download Your Guide</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const STRIPE_KEY='pk_live_51TQB5uERLV3AA0mv0dp2i9c6m3Y1oxuGCe0pghanMWYW9Y8gr4tPWJdwJAUhdaqDaUfWazxd4GKMaRaPfDgwMrBm00d1NxbK5G';
+const AMOUNT=1100;
+const PRODUCT='Concrete Bird Bath with Fabric Drape';
+let stripe,elements;
+
+// Cursor
+const dot=document.getElementById('cursorDot'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});
+function animC(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animC);}
+animC();
+document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>ring.classList.add('hover'));el.addEventListener('mouseleave',()=>ring.classList.remove('hover'));});
+
+// Timer
+(function(){
+  let secs=31*60;
+  function tick(){const m=String(Math.floor(secs/60)).padStart(2,'0'),s=String(secs%60).padStart(2,'0');const el=document.getElementById('countdown');if(el)el.textContent=m+':'+s;if(secs>0)secs--;}
+  tick();setInterval(tick,1000);
+})();
+
+// Reveal
+const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*80);obs.unobserve(e.target);}});},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// Modal
+async function openModal(){
+  document.getElementById('form-wrap').style.display='block';
+  document.getElementById('success-box').style.display='none';
+  document.getElementById('pay-btn').disabled=true;
+  document.getElementById('pay-btn').textContent='Loading...';
+  document.getElementById('card-err').textContent='';
+  document.getElementById('payment-element').innerHTML='<p>&#9203; Loading secure payment...</p>';
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  stripe=Stripe(STRIPE_KEY);
+  try{
+    const res=await fetch('/.netlify/functions/create-payment-intent',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({amount:AMOUNT,currency:'usd',product:PRODUCT})});
+    const data=await res.json();
+    if(data.error)throw new Error(data.error);
+    elements=stripe.elements({clientSecret:data.clientSecret,appearance:{theme:'night',variables:{colorPrimary:'#C8963C',fontFamily:"'Outfit', sans-serif",borderRadius:'0px',colorBackground:'#201E1B',colorText:'#F0EDE8'}}});
+    document.getElementById('payment-element').innerHTML='';
+    elements.create('payment').mount('#payment-element');
+    document.getElementById('pay-btn').disabled=false;
+    document.getElementById('pay-btn').textContent='Pay $11.00 & Download';
+  }catch(err){
+    document.getElementById('payment-element').innerHTML='<p style="color:#B84040">Could not load payment. Please try again.</p>';
+    document.getElementById('pay-btn').textContent='Try Again';
+    document.getElementById('pay-btn').disabled=false;
+    document.getElementById('pay-btn').onclick=openModal;
+  }
+}
+
+function closeModal(){document.getElementById('overlay').classList.remove('open');document.body.style.overflow='';}
+document.getElementById('overlay').addEventListener('click',e=>{if(e.target===document.getElementById('overlay'))closeModal();});
+
+document.getElementById('pay-btn').addEventListener('click',async function(){
+  if(this.textContent.includes('Loading')||this.textContent.includes('Try'))return;
+  const btn=this;btn.disabled=true;btn.textContent='Processing...';
+  document.getElementById('card-err').textContent='';
+  try{
+    const {error}=await stripe.confirmPayment({elements,confirmParams:{return_url:window.location.href},redirect:'if_required'});
+    if(error){document.getElementById('card-err').textContent=error.message;btn.disabled=false;btn.textContent='Pay $11.00 & Download';}
+    else{document.getElementById('form-wrap').style.display='none';document.getElementById('success-box').style.display='block';}
+  }catch(err){document.getElementById('card-err').textContent='Something went wrong. Please try again.';btn.disabled=false;btn.textContent='Try Again';}
+});
+</script>
+</body>
+</html>
