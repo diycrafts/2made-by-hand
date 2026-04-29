@@ -129,10 +129,28 @@ nav{
 .hero-tag{
   display:inline-flex;align-items:center;gap:10px;
   font-size:0.65rem;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;
-  color:var(--green2);margin-bottom:2.5rem;
+  color:var(--green2);margin-bottom:2rem;
   opacity:0;animation:fadeUp 0.8s 0.2s forwards;
 }
 .hero-tag::before{content:'';width:20px;height:1px;background:var(--green2);}
+
+/* WHAT YOU GET */
+.hero-what{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:0;margin-bottom:2rem;
+  border:1px solid var(--line2);
+  opacity:0;animation:fadeUp 0.9s 0.45s forwards;
+}
+.hw-item{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 14px;
+  font-size:0.75rem;font-weight:300;color:var(--text2);
+  border-bottom:1px solid var(--line);
+  border-right:1px solid var(--line);
+}
+.hw-item:nth-child(2n){border-right:none;}
+.hw-item:nth-last-child(-n+2){border-bottom:none;}
+.hw-icon{font-size:0.9rem;flex-shrink:0;}
 .hero h1{
   font-family:'Fraunces',serif;
   font-size:clamp(4rem,7vw,7.5rem);
@@ -620,6 +638,129 @@ footer a:hover{color:var(--accent);}
   .hero-stats{gap:1.5rem;}
   .feat-nums{gap:1.5rem;}
 }
+
+/* ═══════════════════════════════════════════
+   HERO SHOP STYLE
+═══════════════════════════════════════════ */
+.hero-shop{
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:calc(100vh - 82px);
+  border-bottom:1px solid var(--line);
+  overflow:hidden;
+}
+.hs-left{
+  padding:5rem 4vw 5rem 6vw;
+  display:flex;flex-direction:column;justify-content:center;
+  border-right:1px solid var(--line);
+}
+.hs-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:0.68rem;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--accent);background:rgba(200,150,60,0.1);
+  border:1px solid rgba(200,150,60,0.25);
+  padding:6px 14px;margin-bottom:2rem;width:fit-content;
+  animation:fadeUp 0.7s 0.1s both;
+}
+.hs-title{
+  font-family:'Fraunces',serif;
+  font-size:clamp(2.6rem,4.5vw,4.8rem);
+  font-weight:100;line-height:0.95;letter-spacing:-0.02em;
+  color:var(--text);margin-bottom:1.75rem;
+  animation:fadeUp 0.8s 0.25s both;
+}
+.hs-title em{font-style:italic;color:var(--accent);}
+.hs-desc{
+  font-size:0.98rem;font-weight:300;line-height:1.85;
+  color:var(--text2);margin-bottom:2rem;max-width:440px;
+  animation:fadeUp 0.8s 0.4s both;
+}
+.hs-desc strong{color:var(--text);font-weight:500;}
+.hs-includes{
+  display:flex;flex-direction:column;gap:0.6rem;
+  margin-bottom:2.5rem;
+  animation:fadeUp 0.8s 0.5s both;
+}
+.hsi{
+  font-size:0.82rem;font-weight:300;color:var(--text2);
+  display:flex;align-items:center;gap:8px;
+}
+.hs-cta{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Outfit',sans-serif;font-size:0.82rem;font-weight:500;
+  letter-spacing:0.14em;text-transform:uppercase;
+  background:var(--accent);color:var(--bg);
+  padding:16px 28px;text-decoration:none;
+  width:fit-content;
+  position:relative;overflow:hidden;
+  transition:background 0.25s,transform 0.2s;
+  box-shadow:0 0 30px rgba(200,150,60,0.3);
+  animation:fadeUp 0.8s 0.6s both;
+  margin-bottom:1rem;
+}
+.hs-cta:hover{background:var(--accent2);transform:translateY(-1px);}
+.hs-proof{
+  font-size:0.65rem;font-weight:300;color:var(--text3);
+  letter-spacing:0.1em;
+  animation:fadeUp 0.8s 0.7s both;
+}
+
+/* RIGHT SIDE — product grid */
+.hs-right{
+  background:var(--bg2);
+  padding:2.5rem;
+  display:flex;flex-direction:column;justify-content:center;
+  animation:fadeIn 1s 0.3s both;
+}
+.hs-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:2px;background:var(--line);
+  flex:1;
+}
+.hsg-card{
+  background:var(--bg);text-decoration:none;color:inherit;
+  display:flex;flex-direction:column;
+  transition:background 0.2s;
+  overflow:hidden;
+}
+.hsg-card:hover{background:var(--surface);}
+.hsg-img{position:relative;aspect-ratio:4/3;overflow:hidden;}
+.hsg-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s;}
+.hsg-card:hover .hsg-img img{transform:scale(1.05);}
+.hsg-pdf-badge{
+  position:absolute;top:10px;left:10px;
+  font-size:0.56rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
+  background:var(--accent);color:var(--bg);
+  padding:3px 8px;
+}
+.hsg-body{padding:0.85rem 1rem 1rem;border-top:1px solid var(--line);}
+.hsg-name{
+  font-family:'Fraunces',serif;font-size:0.88rem;font-weight:300;
+  color:var(--text);margin-bottom:3px;line-height:1.3;
+}
+.hsg-meta{font-size:0.62rem;font-weight:300;color:var(--text3);margin-bottom:0.6rem;letter-spacing:0.06em;}
+.hsg-price-row{display:flex;align-items:baseline;gap:6px;}
+.hsg-price{font-family:'Fraunces',serif;font-size:1.15rem;font-weight:300;color:var(--accent);}
+.hsg-was{font-size:0.68rem;color:var(--text3);text-decoration:line-through;}
+.hsg-save{font-size:0.58rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;background:rgba(200,150,60,0.12);border:1px solid rgba(200,150,60,0.2);color:var(--accent);padding:1px 6px;}
+.hs-view-all{
+  text-align:center;padding-top:1.25rem;
+  border-top:1px solid var(--line);margin-top:2px;
+}
+.hs-view-all a{
+  font-size:0.65rem;font-weight:400;letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--text3);text-decoration:none;transition:color 0.2s;
+}
+.hs-view-all a:hover{color:var(--accent);}
+
+@media(max-width:900px){
+  .hero-shop{grid-template-columns:1fr;min-height:auto;}
+  .hs-left{padding:3.5rem 5vw;border-right:none;border-bottom:1px solid var(--line);}
+  .hs-right{padding:2rem 5vw;}
+}
+@media(max-width:500px){
+  .hs-grid{grid-template-columns:1fr;}
+}
+
 </style>
 </head>
 <body>
@@ -653,70 +794,73 @@ footer a:hover{color:var(--accent);}
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-blob"></div>
+<!-- HERO — ebook shop style -->
+<section class="hero-shop">
 
-  <div class="hero-left">
-    <div class="hero-tag">Premium DIY Guides</div>
-    <h1>
-      Make<br/>
-      <em class="line2">Something</em><br/>
-      <span class="line3">Beautiful</span>
+  <!-- LEFT: pitch text -->
+  <div class="hs-left">
+    <div class="hs-badge">&#11015; Downloadable PDF Guides</div>
+    <h1 class="hs-title">
+      Step-by-Step Guides<br/>
+      to Build <em>Stunning</em><br/>
+      DIY Projects at Home
     </h1>
-    <p class="hero-desc">
-      Step-by-step PDF guides for real home &amp; garden projects.
-      <b>Real photos at every step.</b> Built for people who want
-      to actually create — not just browse.
+    <p class="hs-desc">
+      Each guide is a <strong>detailed PDF ebook</strong> — real photos at every step, full materials list with costs, and beginner-friendly instructions. <strong>Buy once, download instantly, build whenever you're ready.</strong>
     </p>
-    <div class="hero-btns">
-      <a href="shop.html" class="btn-gold">
-        <span>Shop All Guides</span>
-        <span>&#8594;</span>
-      </a>
-      <a href="#collection" class="btn-outline">Browse collection</a>
+    <div class="hs-includes">
+      <div class="hsi">&#9989; Step-by-step instructions with real photos</div>
+      <div class="hsi">&#9989; Full materials list &amp; costs before you start</div>
+      <div class="hsi">&#9989; Instant PDF download — no account needed</div>
+      <div class="hsi">&#9989; Works for complete beginners</div>
     </div>
-    <div class="hero-stats">
-      <div class="hs">
-        <div class="hs-n">14+</div>
-        <div class="hs-l">Guides</div>
-      </div>
-      <div class="hs">
-        <div class="hs-n">$5</div>
-        <div class="hs-l">From</div>
-      </div>
-      <div class="hs">
-        <div class="hs-n">3M+</div>
-        <div class="hs-l">Views</div>
-      </div>
+    <a href="shop.html" class="hs-cta">
+      Browse All PDF Guides — from $5 &#8594;
+    </a>
+    <div class="hs-proof">
+      &#128274; Secure payment &middot; &#9989; Apple Pay &middot; &#11015; Instant download
     </div>
   </div>
 
-  <div class="hero-right">
-    <div class="hero-imgs">
-      <div class="hi hi--tall">
-        <img src="lifestyle2.jpg" alt="Glowing Stepping Stones"/>
-        <div class="hi-meta">
-          <div class="hi-name">Illuminated Stone Path</div>
-          <div class="hi-price">From $5</div>
+  <!-- RIGHT: product cards -->
+  <div class="hs-right">
+    <div class="hs-grid">
+      <a href="guide-house-number.html" class="hsg-card">
+        <div class="hsg-img"><img src="thumbnail_house-number.jpg" alt="House Number Sign Guide"/><div class="hsg-pdf-badge">PDF Guide</div></div>
+        <div class="hsg-body">
+          <div class="hsg-name">Concrete House Number Sign</div>
+          <div class="hsg-meta">45 min &middot; Beginner</div>
+          <div class="hsg-price-row"><span class="hsg-price">$13</span><span class="hsg-was">$24</span><span class="hsg-save">46% off</span></div>
         </div>
-      </div>
-      <div class="hi">
-        <img src="lifestyle3.jpg" alt="Mosaic Table"/>
-        <div class="hi-meta">
-          <div class="hi-name">Mosaic Patio Table</div>
-          <div class="hi-price">From $5</div>
+      </a>
+      <a href="guide-balloon-vase.html" class="hsg-card">
+        <div class="hsg-img"><img src="thumbnail_balloon-vase.jpg" alt="Balloon Vase Guide"/><div class="hsg-pdf-badge">PDF Guide</div></div>
+        <div class="hsg-body">
+          <div class="hsg-name">Balloon Vase with Gold Interior</div>
+          <div class="hsg-meta">30 min &middot; Beginner</div>
+          <div class="hsg-price-row"><span class="hsg-price">$13</span><span class="hsg-was">$22</span><span class="hsg-save">41% off</span></div>
         </div>
-      </div>
-      <div class="hi">
-        <img src="lifestyle4.jpg" alt="Geometric Planters"/>
-        <div class="hi-meta">
-          <div class="hi-name">Geometric Planters</div>
-          <div class="hi-price">From $5</div>
+      </a>
+      <a href="guide-stone-candle.html" class="hsg-card">
+        <div class="hsg-img"><img src="thumbnail_stone-candle.jpg" alt="Stone Candle Holder Guide"/><div class="hsg-pdf-badge">PDF Guide</div></div>
+        <div class="hsg-body">
+          <div class="hsg-name">River Stone Candle Holder</div>
+          <div class="hsg-meta">20 min &middot; Beginner</div>
+          <div class="hsg-price-row"><span class="hsg-price">$11</span><span class="hsg-was">$30</span><span class="hsg-save">63% off</span></div>
         </div>
-      </div>
+      </a>
+      <a href="guide-rope-planter.html" class="hsg-card">
+        <div class="hsg-img"><img src="thumbnail_rope-planter.jpg" alt="Rope Planter Guide"/><div class="hsg-pdf-badge">PDF Guide</div></div>
+        <div class="hsg-body">
+          <div class="hsg-name">Rope Texture Planter</div>
+          <div class="hsg-meta">30 min &middot; Beginner</div>
+          <div class="hsg-price-row"><span class="hsg-price">$9.99</span><span class="hsg-was">$17</span><span class="hsg-save">41% off</span></div>
+        </div>
+      </a>
     </div>
+    <div class="hs-view-all"><a href="shop.html">View all 14 PDF guides &#8594;</a></div>
   </div>
+
 </section>
 
 
