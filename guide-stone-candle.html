@@ -373,7 +373,7 @@ document.getElementById('pay-btn').addEventListener('click',async function(){
   try{
     const {error}=await stripe.confirmPayment({elements,confirmParams:{return_url:window.location.href},redirect:'if_required'});
     if(error){document.getElementById('card-err').textContent=error.message;btn.disabled=false;btn.textContent='Pay $11.00 & Download';}
-    else{document.getElementById('form-wrap').style.display='none';document.getElementById('success-box').style.display='block';}
+    else{document.getElementById('form-wrap').style.display='none';document.getElementById('success-box').style.display='block';setTimeout(()=>openEmailPopup('DIY_River_Stone_Candle_Holder_Guide.pdf'),1200);}
   }catch(err){document.getElementById('card-err').textContent='Something went wrong. Please try again.';btn.disabled=false;btn.textContent='Try Again';}
 });
 
@@ -451,7 +451,7 @@ async function submitEmail(){
     <div style="padding:0 1.5rem 1.5rem;">
       <div style="border-top:1px solid rgba(255,255,255,0.06);padding-top:1.25rem;">
         <p style="font-size:0.68rem;color:#4A4540;text-align:center;margin:0 0 0.75rem;letter-spacing:0.1em;text-">Or just download directly</p>
-        <a id="popup-download-btn" href="#" download 
+        <a id="popup-dl-btn" href="#" download 
           style="display:flex;align-items:center;justify-content:center;gap:8px;background:#201E1B;border:1px solid rgba(255,255,255,0.1);padding:12px;color:#A09890;text-decoration:none;font-size:0.72rem;font-weight:500;letter-spacing:0.14em;text-"
           onmouseover="this.style.borderColor='rgba(200,150,60,0.4)';this.style.color='#F0EDE8'" 
           onmouseout="this.style.borderColor='rgba(255,255,255,0.1)';this.style.color='#A09890'">
