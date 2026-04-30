@@ -130,6 +130,35 @@ button,a{touch-action:manipulation;}
   <a href="index.html" class="logo"><div class="logo-dot"></div>Made By Hand</a>
 </nav>
 
+
+<!-- COVER GRID -->
+<section style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,240px);gap:3px;background:#0C0B09;border-bottom:1px solid rgba(255,255,255,0.07);">
+  <div style="overflow:hidden;position:relative;">
+    <img src="thumbnail_bird-bath.jpg" alt="Bird Bath" style="width:100%;height:100%;object-fit:cover;display:block;"/>
+    <div style="position:absolute;inset:0;background:rgba(12,11,9,0.25);"></div>
+  </div>
+  <div style="overflow:hidden;position:relative;grid-row:span 2;">
+    <img src="thumbnail_stone-candle.jpg" alt="Stone Candle" style="width:100%;height:100%;object-fit:cover;display:block;"/>
+    <div style="position:absolute;inset:0;background:rgba(12,11,9,0.15);"></div>
+    <div style="position:absolute;bottom:0;left:0;right:0;padding:1.5rem;background:linear-gradient(transparent,rgba(12,11,9,0.9));">
+      <p style="font-family:'Fraunces',serif;font-size:1.4rem;font-weight:100;color:#F0EDE8;margin:0 0 4px;line-height:1.1;">15 Stunning DIY Projects</p>
+      <p style="font-size:0.7rem;font-weight:400;letter-spacing:0.16em;text-transform:uppercase;color:#C8963C;margin:0;">One Complete Bundle</p>
+    </div>
+  </div>
+  <div style="overflow:hidden;position:relative;">
+    <img src="thumbnail_balloon-vase.jpg" alt="Balloon Vase" style="width:100%;height:100%;object-fit:cover;display:block;"/>
+    <div style="position:absolute;inset:0;background:rgba(12,11,9,0.25);"></div>
+  </div>
+  <div style="overflow:hidden;position:relative;">
+    <img src="thumbnail_mosaic_table.jpg" alt="Mosaic Table" style="width:100%;height:100%;object-fit:cover;display:block;"/>
+    <div style="position:absolute;inset:0;background:rgba(12,11,9,0.25);"></div>
+  </div>
+  <div style="overflow:hidden;position:relative;">
+    <img src="thumbnail_stepping-stones.jpg" alt="Stepping Stones" style="width:100%;height:100%;object-fit:cover;display:block;"/>
+    <div style="position:absolute;inset:0;background:rgba(12,11,9,0.25);"></div>
+  </div>
+</section>
+
 <!-- HERO -->
 <section class="hero">
   <div class="exclusive-badge">&#128274; Exclusive Offer &mdash; Not Available in Shop</div>
@@ -361,6 +390,34 @@ const STRIPE_KEY='pk_live_51TQB5uERLV3AA0mv0dp2i9c6m3Y1oxuGCe0pghanMWYW9Y8gr4tPW
 const PRODUCT='The Complete DIY Collection — All 15 Guides';
 const AMOUNT=3700;
 let stripe,elements;
+
+
+async function openModal(){
+  document.getElementById('form-wrap').style.display='block';
+  document.getElementById('success-box').style.display='none';
+  document.getElementById('pay-btn').disabled=true;
+  document.getElementById('pay-btn').textContent='Loading...';
+  document.getElementById('card-err').textContent='';
+  document.getElementById('payment-element').innerHTML='<p style="font-size:0.82rem;color:#A09890;padding:1rem 0;text-align:center;">&#9203; Loading secure payment...</p>';
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  stripe=Stripe(STRIPE_KEY);
+  try{
+    const res=await fetch('/.netlify/functions/create-payment-intent',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({amount:AMOUNT,currency:'usd',product:PRODUCT})});
+    const data=await res.json();
+    if(data.error)throw new Error(data.error);
+    elements=stripe.elements({clientSecret:data.clientSecret,appearance:{theme:'night',variables:{colorPrimary:'#C8963C',fontFamily:"'Outfit',sans-serif",borderRadius:'0px',colorBackground:'#201E1B',colorText:'#F0EDE8'}}});
+    document.getElementById('payment-element').innerHTML='';
+    elements.create('payment').mount('#payment-element');
+    document.getElementById('pay-btn').disabled=false;
+    document.getElementById('pay-btn').textContent='Pay $37.00 — Get All 15 Guides';
+  }catch(err){
+    document.getElementById('payment-element').innerHTML='<p style="color:#B84040;font-size:0.82rem;padding:1rem 0;text-align:center;">Could not load payment. Please try again.</p>';
+    document.getElementById('pay-btn').textContent='Try Again';
+    document.getElementById('pay-btn').disabled=false;
+    document.getElementById('pay-btn').onclick=openModal;
+  }
+}
 
 function closeModal(){document.getElementById('overlay').classList.remove('open');document.body.style.overflow='';}
 document.getElementById('overlay').addEventListener('click',e=>{if(e.target===document.getElementById('overlay'))closeModal();});
