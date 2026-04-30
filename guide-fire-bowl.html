@@ -360,6 +360,35 @@ const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isInte
   }
 }
 
+
+async function openModal(){
+  document.getElementById('form-wrap').style.display='block';
+  document.getElementById('success-box').style.display='none';
+  document.getElementById('pay-btn').disabled=true;
+  document.getElementById('pay-btn').textContent='Loading...';
+  document.getElementById('card-err').textContent='';
+  document.getElementById('payment-element').innerHTML='<p>&#9203; Loading secure payment...</p>';
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  stripe=Stripe(STRIPE_KEY);
+  try{
+    const res=await fetch('/.netlify/functions/create-payment-intent',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({amount:AMOUNT,currency:'usd',product:PRODUCT})});
+    const data=await res.json();
+    if(data.error)throw new Error(data.error);
+    elements=stripe.elements({clientSecret:data.clientSecret,appearance:{theme:'night',variables:{colorPrimary:'#C8963C',fontFamily:"'Outfit',sans-serif",borderRadius:'0px',colorBackground:'#201E1B',colorText:'#F0EDE8'}}});
+    document.getElementById('payment-element').innerHTML='';
+    elements.create('payment').mount('#payment-element');
+    document.getElementById('pay-btn').disabled=false;
+    const amount=(AMOUNT/100).toFixed(2);
+    document.getElementById('pay-btn').textContent='Pay $'+amount+' & Download';
+  }catch(err){
+    document.getElementById('payment-element').innerHTML='<p style="color:#B84040">Could not load payment. Please try again.</p>';
+    document.getElementById('pay-btn').textContent='Try Again';
+    document.getElementById('pay-btn').disabled=false;
+    document.getElementById('pay-btn').onclick=openModal;
+  }
+}
+
 function closeModal(){document.getElementById('overlay').classList.remove('open');document.body.style.overflow='';}
 document.getElementById('overlay').addEventListener('click',e=>{if(e.target===document.getElementById('overlay'))closeModal();});
 
