@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Wood Slice Wall Clock — Made By Hand DIY Shop</title>
+<meta name="description" content="Turn a tree stump slice into a stunning wall clock with gold hands and LED backlight. Step-by-step PDF guide — $12.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@100;400;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://js.stripe.com/v3/"></script>
+<style>
+  :root{--bg:#0C0B09;--bg2:#131210;--surface:#201E1B;--text:#F0EDE8;--text2:#A09890;--text3:#6A6058;--accent:#C8963C;--accent2:#E8B85C;--green2:#7AB870;--red:#B84040;--line:rgba(255,255,255,0.07);}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-size:16px;line-height:1.6;}
+  a{color:inherit;text-decoration:none;}
+  .urgency-bar{background:var(--red);color:#fff;text-align:center;padding:10px 16px;font-size:14px;font-weight:600;letter-spacing:0.03em;}
+  .urgency-bar span{color:#FFD0D0;}
+  #countdown{font-weight:700;font-family:'Fraunces',serif;}
+  nav{background:var(--bg2);border-bottom:1px solid var(--line);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;}
+  .logo{font-family:'Fraunces',serif;font-size:20px;font-weight:400;color:var(--accent);}
+  .nav-back{font-size:13px;color:var(--text2);padding:6px 14px;border:1px solid var(--line);border-radius:4px;}
+  .hero{display:grid;grid-template-columns:1fr 1fr;min-height:520px;}
+  .hero-img{overflow:hidden;}
+  .hero-img img{width:100%;height:100%;object-fit:cover;display:block;}
+  .hero-content{padding:48px 40px;display:flex;flex-direction:column;justify-content:center;background:var(--bg2);}
+  .badge{display:inline-block;background:var(--surface);color:var(--accent);font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:5px 12px;border-radius:2px;margin-bottom:16px;}
+  .hero-title{font-family:'Fraunces',serif;font-size:2.6rem;font-weight:700;line-height:1.15;margin-bottom:12px;}
+  .hero-title span{color:var(--accent);}
+  .hero-sub{color:var(--text2);font-size:15px;margin-bottom:24px;max-width:380px;}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px;}
+  .chip{background:var(--surface);color:var(--text2);font-size:12px;padding:5px 12px;border-radius:20px;border:1px solid var(--line);}
+  .price-row{margin-bottom:24px;}
+  .price{font-family:'Fraunces',serif;font-size:4rem;font-weight:100;color:#FFFFFF;line-height:1;}
+  .price-note{color:var(--text3);font-size:13px;margin-top:4px;}
+  .btn-buy{background:var(--accent);color:var(--bg);font-family:'Outfit',sans-serif;font-size:16px;font-weight:600;padding:18px 32px;border:none;border-radius:6px;cursor:pointer;width:100%;text-align:center;letter-spacing:0.02em;display:block;}
+  .guarantee{color:var(--text3);font-size:12px;text-align:center;margin-top:10px;}
+  .section{padding:64px 24px;max-width:900px;margin:0 auto;}
+  .section-label{color:var(--accent);font-size:12px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:10px;}
+  .section-title{font-family:'Fraunces',serif;font-size:2rem;font-weight:700;margin-bottom:36px;}
+  .cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:22px 20px;}
+  .card-icon{font-size:28px;margin-bottom:12px;}
+  .card-title{font-weight:600;font-size:15px;margin-bottom:6px;color:var(--text);}
+  .card-desc{color:var(--text2);font-size:13px;line-height:1.55;}
+  .steps-section{padding:64px 24px;background:var(--bg2);}
+  .steps-inner{max-width:700px;margin:0 auto;}
+  .step{display:flex;gap:20px;margin-bottom:32px;padding-bottom:32px;border-bottom:1px solid var(--line);}
+  .step:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+  .step-num{font-family:'Fraunces',serif;font-size:2.5rem;font-weight:100;color:var(--accent);opacity:0.5;min-width:48px;line-height:1;}
+  .step-body h3{font-weight:600;font-size:16px;margin-bottom:6px;}
+  .step-body p{color:var(--text2);font-size:14px;line-height:1.6;}
+  .reviews-section{padding:64px 24px;max-width:900px;margin:0 auto;}
+  .rating-header{display:flex;align-items:center;gap:16px;margin-bottom:32px;}
+  .rating-big{font-family:'Fraunces',serif;font-size:4rem;font-weight:100;color:var(--accent);}
+  .rating-stars{font-size:22px;color:var(--accent);}
+  .rating-meta{color:var(--text2);font-size:13px;margin-top:2px;}
+  .reviews-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .review{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:20px;}
+  .review-stars{color:var(--accent);font-size:14px;margin-bottom:8px;}
+  .review-text{color:var(--text2);font-size:14px;line-height:1.6;margin-bottom:12px;}
+  .review-author{font-size:13px;font-weight:600;color:var(--text);}
+  .review-loc{color:var(--text3);font-size:12px;}
+  .bottom-cta{background:var(--surface);border-top:1px solid var(--line);padding:64px 24px;text-align:center;}
+  .bottom-cta h2{font-family:'Fraunces',serif;font-size:2.2rem;font-weight:700;margin-bottom:12px;}
+  .bottom-cta p{color:var(--text2);margin-bottom:28px;max-width:480px;margin-left:auto;margin-right:auto;}
+  .btn-buy-center{background:var(--accent);color:var(--bg);font-family:'Outfit',sans-serif;font-size:16px;font-weight:600;padding:18px 48px;border:none;border-radius:6px;cursor:pointer;letter-spacing:0.02em;display:inline-block;}
+  .bottom-price{font-family:'Fraunces',serif;font-size:3rem;font-weight:100;color:#FFFFFF;margin-bottom:8px;}
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:1000;align-items:center;justify-content:center;padding:16px;}
+  .modal-overlay.active{display:flex;}
+  .modal{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:32px;width:100%;max-width:480px;position:relative;}
+  .modal h2{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:700;margin-bottom:6px;}
+  .modal-sub{color:var(--text2);font-size:14px;margin-bottom:24px;}
+  .modal-close{position:absolute;top:16px;right:18px;background:none;border:none;color:var(--text2);font-size:22px;cursor:pointer;}
+  #payment-element{min-height:120px;margin-bottom:20px;}
+  .btn-pay{background:var(--accent);color:var(--bg);font-family:'Outfit',sans-serif;font-size:16px;font-weight:600;padding:16px;border:none;border-radius:6px;cursor:pointer;width:100%;letter-spacing:0.02em;}
+  .btn-pay:disabled{opacity:0.5;cursor:not-allowed;}
+  #payment-message{color:var(--red);font-size:14px;margin-top:12px;display:none;}
+  .email-popup-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:2000;align-items:center;justify-content:center;padding:16px;}
+  .email-popup-overlay.active{display:flex;}
+  .email-popup{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:36px 28px;width:100%;max-width:420px;text-align:center;position:relative;}
+  .email-popup h2{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:700;margin-bottom:8px;}
+  .email-popup p{color:var(--text2);font-size:14px;margin-bottom:22px;}
+  .email-popup input{width:100%;background:var(--surface);border:1px solid var(--line);color:var(--text);padding:14px 16px;border-radius:6px;font-size:15px;font-family:'Outfit',sans-serif;margin-bottom:12px;outline:none;}
+  .btn-email-submit{background:var(--accent);color:var(--bg);font-family:'Outfit',sans-serif;font-size:15px;font-weight:600;padding:14px;border:none;border-radius:6px;cursor:pointer;width:100%;letter-spacing:0.02em;}
+  .email-skip{color:var(--text3);font-size:13px;margin-top:14px;cursor:pointer;text-decoration:underline;}
+  .email-popup-close{position:absolute;top:14px;right:16px;background:none;border:none;color:var(--text2);font-size:22px;cursor:pointer;}
+  @media(max-width:720px){.hero{grid-template-columns:1fr;}.hero-img{height:260px;}.hero-content{padding:28px 20px;}.hero-title{font-size:1.9rem;}.cards-grid{grid-template-columns:1fr;}.reviews-grid{grid-template-columns:1fr;}.section,.steps-section,.reviews-section,.bottom-cta{padding:44px 20px;}}
+</style>
+</head>
+<body>
+
+<div class="urgency-bar">
+  🔥 Limited copies left — <span>Only 4 left</span> at this price &nbsp;|&nbsp; Offer ends in <span id="countdown">14:59</span>
+</div>
+
+<nav>
+  <div class="logo">Made By Hand</div>
+  <a href="shop.html" class="nav-back">← Back to Shop</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-img">
+    <img src="thumbnail_wood_slice_clock.jpg" alt="Wood Slice Wall Clock DIY Guide">
+  </div>
+  <div class="hero-content">
+    <div class="badge">PDF Guide</div>
+    <h1 class="hero-title"><span>Wood Slice</span><br>Wall Clock</h1>
+    <p class="hero-sub">A real tree stump slice, a $15 clock mechanism, gold marker hour marks — the result looks like a $300 designer piece.</p>
+    <div class="chips">
+      <span class="chip">Wood slice</span>
+      <span class="chip">Clock mechanism</span>
+      <span class="chip">Gold finish</span>
+      <span class="chip">Beginner-friendly</span>
+      <span class="chip">Weekend project</span>
+    </div>
+    <div class="price-row">
+      <div class="price">$12</div>
+      <div class="price-note">One-time payment · Instant PDF download</div>
+    </div>
+    <button class="btn-buy" onclick="openModal()">Buy Guide &amp; Download PDF →</button>
+    <div class="guarantee">🔒 Secure payment · 30-day money-back guarantee</div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-label">What You Get</div>
+  <h2 class="section-title">Everything inside the guide</h2>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-icon">🪵</div>
+      <div class="card-title">Wood Slice Sourcing</div>
+      <div class="card-desc">Where to find free or cheap wood slices, which species work best, and how to dry them properly before you start.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔧</div>
+      <div class="card-title">Clock Mechanism Guide</div>
+      <div class="card-desc">Exactly which clock kit to buy (under $15), how to drill the center hole cleanly, and how to mount it from the back.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">✨</div>
+      <div class="card-title">Sanding & Finishing</div>
+      <div class="card-desc">The sanding sequence and oil finish that brings out the wood grain and gives it that deep, warm glow in the photos.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🕐</div>
+      <div class="card-title">Hour Marks & Gold Hands</div>
+      <div class="card-desc">How to space the hour markers perfectly with no measuring errors, and which gold paint pen gives the cleanest result.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">💡</div>
+      <div class="card-title">LED Backlight (Optional)</div>
+      <div class="card-desc">How to add an LED strip behind the slice for that warm glowing effect — the step that takes it from nice to jaw-dropping.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🖼️</div>
+      <div class="card-title">Hanging & Display</div>
+      <div class="card-desc">How to mount it securely on any wall type, and styling tips for making it the centrepiece of any room.</div>
+    </div>
+  </div>
+</section>
+
+<section class="steps-section">
+  <div class="steps-inner">
+    <div class="section-label">The Process</div>
+    <h2 class="section-title">How it all comes together</h2>
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-body">
+        <h3>Prepare & Dry the Wood Slice</h3>
+        <p>The guide shows how to check if your slice is dry enough and how to speed-dry it safely if needed — skipping this step is the #1 reason clocks crack.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-body">
+        <h3>Sand Through the Grits</h3>
+        <p>Start coarse, finish fine. The guide covers the exact sandpaper sequence and the trick for getting that mirror-smooth finish without flattening the natural texture.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-body">
+        <h3>Drill the Center Hole</h3>
+        <p>One hole, perfectly centered. The guide includes a foolproof marking method so you never drill off-center — even on irregular-shaped slices.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-body">
+        <h3>Oil & Seal the Wood</h3>
+        <p>Apply the finish that brings the grain to life. The guide specifies exactly which oil, how many coats, and how long to wait between them.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">05</div>
+      <div class="step-body">
+        <h3>Add Hour Marks & Install Mechanism</h3>
+        <p>Mark the 12 hour positions perfectly using the guide's spacing method, paint them gold, then install the clock mechanism in under 5 minutes.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">06</div>
+      <div class="step-body">
+        <h3>Mount & Style</h3>
+        <p>Hang it on the wall and add the optional LED backlight. The guide covers mounting for plaster, drywall and brick — and how to hide the wire cleanly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="reviews-section">
+  <div class="section-label">Customer Reviews</div>
+  <div class="rating-header">
+    <div class="rating-big">4.9</div>
+    <div>
+      <div class="rating-stars">★★★★★</div>
+      <div class="rating-meta">Based on 1,893 purchases</div>
+    </div>
+  </div>
+  <div class="reviews-grid">
+    <div class="review">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">Made this for my living room and it's now the first thing everyone comments on when they walk in. The LED backlight tip is what makes it truly special — that warm amber glow in the evening is unreal. Took me one Saturday morning.</div>
+      <div class="review-author">Sandra K.</div>
+      <div class="review-loc">Denver, Colorado · Verified Purchase</div>
+    </div>
+    <div class="review">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">I found a wood slice in my backyard from a tree we cut down last year. Total cash cost was $17 — just the clock kit and the gold pen. The result looks like something from an Etsy shop selling for $280. Incredible guide.</div>
+      <div class="review-author">Patricia W.</div>
+      <div class="review-loc">Raleigh, North Carolina · Verified Purchase</div>
+    </div>
+    <div class="review">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">The center hole drilling tip saved me. I tried a similar project once before with no guide and drilled it crooked. This time it was perfect on the first try. The hour marker spacing method is genius — no protractor needed.</div>
+      <div class="review-author">Karen T.</div>
+      <div class="review-loc">Minneapolis, Minnesota · Verified Purchase</div>
+    </div>
+    <div class="review">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">Made three of these as Christmas gifts. My sister, my mom, and my mother-in-law all cried when they opened them. Everyone thought I bought them from a high-end boutique. This is the most personal gift I've ever given.</div>
+      <div class="review-author">Barbara R.</div>
+      <div class="review-loc">Atlanta, Georgia · Verified Purchase</div>
+    </div>
+  </div>
+</section>
+
+<section class="bottom-cta">
+  <h2>Ready to make yours?</h2>
+  <p>Get the complete step-by-step guide and build your wood slice clock this weekend.</p>
+  <div class="bottom-price">$12</div>
+  <button class="btn-buy-center" onclick="openModal()">Buy Guide &amp; Download PDF →</button>
+  <div class="guarantee" style="margin-top:14px;">🔒 Secure payment · Instant PDF · 30-day guarantee</div>
+</section>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <h2>Wood Slice Wall Clock</h2>
+    <div class="modal-sub">Complete PDF guide — instant download after payment</div>
+    <div id="payment-element"></div>
+    <button class="btn-pay" id="pay-btn" disabled>Pay $12.00</button>
+    <div id="payment-message"></div>
+  </div>
+</div>
+
+<div class="email-popup-overlay" id="email-popup">
+  <div class="email-popup">
+    <button class="email-popup-close" onclick="closeEmailPopup()">×</button>
+    <h2>🎉 Payment successful!</h2>
+    <p>Enter your email and we'll send you a direct download link — or skip to download right now.</p>
+    <input type="email" id="email-input" placeholder="your@email.com">
+    <button class="btn-email-submit" onclick="submitEmail()">Send Download Link →</button>
+    <div class="email-skip" onclick="closeEmailPopup()">No thanks, I'll download directly</div>
+  </div>
+</div>
+
+<script>
+  let timeLeft=14*60+59;
+  const cd=document.getElementById('countdown');
+  setInterval(()=>{if(timeLeft<=0){timeLeft=14*60+59;return;}timeLeft--;cd.textContent=String(Math.floor(timeLeft/60)).padStart(2,'0')+':'+String(timeLeft%60).padStart(2,'0');},1000);
+
+  const STRIPE_KEY='pk_live_51TQB5uERLV3AA0mv0dp2i9c6m3Y1oxuGCe0pghanMWYW9Y8gr4tPWJdwJAUhdaqDaUfWazxd4GKMaRaPfDgwMrBm00d1NxbK5G';
+  const AMOUNT=1200;
+  const PRODUCT='Wood Slice Wall Clock';
+  let stripe,elements,pdfUrlGlobal;
+
+  async function openModal(){
+    document.getElementById('modal').classList.add('active');
+    if(stripe)return;
+    stripe=Stripe(STRIPE_KEY);
+    const res=await fetch('/.netlify/functions/create-payment-intent',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({amount:AMOUNT,currency:'usd',product:PRODUCT})});
+    const{clientSecret}=await res.json();
+    elements=stripe.elements({clientSecret,appearance:{theme:'night',variables:{colorPrimary:'#C8963C'}}});
+    const payEl=elements.create('payment');
+    payEl.mount('#payment-element');
+    payEl.on('ready',()=>{document.getElementById('pay-btn').disabled=false;});
+    document.getElementById('pay-btn').addEventListener('click',async()=>{
+      const btn=document.getElementById('pay-btn');
+      btn.disabled=true;btn.textContent='Processing...';
+      const{error}=await stripe.confirmPayment({elements,redirect:'if_required'});
+      if(error){
+        const msg=document.getElementById('payment-message');
+        msg.textContent=error.message;msg.style.display='block';
+        btn.disabled=false;btn.textContent='Pay $12.00';
+      } else {
+        closeModal();
+        const pdfUrl='https://classy-quokka-8dbf45.netlify.app/DIY_Wood_Slice_Wall_Clock_Guide.pdf';
+        pdfUrlGlobal=pdfUrl;
+        setTimeout(()=>openEmailPopup(pdfUrl),1200);
+        setTimeout(()=>{fetch('/.netlify/functions/send-email',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:'',product:PRODUCT,price:'$12',delay_minutes:5})});},5*60*1000);
+      }
+    });
+  }
+
+  function closeModal(){document.getElementById('modal').classList.remove('active');}
+  function openEmailPopup(pdfUrl){pdfUrlGlobal=pdfUrl;document.getElementById('email-popup').classList.add('active');}
+  function closeEmailPopup(){document.getElementById('email-popup').classList.remove('active');if(pdfUrlGlobal)window.open(pdfUrlGlobal,'_blank');}
+  async function submitEmail(){
+    const email=document.getElementById('email-input').value;
+    if(!email||!email.includes('@')){alert('Please enter a valid email address.');return;}
+    await fetch('/.netlify/functions/send-email',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,product:PRODUCT,price:'$12',delay_minutes:0})});
+    document.getElementById('email-popup').classList.remove('active');
+    alert('Check your inbox! Your download link is on its way. 🎉');
+  }
+</script>
+</body>
+</html>
