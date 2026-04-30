@@ -335,32 +335,6 @@ let stripe,elements;
 
 
 
-// Timer
-(function(){
-  let secs=44*60;
-  function tick(){const m=String(Math.floor(secs/60)).padStart(2,'0'),s=String(secs%60).padStart(2,'0');const el=document.getElementById('countdown');if(el)el.textContent=m+':'+s;if(secs>0)secs--;}
-  tick();setInterval(tick,1000);
-})();
-
-// Reveal
-const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*80);obs.unobserve(e.target);}});},{threshold:0.08});
-
-    const data=await res.json();
-    if(data.error)throw new Error(data.error);
-    elements=stripe.elements({clientSecret:data.clientSecret,appearance:{theme:'night',variables:{colorPrimary:'#C8963C',fontFamily:"'Outfit', sans-serif",borderRadius:'0px',colorBackground:'#201E1B',colorText:'#F0EDE8'}}});
-    document.getElementById('payment-element').innerHTML='';
-    elements.create('payment').mount('#payment-element');
-    document.getElementById('pay-btn').disabled=false;
-    document.getElementById('pay-btn').textContent='Pay $5.00 & Download';
-  }catch(err){
-    document.getElementById('payment-element').innerHTML='<p style="color:#B84040">Could not load payment. Please try again.</p>';
-    document.getElementById('pay-btn').textContent='Try Again';
-    document.getElementById('pay-btn').disabled=false;
-    document.getElementById('pay-btn').onclick=openModal;
-  }
-}
-
-
 async function openModal(){
   document.getElementById('form-wrap').style.display='block';
   document.getElementById('success-box').style.display='none';
