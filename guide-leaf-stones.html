@@ -142,7 +142,7 @@ nav{position:sticky;top:0;z-index:500;height:68px;display:flex;align-items:cente
 #payment-element{min-height:44px;margin-bottom:0.5rem;}
 #payment-element p{font-size:0.82rem;color:var(--text3);padding:1rem 0;text-align:center;}
 #card-err{font-size:0.78rem;color:var(--red);margin-top:0.5rem;min-height:1.2em;}
-.pay-btn{width:100%;background:var(--accent);color:var(--bg);border:none;padding:14px;font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:400;letter-spacing:0.18em;text-cursor:pointer;margin-top:1.25rem;}
+.pay-btn{width:100%;background:var(--accent);color:var(--bg);border:none;padding:14px;font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:400;letter-spacing:0.18em;cursor:pointer;margin-top:1.25rem;}
 .pay-btn:hover:not(:disabled){background:var(--accent2);}
 .pay-btn:disabled{opacity:0.4;cursor:not-allowed;}
 .m-secure{font-size:0.6rem;font-weight:300;color:var(--text3);letter-spacing:0.12em;text-text-align:center;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line);}
@@ -400,7 +400,7 @@ document.getElementById('pay-btn').addEventListener('click',async function(){
           style="flex:1;background:#0C0B09;border:1px solid rgba(255,255,255,0.12);border-right:none;padding:12px 14px;font-size:0.9rem;color:#F0EDE8;font-family:'Outfit',sans-serif;outline:none;"
           onkeydown="if(event.key==='Enter')submitEmail()"/>
         <button onclick="submitEmail()" id="email-submit-btn"
-          style="background:#C8963C;color:#0C0B09;border:none;padding:12px 20px;font-size:0.7rem;font-weight:600;letter-spacing:0.14em;text-cursor:pointer;font-family:'Outfit',sans-serif;white-space:nowrap;"
+          style="background:#C8963C;color:#0C0B09;border:none;padding:12px 20px;font-size:0.7rem;font-weight:600;letter-spacing:0.14em;cursor:pointer;font-family:'Outfit',sans-serif;white-space:nowrap;"
           onmouseover="this.style.background='#E8B85C'" onmouseout="this.style.background='#C8963C'">
           Send It &#8594;
         </button>
