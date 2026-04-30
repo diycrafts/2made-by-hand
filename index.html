@@ -29,7 +29,7 @@
   --red:#B84040;
   --w:#FFFFFF;
 }
-html{scroll-behavior:smooth;cursor:none;}
+html{scroll-behavior:smooth;}
 body{
   font-family:'Outfit',sans-serif;
   background:var(--bg);color:var(--text);
@@ -39,20 +39,9 @@ body{
 /* ═══════════════════════════════════════════
    CUSTOM CURSOR
 ═══════════════════════════════════════════ */
-.cursor{
-  position:fixed;top:0;left:0;z-index:9999;pointer-events:none;
-  mix-blend-mode:exclusion;
-}
-.cursor-dot{
-  width:8px;height:8px;background:var(--w);border-radius:50%;
-  position:absolute;transform:translate(-50%,-50%);
-  transition:transform 0.1s;
-}
-.cursor-ring{
-  width:40px;height:40px;border:1px solid rgba(255,255,255,0.4);
-  border-radius:50%;position:absolute;transform:translate(-50%,-50%);
-  transition:width 0.3s,height 0.3s,border-color 0.3s,transform 0.1s ease;
-}
+
+
+
 .cursor-ring.hover{
   width:64px;height:64px;
   border-color:var(--accent);
@@ -130,7 +119,7 @@ nav{
   display:inline-flex;align-items:center;gap:10px;
   font-size:0.65rem;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;
   color:var(--green2);margin-bottom:2rem;
-  opacity:0;animation:fadeUp 0.8s 0.2s forwards;
+  opacity:0;
 }
 .hero-tag::before{content:'';width:20px;height:1px;background:var(--green2);}
 
@@ -139,7 +128,7 @@ nav{
   display:grid;grid-template-columns:1fr 1fr;
   gap:0;margin-bottom:2rem;
   border:1px solid var(--line2);
-  opacity:0;animation:fadeUp 0.9s 0.45s forwards;
+  opacity:0;
 }
 .hw-item{
   display:flex;align-items:center;gap:10px;
@@ -156,7 +145,7 @@ nav{
   font-size:clamp(4rem,7vw,7.5rem);
   font-weight:100;line-height:0.9;letter-spacing:-0.02em;
   color:var(--text);margin-bottom:3rem;
-  opacity:0;animation:fadeUp 0.9s 0.35s forwards;
+  opacity:0;
 }
 .hero h1 em{font-style:italic;color:var(--accent);font-weight:100;}
 .hero h1 .line2{display:block;padding-left:2rem;}
@@ -164,13 +153,13 @@ nav{
 .hero-desc{
   font-size:1rem;font-weight:300;line-height:1.9;
   color:var(--text2);max-width:400px;margin-bottom:3rem;
-  opacity:0;animation:fadeUp 0.9s 0.5s forwards;
+  opacity:0;
 }
 .hero-desc b{color:var(--text);font-weight:400;}
 .hero-btns{
   display:flex;align-items:center;gap:1.5rem;
   margin-bottom:4rem;
-  opacity:0;animation:fadeUp 0.9s 0.65s forwards;
+  opacity:0;
 }
 .btn-gold{
   display:inline-flex;align-items:center;gap:10px;
@@ -199,7 +188,7 @@ nav{
 .hero-stats{
   display:flex;gap:2.5rem;padding-top:2.5rem;
   border-top:1px solid var(--line);
-  opacity:0;animation:fadeUp 0.9s 0.8s forwards;
+  opacity:0;
 }
 .hs{}
 .hs-n{
@@ -215,7 +204,7 @@ nav{
 /* HERO RIGHT — stacked images with parallax */
 .hero-right{
   position:relative;overflow:hidden;
-  opacity:0;animation:fadeIn 1.2s 0.4s forwards;
+  opacity:0;
 }
 .hero-imgs{
   position:absolute;inset:0;
@@ -252,7 +241,7 @@ nav{
   position:absolute;right:-20%;top:10%;
   width:600px;height:600px;
   background:radial-gradient(circle,rgba(200,150,60,0.06) 0%,transparent 70%);
-  animation:blobFloat 8s ease-in-out infinite;
+  
   pointer-events:none;
 }
 @keyframes blobFloat{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(-30px,40px) scale(1.05);}}
@@ -268,7 +257,7 @@ nav{
 }
 .marquee-track{
   display:flex;width:max-content;
-  animation:marquee 25s linear infinite;
+  
 }
 .marquee-item{
   display:flex;align-items:center;gap:12px;padding:0 2rem;
@@ -591,8 +580,8 @@ footer a:hover{color:var(--accent);}
 @keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
 @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
 
-.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.8s cubic-bezier(0.25,0.46,0.45,0.94),transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94);}
-.reveal.visible{opacity:1;transform:translateY(0);}
+
+
 .reveal-left{opacity:0;transform:translateX(-30px);transition:opacity 0.8s ease,transform 0.8s ease;}
 .reveal-left.visible{opacity:1;transform:translateX(0);}
 .reveal-right{opacity:0;transform:translateX(30px);transition:opacity 0.8s ease,transform 0.8s ease;}
@@ -615,7 +604,7 @@ footer a:hover{color:var(--accent);}
 }
 @media(max-width:900px){
   html{cursor:auto;}
-  .cursor{display:none;}
+  
   .hero{grid-template-columns:1fr;min-height:auto;}
   .hero-right{height:65vw;}
   .hero-left{padding:4rem 5vw;border-right:none;border-bottom:1px solid var(--line);}
@@ -656,26 +645,26 @@ footer a:hover{color:var(--accent);}
   color:var(--accent);background:rgba(200,150,60,0.1);
   border:1px solid rgba(200,150,60,0.25);
   padding:6px 14px;margin-bottom:2rem;width:fit-content;
-  animation:fadeUp 0.7s 0.1s both;
+  
 }
 .hs-title{
   font-family:'Fraunces',serif;
   font-size:clamp(2.6rem,4.5vw,4.8rem);
   font-weight:100;line-height:0.95;letter-spacing:-0.02em;
   color:var(--text);margin-bottom:1.75rem;
-  animation:fadeUp 0.8s 0.25s both;
+  
 }
 .hs-title em{font-style:italic;color:var(--accent);}
 .hs-desc{
   font-size:0.98rem;font-weight:300;line-height:1.85;
   color:var(--text2);margin-bottom:2rem;max-width:440px;
-  animation:fadeUp 0.8s 0.4s both;
+  
 }
 .hs-desc strong{color:var(--text);font-weight:500;}
 .hs-includes{
   display:flex;flex-direction:column;gap:0.6rem;
   margin-bottom:2.5rem;
-  animation:fadeUp 0.8s 0.5s both;
+  
 }
 .hsi{
   font-size:0.82rem;font-weight:300;color:var(--text2);
@@ -691,14 +680,14 @@ footer a:hover{color:var(--accent);}
   position:relative;overflow:hidden;
   transition:background 0.25s,transform 0.2s;
   box-shadow:0 0 30px rgba(200,150,60,0.3);
-  animation:fadeUp 0.8s 0.6s both;
+  
   margin-bottom:1rem;
 }
 .hs-cta:hover{background:var(--accent2);transform:translateY(-1px);}
 .hs-proof{
   font-size:0.65rem;font-weight:300;color:var(--text3);
   letter-spacing:0.1em;
-  animation:fadeUp 0.8s 0.7s both;
+  
 }
 
 /* RIGHT SIDE — product grid */
@@ -706,7 +695,7 @@ footer a:hover{color:var(--accent);}
   background:var(--bg2);
   padding:2.5rem;
   display:flex;flex-direction:column;justify-content:center;
-  animation:fadeIn 1s 0.3s both;
+  
 }
 .hs-grid{
   display:grid;grid-template-columns:1fr 1fr;
@@ -763,8 +752,6 @@ footer a:hover{color:var(--accent);}
 <body>
 
 <!-- CURSOR -->
-<div class="cursor" id="cursor">
-  <div class="cursor-dot" id="cursorDot"></div>
   <div class="cursor-ring" id="cursorRing"></div>
 </div>
 
@@ -901,16 +888,16 @@ footer a:hover{color:var(--accent);}
 <!-- COLLECTION -->
 <section class="coll" id="collection">
   <div class="coll-header">
-    <div class="reveal">
+    <div class="">
       <div class="sec-label">The Collection</div>
       <div class="sec-title">Most Popular <em>Guides</em></div>
     </div>
-    <a href="shop.html" class="coll-link reveal">View All 14 Guides &#8594;</a>
+    <a href="shop.html" class="coll-link">View All 14 Guides &#8594;</a>
   </div>
 
   <div class="pgrid">
 
-    <a href="guide-house-number.html" class="pcard reveal">
+    <a href="guide-house-number.html" class="pcard">
       <div class="pcard-img">
         <img src="thumbnail_mosaic_table.jpg" alt="Mosaic Table"/>
         <span class="pcard-cat">Concrete &middot; Exterior</span>
@@ -933,7 +920,7 @@ footer a:hover{color:var(--accent);}
       </div>
     </a>
 
-    <a href="guide-balloon-vase.html" class="pcard reveal">
+    <a href="guide-balloon-vase.html" class="pcard">
       <div class="pcard-img">
         <img src="thumbnail_glass_stones_facebook.jpg" alt="Glowing Stepping Stones"/>
         <span class="pcard-cat">Concrete &middot; Interior</span>
@@ -955,7 +942,7 @@ footer a:hover{color:var(--accent);}
       </div>
     </a>
 
-    <a href="guide-stone-candle.html" class="pcard reveal">
+    <a href="guide-stone-candle.html" class="pcard">
       <div class="pcard-img">
         <img src="thumbnail_stone-candle.jpg" alt="Stone Candle Holder"/>
         <span class="pcard-cat">Concrete &middot; Interior</span>
@@ -977,7 +964,7 @@ footer a:hover{color:var(--accent);}
       </div>
     </a>
 
-    <a href="guide-stone-wall.html" class="pcard reveal">
+    <a href="guide-stone-wall.html" class="pcard">
       <div class="pcard-img">
         <img src="thumbnail_stone_wall.jpg" alt="Stone Accent Wall"/>
         <span class="pcard-cat">Stone &middot; Interior</span>
@@ -1001,18 +988,18 @@ footer a:hover{color:var(--accent);}
 
   </div>
 
-  <div style="text-align:center;margin-top:3.5rem;" class="reveal">
+  <div style="text-align:center;margin-top:3.5rem;" class="">
     <a href="shop.html" class="btn-gold">View All 14 Guides &#8594;</a>
   </div>
 </section>
 
 <!-- FEATURED — Viral Blueprint -->
 <section class="feat" id="about">
-  <div class="feat-img reveal-left">
+  <div class="feat-img -left">
     <img src="thumbnail_viral_blueprint.jpg" alt="The $2K Reels Playbook"/>
     <div class="feat-img-overlay"></div>
   </div>
-  <div class="feat-body reveal-right">
+  <div class="feat-body -right">
     <div class="feat-tag">Best Seller &middot; Digital Guide</div>
     <div class="feat-title">The <span>$2K Reels</span><br/>Playbook</div>
     <div class="feat-desc">$2,453/month from Facebook Reels with zero ad spend. The exact system behind 3M+ views per video — for creators who want real income from their content.</div>
@@ -1034,17 +1021,17 @@ footer a:hover{color:var(--accent);}
 <section class="why">
   <div class="why-inner">
     <div class="why-top">
-      <div class="reveal">
+      <div class="">
         <div class="anim-line"></div>
         <div class="sec-label">Why Made By Hand</div>
         <div class="sec-title">Built with<br/><em>Intention</em></div>
       </div>
-      <div class="reveal">
+      <div class="">
         <p class="why-body">Every guide comes from a real project built from scratch. Real materials, real mistakes, real results. We write for people who want to pick up tools and make something — not just save it to a folder and forget about it.</p>
       </div>
     </div>
     <div class="why-list">
-      <div class="why-item reveal">
+      <div class="why-item">
         <div class="why-n">01</div>
         <div class="why-text">
           <h4>Real Photography, Every Step</h4>
@@ -1052,7 +1039,7 @@ footer a:hover{color:var(--accent);}
         </div>
         <div class="why-arr">&#8594;</div>
       </div>
-      <div class="why-item reveal">
+      <div class="why-item">
         <div class="why-n">02</div>
         <div class="why-text">
           <h4>Meaningful Savings</h4>
@@ -1060,7 +1047,7 @@ footer a:hover{color:var(--accent);}
         </div>
         <div class="why-arr">&#8594;</div>
       </div>
-      <div class="why-item reveal">
+      <div class="why-item">
         <div class="why-n">03</div>
         <div class="why-text">
           <h4>Done in a Weekend</h4>
@@ -1068,7 +1055,7 @@ footer a:hover{color:var(--accent);}
         </div>
         <div class="why-arr">&#8594;</div>
       </div>
-      <div class="why-item reveal">
+      <div class="why-item">
         <div class="why-n">04</div>
         <div class="why-text">
           <h4>Zero Experience Needed</h4>
@@ -1083,22 +1070,22 @@ footer a:hover{color:var(--accent);}
 <!-- TESTIMONIALS -->
 <section class="testi">
   <div class="testi-inner">
-    <div class="testi-head reveal">
+    <div class="testi-head">
       <div class="sec-label" style="justify-content:center;">Customer Stories</div>
       <div class="sec-title" style="font-size:clamp(2.5rem,4vw,4rem);">Made with Our <em>Guides</em></div>
     </div>
     <div class="testi-grid">
-      <div class="tc reveal">
+      <div class="tc">
         <div class="tc-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <div class="tc-quote">"I made the rope planter last weekend and I can't believe how good it looks. My neighbor thought I bought it at a boutique store."</div>
         <div class="tc-author">Sandra M. &mdash; Texas</div>
       </div>
-      <div class="tc reveal">
+      <div class="tc">
         <div class="tc-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <div class="tc-quote">"The hand planter guide was so clear and detailed. Mine turned out perfect on the first try. Already ordered two more guides."</div>
         <div class="tc-author">Karen L. &mdash; Ohio</div>
       </div>
-      <div class="tc reveal">
+      <div class="tc">
         <div class="tc-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <div class="tc-quote">"The stone wall guide saved me $4,200. My contractor quoted $5,000. I did it myself in 3 days for under $600. Incredible."</div>
         <div class="tc-author">Patricia R. &mdash; Florida</div>
@@ -1111,13 +1098,13 @@ footer a:hover{color:var(--accent);}
 <section class="fcta">
   <div class="fcta-bg"></div>
   <div class="fcta-content">
-    <div class="fcta-label reveal">Start Creating Today</div>
-    <h2 class="reveal">Make Something<br/><em>You're Proud Of</em></h2>
-    <p class="reveal">One guide. One weekend. Something beautiful that lasts. From $5.00 — less than a coffee.</p>
-    <a href="shop.html" class="fcta-btn reveal">
+    <div class="fcta-label">Start Creating Today</div>
+    <h2 class="">Make Something<br/><em>You're Proud Of</em></h2>
+    <p class="">One guide. One weekend. Something beautiful that lasts. From $5.00 — less than a coffee.</p>
+    <a href="shop.html" class="fcta-btn">
       <span>Browse All Guides &#8594;</span>
     </a>
-    <div class="fcta-trust reveal">
+    <div class="fcta-trust">
       <span>&#128274; Secure Checkout</span>
       <span>&#11015; Instant PDF</span>
       <span>&#9989; Apple &amp; Google Pay</span>

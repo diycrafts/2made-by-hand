@@ -16,13 +16,13 @@
   --accent:#C8963C;--accent2:#E8B85C;
   --green:#5A8A50;--green2:#7AB870;--red:#B84040;
 }
-html{scroll-behavior:smooth;cursor:none;}
+html{scroll-behavior:smooth;}
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;font-weight:300;}
 
 /* CURSOR */
-.cursor{position:fixed;top:0;left:0;z-index:9999;pointer-events:none;mix-blend-mode:exclusion;}
-.cursor-dot{width:8px;height:8px;background:#fff;border-radius:50%;position:absolute;transform:translate(-50%,-50%);transition:transform 0.1s;}
-.cursor-ring{width:40px;height:40px;border:1px solid rgba(255,255,255,0.4);border-radius:50%;position:absolute;transform:translate(-50%,-50%);transition:width 0.3s,height 0.3s,border-color 0.3s;}
+
+
+
 .cursor-ring.hover{width:60px;height:60px;border-color:var(--accent);background:rgba(200,150,60,0.06);}
 
 /* ANN */
@@ -135,19 +135,17 @@ footer a{color:var(--text3);text-decoration:none;transition:color 0.2s;}
 footer a:hover{color:var(--accent);}
 
 /* REVEAL */
-.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease;}
-.reveal.visible{opacity:1;transform:translateY(0);}
+
+
 
 /* RESPONSIVE */
 @media(max-width:1100px){.pgrid{grid-template-columns:repeat(3,1fr);}}
-@media(max-width:800px){.pgrid{grid-template-columns:repeat(2,1fr);}html{cursor:auto;}.cursor{display:none;}}
+@media(max-width:800px){.pgrid{grid-template-columns:repeat(2,1fr);}html{cursor:auto;}}
 @media(max-width:500px){.pgrid{grid-template-columns:1fr;}footer{flex-direction:column;text-align:center;}}
 </style>
 </head>
 <body>
 
-<div class="cursor" id="cursor">
-  <div class="cursor-dot" id="cursorDot"></div>
   <div class="cursor-ring" id="cursorRing"></div>
 </div>
 
@@ -197,7 +195,7 @@ footer a:hover{color:var(--accent);}
   <div class="pgrid" id="grid">
 
     <!-- Bird Bath — NEW -->
-    <a href="guide-bird-bath.html" class="pcard reveal" data-cat="concrete garden">
+    <a href="guide-bird-bath.html" class="pcard" data-cat="concrete garden">
       <div class="pcard-img">
         <img src="thumbnail_bird-bath.jpg" alt="Concrete Bird Bath"/>
         <span class="pcard-cat">Concrete &middot; Garden</span>
@@ -218,7 +216,7 @@ footer a:hover{color:var(--accent);}
     </a>
 
     <!-- 2 -->
-    <a href="guide-house-number.html" class="pcard reveal" data-cat="concrete garden">
+    <a href="guide-house-number.html" class="pcard" data-cat="concrete garden">
       <div class="pcard-img">
         <img src="thumbnail_house-number.jpg" alt="House Number Sign"/>
         <span class="pcard-cat">Concrete &middot; Exterior</span>
@@ -238,7 +236,7 @@ footer a:hover{color:var(--accent);}
     </a>
 
     <!-- 2 -->
-    <a href="guide-stone-candle.html" class="pcard reveal" data-cat="concrete interior">
+    <a href="guide-stone-candle.html" class="pcard" data-cat="concrete interior">
       <div class="pcard-img">
         <img src="thumbnail_stone-candle.jpg" alt="Stone Candle Holder"/>
         <span class="pcard-cat">Concrete &middot; Interior</span>
@@ -258,7 +256,7 @@ footer a:hover{color:var(--accent);}
     </a>
 
     <!-- 3 -->
-    <a href="guide-balloon-vase.html" class="pcard reveal" data-cat="concrete interior">
+    <a href="guide-balloon-vase.html" class="pcard" data-cat="concrete interior">
       <div class="pcard-img">
         <img src="thumbnail_balloon-vase.jpg" alt="Balloon Vase"/>
         <span class="pcard-cat">Concrete &middot; Interior</span>
@@ -278,7 +276,7 @@ footer a:hover{color:var(--accent);}
     </a>
 
     <!-- 4 -->
-    <a href="guide-rope-planter.html" class="pcard reveal" data-cat="concrete garden">
+    <a href="guide-rope-planter.html" class="pcard" data-cat="concrete garden">
       <div class="pcard-img">
         <img src="thumbnail_rope-planter.jpg" alt="Rope Planter"/>
         <span class="pcard-cat">Concrete &middot; Garden</span>
@@ -298,7 +296,7 @@ footer a:hover{color:var(--accent);}
     </a>
 
     <!-- 5 -->
-    <a href="guide-hand-planter.html" class="pcard reveal" data-cat="concrete garden">
+    <a href="guide-hand-planter.html" class="pcard" data-cat="concrete garden">
       <div class="pcard-img">
         <img src="thumbnail_hand-planter.jpg" alt="Hand Planter"/>
         <span class="pcard-cat">Concrete &middot; Garden</span>
@@ -318,7 +316,7 @@ footer a:hover{color:var(--accent);}
     </a>
 
     <!-- 6 -->
-    <a href="guide-stone-wall.html" class="pcard reveal" data-cat="interior">
+    <a href="guide-stone-wall.html" class="pcard" data-cat="interior">
       <div class="pcard-img">
         <img src="thumbnail_stone_wall.jpg" alt="Stone Accent Wall"/>
         <span class="pcard-cat">Stone &middot; Interior</span>
@@ -338,7 +336,7 @@ footer a:hover{color:var(--accent);}
     </a>
 
     <!-- 7 -->
-    <a href="guide-bottle-edging.html" class="pcard reveal" data-cat="concrete garden glass">
+    <a href="guide-bottle-edging.html" class="pcard" data-cat="concrete garden glass">
       <div class="pcard-img">
         <img src="thumbnail_bottle-edging.jpg" alt="Bottle Glass Edging"/>
         <span class="pcard-cat">Concrete &middot; Garden</span>
@@ -358,7 +356,7 @@ footer a:hover{color:var(--accent);}
     </a>
 
     <!-- 8 -->
-    <a href="guide-creek-bridge.html" class="pcard reveal" data-cat="garden">
+    <a href="guide-creek-bridge.html" class="pcard" data-cat="garden">
       <div class="pcard-img">
         <img src="thumbnail_creek-bridge.jpg" alt="Creek Bridge"/>
         <span class="pcard-cat">Wood &middot; Garden</span>
@@ -378,7 +376,7 @@ footer a:hover{color:var(--accent);}
     </a>
 
     <!-- 9 -->
-    <a href="guide-mosaic-table.html" class="pcard reveal" data-cat="garden glass">
+    <a href="guide-mosaic-table.html" class="pcard" data-cat="garden glass">
       <div class="pcard-img">
         <img src="thumbnail_mosaic_table.jpg" alt="Mosaic Patio Table"/>
         <span class="pcard-cat">Mosaic &middot; Garden</span>
@@ -398,7 +396,7 @@ footer a:hover{color:var(--accent);}
     </a>
 
     <!-- 10 -->
-    <a href="guide-leaf-stones.html" class="pcard reveal" data-cat="concrete garden">
+    <a href="guide-leaf-stones.html" class="pcard" data-cat="concrete garden">
       <div class="pcard-img">
         <img src="thumbnail_leaf_stones.jpg" alt="Leaf Stepping Stones"/>
         <span class="pcard-cat">Concrete &middot; Garden</span>
@@ -418,7 +416,7 @@ footer a:hover{color:var(--accent);}
     </a>
 
     <!-- 11 -->
-    <a href="guide-glass-stones.html" class="pcard reveal" data-cat="concrete garden glass">
+    <a href="guide-glass-stones.html" class="pcard" data-cat="concrete garden glass">
       <div class="pcard-img">
         <img src="thumbnail_glass_stones_facebook.jpg" alt="Glass Mosaic Stepping Stones"/>
         <span class="pcard-cat">Glass &middot; Garden</span>
@@ -438,7 +436,7 @@ footer a:hover{color:var(--accent);}
     </a>
 
     <!-- 12 -->
-    <a href="guide-candle.html" class="pcard reveal" data-cat="concrete interior">
+    <a href="guide-candle.html" class="pcard" data-cat="concrete interior">
       <div class="pcard-img">
         <img src="thumbnail_candle_facebook.jpg" alt="Concrete Candle Holder"/>
         <span class="pcard-cat">Concrete &middot; Interior</span>
@@ -458,7 +456,7 @@ footer a:hover{color:var(--accent);}
     </a>
 
     <!-- 13 -->
-    <a href="guide-planter.html" class="pcard reveal" data-cat="concrete garden">
+    <a href="guide-planter.html" class="pcard" data-cat="concrete garden">
       <div class="pcard-img">
         <img src="thumbnail_planter_facebook.jpg" alt="Woven Concrete Planter"/>
         <span class="pcard-cat">Concrete &middot; Garden</span>
@@ -478,7 +476,7 @@ footer a:hover{color:var(--accent);}
     </a>
 
     <!-- 14 -->
-    <a href="guide-fire-bowl.html" class="pcard reveal" data-cat="concrete garden">
+    <a href="guide-fire-bowl.html" class="pcard" data-cat="concrete garden">
       <div class="pcard-img">
         <img src="thumbnail_fire_bowl.jpg" alt="Concrete Fire Bowl"/>
         <span class="pcard-cat">Concrete &middot; Garden</span>
@@ -498,7 +496,7 @@ footer a:hover{color:var(--accent);}
     </a>
 
     <!-- Coming Soon -->
-    <div class="pcard soon reveal" data-cat="glass">
+    <div class="pcard soon" data-cat="glass">
       <div class="pcard-img">
         <img src="thumbnail_resin_facebook.jpg" alt="Flower Resin Coasters"/>
         <span class="pcard-cat">Glass &amp; Resin</span>
