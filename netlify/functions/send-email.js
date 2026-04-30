@@ -1,10 +1,7 @@
-// ═══════════════════════════════════════════════════════
-// NETLIFY FUNCTION: send-email.js
-// Trimite email prin Brevo API dupa plata
-// ═══════════════════════════════════════════════════════
+const fetch = (...args) => import('node-fetch').then(({default: f}) => f(...args));
 
-const BASE_URL = "https://classy-quokka-8dbf45.netlify.app";
 const PDF_MAP = {
+  "Stone Garden Border Wall": "DIY_Stone_Garden_Border_Wall_Guide.pdf",
   "Concrete Bowl Candle Holder": "DIY_Concrete_Candle_Holder_Guide.pdf",
   "Concrete Bird Bath with Fabric Drape": "DIY_Concrete_Bird_Bath_Guide.pdf",
   "River Stone Candle Holder": "DIY_River_Stone_Candle_Holder_Guide.pdf",
@@ -22,166 +19,121 @@ const PDF_MAP = {
   "Concrete Serving Tray": "DIY_Concrete_Serving_Tray_Guide.pdf",
   "Concrete Garden Sign with Leaf Imprints": "DIY_Concrete_Garden_Sign_Guide.pdf",
   "Concrete Stepping Stones Path": "DIY_Concrete_Stepping_Stones_Guide.pdf",
-  "Concrete Garden Sign": "DIY_Concrete_Garden_Sign_Guide.pdf",
 };
 
+const BASE_URL = "https://classy-quokka-8dbf45.netlify.app";
+
 exports.handler = async (event) => {
-  const headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    'Content-Type': 'application/json',
+  if (event.httpMethod !== "POST") {
+    return { statusCode: 405, body: "Method Not Allowed" };
+  }
+
+  const { email, product, price, delay_minutes } = JSON.parse(event.body || "{}");
+  const BREVO_API_KEY = process.env.BREVO_API_KEY;
+
+  if (!email || !product) {
+    return { statusCode: 400, body: JSON.stringify({ error: "Missing email or product" }) };
+  }
+
+  const pdfFile = PDF_MAP[product];
+  const pdfUrl = pdfFile ? `${BASE_URL}/${pdfFile}` : null;
+
+  let subject, htmlContent;
+
+  if (!delay_minutes || delay_minutes === 0) {
+    // EMAIL 1 — Confirmare instant cu link download
+    subject = "Your DIY Guide is ready to download! 🎉";
+    htmlContent = `
+      <div style="font-family:Arial,sans-serif;max-width:560px;margin:0 auto;background:#0C0B09;color:#F0EDE8;padding:40px 32px;border-radius:12px;">
+        <div style="text-align:center;margin-bottom:32px;">
+          <div style="font-size:13px;letter-spacing:0.12em;text-transform:uppercase;color:#C8963C;margin-bottom:8px;">MADE BY HAND</div>
+          <h1 style="font-size:26px;font-weight:700;color:#F0EDE8;margin:0;">Your guide is ready! 🎉</h1>
+        </div>
+        <p style="color:#A09890;font-size:15px;line-height:1.7;margin-bottom:24px;">
+          Thank you for your purchase! Your copy of <strong style="color:#F0EDE8;">${product}</strong> is ready to download.
+        </p>
+        ${pdfUrl ? `
+        <div style="text-align:center;margin:32px 0;">
+          <a href="${pdfUrl}" style="display:inline-block;background:#C8963C;color:#0C0B09;font-weight:700;font-size:16px;padding:16px 36px;border-radius:8px;text-decoration:none;letter-spacing:0.02em;">
+            ⬇ Download Your Guide Now →
+          </a>
+        </div>
+        ` : ''}
+        <p style="color:#6A6058;font-size:13px;text-align:center;margin-top:32px;line-height:1.6;">
+          If the button doesn't work, copy this link into your browser:<br>
+          <a href="${pdfUrl}" style="color:#C8963C;">${pdfUrl}</a>
+        </p>
+        <hr style="border:none;border-top:1px solid rgba(255,255,255,0.07);margin:32px 0;">
+        <p style="color:#6A6058;font-size:12px;text-align:center;">
+          Made By Hand · madebyhand010@gmail.com
+        </p>
+      </div>
+    `;
+  } else {
+    // EMAIL 2 — Upsell bundle după delay_minutes
+    subject = "⚡ 80% OFF — Exclusive offer just for you (24h only)";
+    htmlContent = `
+      <div style="font-family:Arial,sans-serif;max-width:560px;margin:0 auto;background:#0C0B09;color:#F0EDE8;padding:40px 32px;border-radius:12px;">
+        <div style="text-align:center;margin-bottom:32px;">
+          <div style="font-size:13px;letter-spacing:0.12em;text-transform:uppercase;color:#C8963C;margin-bottom:8px;">MADE BY HAND · EXCLUSIVE OFFER</div>
+          <h1 style="font-size:26px;font-weight:700;color:#F0EDE8;margin:0 0 12px;">Get ALL 15 guides for just $37</h1>
+          <p style="color:#A09890;font-size:15px;margin:0;">This offer expires in 24 hours and won't be shown again.</p>
+        </div>
+        <div style="background:#201E1B;border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:24px;margin-bottom:28px;">
+          <div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:16px;">
+            <span style="color:#6A6058;font-size:22px;text-decoration:line-through;">$142</span>
+            <span style="color:#F0EDE8;font-size:40px;font-weight:700;">$37</span>
+            <span style="background:#B84040;color:white;font-size:13px;font-weight:700;padding:4px 10px;border-radius:4px;">74% OFF</span>
+          </div>
+          <p style="color:#A09890;font-size:14px;text-align:center;line-height:1.7;margin:0;">
+            Since you just bought <strong style="color:#F0EDE8;">${product}</strong>, you can unlock the entire collection — all 15 step-by-step DIY guides — at a massive discount.
+          </p>
+        </div>
+        <div style="text-align:center;margin:32px 0;">
+          <a href="${BASE_URL}/bundle.html" style="display:inline-block;background:#C8963C;color:#0C0B09;font-weight:700;font-size:16px;padding:16px 36px;border-radius:8px;text-decoration:none;letter-spacing:0.02em;">
+            Get All 15 Guides for $37 →
+          </a>
+        </div>
+        <hr style="border:none;border-top:1px solid rgba(255,255,255,0.07);margin:32px 0;">
+        <p style="color:#6A6058;font-size:12px;text-align:center;">
+          Made By Hand · madebyhand010@gmail.com<br>
+          This offer is exclusive to recent customers and expires in 24 hours.
+        </p>
+      </div>
+    `;
+  }
+
+  // Dacă e delay, folosim Brevo scheduled send
+  const sendAt = delay_minutes > 0
+    ? new Date(Date.now() + delay_minutes * 60 * 1000).toISOString().replace(/\.\d{3}Z$/, '+00:00')
+    : null;
+
+  const payload = {
+    sender: { name: "Made By Hand", email: "madebyhand010@gmail.com" },
+    to: [{ email }],
+    subject,
+    htmlContent,
+    ...(sendAt ? { scheduledAt: sendAt } : {}),
   };
 
-  if (event.httpMethod === 'OPTIONS') return { statusCode: 200, headers, body: '' };
-  if (event.httpMethod !== 'POST') return { statusCode: 405, headers, body: '' };
-
   try {
-    const { email, product, price, delay_minutes } = JSON.parse(event.body);
-
-    if (!email || !email.includes('@')) {
-      return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid email' }) };
-    }
-
-    // Delay: schedule via setTimeout (Netlify functions run up to 26s)
-    // For 5 min delay we use a simple approach: call this endpoint twice
-    // First call: immediate confirmation email
-    // Second call (from client after 5min): upsell email
-
-    const emailType = delay_minutes > 0 ? 'upsell' : 'confirmation';
-
-    let subject, htmlContent;
-
-    if (emailType === 'confirmation') {
-      subject = `Your DIY Guide is ready to download! 🎉`;
-      const pdfFile = PDF_MAP[product] || '';
-      const downloadUrl = pdfFile ? `${BASE_URL}/${pdfFile}` : null;
-      htmlContent = `
-<!DOCTYPE html>
-<html>
-<head><meta charset="UTF-8"/></head>
-<body style="margin:0;padding:0;background:#0C0B09;font-family:'Outfit',Arial,sans-serif;">
-  <div style="max-width:560px;margin:0 auto;padding:40px 20px;">
-    
-    <div style="text-align:center;margin-bottom:32px;">
-      <p style="font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:#C8963C;margin:0 0 8px;">MADE BY HAND</p>
-      <div style="width:40px;height:1px;background:#C8963C;margin:0 auto;"></div>
-    </div>
-
-    <h1 style="font-family:Georgia,serif;font-size:32px;font-weight:400;color:#F0EDE8;text-align:center;line-height:1.1;margin:0 0 16px;">
-      Your guide is ready! 🎉
-    </h1>
-    
-    <p style="font-size:15px;color:#A09890;text-align:center;line-height:1.7;margin:0 0 24px;">
-      Thank you for your purchase! Your guide is ready — click the button below to download it instantly.
-    </p>
-
-    <div style="background:#201E1B;border:1px solid rgba(255,255,255,0.08);padding:24px;margin-bottom:24px;">
-      <p style="font-size:12px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:#C8963C;margin:0 0 12px;">What you purchased</p>
-      <p style="font-size:17px;font-family:Georgia,serif;color:#F0EDE8;margin:0 0 4px;">${product}</p>
-      <p style="font-size:13px;color:#6A6058;margin:0;">Step-by-step PDF guide · Instant download · Yours forever</p>
-    </div>
-
-    ${downloadUrl ? `
-    <div style="text-align:center;margin-bottom:24px;">
-      <a href="${downloadUrl}"
-         style="display:inline-block;background:#C8963C;color:#0C0B09;font-size:13px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;padding:16px 40px;text-decoration:none;">
-        ⬇ Download Your Guide Now →
-      </a>
-    </div>
-    ` : ''}
-
-    <p style="font-size:13px;color:#6A6058;text-align:center;line-height:1.6;margin:0 0 24px;">
-      If you have any questions, reply to this email and we'll help you right away.
-    </p>
-
-    <div style="border-top:1px solid rgba(255,255,255,0.06);padding-top:24px;text-align:center;">
-      <p style="font-size:11px;color:#3A3530;margin:0;">© 2026 Made By Hand · Digital PDF Downloads</p>
-    </div>
-
-  </div>
-</body>
-</html>`;
-    } else {
-      subject = `⚡ 80% OFF — Exclusive offer just for you (24h only)`;
-      htmlContent = `
-<!DOCTYPE html>
-<html>
-<head><meta charset="UTF-8"/></head>
-<body style="margin:0;padding:0;background:#0C0B09;font-family:Arial,sans-serif;">
-  <div style="max-width:520px;margin:0 auto;padding:40px 20px;">
-
-    <div style="text-align:center;margin-bottom:28px;">
-      <p style="font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#C8963C;margin:0 0 8px;">MADE BY HAND · EXCLUSIVE OFFER</p>
-      <div style="width:40px;height:1px;background:#C8963C;margin:0 auto;"></div>
-    </div>
-
-    <div style="background:#B84040;padding:10px 20px;text-align:center;margin-bottom:24px;">
-      <p style="font-size:12px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:white;margin:0;">
-        ⚡ This offer expires in 24 hours
-      </p>
-    </div>
-
-    <h1 style="font-family:Georgia,serif;font-size:28px;font-weight:400;color:#F0EDE8;text-align:center;line-height:1.2;margin:0 0 16px;">
-      You've been selected for<br/>
-      <span style="color:#C8963C;font-style:italic;">80% OFF</span> our complete<br/>
-      DIY Bundle
-    </h1>
-
-    <p style="font-size:14px;color:#A09890;text-align:center;line-height:1.7;margin:0 0 24px;">
-      Get all <strong style="color:#F0EDE8;">15 step-by-step DIY guides</strong> — concrete, mosaic, garden &amp; more — for one exclusive price.
-    </p>
-
-    <div style="background:#201E1B;border:1px solid rgba(200,150,60,0.25);padding:24px;margin-bottom:24px;text-align:center;">
-      <p style="font-size:13px;color:#6A6058;text-decoration:line-through;margin:0 0 4px;">Individual value: $142.00</p>
-      <p style="font-family:Georgia,serif;font-size:42px;color:#FFFFFF;margin:0 0 4px;font-weight:400;">$37.00</p>
-      <p style="font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#C8963C;margin:0;">All 15 guides · Instant download · Yours forever</p>
-    </div>
-
-    <div style="text-align:center;margin-bottom:20px;">
-      <a href="https://classy-quokka-8dbf45.netlify.app/bundle.html"
-         style="display:inline-block;background:#C8963C;color:#0C0B09;font-size:13px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;padding:16px 40px;text-decoration:none;">
-        Get All 15 Guides for $37 →
-      </a>
-    </div>
-
-    <p style="font-size:11px;color:#3A3530;text-align:center;margin:0 0 20px;">
-      Exclusive to recent customers only. Expires in 24 hours.
-    </p>
-
-    <div style="border-top:1px solid rgba(255,255,255,0.06);padding-top:20px;text-align:center;">
-      <p style="font-size:10px;color:#3A3530;margin:0;">© 2026 Made By Hand · You received this because you recently purchased a guide.</p>
-    </div>
-
-  </div>
-</body>
-</html>`;
-    }
-
-    // Send via Brevo API
-    const response = await fetch('https://api.brevo.com/v3/smtp/email', {
-      method: 'POST',
+    const res = await fetch("https://api.brevo.com/v3/smtp/email", {
+      method: "POST",
       headers: {
-        'accept': 'application/json',
-        'api-key': process.env.BREVO_API_KEY,
-        'content-type': 'application/json',
+        "Content-Type": "application/json",
+        "api-key": BREVO_API_KEY,
       },
-      body: JSON.stringify({
-        sender: { name: 'Made By Hand', email: 'madebyhand010@gmail.com' },
-        to: [{ email }],
-        subject,
-        htmlContent,
-      }),
+      body: JSON.stringify(payload),
     });
 
-    if (!response.ok) {
-      const err = await response.text();
-      throw new Error(err);
+    const data = await res.json();
+
+    if (!res.ok) {
+      return { statusCode: 500, body: JSON.stringify({ error: data }) };
     }
 
-    return { statusCode: 200, headers, body: JSON.stringify({ ok: true }) };
-
+    return { statusCode: 200, body: JSON.stringify({ success: true, data }) };
   } catch (err) {
-    return { statusCode: 500, headers, body: JSON.stringify({ error: err.message }) };
+    return { statusCode: 500, body: JSON.stringify({ error: err.message }) };
   }
 };
