@@ -2,6 +2,7 @@
   "name": "made-by-hand",
   "version": "1.0.0",
   "dependencies": {
-    "node-fetch": "^3.0.0"
+    "node-fetch": "^3.0.0",
+    "stripe": "^14.0.0"
   }
 }
