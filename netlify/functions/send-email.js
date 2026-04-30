@@ -1,6 +1,7 @@
 const fetch = (...args) => import('node-fetch').then(({default: f}) => f(...args));
 
 const PDF_MAP = {
+  "Wood Slice Wall Clock": "DIY_Wood_Slice_Wall_Clock_Guide.pdf",
   "Concrete Glowing Garden Lights": "DIY_Concrete_Garden_Lights_Guide.pdf",
   "Stone Garden Border Wall": "DIY_Stone_Garden_Border_Wall_Guide.pdf",
   "Concrete Bowl Candle Holder": "DIY_Concrete_Candle_Holder_Guide.pdf",
