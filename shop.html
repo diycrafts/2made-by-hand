@@ -5,571 +5,281 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>All Guides — Made By Hand</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100;0,9..144,300;0,9..144,400;1,9..144,100;1,9..144,300&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-:root{
-  --bg:#0C0B09;--bg2:#131210;--bg3:#1A1815;
-  --surface:#201E1B;--surface2:#282420;
-  --line:rgba(255,255,255,0.07);--line2:rgba(255,255,255,0.12);
-  --text:#F0EDE8;--text2:#A09890;--text3:#6A6058;
-  --accent:#C8963C;--accent2:#E8B85C;
-  --green:#5A8A50;--green2:#7AB870;--red:#B84040;
-}
-html{scroll-behavior:auto;-webkit-text-size-adjust:100%;}body{-webkit-overflow-scrolling:touch;overscroll-behavior:none;}
-body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;font-weight:300;}
-
-/* CURSOR */
-
-
-
-.cursor-ring.hover{width:60px;height:60px;border-color:var(--accent);background:rgba(200,150,60,0.06);}
-
-/* ANN */
-.ann{background:var(--accent);padding:9px 5vw;display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;font-size:0.68rem;font-weight:400;letter-spacing:0.16em;text-color:rgba(12,11,9,0.75);}
-.ann strong{color:var(--bg);font-weight:600;}
-.ann a{color:var(--bg);text-decoration:none;font-weight:500;border-bottom:1px solid rgba(12,11,9,0.25);}
-
-/* NAV */
-nav{position:sticky;top:0;z-index:500;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;background:rgba(12,11,9,0.94);backdrop-filter:blur(28px);border-bottom:1px solid var(--line);}
-.logo{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:300;letter-spacing:0.02em;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:10px;}
-.logo-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0;}
-.nav-r{display:flex;align-items:center;gap:24px;}
-.nav-a{font-size:0.65rem;font-weight:400;letter-spacing:0.16em;text-color:var(--text3);text-decoration:none;}
-.nav-a:hover{color:var(--text);}
-.nav-back{font-size:0.65rem;font-weight:400;letter-spacing:0.14em;text-color:var(--text3);text-decoration:none;display:flex;align-items:center;gap:8px;}
-.nav-back:hover{color:var(--accent);}
-
-/* PAGE HEADER */
-.page-header{
-  padding:6rem 5vw 4rem;
-  border-bottom:1px solid var(--line);
-  position:relative;overflow:hidden;
-}
-.page-header::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse at 80% 50%,rgba(200,150,60,0.05) 0%,transparent 60%);
-  pointer-events:none;
-}
-.ph-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1;}
-.ph-label{font-size:0.62rem;font-weight:400;letter-spacing:0.22em;text-color:var(--green2);margin-bottom:1rem;display:flex;align-items:center;gap:10px;}
-.ph-label::before{content:'';width:16px;height:1px;background:var(--green2);}
-.ph-title{font-family:'Fraunces',serif;font-size:clamp(3rem,6vw,6rem);font-weight:100;line-height:0.9;letter-spacing:-0.02em;color:var(--text);margin-bottom:1.5rem;}
-.ph-title em{font-style:italic;color:var(--accent);}
-.ph-desc{font-size:0.92rem;font-weight:300;color:var(--text2);max-width:480px;line-height:1.8;}
-
-/* VIRAL BLUEPRINT STRIP */
-.vb-strip{
-  background:var(--surface);
-  border-bottom:1px solid var(--line);
-  padding:1.25rem 5vw;
-  display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;
-}
-.vb-strip a{text-decoration:none;display:flex;align-items:center;gap:1.5rem;flex:1;flex-wrap:wrap;}
-.vb-strip-badge{font-size:0.58rem;font-weight:500;letter-spacing:0.12em;text-background:var(--accent);color:var(--bg);padding:4px 10px;flex-shrink:0;}
-.vb-strip-title{font-family:'Fraunces',serif;font-size:1rem;font-weight:300;color:var(--text);flex:1;}
-.vb-strip-price{display:flex;align-items:baseline;gap:8px;flex-shrink:0;}
-.vb-strip-cur{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:300;color:var(--accent);}
-.vb-strip-was{font-size:0.75rem;color:var(--text3);text-decoration:line-through;}
-.vb-strip-btn{font-size:0.62rem;font-weight:400;letter-spacing:0.14em;text-background:var(--accent);color:var(--bg);padding:8px 18px;flex-shrink:0;}
-.vb-strip a:hover .vb-strip-btn{background:var(--accent2);}
-
-/* FILTERS */
-.filters{
-  padding:1.5rem 5vw;
-  border-bottom:1px solid var(--line);
-  display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;
-  background:var(--bg2);
-}
-.fb{
-  font-size:0.62rem;font-weight:400;letter-spacing:0.14em;text-
-  padding:8px 18px;border:1px solid var(--line2);
-  background:transparent;color:var(--text3);
-  cursor:pointer;font-family:'Outfit',sans-serif;
-  
-}
-.fb:hover{border-color:var(--text3);color:var(--text);}
-.fb.active{background:var(--accent);border-color:var(--accent);color:var(--bg);}
-
-/* GRID */
-.shop-wrap{max-width:1400px;margin:0 auto;padding:0;}
-.pgrid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:1px;background:var(--line);
-}
-.pcard{
-  background:var(--bg);text-decoration:none;color:inherit;
-  display:block;position:relative;overflow:hidden;
-  
-}
-.pcard:hover{background:var(--surface);}
-.pcard.soon{opacity:0.4;pointer-events:none;}
-.pcard.hidden{display:none!important;}
-
-.pcard-img{width:100%;aspect-ratio:3/4;overflow:hidden;position:relative;}
-.pcard-img img{width:100%;height:100%;object-fit:cover;display:block;}
-
-.pcard-cat{position:absolute;top:14px;left:14px;font-size:0.56rem;font-weight:400;letter-spacing:0.14em;text-color:rgba(240,237,232,0.7);background:rgba(12,11,9,0.72);padding:4px 10px;backdrop-filter:blur(8px);}
-.pcard-new{position:absolute;top:14px;right:14px;font-size:0.56rem;font-weight:500;letter-spacing:0.1em;text-background:var(--green);color:#fff;padding:4px 10px;}
-.pcard-soon-tag{position:absolute;top:14px;right:14px;font-size:0.56rem;font-weight:500;letter-spacing:0.1em;text-background:var(--surface2);color:var(--text3);padding:4px 10px;}
-
-.pcard-body{padding:1.25rem;border-top:1px solid var(--line);}
-.pcard-name{font-family:'Fraunces',serif;font-size:1rem;font-weight:300;color:var(--text);margin-bottom:4px;line-height:1.3;}
-.pcard-sub{font-size:0.72rem;font-weight:300;color:var(--text3);margin-bottom:1rem;line-height:1.5;}
-.pcard-urgency{display:flex;align-items:center;gap:8px;margin-bottom:0.85rem;flex-wrap:wrap;}
-.pcard-stock{font-size:0.58rem;font-weight:400;letter-spacing:0.1em;text-color:var(--red);display:flex;align-items:center;gap:4px;}
-.pcard-stock::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--red);}
-.pcard-timer{font-size:0.58rem;font-weight:500;background:rgba(200,150,60,0.1);border:1px solid rgba(200,150,60,0.25);color:var(--accent);padding:2px 8px;font-family:'Fraunces',serif;}
-.pcard-footer{display:flex;align-items:center;justify-content:space-between;}
-.pcard-was{font-size:0.62rem;font-weight:300;color:var(--text3);text-decoration:line-through;display:block;margin-bottom:2px;}
-.pcard-price{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:400;color:#FFFFFF;}
-.pcard-btn{font-size:0.6rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;background:var(--accent);border:1px solid var(--accent);color:var(--bg);padding:8px 14px;cursor:pointer;}
-
-
-/* FOOTER */
-footer{background:var(--surface);padding:2.5rem 5vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;border-top:1px solid var(--line);}
-.f-logo{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:300;color:var(--text3);letter-spacing:0.04em;}
-footer p{font-size:0.6rem;font-weight:400;letter-spacing:0.14em;text-color:var(--text3);}
-footer a{color:var(--text3);text-decoration:none;}
-footer a:hover{color:var(--accent);}
-
-/* REVEAL */
-
-
-
-/* RESPONSIVE */
-@media(max-width:1100px){.pgrid{grid-template-columns:repeat(3,1fr);}}
-@media(max-width:800px){.pgrid{grid-template-columns:repeat(2,1fr);}html{cursor:auto;}}
-@media(max-width:500px){.pgrid{grid-template-columns:1fr;}footer{flex-direction:column;text-align:center;}}
-
-img{max-width:100%;height:auto;}
-*{-webkit-tap-highlight-color:transparent;}
-button,a{touch-action:manipulation;}
+:root{--cream:#FAF7F2;--warm:#F0EBE1;--stone:#D6CEC2;--bark:#8C6B4A;--forest:#4A6741;--ink:#2A2520;--muted:#8A7E72;--white:#FFFFFF;--gold:#C8963C;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;background:rgba(250,247,242,0.95);backdrop-filter:blur(14px);border-bottom:1px solid rgba(214,206,194,0.5);}
+.logo{font-family:'Lora',serif;font-size:1.25rem;font-weight:700;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:0.6rem;}
+.logo-mark{width:34px;height:34px;background:var(--bark);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+.back{display:flex;align-items:center;gap:0.4rem;font-size:0.88rem;font-weight:600;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.back:hover{color:var(--ink);}
+.page-top{padding:100px 5vw 3rem;text-align:center;}
+.eyebrow{font-size:0.75rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--forest);margin-bottom:0.75rem;}
+.page-top h1{font-family:'Lora',serif;font-size:clamp(2.2rem,5vw,3.8rem);font-weight:700;margin-bottom:0.75rem;}
+.page-top h1 em{font-style:italic;color:var(--bark);}
+.page-top p{font-size:1rem;color:var(--muted);max-width:520px;margin:0 auto;line-height:1.75;}
+.filters{display:flex;gap:0.6rem;justify-content:center;padding:1.5rem 5vw 2.5rem;flex-wrap:wrap;}
+.fb{padding:0.6rem 1.4rem;border-radius:50px;border:1.5px solid var(--stone);background:transparent;font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:600;color:var(--muted);cursor:pointer;transition:all 0.2s;}
+.fb:hover{border-color:var(--bark);color:var(--bark);}
+.fb.active{background:var(--ink);border-color:var(--ink);color:white;}
+.shop-wrap{max-width:1200px;margin:0 auto;padding:0 5vw 7rem;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.75rem;}
+.card{background:var(--white);border:1.5px solid var(--stone);border-radius:18px;overflow:hidden;transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s;opacity:0;transform:translateY(16px);text-decoration:none;color:inherit;display:block;}
+.card.visible{opacity:1;transform:translateY(0);}
+.card:not(.soon):hover{transform:translateY(-6px);box-shadow:0 16px 50px rgba(42,37,32,0.12);border-color:var(--bark);}
+.card.hidden{display:none!important;}
+.card.soon{opacity:0.5;pointer-events:none;}
+.thumb{width:100%;aspect-ratio:16/9;overflow:hidden;position:relative;}
+.thumb img{width:100%;height:100%;object-fit:cover;transition:transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94);}
+.card:hover .thumb img{transform:scale(1.06);}
+.cat-tag{position:absolute;top:0.8rem;left:0.8rem;font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:0.3rem 0.75rem;border-radius:50px;background:rgba(250,247,242,0.92);color:var(--ink);backdrop-filter:blur(4px);}
+.new-tag{position:absolute;top:0.8rem;right:0.8rem;font-size:0.7rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:0.3rem 0.75rem;border-radius:50px;background:var(--forest);color:white;}
+.soon-tag{position:absolute;top:0.8rem;right:0.8rem;font-size:0.7rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:0.3rem 0.75rem;border-radius:50px;background:var(--gold);color:white;}
+.card-body{padding:1.5rem 1.5rem 1.75rem;}
+.card-title{font-family:'Lora',serif;font-size:1.25rem;font-weight:700;color:var(--ink);margin-bottom:0.5rem;line-height:1.3;}
+.card-desc{font-size:0.9rem;color:var(--muted);line-height:1.65;margin-bottom:1.2rem;}
+.card-tags{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1.2rem;}
+.ctag{font-size:0.73rem;font-weight:600;color:var(--muted);background:var(--warm);padding:0.25rem 0.65rem;border-radius:50px;border:1px solid var(--stone);}
+.card-footer{display:flex;align-items:center;justify-content:space-between;padding-top:1.2rem;border-top:1.5px solid var(--warm);}
+.price{font-family:'Lora',serif;font-size:1.6rem;font-weight:700;color:var(--ink);line-height:1;}
+.price sup{font-family:'Nunito',sans-serif;font-size:0.9rem;font-weight:400;color:var(--muted);vertical-align:super;}
+.view-btn{display:inline-flex;align-items:center;gap:0.5rem;background:var(--bark);color:white;font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:700;padding:0.7rem 1.4rem;border-radius:50px;border:none;cursor:pointer;transition:background 0.2s,transform 0.15s;text-decoration:none;}
+.view-btn:hover{background:var(--ink);transform:scale(1.03);}
+footer{background:var(--ink);padding:2.5rem 5vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.fl{font-family:'Lora',serif;font-size:1.1rem;font-weight:700;color:rgba(250,247,242,0.65);}
+footer p{font-size:0.8rem;color:rgba(250,247,242,0.3);}
+footer a{color:rgba(250,247,242,0.45);text-decoration:none;}
+@media(max-width:600px){.grid{grid-template-columns:1fr;}footer{flex-direction:column;text-align:center;}}
 </style>
 </head>
 <body>
-
-  
-</div>
-
-<div class="ann">
-  <span>&#128308; <strong>Limited Pricing</strong> — Guides from $5.00</span>
-  <span>&#8212;</span>
-  <a href="index.html">&#8592; Back to Home</a>
-</div>
-
 <nav>
-  <a href="index.html" class="logo"><div class="logo-dot"></div>Made By Hand</a>
-  <div class="nav-r">
-    <a href="index.html" class="nav-back">&#8592; Home</a>
-  </div>
+  <a href="index.html" class="logo"><div class="logo-mark">🪨</div>Made By Hand</a>
+  <a href="index.html" class="back">← Back to Home</a>
 </nav>
 
-<!-- PAGE HEADER -->
-<div class="page-header">
-  <div class="ph-inner">
-    <div class="ph-label">The Collection</div>
-    <div class="ph-title">All <em>DIY</em><br/>Guides</div>
-    <p class="ph-desc">Every guide is built from a real project — real photos, full materials list, and clear steps anyone can follow. Instant PDF download.</p>
+<div class="page-top">
+  <div class="eyebrow">The Collection</div>
+  <h1>All <em>DIY Guides</em></h1>
+  <p>Every guide is built from a real project — real photos, full materials list, and clear steps anyone can follow.</p>
+</div>
+
+<div class="filters">
+  <button class="fb active" onclick="doFilter('all',this)">All Guides</button>
+  <button class="fb" onclick="doFilter('concrete',this)">🪨 Concrete</button>
+  <button class="fb" onclick="doFilter('garden',this)">🌿 Garden</button>
+  <button class="fb" onclick="doFilter('glass',this)">💎 Glass & Resin</button>
+  <button class="fb" onclick="doFilter('interior',this)">🏠 Interior</button>
+</div>
+
+<div class="shop-wrap">
+  <div class="grid" id="grid">
+
+    <!-- ★ NOU — Stone Garden Border Wall -->
+    <a href="guide-stone-garden-wall.html" class="card" data-cat="concrete garden">
+      <div class="thumb">
+        <img src="thumbnail_stone_garden_wall.jpg" alt="Stone Garden Border Wall"/>
+        <div class="cat-tag">Stone · Garden</div>
+        <div class="new-tag">NEW</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Stone Garden Border Wall</div>
+        <div class="card-desc">Build a stunning rustic stone wall that transforms any backyard into a cottage garden — no masonry experience needed.</div>
+        <div class="card-tags">
+          <span class="ctag">⏱ Weekend project</span>
+          <span class="ctag">💰 Under $60</span>
+          <span class="ctag">🌱 Beginner</span>
+        </div>
+        <div class="card-footer">
+          <div class="price"><sup>$</sup>13.00</div>
+          <span class="view-btn">View Guide →</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="guide-mosaic-table.html" class="card" data-cat="garden">
+      <div class="thumb">
+        <img src="thumbnail_mosaic_table.jpg" alt="DIY Mosaic Patio Table"/>
+        <div class="cat-tag">Mosaic · Garden</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">DIY Mosaic Patio Table</div>
+        <div class="card-desc">Turn broken tiles into a stunning garden centrepiece. Looks like it cost $500 — made for under $50 in a weekend.</div>
+        <div class="card-tags">
+          <span class="ctag">⏱ 2 days</span>
+          <span class="ctag">💰 Under $50</span>
+          <span class="ctag">🌱 Beginner</span>
+        </div>
+        <div class="card-footer">
+          <div class="price"><sup>$</sup>5.00</div>
+          <span class="view-btn">View Guide →</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="guide-leaf-stones.html" class="card" data-cat="concrete garden">
+      <div class="thumb">
+        <img src="thumbnail_leaf_stones.jpg" alt="Leaf Imprint Stepping Stones"/>
+        <div class="cat-tag">Concrete · Garden</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Leaf Imprint Stepping Stones</div>
+        <div class="card-desc">Press a large leaf into poured concrete — every single vein transfers perfectly. Nature does the design work. You pour and wait.</div>
+        <div class="card-tags">
+          <span class="ctag">⏱ 15 min per stone</span>
+          <span class="ctag">💰 Under $5 each</span>
+          <span class="ctag">🌱 Beginner</span>
+        </div>
+        <div class="card-footer">
+          <div class="price"><sup>$</sup>5.00</div>
+          <span class="view-btn">View Guide →</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="guide-glass-stones.html" class="card" data-cat="glass garden">
+      <div class="thumb">
+        <img src="thumbnail_glass_stones_facebook.jpg" alt="Glass Mosaic Stepping Stones"/>
+        <div class="cat-tag">Glass · Garden</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Glass Mosaic Stepping Stones</div>
+        <div class="card-desc">Coloured glass pressed into polished concrete. Stunning by day — at night with a light beneath each stone, they glow like stained glass.</div>
+        <div class="card-tags">
+          <span class="ctag">⏱ 30 min per stone</span>
+          <span class="ctag">💰 $8–15 each</span>
+          <span class="ctag">🌱 Beginner</span>
+        </div>
+        <div class="card-footer">
+          <div class="price"><sup>$</sup>5.00</div>
+          <span class="view-btn">View Guide →</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="guide-candle.html" class="card" data-cat="concrete">
+      <div class="thumb">
+        <img src="thumbnail_candle_facebook.jpg" alt="Concrete Candle Holder"/>
+        <div class="cat-tag">Concrete</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Concrete Candle Holder</div>
+        <div class="card-desc">Two plastic cups and a bag of concrete. The easiest project in the collection, and one of the most satisfying to unmold.</div>
+        <div class="card-tags">
+          <span class="ctag">⏱ 20 min active</span>
+          <span class="ctag">💰 Under $10</span>
+          <span class="ctag">🌱 Perfect first project</span>
+        </div>
+        <div class="card-footer">
+          <div class="price"><sup>$</sup>5.00</div>
+          <span class="view-btn">View Guide →</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="guide-planter.html" class="card" data-cat="concrete garden">
+      <div class="thumb">
+        <img src="thumbnail_planter_facebook.jpg" alt="Woven Concrete Planter"/>
+        <div class="cat-tag">Concrete · Garden</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Woven Texture Concrete Planter</div>
+        <div class="card-desc">A $5 laundry basket transfers a beautiful woven pattern onto concrete. Makes a planter worth $100 for under $20.</div>
+        <div class="card-tags">
+          <span class="ctag">⏱ 45 min active</span>
+          <span class="ctag">💰 Under $20</span>
+          <span class="ctag">🌱 Beginner</span>
+        </div>
+        <div class="card-footer">
+          <div class="price"><sup>$</sup>5.00</div>
+          <span class="view-btn">View Guide →</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="guide-stone-wall.html" class="card" data-cat="interior">
+      <div class="thumb">
+        <img src="thumbnail_stone_wall.jpg" alt="Natural Stone Accent Wall"/>
+        <div class="cat-tag">Interior</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Natural Stone Accent Wall</div>
+        <div class="card-desc">Install a full natural stone feature wall yourself and save $2,000–$7,000 vs a contractor. Includes lighting guide.</div>
+        <div class="card-tags">
+          <span class="ctag">⏱ 2–3 days</span>
+          <span class="ctag">💰 $300–600</span>
+          <span class="ctag">🌱 No experience needed</span>
+        </div>
+        <div class="card-footer">
+          <div class="price"><sup>$</sup>5.00</div>
+          <span class="view-btn">View Guide →</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="guide-fire-bowl.html" class="card" data-cat="concrete">
+      <div class="thumb">
+        <img src="thumbnail_fire_bowl.jpg" alt="Concrete Fire Bowl"/>
+        <div class="cat-tag">Concrete</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Concrete Fire Bowl</div>
+        <div class="card-desc">A $3 plastic basin becomes a stunning outdoor fire bowl. Heavy, weather-resistant, and looks like it belongs in a $500 garden store.</div>
+        <div class="card-tags">
+          <span class="ctag">⏱ 30 min active</span>
+          <span class="ctag">💰 Under $30</span>
+          <span class="ctag">🌱 Beginner</span>
+        </div>
+        <div class="card-footer">
+          <div class="price"><sup>$</sup>5.00</div>
+          <span class="view-btn">View Guide →</span>
+        </div>
+      </div>
+    </a>
+
+    <div class="card soon" data-cat="glass">
+      <div class="thumb">
+        <img src="thumbnail_resin_facebook.jpg" alt="Flower Resin Coasters"/>
+        <div class="cat-tag">Glass & Resin</div>
+        <div class="soon-tag">Coming Soon</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Flower Resin Coasters</div>
+        <div class="card-footer">
+          <div class="price"><sup>$</sup>5.00</div>
+          <span class="view-btn">Coming Soon</span>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
-<!-- VIRAL BLUEPRINT STRIP -->
-<div class="vb-strip">
-  <a href="guide-viral-blueprint.html">
-    <span class="vb-strip-badge">&#11088; Best Seller</span>
-    <span class="vb-strip-title">The $2K Reels Playbook — $2,453/month from Facebook Reels, $0 ad spend</span>
-    <span class="vb-strip-price"><span class="vb-strip-cur">$67</span><span class="vb-strip-was">$134</span></span>
-    <span class="vb-strip-btn">Get Guide &#8594;</span>
-  </a>
-</div>
-
-<!-- FILTERS -->
-<div class="filters">
-  <button class="fb active" onclick="doFilter('all',this)">All</button>
-  <button class="fb" onclick="doFilter('concrete',this)">Concrete</button>
-  <button class="fb" onclick="doFilter('garden',this)">Garden</button>
-  <button class="fb" onclick="doFilter('glass',this)">Glass &amp; Mosaic</button>
-  <button class="fb" onclick="doFilter('interior',this)">Interior</button>
-</div>
-
-<!-- GRID -->
-<div class="shop-wrap">
-  <div class="pgrid" id="grid">
-
-    <!-- Bird Bath — NEW -->
-                <a href="guide-stepping-stones.html" class="pcard" data-cat="concrete garden">
-      <div class="pcard-img">
-        <img src="thumbnail_stepping-stones.jpg" alt="Concrete Stepping Stones Path"/>
-        <span class="pcard-cat">Concrete &middot; Garden</span>
-        <span class="pcard-new">New</span>
-      </div>
-      <div class="pcard-body">
-        <div class="pcard-name">Concrete Stepping Stones Path</div>
-        <div class="pcard-sub">Under $5 per stone. Transform your entire garden path in one weekend for under $60.</div>
-        <div class="pcard-urgency">
-          <span class="pcard-stock">Only 3 left</span>
-          <span class="pcard-timer" data-mins="42">42:00</span>
-        </div>
-        <div class="pcard-footer">
-          <div><span class="pcard-was">Was $24.00</span><div class="pcard-price">$11.00</div></div>
-          <span class="pcard-btn">Get Guide</span>
-        </div>
-      </div>
-    </a>
-
-    <a href="guide-garden-sign.html" class="pcard" data-cat="concrete garden">
-      <div class="pcard-img">
-        <img src="thumbnail_garden-sign.jpg" alt="Concrete Garden Sign"/>
-        <span class="pcard-cat">Concrete &middot; Garden</span>
-        <span class="pcard-new">New</span>
-      </div>
-      <div class="pcard-body">
-        <div class="pcard-name">Concrete Garden Sign with Leaf Imprints</div>
-        <div class="pcard-sub">Press real leaves & carve any word into concrete. A stunning personalised garden piece for under $15.</div>
-        <div class="pcard-urgency">
-          <span class="pcard-stock">Only 3 left</span>
-          <span class="pcard-timer" data-mins="38">38:00</span>
-        </div>
-        <div class="pcard-footer">
-          <div><span class="pcard-was">Was $26.00</span><div class="pcard-price">$13.00</div></div>
-          <span class="pcard-btn">Get Guide</span>
-        </div>
-      </div>
-    </a>
-
-    <a href="guide-serving-tray.html" class="pcard" data-cat="concrete interior">
-      <div class="pcard-img">
-        <img src="thumbnail_serving-tray.jpg" alt="Concrete Serving Tray"/>
-        <span class="pcard-cat">Concrete &middot; Interior</span>
-        <span class="pcard-new">New</span>
-      </div>
-      <div class="pcard-body">
-        <div class="pcard-name">Concrete Serving Tray</div>
-        <div class="pcard-sub">Looks like $150. Costs under $20 to make. A stunning minimalist home piece.</div>
-        <div class="pcard-urgency">
-          <span class="pcard-stock">Only 3 left</span>
-          <span class="pcard-timer" data-mins="34">34:00</span>
-        </div>
-        <div class="pcard-footer">
-          <div><span class="pcard-was">Was $28.00</span><div class="pcard-price">$12.00</div></div>
-          <span class="pcard-btn">Get Guide</span>
-        </div>
-      </div>
-    </a>
-
-    <a href="guide-candle.html" class="pcard" data-cat="concrete interior">
-      <div class="pcard-img">
-        <img src="thumbnail_candle_facebook.jpg" alt="Concrete Candle Holder"/>
-        <span class="pcard-cat">Concrete &middot; Interior</span>
-      </div>
-      <div class="pcard-body">
-        <div class="pcard-name">Concrete Bowl Candle Holder</div>
-        <div class="pcard-sub">Two cups and a bag of concrete. The perfect first project.</div>
-        <div class="pcard-urgency">
-          <span class="pcard-stock">Only 5 left</span>
-          <span class="pcard-timer" data-mins="55">55:00</span>
-        </div>
-        <div class="pcard-footer">
-          <div><span class="pcard-was">Was $22.00</span><div class="pcard-price">$ 13.00</div></div>
-          <span class="pcard-btn">Get Guide</span>
-        </div>
-      </div>
-    </a>
-
-    <a href="guide-bird-bath.html" class="pcard" data-cat="concrete garden">
-      <div class="pcard-img">
-        <img src="thumbnail_bird-bath.jpg" alt="Concrete Bird Bath"/>
-        <span class="pcard-cat">Concrete &middot; Garden</span>
-        <span class="pcard-new">New</span>
-      </div>
-      <div class="pcard-body">
-        <div class="pcard-name">Concrete Bird Bath with Fabric Drape</div>
-        <div class="pcard-sub">Old bag + bucket + concrete = a stunning bird bath. A bird showed up the same day!</div>
-        <div class="pcard-urgency">
-          <span class="pcard-stock">Only 3 left</span>
-          <span class="pcard-timer" data-mins="47">47:00</span>
-        </div>
-        <div class="pcard-footer">
-          <div><span class="pcard-was">Was $28.00</span><div class="pcard-price">$11.00</div></div>
-          <span class="pcard-btn">Get Guide</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- 2 -->
-    <a href="guide-house-number.html" class="pcard" data-cat="concrete garden">
-      <div class="pcard-img">
-        <img src="thumbnail_house-number.jpg" alt="House Number Sign"/>
-        <span class="pcard-cat">Concrete &middot; Exterior</span>
-      </div>
-      <div class="pcard-body">
-        <div class="pcard-name">Concrete House Number Sign</div>
-        <div class="pcard-sub">River stone numbers in dark concrete. Stunning at your front door.</div>
-        <div class="pcard-urgency">
-          <span class="pcard-stock">Only 3 left</span>
-          <span class="pcard-timer" data-mins="28">28:00</span>
-        </div>
-        <div class="pcard-footer">
-          <div><span class="pcard-was">Was $24.00</span><div class="pcard-price">$13.00</div></div>
-          <span class="pcard-btn">Get Guide</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- 2 -->
-    <a href="guide-stone-candle.html" class="pcard" data-cat="concrete interior">
-      <div class="pcard-img">
-        <img src="thumbnail_stone-candle.jpg" alt="Stone Candle Holder"/>
-        <span class="pcard-cat">Concrete &middot; Interior</span>
-      </div>
-      <div class="pcard-body">
-        <div class="pcard-name">River Stone Candle Holder</div>
-        <div class="pcard-sub">Embedded pebbles that glow like a lantern at night.</div>
-        <div class="pcard-urgency">
-          <span class="pcard-stock">Only 4 left</span>
-          <span class="pcard-timer" data-mins="31">31:00</span>
-        </div>
-        <div class="pcard-footer">
-          <div><span class="pcard-was">Was $30.00</span><div class="pcard-price">$11.00</div></div>
-          <span class="pcard-btn">Get Guide</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- 3 -->
-    <a href="guide-balloon-vase.html" class="pcard" data-cat="concrete interior">
-      <div class="pcard-img">
-        <img src="thumbnail_balloon-vase.jpg" alt="Balloon Vase"/>
-        <span class="pcard-cat">Concrete &middot; Interior</span>
-      </div>
-      <div class="pcard-body">
-        <div class="pcard-name">Balloon Vase with Gold Interior</div>
-        <div class="pcard-sub">Pour into a balloon, cure, pop — paint inside gold.</div>
-        <div class="pcard-urgency">
-          <span class="pcard-stock">Only 3 left</span>
-          <span class="pcard-timer" data-mins="37">37:00</span>
-        </div>
-        <div class="pcard-footer">
-          <div><span class="pcard-was">Was $22.00</span><div class="pcard-price">$13.00</div></div>
-          <span class="pcard-btn">Get Guide</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- 4 -->
-    <a href="guide-rope-planter.html" class="pcard" data-cat="concrete garden">
-      <div class="pcard-img">
-        <img src="thumbnail_rope-planter.jpg" alt="Rope Planter"/>
-        <span class="pcard-cat">Concrete &middot; Garden</span>
-      </div>
-      <div class="pcard-body">
-        <div class="pcard-name">Rope Texture Planter</div>
-        <div class="pcard-sub">Wrap rope around a bucket, pour concrete — unmold a $150 planter.</div>
-        <div class="pcard-urgency">
-          <span class="pcard-stock">Only 2 left</span>
-          <span class="pcard-timer" data-mins="52">52:00</span>
-        </div>
-        <div class="pcard-footer">
-          <div><span class="pcard-was">Was $17.00</span><div class="pcard-price">$9.99</div></div>
-          <span class="pcard-btn">Get Guide</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- 5 -->
-    <a href="guide-hand-planter.html" class="pcard" data-cat="concrete garden">
-      <div class="pcard-img">
-        <img src="thumbnail_hand-planter.jpg" alt="Hand Planter"/>
-        <span class="pcard-cat">Concrete &middot; Garden</span>
-      </div>
-      <div class="pcard-body">
-        <div class="pcard-name">Concrete Hand Planter</div>
-        <div class="pcard-sub">Cast your hand in concrete with a rubber glove. Plant with succulents.</div>
-        <div class="pcard-urgency">
-          <span class="pcard-stock">Only 4 left</span>
-          <span class="pcard-timer" data-mins="44">44:00</span>
-        </div>
-        <div class="pcard-footer">
-          <div><span class="pcard-was">Was $9.00</span><div class="pcard-price">$5.00</div></div>
-          <span class="pcard-btn">Get Guide</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- 6 -->
-    <a href="guide-stone-wall.html" class="pcard" data-cat="interior">
-      <div class="pcard-img">
-        <img src="thumbnail_stone_wall.jpg" alt="Stone Accent Wall"/>
-        <span class="pcard-cat">Stone &middot; Interior</span>
-      </div>
-      <div class="pcard-body">
-        <div class="pcard-name">Natural Stone Accent Wall</div>
-        <div class="pcard-sub">Save $2,000–$7,000 vs a contractor. Full lighting guide included.</div>
-        <div class="pcard-urgency">
-          <span class="pcard-stock">Only 2 left</span>
-          <span class="pcard-timer" data-mins="43">43:00</span>
-        </div>
-        <div class="pcard-footer">
-          <div><span class="pcard-was">Was $22.00</span><div class="pcard-price">$12.99</div></div>
-          <span class="pcard-btn">Get Guide</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- 8 -->
-    <a href="guide-creek-bridge.html" class="pcard" data-cat="garden">
-      <div class="pcard-img">
-        <img src="thumbnail_creek-bridge.jpg" alt="Creek Bridge"/>
-        <span class="pcard-cat">Wood &middot; Garden</span>
-      </div>
-      <div class="pcard-body">
-        <div class="pcard-name">Dry Creek Stream &amp; Garden Bridge</div>
-        <div class="pcard-sub">Transform a flat backyard into a natural stream with a wooden bridge.</div>
-        <div class="pcard-urgency">
-          <span class="pcard-stock">Only 2 left</span>
-          <span class="pcard-timer" data-mins="61">61:00</span>
-        </div>
-        <div class="pcard-footer">
-          <div><span class="pcard-was">Was $9.00</span><div class="pcard-price">$5.00</div></div>
-          <span class="pcard-btn">Get Guide</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- 9 -->
-    <a href="guide-mosaic-table.html" class="pcard" data-cat="garden glass">
-      <div class="pcard-img">
-        <img src="thumbnail_mosaic_table.jpg" alt="Mosaic Patio Table"/>
-        <span class="pcard-cat">Mosaic &middot; Garden</span>
-      </div>
-      <div class="pcard-body">
-        <div class="pcard-name">Mosaic Patio Table</div>
-        <div class="pcard-sub">Turn broken tiles into a stunning garden centrepiece. Under $50.</div>
-        <div class="pcard-urgency">
-          <span class="pcard-stock">Only 3 left</span>
-          <span class="pcard-timer" data-mins="48">48:00</span>
-        </div>
-        <div class="pcard-footer">
-          <div><span class="pcard-was">Was $9.00</span><div class="pcard-price">$5.00</div></div>
-          <span class="pcard-btn">Get Guide</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- 10 -->
-    <a href="guide-leaf-stones.html" class="pcard" data-cat="concrete garden">
-      <div class="pcard-img">
-        <img src="thumbnail_leaf_stones.jpg" alt="Leaf Stepping Stones"/>
-        <span class="pcard-cat">Concrete &middot; Garden</span>
-      </div>
-      <div class="pcard-body">
-        <div class="pcard-name">Leaf Imprint Stepping Stones</div>
-        <div class="pcard-sub">Press a leaf into concrete — every vein transfers perfectly. Under $5 each.</div>
-        <div class="pcard-urgency">
-          <span class="pcard-stock">Only 4 left</span>
-          <span class="pcard-timer" data-mins="33">33:00</span>
-        </div>
-        <div class="pcard-footer">
-          <div><span class="pcard-was">Was $9.00</span><div class="pcard-price">$5.00</div></div>
-          <span class="pcard-btn">Get Guide</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- 11 -->
-    <a href="guide-glass-stones.html" class="pcard" data-cat="concrete garden glass">
-      <div class="pcard-img">
-        <img src="thumbnail_glass_stones_facebook.jpg" alt="Glass Mosaic Stepping Stones"/>
-        <span class="pcard-cat">Glass &middot; Garden</span>
-      </div>
-      <div class="pcard-body">
-        <div class="pcard-name">Glass Mosaic Stepping Stones</div>
-        <div class="pcard-sub">Coloured glass in polished concrete — glows like stained glass at night.</div>
-        <div class="pcard-urgency">
-          <span class="pcard-stock">Only 2 left</span>
-          <span class="pcard-timer" data-mins="41">41:00</span>
-        </div>
-        <div class="pcard-footer">
-          <div><span class="pcard-was">Was $9.00</span><div class="pcard-price">$5.00</div></div>
-          <span class="pcard-btn">Get Guide</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- 12 -->
-    
-
-    <!-- 13 -->
-        <a href="guide-fire-bowl.html" class="pcard" data-cat="concrete garden">
-      <div class="pcard-img">
-        <img src="thumbnail_fire_bowl.jpg" alt="Concrete Fire Bowl"/>
-        <span class="pcard-cat">Concrete &middot; Garden</span>
-      </div>
-      <div class="pcard-body">
-        <div class="pcard-name">Concrete Fire Bowl</div>
-        <div class="pcard-sub">A $3 basin becomes a stunning outdoor fire bowl. Under $30 to make.</div>
-        <div class="pcard-urgency">
-          <span class="pcard-stock">Only 3 left</span>
-          <span class="pcard-timer" data-mins="26">26:00</span>
-        </div>
-        <div class="pcard-footer">
-          <div><span class="pcard-was">Was $9.00</span><div class="pcard-price">$5.00</div></div>
-          <span class="pcard-btn">Get Guide</span>
-        </div>
-      </div>
-    </a>
-
-    <a href="guide-planter.html" class="pcard" data-cat="concrete garden">
-      <div class="pcard-img">
-        <img src="thumbnail_planter_facebook.jpg" alt="Woven Concrete Planter"/>
-        <span class="pcard-cat">Concrete &middot; Garden</span>
-      </div>
-      <div class="pcard-body">
-        <div class="pcard-name">Woven Texture Concrete Planter</div>
-        <div class="pcard-sub">A $5 laundry basket transfers a beautiful woven texture. Under $20.</div>
-        <div class="pcard-urgency">
-          <span class="pcard-stock">Only 3 left</span>
-          <span class="pcard-timer" data-mins="38">38:00</span>
-        </div>
-        <div class="pcard-footer">
-          <div><span class="pcard-was">Was $9.00</span><div class="pcard-price">$5.00</div></div>
-          <span class="pcard-btn">Get Guide</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- 14 -->
-    </p>
+<footer>
+  <div class="fl">🪨 Made By Hand</div>
+  <p>© 2026 · All guides are digital PDF downloads · <a href="mailto:you@example.com">Contact us</a></p>
 </footer>
 
 <script>
-// CURSOR
-const dot=document.getElementById('cursorDot'),ring=document.getElementById('cursorRing');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});
-function anim(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(anim);}
-anim();
-document.querySelectorAll('a,button,.pcard').forEach(el=>{
-  el.addEventListener('mouseenter',()=>ring.classList.add('hover'));
-  el.addEventListener('mouseleave',()=>ring.classList.remove('hover'));
-});
-
-// FILTERS
-function doFilter(cat,btn){
-  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('active'));
+function doFilter(cat, btn) {
+  document.querySelectorAll('.fb').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  document.querySelectorAll('.pcard').forEach(c=>{
-    c.classList.toggle('hidden',cat!=='all'&&!(c.dataset.cat||'').includes(cat));
+  document.querySelectorAll('.card').forEach(c => {
+    c.classList.toggle('hidden', cat !== 'all' && !(c.dataset.cat||'').includes(cat));
   });
 }
-
-// REVEAL
-const obs=new IntersectionObserver((entries)=>{
-  entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*60);obs.unobserve(e.target);}});
-},{threshold:0.06});
-
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 60); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.card').forEach(c => {
+  c.style.transition = 'opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s, border-color 0.3s';
+  obs.observe(c);
+});
 </script>
 </body>
 </html>
