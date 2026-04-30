@@ -10,48 +10,48 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{--bg:#0C0B09;--bg2:#131210;--surface:#201E1B;--surface2:#282420;--line:rgba(255,255,255,0.07);--line2:rgba(255,255,255,0.12);--text:#F0EDE8;--text2:#A09890;--text3:#6A6058;--accent:#C8963C;--accent2:#E8B85C;--green:#5A8A50;--green2:#7AB870;--red:#B84040;}
-html{scroll-behavior:smooth;cursor:none;}
+html{scroll-behavior:auto;-webkit-text-size-adjust:100%;}body{-webkit-overflow-scrolling:touch;overscroll-behavior:none;}
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;font-weight:300;}
 
-.cursor{position:fixed;top:0;left:0;z-index:9999;pointer-events:none;mix-blend-mode:exclusion;}
-.cursor-dot{width:8px;height:8px;background:#fff;border-radius:50%;position:absolute;transform:translate(-50%,-50%);}
-.cursor-ring{width:40px;height:40px;border:1px solid rgba(255,255,255,0.4);border-radius:50%;position:absolute;transform:translate(-50%,-50%);transition:width 0.3s,height 0.3s,border-color 0.3s;}
+
+
+
 .cursor-ring.hover{width:60px;height:60px;border-color:var(--accent);background:rgba(200,150,60,0.06);}
 
-.ann{background:var(--accent);padding:9px 5vw;display:flex;align-items:center;justify-content:center;gap:20px;font-size:0.68rem;font-weight:400;letter-spacing:0.16em;text-transform:uppercase;color:rgba(12,11,9,0.75);flex-wrap:wrap;}
+.ann{background:var(--accent);padding:9px 5vw;display:flex;align-items:center;justify-content:center;gap:20px;font-size:0.68rem;font-weight:400;letter-spacing:0.16em;text-color:rgba(12,11,9,0.75);flex-wrap:wrap;}
 .ann a{color:var(--bg);text-decoration:none;font-weight:500;border-bottom:1px solid rgba(12,11,9,0.25);}
 
 nav{position:sticky;top:0;z-index:500;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;background:rgba(12,11,9,0.94);backdrop-filter:blur(28px);border-bottom:1px solid var(--line);}
 .logo{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:300;letter-spacing:0.02em;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:10px;}
 .logo-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);}
-.nav-back{font-size:0.65rem;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;color:var(--text3);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color 0.2s;}
+.nav-back{font-size:0.65rem;font-weight:400;letter-spacing:0.14em;text-color:var(--text3);text-decoration:none;display:flex;align-items:center;gap:8px;}
 .nav-back:hover{color:var(--accent);}
 
 /* URGENCY BAR */
-.urgency{background:var(--red);color:#fff;text-align:center;padding:10px 20px;font-size:0.72rem;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;}
+.urgency{background:var(--red);color:#fff;text-align:center;padding:10px 20px;font-size:0.72rem;font-weight:400;letter-spacing:0.14em;text-display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;}
 .urgency-timer{font-family:'Fraunces',serif;font-size:0.9rem;background:rgba(0,0,0,0.25);padding:3px 12px;}
 
 /* HERO */
 .guide-hero{display:grid;grid-template-columns:1fr 1fr;min-height:80vh;border-bottom:1px solid var(--line);}
 .gh-img{position:relative;overflow:hidden;}
-.gh-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.7s;}
-.gh-img:hover img{transform:scale(1.03);}
+.gh-img img{width:100%;height:100%;object-fit:cover;display:block;}
+
 .gh-img-overlay{position:absolute;inset:0;background:linear-gradient(90deg,transparent 60%,var(--bg) 100%);}
 
 .gh-body{padding:5vw;display:flex;flex-direction:column;justify-content:center;}
-.gh-eyebrow{font-size:0.62rem;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:var(--green2);margin-bottom:1.5rem;display:flex;align-items:center;gap:10px;}
+.gh-eyebrow{font-size:0.62rem;font-weight:400;letter-spacing:0.22em;text-color:var(--green2);margin-bottom:1.5rem;display:flex;align-items:center;gap:10px;}
 .gh-eyebrow::before{content:'';width:16px;height:1px;background:var(--green2);}
 .gh-title{font-family:'Fraunces',serif;font-size:clamp(2.2rem,4vw,4rem);font-weight:100;line-height:0.95;letter-spacing:-0.02em;color:var(--text);margin-bottom:1.5rem;}
 .gh-title em{font-style:italic;color:var(--accent);}
 .gh-desc{font-size:0.92rem;font-weight:300;color:var(--text2);line-height:1.85;margin-bottom:2rem;max-width:420px;}
 .gh-chips{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:2rem;}
-.gh-chip{font-size:0.6rem;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;border:1px solid var(--line2);color:var(--text3);padding:6px 12px;}
+.gh-chip{font-size:0.6rem;font-weight:400;letter-spacing:0.12em;text-border:1px solid var(--line2);color:var(--text3);padding:6px 12px;}
 .gh-price-block{margin-bottom:2rem;}
 .gh-was{font-size:0.72rem;color:var(--text3);text-decoration:line-through;margin-bottom:4px;}
 .gh-price-row{display:flex;align-items:baseline;gap:12px;margin-bottom:8px;}
 .gh-price{font-family:'Fraunces',serif;font-size:4rem;font-weight:100;color:#FFFFFF;line-height:1;}
-.gh-save{font-size:0.6rem;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;border:1px solid rgba(200,150,60,0.35);color:var(--accent);padding:4px 10px;}
-.gh-stock{font-size:0.65rem;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:6px;}
+.gh-save{font-size:0.6rem;font-weight:400;letter-spacing:0.12em;text-border:1px solid rgba(200,150,60,0.35);color:var(--accent);padding:4px 10px;}
+.gh-stock{font-size:0.65rem;font-weight:400;letter-spacing:0.12em;text-color:var(--red);display:flex;align-items:center;gap:6px;}
 .gh-stock::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--red);}
 
 /* ── BUY BUTTON — imposibil de ratat ─────── */
@@ -59,81 +59,52 @@ nav{position:sticky;top:0;z-index:500;height:68px;display:flex;align-items:cente
   position:relative;margin-top:1.75rem;
 }
 /* 3 inele concentrice care pulseaza */
-.gh-buy-pulse{
-  position:absolute;inset:-6px;
-  border:2px solid rgba(200,150,60,0.7);
-  animation:pulse-ring 1.6s ease-out infinite;
-  pointer-events:none;
-}
-.gh-buy-pulse::before{
-  content:'';position:absolute;inset:-8px;
-  border:1.5px solid rgba(200,150,60,0.35);
-  animation:pulse-ring 1.6s ease-out 0.4s infinite;
-}
-.gh-buy-pulse::after{
-  content:'';position:absolute;inset:-16px;
-  border:1px solid rgba(200,150,60,0.15);
-  animation:pulse-ring 1.6s ease-out 0.8s infinite;
-}
+
+
+
 @keyframes pulse-ring{
-  0%{opacity:1;transform:scale(1);}
-  100%{opacity:0;transform:scale(1.12);}
+  0%{opacity:1;}
+  100%{}
 }
 .gh-buy{
   display:flex;align-items:center;justify-content:center;gap:14px;
   width:100%;
   font-family:'Outfit',sans-serif;font-size:0.9rem;font-weight:600;
-  letter-spacing:0.2em;text-transform:uppercase;
+  letter-spacing:0.2em;text-
   background:linear-gradient(135deg, #D4A843 0%, #C8963C 50%, #B8820A 100%);
   color:#0C0B09;
   padding:22px 32px;border:none;cursor:pointer;
   position:relative;overflow:hidden;
-  transition:transform 0.2s,box-shadow 0.2s;
-  box-shadow:
-    0 0 0 1px rgba(200,150,60,0.6),
-    0 0 30px rgba(200,150,60,0.5),
-    0 0 70px rgba(200,150,60,0.25),
-    0 8px 32px rgba(0,0,0,0.4);
+  
+  
 }
 /* shimmer sweep */
-.gh-buy::before{
-  content:'';position:absolute;top:0;left:-100%;
-  width:60%;height:100%;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.25),transparent);
-  animation:shimmer 2.5s ease-in-out infinite;
-}
-@keyframes shimmer{
-  0%{left:-100%;}
-  60%,100%{left:150%;}
-}
+
+
 .gh-buy:hover{
-  transform:translateY(-3px);
-  box-shadow:
-    0 0 0 1px rgba(200,150,60,0.8),
-    0 0 50px rgba(200,150,60,0.7),
-    0 0 100px rgba(200,150,60,0.35),
-    0 12px 40px rgba(0,0,0,0.5);
+  
+  
 }
 .gh-buy-icon{font-size:1.2rem;}
 .gh-buy-text{display:flex;flex-direction:column;align-items:flex-start;gap:1px;}
 .gh-buy-main{font-size:0.88rem;font-weight:600;letter-spacing:0.16em;}
-.gh-buy-sub{font-size:0.62rem;font-weight:400;letter-spacing:0.1em;opacity:0.75;text-transform:none;}
-.gh-buy-arrow{font-size:1.2rem;transition:transform 0.2s;margin-left:auto;}
-.gh-buy:hover .gh-buy-arrow{transform:translateX(5px);}
+.gh-buy-sub{font-size:0.62rem;font-weight:400;letter-spacing:0.1em;opacity:0.75;text-}
+.gh-buy-arrow{font-size:1.2rem;margin-left:auto;}
+.gh-buy:hover .gh-buy-arrow{}
 .gh-trust{font-size:0.62rem;font-weight:300;color:var(--text3);letter-spacing:0.1em;text-align:center;margin-top:1rem;}
 
-.gh-buy::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,0.12);transform:translateX(-100%);transition:transform 0.35s;}
-.gh-buy:hover::after{transform:translateX(0);}
-.gh-buy:hover{transform:translateY(-1px);}
+.gh-buy::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,0.12);}
+.gh-buy:hover::after{}
+.gh-buy:hover{}
 .gh-trust{font-size:0.62rem;font-weight:300;color:var(--text3);letter-spacing:0.1em;margin-top:1rem;}
 
 /* INSIDE SECTION */
 .inside-sec{padding:6rem 5vw;border-bottom:1px solid var(--line);max-width:1200px;margin:0 auto;}
-.sec-label{font-size:0.62rem;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:var(--green2);margin-bottom:1rem;display:flex;align-items:center;gap:10px;}
+.sec-label{font-size:0.62rem;font-weight:400;letter-spacing:0.22em;text-color:var(--green2);margin-bottom:1rem;display:flex;align-items:center;gap:10px;}
 .sec-label::before{content:'';width:16px;height:1px;background:var(--green2);}
 .sec-title{font-family:'Fraunces',serif;font-size:clamp(2rem,3vw,3rem);font-weight:100;color:var(--text);margin-bottom:2.5rem;}
 .inside-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--line);}
-.ic{background:var(--bg);padding:1.75rem;border-top:2px solid transparent;transition:border-color 0.25s,background 0.25s;}
+.ic{background:var(--bg);padding:1.75rem;border-top:2px solid transparent;}
 .ic:hover{background:var(--surface);border-top-color:var(--accent);}
 .ic-icon{font-size:1.5rem;margin-bottom:1rem;display:block;}
 .ic h4{font-family:'Fraunces',serif;font-size:1rem;font-weight:300;color:var(--text);margin-bottom:6px;}
@@ -142,7 +113,7 @@ nav{position:sticky;top:0;z-index:500;height:68px;display:flex;align-items:cente
 /* STEPS */
 .steps-sec{padding:6rem 5vw;border-bottom:1px solid var(--line);max-width:900px;margin:0 auto;}
 .steps-list{display:flex;flex-direction:column;}
-.step{display:grid;grid-template-columns:60px 1fr;gap:1.5rem;padding:1.75rem 0;border-bottom:1px solid var(--line);align-items:start;transition:padding-left 0.3s;}
+.step{display:grid;grid-template-columns:60px 1fr;gap:1.5rem;padding:1.75rem 0;border-bottom:1px solid var(--line);align-items:start;}
 .step:first-child{border-top:1px solid var(--line);}
 .step:hover{padding-left:0.75rem;}
 .step-n{font-family:'Fraunces',serif;font-size:0.8rem;font-weight:300;color:var(--text3);letter-spacing:0.1em;margin-top:4px;}
@@ -158,40 +129,40 @@ nav{position:sticky;top:0;z-index:500;height:68px;display:flex;align-items:cente
 /* MODAL */
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:1000;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(12px);}
 .overlay.open{display:flex;}
-.modal{background:var(--bg2);border:1px solid var(--line2);width:100%;max-width:480px;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,0.6);animation:pop 0.35s cubic-bezier(0.34,1.56,0.64,1);}
-@keyframes pop{from{opacity:0;transform:scale(0.92) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.modal{background:var(--bg2);border:1px solid var(--line2);width:100%;max-width:480px;overflow:hidden;}
+
 .modal-top{background:var(--surface);padding:1.75rem 2rem;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;border-bottom:1px solid var(--line);}
 .m-title{font-family:'Fraunces',serif;font-size:1rem;font-weight:300;color:var(--text);margin-bottom:4px;}
 .m-price-row{display:flex;align-items:baseline;gap:8px;}
 .m-price{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:300;color:var(--accent);}
 .m-was{font-size:0.78rem;color:var(--text3);text-decoration:line-through;}
-.m-close{background:none;border:none;color:var(--text3);font-size:1.4rem;cursor:pointer;line-height:1;padding:0;transition:color 0.2s;flex-shrink:0;}
+.m-close{background:none;border:none;color:var(--text3);font-size:1.4rem;cursor:pointer;line-height:1;padding:0;flex-shrink:0;}
 .m-close:hover{color:var(--text);}
 .modal-body{padding:2rem;}
 #payment-element{min-height:44px;margin-bottom:0.5rem;}
 #payment-element p{font-size:0.82rem;color:var(--text3);padding:1rem 0;text-align:center;}
 #card-err{font-size:0.78rem;color:var(--red);margin-top:0.5rem;min-height:1.2em;}
-.pay-btn{width:100%;background:var(--accent);color:var(--bg);border:none;padding:14px;font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;margin-top:1.25rem;transition:background 0.2s;}
+.pay-btn{width:100%;background:var(--accent);color:var(--bg);border:none;padding:14px;font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:400;letter-spacing:0.18em;text-cursor:pointer;margin-top:1.25rem;}
 .pay-btn:hover:not(:disabled){background:var(--accent2);}
 .pay-btn:disabled{opacity:0.4;cursor:not-allowed;}
-.m-secure{font-size:0.6rem;font-weight:300;color:var(--text3);letter-spacing:0.12em;text-transform:uppercase;text-align:center;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line);}
+.m-secure{font-size:0.6rem;font-weight:300;color:var(--text3);letter-spacing:0.12em;text-text-align:center;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line);}
 .success{display:none;text-align:center;padding:2rem 0 1rem;}
 .success-icon{font-size:3rem;margin-bottom:1rem;display:block;}
 .success h3{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:300;color:var(--accent);margin-bottom:0.75rem;}
 .success p{font-size:0.85rem;color:var(--text3);margin-bottom:1.5rem;}
-.dl-btn{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:400;letter-spacing:0.16em;text-transform:uppercase;padding:12px 24px;text-decoration:none;transition:background 0.2s;}
+.dl-btn{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:400;letter-spacing:0.16em;text-padding:12px 24px;text-decoration:none;}
 .dl-btn:hover{background:var(--green2);}
 
 footer{background:var(--surface);padding:2.5rem 5vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;border-top:1px solid var(--line);}
 .f-logo{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:300;color:var(--text3);}
-footer p{font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text3);}
+footer p{font-size:0.6rem;letter-spacing:0.14em;text-color:var(--text3);}
 footer a{color:var(--text3);text-decoration:none;}
 
-.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease;}
-.reveal.visible{opacity:1;transform:translateY(0);}
+
+
 
 @media(max-width:900px){
-  html{cursor:auto;}.cursor{display:none;}
+  html{cursor:auto;}
   .guide-hero{grid-template-columns:1fr;}
   .gh-img{height:60vw;}.gh-img-overlay{display:none;}
   .inside-grid{grid-template-columns:1fr 1fr;}
@@ -206,27 +177,29 @@ footer a{color:var(--text3);text-decoration:none;}
 .reviews-summary{text-align:right;}
 .rs-big{font-family:'Fraunces',serif;font-size:3.5rem;font-weight:100;color:var(--accent);line-height:1;}
 .rs-stars{color:var(--accent);font-size:1rem;letter-spacing:3px;margin:4px 0;}
-.rs-count{font-size:0.72rem;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;color:var(--text3);}
+.rs-count{font-size:0.72rem;font-weight:400;letter-spacing:0.12em;text-color:var(--text3);}
 .rs-sold{font-size:0.82rem;font-weight:300;color:var(--text2);margin-top:6px;}
 .rs-sold strong{color:var(--accent);}
 .rv-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);}
-.rv-card{background:var(--bg);padding:1.75rem;border-top:2px solid transparent;transition:border-color 0.25s,background 0.2s;}
+.rv-card{background:var(--bg);padding:1.75rem;border-top:2px solid transparent;}
 .rv-card:hover{background:var(--surface);border-top-color:var(--accent);}
 .rv-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.85rem;}
 .rv-stars{color:var(--accent);font-size:0.85rem;letter-spacing:2px;}
-.rv-verified{font-size:0.6rem;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;color:var(--green2);}
+.rv-verified{font-size:0.6rem;font-weight:400;letter-spacing:0.12em;text-color:var(--green2);}
 .rv-text{font-family:'Fraunces',serif;font-size:0.95rem;font-weight:300;font-style:italic;color:var(--text2);line-height:1.7;margin-bottom:1rem;}
-.rv-author{font-size:0.65rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--text3);}
+.rv-author{font-size:0.65rem;font-weight:500;letter-spacing:0.14em;text-color:var(--text3);}
 .rv-author span{color:var(--text3);font-weight:400;}
 @media(max-width:700px){.rv-grid{grid-template-columns:1fr;}.reviews-header{flex-direction:column;}.reviews-summary{text-align:left;}}
 
+
+img{max-width:100%;height:auto;}
+*{-webkit-tap-highlight-color:transparent;}
+button,a{touch-action:manipulation;}
 </style>
 </head>
 <body>
 
-<div class="cursor" id="cursor">
-  <div class="cursor-dot" id="cursorDot"></div>
-  <div class="cursor-ring" id="cursorRing"></div>
+  
 </div>
 
 <div class="ann">
@@ -269,7 +242,7 @@ footer a{color:var(--text3);text-decoration:none;}
       <div class="gh-stock">Only 2 left at this price</div>
     </div>
         <div class="gh-buy-wrap">
-      <div class="gh-buy-pulse"></div>
+      
       <button class="gh-buy" onclick="openModal()">
           <span class="gh-buy-icon">&#11015;</span>
           <span class="gh-buy-text">
@@ -359,13 +332,8 @@ const AMOUNT=1299;
 const PRODUCT='Natural Stone Accent Wall';
 let stripe,elements;
 
-// Cursor
-const dot=document.getElementById('cursorDot'),ring=document.getElementById('cursorRing');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});
-function animC(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animC);}
-animC();
-document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>ring.classList.add('hover'));el.addEventListener('mouseleave',()=>ring.classList.remove('hover'));});
+
+
 
 // Timer
 (function(){
@@ -376,21 +344,7 @@ document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseent
 
 // Reveal
 const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*80);obs.unobserve(e.target);}});},{threshold:0.08});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-// Modal
-async function openModal(){
-  document.getElementById('form-wrap').style.display='block';
-  document.getElementById('success-box').style.display='none';
-  document.getElementById('pay-btn').disabled=true;
-  document.getElementById('pay-btn').textContent='Loading...';
-  document.getElementById('card-err').textContent='';
-  document.getElementById('payment-element').innerHTML='<p>&#9203; Loading secure payment...</p>';
-  document.getElementById('overlay').classList.add('open');
-  document.body.style.overflow='hidden';
-  stripe=Stripe(STRIPE_KEY);
-  try{
-    const res=await fetch('/.netlify/functions/create-payment-intent',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({amount:AMOUNT,currency:'usd',product:PRODUCT})});
     const data=await res.json();
     if(data.error)throw new Error(data.error);
     elements=stripe.elements({clientSecret:data.clientSecret,appearance:{theme:'night',variables:{colorPrimary:'#C8963C',fontFamily:"'Outfit', sans-serif",borderRadius:'0px',colorBackground:'#201E1B',colorText:'#F0EDE8'}}});
@@ -423,15 +377,15 @@ document.getElementById('pay-btn').addEventListener('click',async function(){
 
 <!-- EMAIL CAPTURE POPUP — appears after successful payment -->
 <div id="email-popup" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:2000;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(16px);">
-  <div style="background:#1A1815;border:1px solid rgba(200,150,60,0.3);max-width:440px;width:100%;padding:0;overflow:hidden;animation:pop 0.35s cubic-bezier(0.34,1.56,0.64,1);">
+  <div style="background:#1A1815;border:1px solid rgba(200,150,60,0.3);max-width:440px;width:100%;padding:0;overflow:hidden;">
     
     <!-- Top bar -->
     <div style="background:#201E1B;padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.07);">
       <div>
-        <p style="font-size:0.6rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:#C8963C;margin:0 0 4px;">One more thing...</p>
+        <p style="font-size:0.6rem;font-weight:500;letter-spacing:0.18em;text-color:#C8963C;margin:0 0 4px;">One more thing...</p>
         <p style="font-family:Georgia,serif;font-size:1.1rem;color:#F0EDE8;margin:0;font-weight:400;">Get your guide by email too</p>
       </div>
-      <button onclick="closeEmailPopup()" style="background:none;border:none;color:#6A6058;font-size:1.4rem;cursor:pointer;line-height:1;padding:0;transition:color 0.2s;" onmouseover="this.style.color='#F0EDE8'" onmouseout="this.style.color='#6A6058'">&#10005;</button>
+      <button onclick="closeEmailPopup()" style="background:none;border:none;color:#6A6058;font-size:1.4rem;cursor:pointer;line-height:1;padding:0;" onmouseover="this.style.color='#F0EDE8'" onmouseout="this.style.color='#6A6058'">&#10005;</button>
     </div>
 
     <!-- Body -->
@@ -446,7 +400,7 @@ document.getElementById('pay-btn').addEventListener('click',async function(){
           style="flex:1;background:#0C0B09;border:1px solid rgba(255,255,255,0.12);border-right:none;padding:12px 14px;font-size:0.9rem;color:#F0EDE8;font-family:'Outfit',sans-serif;outline:none;"
           onkeydown="if(event.key==='Enter')submitEmail()"/>
         <button onclick="submitEmail()" id="email-submit-btn"
-          style="background:#C8963C;color:#0C0B09;border:none;padding:12px 20px;font-size:0.7rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;font-family:'Outfit',sans-serif;transition:background 0.2s;white-space:nowrap;"
+          style="background:#C8963C;color:#0C0B09;border:none;padding:12px 20px;font-size:0.7rem;font-weight:600;letter-spacing:0.14em;text-cursor:pointer;font-family:'Outfit',sans-serif;white-space:nowrap;"
           onmouseover="this.style.background='#E8B85C'" onmouseout="this.style.background='#C8963C'">
           Send It &#8594;
         </button>
@@ -457,9 +411,9 @@ document.getElementById('pay-btn').addEventListener('click',async function(){
     <!-- Download button — always visible -->
     <div style="padding:0 1.5rem 1.5rem;">
       <div style="border-top:1px solid rgba(255,255,255,0.06);padding-top:1.25rem;">
-        <p style="font-size:0.68rem;color:#4A4540;text-align:center;margin:0 0 0.75rem;letter-spacing:0.1em;text-transform:uppercase;">Or just download directly</p>
+        <p style="font-size:0.68rem;color:#4A4540;text-align:center;margin:0 0 0.75rem;letter-spacing:0.1em;text-">Or just download directly</p>
         <a id="popup-download-btn" href="#" download 
-          style="display:flex;align-items:center;justify-content:center;gap:8px;background:#201E1B;border:1px solid rgba(255,255,255,0.1);padding:12px;color:#A09890;text-decoration:none;font-size:0.72rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;transition:border-color 0.2s;"
+          style="display:flex;align-items:center;justify-content:center;gap:8px;background:#201E1B;border:1px solid rgba(255,255,255,0.1);padding:12px;color:#A09890;text-decoration:none;font-size:0.72rem;font-weight:500;letter-spacing:0.14em;text-"
           onmouseover="this.style.borderColor='rgba(200,150,60,0.4)';this.style.color='#F0EDE8'" 
           onmouseout="this.style.borderColor='rgba(255,255,255,0.1)';this.style.color='#A09890'">
           &#11015; Download Your PDF Guide
