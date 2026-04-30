@@ -10,12 +10,12 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{--bg:#0C0B09;--bg2:#131210;--surface:#201E1B;--surface2:#282420;--line:rgba(255,255,255,0.07);--line2:rgba(255,255,255,0.12);--text:#F0EDE8;--text2:#A09890;--text3:#6A6058;--accent:#C8963C;--accent2:#E8B85C;--green:#5A8A50;--green2:#7AB870;--red:#B84040;}
-html{scroll-behavior:smooth;cursor:none;}
+html{scroll-behavior:smooth;}
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;font-weight:300;}
 
-.cursor{position:fixed;top:0;left:0;z-index:9999;pointer-events:none;mix-blend-mode:exclusion;}
-.cursor-dot{width:8px;height:8px;background:#fff;border-radius:50%;position:absolute;transform:translate(-50%,-50%);}
-.cursor-ring{width:40px;height:40px;border:1px solid rgba(255,255,255,0.4);border-radius:50%;position:absolute;transform:translate(-50%,-50%);transition:width 0.3s,height 0.3s,border-color 0.3s;}
+
+
+
 .cursor-ring.hover{width:60px;height:60px;border-color:var(--accent);background:rgba(200,150,60,0.06);}
 
 .ann{background:var(--accent);padding:9px 5vw;display:flex;align-items:center;justify-content:center;gap:20px;font-size:0.68rem;font-weight:400;letter-spacing:0.16em;text-transform:uppercase;color:rgba(12,11,9,0.75);flex-wrap:wrap;}
@@ -62,18 +62,18 @@ nav{position:sticky;top:0;z-index:500;height:68px;display:flex;align-items:cente
 .gh-buy-pulse{
   position:absolute;inset:-6px;
   border:2px solid rgba(200,150,60,0.7);
-  animation:pulse-ring 1.6s ease-out infinite;
+  
   pointer-events:none;
 }
 .gh-buy-pulse::before{
   content:'';position:absolute;inset:-8px;
   border:1.5px solid rgba(200,150,60,0.35);
-  animation:pulse-ring 1.6s ease-out 0.4s infinite;
+  
 }
 .gh-buy-pulse::after{
   content:'';position:absolute;inset:-16px;
   border:1px solid rgba(200,150,60,0.15);
-  animation:pulse-ring 1.6s ease-out 0.8s infinite;
+  
 }
 @keyframes pulse-ring{
   0%{opacity:1;transform:scale(1);}
@@ -100,7 +100,7 @@ nav{position:sticky;top:0;z-index:500;height:68px;display:flex;align-items:cente
   content:'';position:absolute;top:0;left:-100%;
   width:60%;height:100%;
   background:linear-gradient(90deg,transparent,rgba(255,255,255,0.25),transparent);
-  animation:shimmer 2.5s ease-in-out infinite;
+  
 }
 @keyframes shimmer{
   0%{left:-100%;}
@@ -158,7 +158,7 @@ nav{position:sticky;top:0;z-index:500;height:68px;display:flex;align-items:cente
 /* MODAL */
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:1000;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(12px);}
 .overlay.open{display:flex;}
-.modal{background:var(--bg2);border:1px solid var(--line2);width:100%;max-width:480px;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,0.6);animation:pop 0.35s cubic-bezier(0.34,1.56,0.64,1);}
+.modal{background:var(--bg2);border:1px solid var(--line2);width:100%;max-width:480px;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,0.6);}
 @keyframes pop{from{opacity:0;transform:scale(0.92) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
 .modal-top{background:var(--surface);padding:1.75rem 2rem;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;border-bottom:1px solid var(--line);}
 .m-title{font-family:'Fraunces',serif;font-size:1rem;font-weight:300;color:var(--text);margin-bottom:4px;}
@@ -187,11 +187,11 @@ footer{background:var(--surface);padding:2.5rem 5vw;display:flex;align-items:cen
 footer p{font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text3);}
 footer a{color:var(--text3);text-decoration:none;}
 
-.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease;}
-.reveal.visible{opacity:1;transform:translateY(0);}
+
+
 
 @media(max-width:900px){
-  html{cursor:auto;}.cursor{display:none;}
+  html{cursor:auto;}
   .guide-hero{grid-template-columns:1fr;}
   .gh-img{height:60vw;}.gh-img-overlay{display:none;}
   .inside-grid{grid-template-columns:1fr 1fr;}
@@ -224,8 +224,6 @@ footer a{color:var(--text3);text-decoration:none;}
 </head>
 <body>
 
-<div class="cursor" id="cursor">
-  <div class="cursor-dot" id="cursorDot"></div>
   <div class="cursor-ring" id="cursorRing"></div>
 </div>
 
@@ -359,13 +357,8 @@ const AMOUNT=500;
 const PRODUCT='Concrete Fire Bowl';
 let stripe,elements;
 
-// Cursor
-const dot=document.getElementById('cursorDot'),ring=document.getElementById('cursorRing');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});
-function animC(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animC);}
-animC();
-document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>ring.classList.add('hover'));el.addEventListener('mouseleave',()=>ring.classList.remove('hover'));});
+
+
 
 // Timer
 (function(){
@@ -423,7 +416,7 @@ document.getElementById('pay-btn').addEventListener('click',async function(){
 
 <!-- EMAIL CAPTURE POPUP — appears after successful payment -->
 <div id="email-popup" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:2000;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(16px);">
-  <div style="background:#1A1815;border:1px solid rgba(200,150,60,0.3);max-width:440px;width:100%;padding:0;overflow:hidden;animation:pop 0.35s cubic-bezier(0.34,1.56,0.64,1);">
+  <div style="background:#1A1815;border:1px solid rgba(200,150,60,0.3);max-width:440px;width:100%;padding:0;overflow:hidden;">
     
     <!-- Top bar -->
     <div style="background:#201E1B;padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.07);">
