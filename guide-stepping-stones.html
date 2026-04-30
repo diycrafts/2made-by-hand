@@ -376,6 +376,42 @@ document.getElementById('pay-btn').addEventListener('click',async function(){
     else{document.getElementById('form-wrap').style.display='none';document.getElementById('success-box').style.display='block';}
   }catch(err){document.getElementById('card-err').textContent='Something went wrong. Please try again.';btn.disabled=false;btn.textContent='Try Again';}
 });
+
+let popupPdfUrl='';
+function openEmailPopup(pdfUrl){
+  popupPdfUrl=pdfUrl;
+  document.getElementById('popup-dl-btn').href=pdfUrl;
+  document.getElementById('email-popup').style.display='flex';
+  document.body.style.overflow='hidden';
+  setTimeout(()=>document.getElementById('popup-email').focus(),100);
+}
+function closeEmailPopup(){
+  document.getElementById('email-popup').style.display='none';
+  document.body.style.overflow='';
+}
+async function submitEmail(){
+  const email=document.getElementById('popup-email').value.trim();
+  const msg=document.getElementById('email-popup-msg');
+  const btn=document.getElementById('email-submit-btn');
+  if(!email||!email.includes('@')){msg.style.color='#B84040';msg.textContent='Please enter a valid email.';return;}
+  btn.textContent='Sending...';btn.disabled=true;
+  msg.style.color='#6A6058';msg.textContent='';
+  try{
+    await fetch('/.netlify/functions/send-email',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email,product:PRODUCT,price:AMOUNT/100,delay_minutes:0})});
+    msg.style.color='#7AB870';msg.textContent='✓ Guide sent! Check your inbox.';
+    btn.textContent='Sent ✓';
+    setTimeout(async()=>{
+      try{await fetch('/.netlify/functions/send-email',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({email,product:PRODUCT,price:AMOUNT/100,delay_minutes:5})});}catch(e){}
+    },5*60*1000);
+    setTimeout(()=>closeEmailPopup(),2000);
+  }catch(e){
+    msg.style.color='#B84040';msg.textContent='Could not send. Please download directly below.';
+    btn.textContent='Try Again';btn.disabled=false;
+  }
+}
+
 </script>
 
 <!-- EMAIL CAPTURE POPUP — appears after successful payment -->
