@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Smooth Concrete Planter — Made By Hand</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100;0,9..144,300;0,9..144,400;1,9..144,100;1,9..144,300&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+<script src="https://js.stripe.com/v3/"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--bg:#0C0B09;--bg2:#131210;--surface:#201E1B;--surface2:#282420;--line:rgba(255,255,255,0.07);--line2:rgba(255,255,255,0.12);--text:#F0EDE8;--text2:#A09890;--text3:#6A6058;--accent:#C8963C;--accent2:#E8B85C;--green:#5A8A50;--green2:#7AB870;--red:#B84040;}
+html{scroll-behavior:auto;-webkit-text-size-adjust:100%;}body{-webkit-overflow-scrolling:touch;overscroll-behavior:none;}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;font-weight:300;}
+.ann{background:var(--accent);padding:9px 5vw;display:flex;align-items:center;justify-content:center;gap:20px;font-size:0.68rem;font-weight:400;letter-spacing:0.16em;flex-wrap:wrap;}
+.ann a{color:var(--bg);text-decoration:none;font-weight:500;border-bottom:1px solid rgba(12,11,9,0.25);}
+nav{position:sticky;top:0;z-index:500;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;background:rgba(12,11,9,0.94);backdrop-filter:blur(28px);border-bottom:1px solid var(--line);}
+.logo{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:300;letter-spacing:0.02em;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:10px;}
+.logo-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);}
+.nav-back{font-size:0.65rem;font-weight:400;letter-spacing:0.14em;color:var(--text3);text-decoration:none;display:flex;align-items:center;gap:8px;}
+.nav-back:hover{color:var(--accent);}
+.urgency{background:var(--red);color:#fff;text-align:center;padding:10px 20px;font-size:0.72rem;font-weight:400;letter-spacing:0.14em;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;}
+.urgency-timer{font-family:'Fraunces',serif;font-size:0.9rem;background:rgba(0,0,0,0.25);padding:3px 12px;}
+.guide-hero{display:grid;grid-template-columns:1fr 1fr;min-height:80vh;border-bottom:1px solid var(--line);}
+.gh-img{position:relative;overflow:hidden;}
+.gh-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.gh-img-overlay{position:absolute;inset:0;background:linear-gradient(90deg,transparent 60%,var(--bg) 100%);}
+.gh-body{padding:5vw;display:flex;flex-direction:column;justify-content:center;}
+.gh-eyebrow{font-size:0.62rem;font-weight:400;letter-spacing:0.22em;color:var(--green2);margin-bottom:1.5rem;display:flex;align-items:center;gap:10px;}
+.gh-eyebrow::before{content:'';width:16px;height:1px;background:var(--green2);}
+.gh-title{font-family:'Fraunces',serif;font-size:clamp(2.2rem,4vw,4rem);font-weight:100;line-height:0.95;letter-spacing:-0.02em;color:var(--text);margin-bottom:1.5rem;}
+.gh-title em{font-style:italic;color:var(--accent);}
+.gh-desc{font-size:0.92rem;font-weight:300;color:var(--text2);line-height:1.85;margin-bottom:2rem;max-width:420px;}
+.gh-chips{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:2rem;}
+.gh-chip{font-size:0.6rem;font-weight:400;letter-spacing:0.12em;border:1px solid var(--line2);color:var(--text3);padding:6px 12px;}
+.gh-price-block{margin-bottom:2rem;}
+.gh-was{font-size:0.72rem;color:var(--text3);text-decoration:line-through;margin-bottom:4px;}
+.gh-price-row{display:flex;align-items:baseline;gap:12px;margin-bottom:8px;}
+.gh-price{font-family:'Fraunces',serif;font-size:4rem;font-weight:100;color:#FFFFFF;line-height:1;}
+.gh-save{font-size:0.6rem;font-weight:400;letter-spacing:0.12em;border:1px solid rgba(200,150,60,0.35);color:var(--accent);padding:4px 10px;}
+.gh-stock{font-size:0.65rem;font-weight:400;letter-spacing:0.12em;color:var(--red);display:flex;align-items:center;gap:6px;}
+.gh-stock::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--red);}
+.gh-buy-wrap{position:relative;margin-top:1.75rem;}
+.gh-buy{display:flex;align-items:center;justify-content:center;gap:14px;width:100%;font-family:'Outfit',sans-serif;font-size:0.9rem;font-weight:600;letter-spacing:0.2em;background:linear-gradient(135deg,#D4A843 0%,#C8963C 50%,#B8820A 100%);color:#0C0B09;padding:22px 32px;border:none;cursor:pointer;position:relative;overflow:hidden;}
+.gh-buy-icon{font-size:1.2rem;}
+.gh-buy-text{display:flex;flex-direction:column;align-items:flex-start;gap:1px;}
+.gh-buy-main{font-size:0.88rem;font-weight:600;letter-spacing:0.16em;}
+.gh-buy-sub{font-size:0.62rem;font-weight:400;letter-spacing:0.1em;opacity:0.75;}
+.gh-buy-arrow{font-size:1.2rem;margin-left:auto;}
+.gh-buy::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,0.12);}
+.gh-trust{font-size:0.62rem;font-weight:300;color:var(--text3);letter-spacing:0.1em;margin-top:1rem;}
+.inside-sec{padding:6rem 5vw;border-bottom:1px solid var(--line);max-width:1200px;margin:0 auto;}
+.sec-label{font-size:0.62rem;font-weight:400;letter-spacing:0.22em;color:var(--green2);margin-bottom:1rem;display:flex;align-items:center;gap:10px;}
+.sec-label::before{content:'';width:16px;height:1px;background:var(--green2);}
+.sec-title{font-family:'Fraunces',serif;font-size:clamp(2rem,3vw,3rem);font-weight:100;color:var(--text);margin-bottom:2.5rem;}
+.inside-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--line);}
+.ic{background:var(--bg);padding:1.75rem;border-top:2px solid transparent;}
+.ic:hover{background:var(--surface);border-top-color:var(--accent);}
+.ic-icon{font-size:1.5rem;margin-bottom:1rem;display:block;}
+.ic h4{font-family:'Fraunces',serif;font-size:1rem;font-weight:300;color:var(--text);margin-bottom:6px;}
+.ic p{font-size:0.78rem;font-weight:300;color:var(--text3);line-height:1.65;}
+.steps-sec{padding:6rem 5vw;border-bottom:1px solid var(--line);max-width:900px;margin:0 auto;}
+.steps-list{display:flex;flex-direction:column;}
+.step{display:grid;grid-template-columns:60px 1fr;gap:1.5rem;padding:1.75rem 0;border-bottom:1px solid var(--line);align-items:start;}
+.step:first-child{border-top:1px solid var(--line);}
+.step-n{font-family:'Fraunces',serif;font-size:0.8rem;font-weight:300;color:var(--text3);letter-spacing:0.1em;margin-top:4px;}
+.step h4{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:300;color:var(--text);margin-bottom:6px;}
+.step p{font-size:0.82rem;font-weight:300;color:var(--text3);line-height:1.65;}
+.bottom-cta{padding:6rem 5vw;text-align:center;background:var(--bg2);border-bottom:1px solid var(--line);}
+.bottom-cta h2{font-family:'Fraunces',serif;font-size:clamp(2rem,4vw,4rem);font-weight:100;color:var(--text);margin-bottom:1rem;line-height:1;}
+.bottom-cta h2 em{font-style:italic;color:var(--accent);}
+.bottom-cta p{font-size:0.9rem;font-weight:300;color:var(--text2);max-width:400px;margin:0 auto 2.5rem;line-height:1.8;}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:1000;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(12px);}
+.overlay.open{display:flex;}
+.modal{background:var(--bg2);border:1px solid var(--line2);width:100%;max-width:480px;overflow:hidden;}
+.modal-top{background:var(--surface);padding:1.75rem 2rem;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;border-bottom:1px solid var(--line);}
+.m-title{font-family:'Fraunces',serif;font-size:1rem;font-weight:300;color:var(--text);margin-bottom:4px;}
+.m-price-row{display:flex;align-items:baseline;gap:8px;}
+.m-price{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:300;color:var(--accent);}
+.m-was{font-size:0.78rem;color:var(--text3);text-decoration:line-through;}
+.m-close{background:none;border:none;color:var(--text3);font-size:1.4rem;cursor:pointer;line-height:1;padding:0;flex-shrink:0;}
+.m-close:hover{color:var(--text);}
+.modal-body{padding:2rem;}
+#payment-element{min-height:44px;margin-bottom:0.5rem;}
+#payment-element p{font-size:0.82rem;color:var(--text3);padding:1rem 0;text-align:center;}
+#card-err{font-size:0.78rem;color:var(--red);margin-top:0.5rem;min-height:1.2em;}
+.pay-btn{width:100%;background:var(--accent);color:var(--bg);border:none;padding:14px;font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:400;letter-spacing:0.18em;cursor:pointer;margin-top:1.25rem;}
+.pay-btn:hover:not(:disabled){background:var(--accent2);}
+.pay-btn:disabled{opacity:0.4;cursor:not-allowed;}
+.m-secure{font-size:0.6rem;font-weight:300;color:var(--text3);letter-spacing:0.12em;text-align:center;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line);}
+.success{display:none;text-align:center;padding:2rem 0 1rem;}
+.success-icon{font-size:3rem;margin-bottom:1rem;display:block;}
+.success h3{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:300;color:var(--accent);margin-bottom:0.75rem;}
+.success p{font-size:0.85rem;color:var(--text3);margin-bottom:1.5rem;}
+.dl-btn{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:400;letter-spacing:0.16em;padding:12px 24px;text-decoration:none;}
+.dl-btn:hover{background:var(--green2);}
+footer{background:var(--surface);padding:2.5rem 5vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;border-top:1px solid var(--line);}
+.f-logo{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:300;color:var(--text3);}
+footer p{font-size:0.6rem;letter-spacing:0.14em;color:var(--text3);}
+footer a{color:var(--text3);text-decoration:none;}
+.reviews-section{padding:5rem 5vw;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg2);}
+.reviews-inner{max-width:1100px;margin:0 auto;}
+.reviews-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:3rem;flex-wrap:wrap;gap:1.5rem;}
+.reviews-summary{text-align:right;}
+.rs-big{font-family:'Fraunces',serif;font-size:3.5rem;font-weight:100;color:var(--accent);line-height:1;}
+.rs-stars{color:var(--accent);font-size:1rem;letter-spacing:3px;margin:4px 0;}
+.rs-count{font-size:0.72rem;font-weight:400;letter-spacing:0.12em;color:var(--text3);}
+.rs-sold{font-size:0.82rem;font-weight:300;color:var(--text2);margin-top:6px;}
+.rs-sold strong{color:var(--accent);}
+.rv-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);}
+.rv-card{background:var(--bg);padding:1.75rem;border-top:2px solid transparent;}
+.rv-card:hover{background:var(--surface);border-top-color:var(--accent);}
+.rv-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.85rem;}
+.rv-stars{color:var(--accent);font-size:0.85rem;letter-spacing:2px;}
+.rv-verified{font-size:0.6rem;font-weight:400;letter-spacing:0.12em;color:var(--green2);}
+.rv-text{font-family:'Fraunces',serif;font-size:0.95rem;font-weight:300;font-style:italic;color:var(--text2);line-height:1.7;margin-bottom:1rem;}
+.rv-author{font-size:0.65rem;font-weight:500;letter-spacing:0.14em;color:var(--text3);}
+.rv-author span{color:var(--text3);font-weight:400;}
+img{max-width:100%;height:auto;}
+*{-webkit-tap-highlight-color:transparent;}
+button,a{touch-action:manipulation;}
+@media(max-width:900px){.guide-hero{grid-template-columns:1fr;}.gh-img{height:60vw;}.gh-img-overlay{display:none;}.inside-grid{grid-template-columns:1fr 1fr;}footer{flex-direction:column;text-align:center;}}
+@media(max-width:700px){.rv-grid{grid-template-columns:1fr;}.reviews-header{flex-direction:column;}.reviews-summary{text-align:left;}}
+@media(max-width:600px){.inside-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div class="ann">
+<span>&#128308; Limited Pricing — Only 3 left at this price</span>
+<span>&#8212;</span>
+<a href="shop.html">&#8592; All Guides</a>
+</div>
+
+<nav>
+<a href="index.html" class="logo"><div class="logo-dot"></div>Made By Hand</a>
+<a href="shop.html" class="nav-back">&#8592; All Guides</a>
+</nav>
+
+<div class="urgency">
+<span>&#9888; Only <strong>3 copies</strong> left at this price &mdash;</span>
+<span class="urgency-timer" id="countdown">29:00</span>
+<span>&#128293; Selling fast</span>
+</div>
+
+<section class="guide-hero">
+<div class="gh-img">
+<img src="thumbnail_smooth_planter.jpg" alt="Smooth Concrete Planter"/>
+<div class="gh-img-overlay"></div>
+</div>
+<div class="gh-body">
+<div class="gh-eyebrow">Concrete · Garden · Modern</div>
+<div class="gh-title">Smooth<br/><em>Concrete Planter</em></div>
+<p class="gh-desc">Cast a perfectly smooth round concrete planter — clean minimal finish, looks like a $100 design store piece, costs under $12 to make. The most dramatic garden transformation you can make by hand.</p>
+<div class="gh-chips">
+<span class="gh-chip">Perfect finish</span>
+<span class="gh-chip">Sells for $60–100</span>
+<span class="gh-chip">Minimal & modern</span>
+</div>
+<div class="gh-price-block">
+<div class="gh-was">Was $24.00</div>
+<div class="gh-price-row">
+<div class="gh-price">$12.00</div>
+<span class="gh-save">50% Off</span>
+</div>
+<div class="gh-stock">Only 3 left at this price</div>
+</div>
+<div class="gh-buy-wrap">
+<button class="gh-buy" onclick="openModal()">
+<span class="gh-buy-icon">&#11015;</span>
+<span class="gh-buy-text">
+<span class="gh-buy-main">Buy Guide &amp; Download PDF</span>
+<span class="gh-buy-sub">Instant download · Yours forever</span>
+</span>
+<span class="gh-buy-arrow">&#8594;</span>
+</button>
+</div>
+<div class="gh-trust">&#128274; Secure Stripe &middot; Instant PDF &middot; Yours forever</div>
+</div>
+</section>
+
+<section class="inside-section">
+<div class="inside-sec">
+<div class="sec-label">What's Inside</div>
+<div class="sec-title">Everything You Need to Make This</div>
+<div class="inside-grid">
+<div class="ic"><span class="ic-icon">&#127963;</span><h4>Full Concrete Path Guide</h4><p>How to dig, form, reinforce, pour, and finish a smooth concrete path — from trench to trowel.</p></div>
+<div class="ic"><span class="ic-icon">&#127912;</span><h4>Flower Painting Guide</h4><p>Step-by-step instructions for painting roses, dahlias, blue daisies, and sunflowers — even if you've never painted before.</p></div>
+<div class="ic"><span class="ic-icon">&#128247;</span><h4>Real Photos Every Step</h4><p>Every photo was taken during the actual project. You'll always know exactly what to expect at each stage.</p></div>
+<div class="ic"><span class="ic-icon">&#128203;</span><h4>Full Materials List</h4><p>Every item — concrete bags, paint colours, brush sizes, sealer type — with exact quantities and what to buy.</p></div>
+<div class="ic"><span class="ic-icon">&#128161;</span><h4>Pro Tips &amp; Variations</h4><p>How to use a projector for perfect designs, best paint brands, sealing secrets for 10+ year durability.</p></div>
+<div class="ic"><span class="ic-icon">&#128295;</span><h4>Troubleshooting Guide</h4><p>Paint peeling? Concrete cracked? Every common problem solved with tested fixes.</p></div>
+</div>
+</div>
+</section>
+
+<section class="steps-section">
+<div class="steps-sec">
+<div class="sec-label">The Process</div>
+<div class="sec-title">How It All Comes Together</div>
+<div class="steps-list">
+<div class="step"><div class="step-n">01</div><div><h4>Dig, Form &amp; Reinforce</h4><p>Set wooden form boards along the path, lay wire mesh reinforcement, and prepare a solid base for the concrete pour.</p></div></div>
+<div class="step"><div class="step-n">02</div><div><h4>Pour &amp; Finish the Concrete</h4><p>Mix, pour, screed level, and trowel smooth — creating a clean, paintable surface that will last for decades.</p></div></div>
+<div class="step"><div class="step-n">03</div><div><h4>Cure &amp; Prime</h4><p>Wait the full 72 hours, then apply masonry primer and a base coat — the essential foundation for vibrant, long-lasting paint.</p></div></div>
+<div class="step"><div class="step-n">04</div><div><h4>Sketch &amp; Paint the Mural</h4><p>Chalk the floral design, then paint flower by flower — roses, dahlias, blue daisies, and lush green leaves — following the step-by-step guide.</p></div></div>
+<div class="step"><div class="step-n">05</div><div><h4>Seal &amp; Light</h4><p>Apply 2–3 coats of UV-resistant outdoor sealer, then install solar path lights along both sides for the stunning night effect.</p></div></div>
+</div>
+</div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section">
+<div class="reviews-inner">
+<div class="reviews-header">
+<div>
+<div class="sec-label">What People Are Saying</div>
+<div class="sec-title" style="margin-bottom:0;">Customer Reviews</div>
+</div>
+<div class="reviews-summary">
+<div class="rs-big">4.9</div>
+<div class="rs-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+<div class="rs-count">Based on 47 reviews</div>
+<div class="rs-sold">Over <strong>200 paths</strong> made from this guide</div>
+</div>
+</div>
+<div class="rv-grid">
+<div class="rv-card"><div class="rv-top"><span class="rv-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-verified">&#10003; Verified Purchase</span></div><div class="rv-text">"I was terrified of both concrete AND painting. The guide broke it down so well I actually did it. My neighbours think I hired someone."</div><div class="rv-author">Sarah M. <span>— Portland, OR</span></div></div>
+<div class="rv-card"><div class="rv-top"><span class="rv-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-verified">&#10003; Verified Purchase</span></div><div class="rv-text">"The flower-by-flower painting section is brilliant. I followed it exactly and my roses actually look like roses. Worth every penny."</div><div class="rv-author">James T. <span>— Austin, TX</span></div></div>
+<div class="rv-card"><div class="rv-top"><span class="rv-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-verified">&#10003; Verified Purchase</span></div><div class="rv-text">"The night photo in the guide is what sold me. Mine looks exactly like that now. The solar lights make it magical. Best DIY I've ever done."</div><div class="rv-author">Linda K. <span>— Denver, CO</span></div></div>
+<div class="rv-card"><div class="rv-top"><span class="rv-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-verified">&#10003; Verified Purchase</span></div><div class="rv-text">"The projector tip is genius — I traced the flowers at night and painted the next day. Perfect result with zero art skills required."</div><div class="rv-author">Mark D. <span>— Seattle, WA</span></div></div>
+</div>
+</div>
+</section>
+
+<section class="bottom-cta">
+<h2>Ready to <em>Make This?</em></h2>
+<p>Complete concrete + painting guide. Real photos. Step-by-step flowers. Only 3 copies left at this price.</p>
+<button class="gh-buy" onclick="openModal()" style="max-width:480px;margin:0 auto;">&#11015; Buy Guide &mdash; $12.00</button>
+</section>
+
+<footer>
+<div class="f-logo">Made By Hand</div>
+<p>&#169; 2026 &middot; Digital PDF Downloads &middot; <a href="mailto:you@example.com">Contact</a></p>
+</footer>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay">
+<div class="modal">
+<div class="modal-top">
+<div>
+<div class="m-title">Smooth Concrete Planter</div>
+<div class="m-price-row">
+<span class="m-price">$12.00</span>
+<span class="m-was">$22.00</span>
+</div>
+</div>
+<button class="m-close" onclick="closeModal()">&#10005;</button>
+</div>
+<div class="modal-body">
+<div id="form-wrap">
+<div id="payment-element"><p>&#9203; Loading secure payment...</p></div>
+<div id="card-err"></div>
+<button class="pay-btn" id="pay-btn" disabled>Loading...</button>
+<div class="m-secure">&#128274; Secured by Stripe &middot; PDF delivered instantly</div>
+</div>
+<div class="success" id="success-box">
+<span class="success-icon">&#127881;</span>
+<h3>All Set!</h3>
+<p>Your guide is ready. Thank you!</p>
+<a href="DIY_Smooth_Concrete_Planter_Guide.pdf" download class="dl-btn">&#11015; Download Your Guide</a>
+</div>
+</div>
+</div>
+</div>
+
+<script>
+const STRIPE_KEY='pk_live_51TQB5uERLV3AA0mv0dp2i9c6m3Y1oxuGCe0pghanMWYW9Y8gr4tPWJdwJAUhdaqDaUfWazxd4GKMaRaPfDgwMrBm00d1NxbK5G';
+const AMOUNT=1200;
+const PRODUCT='Smooth Concrete Planter';
+let stripe,elements;
+
+function startCountdown(){
+  let t=29*60;
+  const el=document.getElementById('countdown');
+  setInterval(()=>{if(t<=0){el.textContent='00:00';return;}t--;const m=String(Math.floor(t/60)).padStart(2,'0');const s=String(t%60).padStart(2,'0');el.textContent=m+':'+s;},1000);
+}
+startCountdown();
+
+async function openModal(){
+  document.getElementById('form-wrap').style.display='block';
+  document.getElementById('success-box').style.display='none';
+  document.getElementById('pay-btn').disabled=true;
+  document.getElementById('pay-btn').textContent='Loading...';
+  document.getElementById('card-err').textContent='';
+  document.getElementById('payment-element').innerHTML='<p>&#9203; Loading secure payment...</p>';
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  stripe=Stripe(STRIPE_KEY);
+  try{
+    const res=await fetch('/.netlify/functions/create-payment-intent',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({amount:AMOUNT,currency:'usd',product:PRODUCT})});
+    const data=await res.json();
+    if(data.error)throw new Error(data.error);
+    elements=stripe.elements({clientSecret:data.clientSecret,appearance:{theme:'night',variables:{colorPrimary:'#C8963C',fontFamily:"'Outfit',sans-serif",borderRadius:'0px',colorBackground:'#201E1B',colorText:'#F0EDE8'}}});
+    document.getElementById('payment-element').innerHTML='';
+    elements.create('payment').mount('#payment-element');
+    document.getElementById('pay-btn').disabled=false;
+    document.getElementById('pay-btn').textContent='Pay $12.00 & Download';
+  }catch(err){
+    document.getElementById('payment-element').innerHTML='<p style="color:#B84040">Could not load payment. Please try again.</p>';
+    document.getElementById('pay-btn').textContent='Try Again';
+    document.getElementById('pay-btn').disabled=false;
+    document.getElementById('pay-btn').onclick=openModal;
+  }
+}
+
+function closeModal(){document.getElementById('overlay').classList.remove('open');document.body.style.overflow='';}
+document.getElementById('overlay').addEventListener('click',e=>{if(e.target===document.getElementById('overlay'))closeModal();});
+
+document.getElementById('pay-btn').addEventListener('click',async function(){
+  if(this.textContent.includes('Loading')||this.textContent.includes('Try'))return;
+  const btn=this;btn.disabled=true;btn.textContent='Processing...';
+  document.getElementById('card-err').textContent='';
+  try{
+    const {error}=await stripe.confirmPayment({elements,confirmParams:{return_url:window.location.href},redirect:'if_required'});
+    if(error){document.getElementById('card-err').textContent=error.message;btn.disabled=false;btn.textContent='Pay $12.00 & Download';}
+    else{document.getElementById('form-wrap').style.display='none';document.getElementById('success-box').style.display='block';setTimeout(()=>openEmailPopup('DIY_Smooth_Concrete_Planter_Guide.pdf'),1200);}
+  }catch(err){document.getElementById('card-err').textContent='Something went wrong. Please try again.';btn.disabled=false;btn.textContent='Try Again';}
+});
+
+let popupPdfUrl='';
+function openEmailPopup(pdfUrl){
+  popupPdfUrl=pdfUrl;
+  document.getElementById('popup-dl-btn').href=pdfUrl;
+  document.getElementById('email-popup').style.display='flex';
+  document.body.style.overflow='hidden';
+  setTimeout(()=>document.getElementById('popup-email').focus(),100);
+}
+function closeEmailPopup(){document.getElementById('email-popup').style.display='none';document.body.style.overflow='';}
+
+async function submitEmail(){
+  const email=document.getElementById('popup-email').value.trim();
+  const msg=document.getElementById('email-popup-msg');
+  const btn=document.getElementById('email-submit-btn');
+  if(!email||!email.includes('@')){msg.style.color='#B84040';msg.textContent='Please enter a valid email.';return;}
+  btn.textContent='Sending...';btn.disabled=true;
+  msg.style.color='#6A6058';msg.textContent='';
+  try{
+    await fetch('/.netlify/functions/send-email',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,product:PRODUCT,price:AMOUNT/100,delay_minutes:0})});
+    msg.style.color='#7AB870';msg.textContent='✓ Guide sent! Check your inbox.';
+    btn.textContent='Sent ✓';
+    setTimeout(async()=>{try{await fetch('/.netlify/functions/send-email',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,product:PRODUCT,price:AMOUNT/100,delay_minutes:5})});}catch(e){}},5*60*1000);
+    setTimeout(()=>closeEmailPopup(),2000);
+  }catch(e){
+    msg.style.color='#B84040';msg.textContent='Could not send. Please download directly below.';
+    btn.textContent='Try Again';btn.disabled=false;
+  }
+}
+</script>
+
+<!-- EMAIL CAPTURE POPUP -->
+<div id="email-popup" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:2000;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(16px);">
+<div style="background:#1A1815;border:1px solid rgba(200,150,60,0.3);max-width:440px;width:100%;padding:0;overflow:hidden;">
+<div style="background:#201E1B;padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.07);">
+<div>
+<p style="font-size:0.6rem;font-weight:500;letter-spacing:0.18em;color:#C8963C;margin:0 0 4px;">One more thing...</p>
+<p style="font-family:Georgia,serif;font-size:1.1rem;color:#F0EDE8;margin:0;font-weight:400;">Get your guide by email too</p>
+</div>
+<button onclick="closeEmailPopup()" style="background:none;border:none;color:#6A6058;font-size:1.4rem;cursor:pointer;line-height:1;padding:0;" onmouseover="this.style.color='#F0EDE8'" onmouseout="this.style.color='#6A6058'">&#10005;</button>
+</div>
+<div style="padding:1.75rem 1.5rem;">
+<p style="font-size:0.88rem;color:#A09890;line-height:1.75;margin:0 0 1.25rem;">
+Enter your email and we'll send you the guide — plus a <strong style="color:#F0EDE8;">special offer</strong> just for you.
+<br/><span style="font-size:0.78rem;color:#6A6058;">Don't want to? Just close this and download directly below. 👇</span>
+</p>
+<div style="display:flex;gap:0;margin-bottom:0.75rem;">
+<input type="email" id="popup-email" placeholder="your@email.com" style="flex:1;background:#0C0B09;border:1px solid rgba(255,255,255,0.12);border-right:none;padding:12px 14px;font-size:0.9rem;color:#F0EDE8;font-family:'Outfit',sans-serif;outline:none;" onkeydown="if(event.key==='Enter')submitEmail()"/>
+<button onclick="submitEmail()" id="email-submit-btn" style="background:#C8963C;color:#0C0B09;border:none;padding:12px 20px;font-size:0.7rem;font-weight:600;letter-spacing:0.14em;cursor:pointer;font-family:'Outfit',sans-serif;white-space:nowrap;" onmouseover="this.style.background='#E8B85C'" onmouseout="this.style.background='#C8963C'">Send It &#8594;</button>
+</div>
+<p id="email-popup-msg" style="font-size:0.75rem;color:#6A6058;margin:0;min-height:1.2em;"></p>
+</div>
+<div style="padding:0 1.5rem 1.5rem;">
+<div style="border-top:1px solid rgba(255,255,255,0.06);padding-top:1.25rem;">
+<p style="font-size:0.68rem;color:#4A4540;text-align:center;margin:0 0 0.75rem;letter-spacing:0.1em;">Or just download directly</p>
+<a id="popup-dl-btn" href="#" download style="display:flex;align-items:center;justify-content:center;gap:8px;background:#201E1B;border:1px solid rgba(255,255,255,0.1);padding:12px;color:#A09890;text-decoration:none;font-size:0.72rem;font-weight:500;letter-spacing:0.14em;" onmouseover="this.style.borderColor='rgba(200,150,60,0.4)';this.style.color='#F0EDE8'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)';this.style.color='#A09890'">&#11015; Download Your PDF Guide</a>
+</div>
+</div>
+</div>
+</div>
+
+</body>
+</html>
