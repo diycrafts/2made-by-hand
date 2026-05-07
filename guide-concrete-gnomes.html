@@ -4,210 +4,376 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>DIY Concrete Garden Gnomes — Made By Hand</title>
-<meta name="description" content="Cast, sculpt and paint charming concrete garden gnomes. Step-by-step PDF guide — instant download."/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100;0,9..144,400;0,9..144,700;1,9..144,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100;0,9..144,300;0,9..144,400;1,9..144,100;1,9..144,300&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+<script src="https://js.stripe.com/v3/"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-:root{
-  --bg:#0C0B09;--bg2:#131210;--surface:#201E1B;
-  --text:#F0EDE8;--text2:#A09890;--text3:#6A6058;
-  --accent:#C8963C;--green:#7AB870;--red:#E05252;
-  --line:rgba(255,255,255,0.07);
+:root{--bg:#0C0B09;--bg2:#131210;--surface:#201E1B;--surface2:#282420;--line:rgba(255,255,255,0.07);--line2:rgba(255,255,255,0.12);--text:#F0EDE8;--text2:#A09890;--text3:#6A6058;--accent:#C8963C;--accent2:#E8B85C;--green:#5A8A50;--green2:#7AB870;--red:#B84040;}
+html{scroll-behavior:auto;-webkit-text-size-adjust:100%;}body{-webkit-overflow-scrolling:touch;overscroll-behavior:none;}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;font-weight:300;}
+
+.ann{background:var(--accent);padding:9px 5vw;display:flex;align-items:center;justify-content:center;gap:20px;font-size:0.68rem;font-weight:400;letter-spacing:0.16em;color:rgba(12,11,9,0.75);flex-wrap:wrap;}
+.ann a{color:var(--bg);text-decoration:none;font-weight:500;border-bottom:1px solid rgba(12,11,9,0.25);}
+
+nav{position:sticky;top:0;z-index:500;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;background:rgba(12,11,9,0.94);backdrop-filter:blur(28px);border-bottom:1px solid var(--line);}
+.logo{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:300;letter-spacing:0.02em;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:10px;}
+.logo-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);}
+.nav-back{font-size:0.65rem;font-weight:400;letter-spacing:0.14em;color:var(--text3);text-decoration:none;display:flex;align-items:center;gap:8px;}
+.nav-back:hover{color:var(--accent);}
+
+.urgency{background:var(--red);color:#fff;text-align:center;padding:10px 20px;font-size:0.72rem;font-weight:400;letter-spacing:0.14em;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;}
+.urgency-timer{font-family:'Fraunces',serif;font-size:0.9rem;background:rgba(0,0,0,0.25);padding:3px 12px;}
+
+.guide-hero{display:grid;grid-template-columns:1fr 1fr;min-height:80vh;border-bottom:1px solid var(--line);}
+.gh-img{position:relative;overflow:hidden;}
+.gh-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.gh-img-overlay{position:absolute;inset:0;background:linear-gradient(90deg,transparent 60%,var(--bg) 100%);}
+
+.gh-body{padding:5vw;display:flex;flex-direction:column;justify-content:center;}
+.gh-eyebrow{font-size:0.62rem;font-weight:400;letter-spacing:0.22em;color:var(--green2);margin-bottom:1.5rem;display:flex;align-items:center;gap:10px;}
+.gh-eyebrow::before{content:'';width:16px;height:1px;background:var(--green2);}
+.gh-title{font-family:'Fraunces',serif;font-size:clamp(2.2rem,4vw,4rem);font-weight:100;line-height:0.95;letter-spacing:-0.02em;color:var(--text);margin-bottom:1.5rem;}
+.gh-title em{font-style:italic;color:var(--accent);}
+.gh-desc{font-size:0.92rem;font-weight:300;color:var(--text2);line-height:1.85;margin-bottom:2rem;max-width:420px;}
+.gh-chips{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:2rem;}
+.gh-chip{font-size:0.6rem;font-weight:400;letter-spacing:0.12em;border:1px solid var(--line2);color:var(--text3);padding:6px 12px;}
+.gh-price-block{margin-bottom:2rem;}
+.gh-was{font-size:0.72rem;color:var(--text3);text-decoration:line-through;margin-bottom:4px;}
+.gh-price-row{display:flex;align-items:baseline;gap:12px;margin-bottom:8px;}
+.gh-price{font-family:'Fraunces',serif;font-size:4rem;font-weight:100;color:#FFFFFF;line-height:1;}
+.gh-save{font-size:0.6rem;font-weight:400;letter-spacing:0.12em;border:1px solid rgba(200,150,60,0.35);color:var(--accent);padding:4px 10px;}
+.gh-stock{font-size:0.65rem;font-weight:400;letter-spacing:0.12em;color:var(--red);display:flex;align-items:center;gap:6px;}
+.gh-stock::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--red);}
+
+.gh-buy-wrap{position:relative;margin-top:1.75rem;}
+.gh-buy{display:flex;align-items:center;justify-content:center;gap:14px;width:100%;font-family:'Outfit',sans-serif;font-size:0.9rem;font-weight:600;letter-spacing:0.2em;background:linear-gradient(135deg,#D4A843 0%,#C8963C 50%,#B8820A 100%);color:#0C0B09;padding:22px 32px;border:none;cursor:pointer;position:relative;overflow:hidden;}
+.gh-buy:hover{opacity:0.92;}
+.gh-buy-icon{font-size:1.2rem;}
+.gh-buy-text{display:flex;flex-direction:column;align-items:flex-start;gap:1px;}
+.gh-buy-main{font-size:0.88rem;font-weight:600;letter-spacing:0.16em;}
+.gh-buy-sub{font-size:0.62rem;font-weight:400;letter-spacing:0.1em;opacity:0.75;}
+.gh-buy-arrow{font-size:1.2rem;margin-left:auto;}
+.gh-trust{font-size:0.62rem;font-weight:300;color:var(--text3);letter-spacing:0.1em;margin-top:1rem;}
+
+.inside-sec{padding:6rem 5vw;border-bottom:1px solid var(--line);max-width:1200px;margin:0 auto;}
+.sec-label{font-size:0.62rem;font-weight:400;letter-spacing:0.22em;color:var(--green2);margin-bottom:1rem;display:flex;align-items:center;gap:10px;}
+.sec-label::before{content:'';width:16px;height:1px;background:var(--green2);}
+.sec-title{font-family:'Fraunces',serif;font-size:clamp(2rem,3vw,3rem);font-weight:100;color:var(--text);margin-bottom:2.5rem;}
+.inside-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--line);}
+.ic{background:var(--bg);padding:1.75rem;border-top:2px solid transparent;}
+.ic:hover{background:var(--surface);border-top-color:var(--accent);}
+.ic-icon{font-size:1.5rem;margin-bottom:1rem;display:block;}
+.ic h4{font-family:'Fraunces',serif;font-size:1rem;font-weight:300;color:var(--text);margin-bottom:6px;}
+.ic p{font-size:0.78rem;font-weight:300;color:var(--text3);line-height:1.65;}
+
+.steps-sec{padding:6rem 5vw;border-bottom:1px solid var(--line);max-width:900px;margin:0 auto;}
+.steps-list{display:flex;flex-direction:column;}
+.step{display:grid;grid-template-columns:60px 1fr;gap:1.5rem;padding:1.75rem 0;border-bottom:1px solid var(--line);align-items:start;}
+.step:first-child{border-top:1px solid var(--line);}
+.step-n{font-family:'Fraunces',serif;font-size:0.8rem;font-weight:300;color:var(--text3);letter-spacing:0.1em;margin-top:4px;}
+.step h4{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:300;color:var(--text);margin-bottom:6px;}
+.step p{font-size:0.82rem;font-weight:300;color:var(--text3);line-height:1.65;}
+
+.bottom-cta{padding:6rem 5vw;text-align:center;background:var(--bg2);border-bottom:1px solid var(--line);}
+.bottom-cta h2{font-family:'Fraunces',serif;font-size:clamp(2rem,4vw,4rem);font-weight:100;color:var(--text);margin-bottom:1rem;line-height:1;}
+.bottom-cta h2 em{font-style:italic;color:var(--accent);}
+.bottom-cta p{font-size:0.9rem;font-weight:300;color:var(--text2);max-width:400px;margin:0 auto 2.5rem;line-height:1.8;}
+
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:1000;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(12px);}
+.overlay.open{display:flex;}
+.modal{background:var(--bg2);border:1px solid var(--line2);width:100%;max-width:480px;overflow:hidden;}
+.modal-top{background:var(--surface);padding:1.75rem 2rem;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;border-bottom:1px solid var(--line);}
+.m-title{font-family:'Fraunces',serif;font-size:1rem;font-weight:300;color:var(--text);margin-bottom:4px;}
+.m-price-row{display:flex;align-items:baseline;gap:8px;}
+.m-price{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:300;color:var(--accent);}
+.m-was{font-size:0.78rem;color:var(--text3);text-decoration:line-through;}
+.m-close{background:none;border:none;color:var(--text3);font-size:1.4rem;cursor:pointer;line-height:1;padding:0;flex-shrink:0;}
+.m-close:hover{color:var(--text);}
+.modal-body{padding:2rem;}
+#payment-element{min-height:44px;margin-bottom:0.5rem;}
+#payment-element p{font-size:0.82rem;color:var(--text3);padding:1rem 0;text-align:center;}
+#card-err{font-size:0.78rem;color:var(--red);margin-top:0.5rem;min-height:1.2em;}
+.pay-btn{width:100%;background:var(--accent);color:var(--bg);border:none;padding:14px;font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:400;letter-spacing:0.18em;cursor:pointer;margin-top:1.25rem;}
+.pay-btn:hover:not(:disabled){background:var(--accent2);}
+.pay-btn:disabled{opacity:0.4;cursor:not-allowed;}
+.m-secure{font-size:0.6rem;font-weight:300;color:var(--text3);letter-spacing:0.12em;text-align:center;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line);}
+.success{display:none;text-align:center;padding:2rem 0 1rem;}
+.success-icon{font-size:3rem;margin-bottom:1rem;display:block;}
+.success h3{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:300;color:var(--accent);margin-bottom:0.75rem;}
+.success p{font-size:0.85rem;color:var(--text3);margin-bottom:1.5rem;}
+.dl-btn{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:400;letter-spacing:0.16em;padding:12px 24px;text-decoration:none;}
+.dl-btn:hover{background:var(--green2);}
+
+footer{background:var(--surface);padding:2.5rem 5vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;border-top:1px solid var(--line);}
+.f-logo{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:300;color:var(--text3);}
+footer p{font-size:0.6rem;letter-spacing:0.14em;color:var(--text3);}
+footer a{color:var(--text3);text-decoration:none;}
+
+@media(max-width:900px){
+  .guide-hero{grid-template-columns:1fr;}
+  .gh-img{height:60vw;}.gh-img-overlay{display:none;}
+  .inside-grid{grid-template-columns:1fr 1fr;}
+  footer{flex-direction:column;text-align:center;}
 }
-body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;overflow-x:hidden;}
-a{color:inherit;text-decoration:none;}
-
-/* URGENCY */
-.urgency{background:#B94040;color:#fff;display:flex;align-items:center;justify-content:center;gap:18px;padding:11px 20px;font-size:13px;font-weight:500;position:sticky;top:0;z-index:300;}
-.urgency strong{font-weight:700;}
-.timer{background:rgba(0,0,0,0.35);border-radius:4px;padding:3px 12px;font-weight:700;font-size:15px;letter-spacing:.08em;}
-
-/* NAV */
-nav{height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;background:rgba(12,11,9,0.97);border-bottom:1px solid var(--line);}
-.logo{font-family:'Fraunces',serif;font-size:19px;font-weight:400;color:var(--accent);}
-.nav-back{font-size:13px;color:var(--text2);}
-.nav-back:hover{color:var(--text);}
-
-/* HERO */
-.hero{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 101px);}
-@media(max-width:780px){.hero{grid-template-columns:1fr;}}
-
-.hero-images{position:relative;overflow:hidden;background:#000;}
-.hero-main{width:100%;height:100%;object-fit:cover;display:block;}
-.hero-strip{position:absolute;top:0;right:0;width:36%;height:100%;display:flex;flex-direction:column;gap:2px;}
-.hero-strip img{width:100%;flex:1;object-fit:cover;display:block;border-left:2px solid var(--bg);}
-
-.hero-content{padding:52px 5vw 52px 4vw;display:flex;flex-direction:column;justify-content:center;background:var(--bg);}
-.cat-line{font-size:12px;font-weight:500;color:var(--green);letter-spacing:.06em;margin-bottom:20px;display:flex;align-items:center;gap:10px;}
-.cat-line::before{content:'';display:block;width:28px;height:1px;background:var(--green);}
-.hero-title{font-family:'Fraunces',serif;font-size:clamp(2.4rem,4vw,3.8rem);font-weight:700;line-height:1.1;margin-bottom:20px;}
-.hero-title em{font-style:italic;color:var(--accent);font-weight:400;}
-.hero-desc{font-size:15px;line-height:1.75;color:var(--text2);max-width:480px;margin-bottom:24px;}
-.pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;}
-.pill{font-size:12px;font-weight:500;color:var(--text2);border:1px solid var(--line);border-radius:3px;padding:5px 13px;}
-
-.was{font-size:14px;color:var(--text3);text-decoration:line-through;margin-bottom:4px;}
-.price-row{display:flex;align-items:center;gap:14px;margin-bottom:8px;}
-.price-big{font-family:'Fraunces',serif;font-size:3.2rem;font-weight:100;color:var(--text);line-height:1;}
-.disc{border:1px solid var(--accent);color:var(--accent);font-size:11px;font-weight:700;padding:4px 10px;border-radius:2px;letter-spacing:.06em;}
-.scarcity{font-size:13px;color:var(--red);margin-bottom:30px;display:flex;align-items:center;gap:7px;}
-.scarcity::before{content:'';display:block;width:7px;height:7px;border-radius:50%;background:var(--red);flex-shrink:0;}
-
-.btn-buy{display:flex;align-items:center;justify-content:space-between;background:var(--accent);color:var(--bg);border-radius:4px;padding:18px 22px;width:100%;max-width:480px;margin-bottom:12px;transition:opacity .2s;cursor:pointer;border:none;font-family:'Outfit',sans-serif;}
-.btn-buy:hover{opacity:.9;}
-a.btn-buy{text-decoration:none;}
-.btn-left{display:flex;align-items:center;gap:12px;}
-.btn-title{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:700;display:block;color:var(--bg);}
-.btn-sub{font-size:12px;color:rgba(12,11,9,0.6);display:block;margin-top:1px;}
-.btn-arrow{font-size:1.3rem;color:var(--bg);}
-.secure{font-size:12px;color:var(--text3);}
-
-/* CONTENT */
-.content{max-width:1100px;margin:0 auto;padding:72px 5vw 80px;}
-.slabel{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;}
-.stitle{font-family:'Fraunces',serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;margin-bottom:32px;line-height:1.2;}
-hr.div{border:none;border-top:1px solid var(--line);margin:64px 0;}
-
-.inside-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1px;background:var(--line);margin-bottom:0;}
-.ic{background:var(--bg);padding:24px 22px;}
-.ic .ico{font-size:1.4rem;margin-bottom:10px;}
-.ic h3{font-size:.95rem;font-weight:600;margin-bottom:5px;}
-.ic p{font-size:13px;color:var(--text2);line-height:1.6;}
-
-.steps{display:flex;flex-direction:column;}
-.step{display:grid;grid-template-columns:64px 1fr;gap:24px;padding:28px 0;border-bottom:1px solid var(--line);align-items:start;}
-.step:last-child{border-bottom:none;}
-.step-n{font-family:'Fraunces',serif;font-size:2.2rem;font-weight:100;color:var(--accent);line-height:1;padding-top:2px;}
-.step h3{font-size:1rem;font-weight:600;margin-bottom:6px;}
-.step p{font-size:14px;color:var(--text2);line-height:1.7;}
-
-table.mat{width:100%;border-collapse:collapse;}
-table.mat th{text-align:left;padding:10px 16px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--line);}
-table.mat td{padding:12px 16px;font-size:14px;border-bottom:1px solid var(--line);color:var(--text2);}
-table.mat td:first-child{color:var(--text);font-weight:500;}
-table.mat tr:hover td{background:var(--surface);}
-
-footer{background:var(--bg2);border-top:1px solid var(--line);padding:2rem 5vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
-.fl{font-family:'Fraunces',serif;font-size:1rem;color:var(--accent);}
-footer p{font-size:12px;color:var(--text3);}
+@media(max-width:600px){.inside-grid{grid-template-columns:1fr;}}
+img{max-width:100%;height:auto;}
+*{-webkit-tap-highlight-color:transparent;}
+button,a{touch-action:manipulation;}
 </style>
 </head>
 <body>
 
-<div class="urgency">
-  <span>⚠ Only <strong>3 copies</strong> left at this price —</span>
-  <span class="timer" id="timer">29:59</span>
-  <span>🔥 Selling fast</span>
+<div class="ann">
+  <span>&#128308; Limited Pricing — Only 3 left at this price</span>
+  <span>&#8212;</span>
+  <a href="shop.html">&#8592; All Guides</a>
 </div>
 
 <nav>
-  <div class="logo">Made By Hand</div>
-  <a href="shop.html" class="nav-back">← All Guides</a>
+  <a href="index.html" class="logo"><div class="logo-dot"></div>Made By Hand</a>
+  <a href="shop.html" class="nav-back">&#8592; All Guides</a>
 </nav>
 
-<div class="hero">
-  <div class="hero-images">
-    <img class="hero-main" src="frames/frame_015.jpg" alt="Concrete Garden Gnomes"/>
-    <div class="hero-strip">
-      <img src="frames/frame_001.jpg" alt="Pouring concrete"/>
-      <img src="frames/frame_005.jpg" alt="Carving details"/>
-      <img src="frames/frame_013.jpg" alt="Painted gnome"/>
-    </div>
+<div class="urgency">
+  <span>&#9888; Only <strong>3 copies</strong> left at this price &mdash;</span>
+  <span class="urgency-timer" id="countdown">37:00</span>
+  <span>&#128293; Selling fast</span>
+</div>
+
+<section class="guide-hero">
+  <div class="gh-img">
+    <img src="thumbnail_concrete-gnomes.jpg" alt="DIY Concrete Garden Gnomes"/>
+    <div class="gh-img-overlay"></div>
   </div>
-
-  <div class="hero-content">
-    <div class="cat-line">Concrete · Garden · Art</div>
-    <h1 class="hero-title">DIY Concrete<br><em>Garden Gnomes</em></h1>
-    <p class="hero-desc">Cast, sculpt and paint charming garden guardians from concrete using silicone molds. Complete guide from first pour to finished display — carving techniques, color inserts, painting and weathering included.</p>
-    <div class="pills">
-      <span class="pill">Silicone molds</span>
-      <span class="pill">10 detailed steps</span>
-      <span class="pill">Lasts 10+ years</span>
+  <div class="gh-body">
+    <div class="gh-eyebrow">Concrete · Garden · Art</div>
+    <div class="gh-title">DIY Concrete<br/><em>Garden Gnomes</em></div>
+    <p class="gh-desc">Cast, sculpt and paint charming garden guardians from concrete using silicone molds. Carving techniques, color inserts, painting and weathering — everything from first pour to finished display.</p>
+    <div class="gh-chips">
+      <span class="gh-chip">2–3h active + 24h cure</span>
+      <span class="gh-chip">$15–$30 each</span>
+      <span class="gh-chip">Intermediate</span>
     </div>
-    <div class="was">Was $26.00</div>
-    <div class="price-row">
-      <span class="price-big">$13.00</span>
-      <span class="disc">50% Off</span>
-    </div>
-    <div class="scarcity">Only 3 left at this price</div>
-
-    <!-- ★ INLOCUIESTE href cu Stripe Payment Link-ul tau (buy.stripe.com/...) -->
-    <a href="STRIPE_LINK_AICI" class="btn-buy">
-      <div class="btn-left">
-        <span>🔒</span>
-        <div>
-          <span class="btn-title">Buy Guide &amp; Download PDF</span>
-          <span class="btn-sub">Instant download · Yours forever</span>
-        </div>
+    <div class="gh-price-block">
+      <div class="gh-was">Was $26.00</div>
+      <div class="gh-price-row">
+        <div class="gh-price">$13.00</div>
+        <span class="gh-save">50% Off</span>
       </div>
-      <span class="btn-arrow">→</span>
-    </a>
-    <div class="secure">🔒 Secure Stripe · Instant PDF · Yours forever</div>
+      <div class="gh-stock">Only 3 left at this price</div>
+    </div>
+    <div class="gh-buy-wrap">
+      <button class="gh-buy" onclick="openModal()">
+        <span class="gh-buy-icon">&#11015;</span>
+        <span class="gh-buy-text">
+          <span class="gh-buy-main">Buy Guide &amp; Download PDF</span>
+          <span class="gh-buy-sub">Instant download · Yours forever</span>
+        </span>
+        <span class="gh-buy-arrow">&#8594;</span>
+      </button>
+    </div>
+    <div class="gh-trust">&#128274; Secure Stripe &middot; Instant PDF &middot; Yours forever</div>
   </div>
-</div>
+</section>
 
-<div class="content">
-  <div class="slabel">What's Inside</div>
-  <div class="inside-grid">
-    <div class="ic"><div class="ico">📋</div><h3>Full Materials List</h3><p>Every item you need with exact quantities and sourcing notes</p></div>
-    <div class="ic"><div class="ico">🪨</div><h3>10 Detailed Steps</h3><p>From mixing concrete to placing finished gnomes in your garden</p></div>
-    <div class="ic"><div class="ico">🎨</div><h3>Painting & Finishing</h3><p>Dry-brush, wash and sealing for a realistic weathered stone look</p></div>
-    <div class="ic"><div class="ico">✂️</div><h3>Carving Techniques</h3><p>How and when to carve details into green-stage concrete</p></div>
-    <div class="ic"><div class="ico">⚡</div><h3>Pro Tips</h3><p>5 expert tips — hollow casting, aged stone effect and more</p></div>
-    <div class="ic"><div class="ico">🔧</div><h3>Troubleshooting</h3><p>Fixes for cracking, stuck molds, lost detail, peeling paint</p></div>
+<section class="inside-section">
+  <div class="inside-sec">
+    <div class="sec-label">What's Inside</div>
+    <div class="sec-title">Everything You Need to Make This</div>
+    <div class="inside-grid">
+      <div class="ic"><span class="ic-icon">&#128203;</span><h4>Full Materials List</h4><p>Every item with exact quantities and costs — molds, concrete mix, pigments, tools.</p></div>
+      <div class="ic"><span class="ic-icon">&#128247;</span><h4>Real Photos Every Step</h4><p>Every photo taken during the actual project. You'll always know what to expect.</p></div>
+      <div class="ic"><span class="ic-icon">&#9986;</span><h4>Carving Techniques</h4><p>Exactly when and how to carve beard, hat and facial details into green-stage concrete.</p></div>
+      <div class="ic"><span class="ic-icon">&#127912;</span><h4>Painting & Weathering</h4><p>Dry-brush, wash and oxide pigment tricks for a realistic aged stone finish.</p></div>
+      <div class="ic"><span class="ic-icon">&#128161;</span><h4>Pro Tips</h4><p>Hollow casting, antique stone effect, mold care — the things nobody else tells you.</p></div>
+      <div class="ic"><span class="ic-icon">&#128295;</span><h4>Troubleshooting Guide</h4><p>Cracking, stuck molds, lost detail, peeling paint — every common problem solved.</p></div>
+    </div>
   </div>
+</section>
 
-  <hr class="div"/>
-
-  <div class="slabel">The Process</div>
-  <div class="stitle">Step by Step</div>
-  <div class="steps">
-    <div class="step"><div class="step-n">01</div><div><h3>Prepare Your Molds</h3><p>Apply mold release and assemble multi-part silicone gnome molds for casting.</p></div></div>
-    <div class="step"><div class="step-n">02</div><div><h3>Mix the Concrete</h3><p>Achieve perfect consistency — thick, lump-free and pourable but holding its shape.</p></div></div>
-    <div class="step"><div class="step-n">03</div><div><h3>Pour & Vibrate</h3><p>Fill the mold and eliminate air bubbles for sharp facial and texture detail.</p></div></div>
-    <div class="step"><div class="step-n">04</div><div><h3>Wait for Green Stage</h3><p>Let concrete reach firm-but-workable before demolding and carving.</p></div></div>
-    <div class="step"><div class="step-n">05</div><div><h3>Sculpt & Carve Details</h3><p>Refine beard, hat, glasses and facial features with sculpting tools.</p></div></div>
-    <div class="step"><div class="step-n">06</div><div><h3>Add Color Inserts</h3><p>Press tinted concrete into jeans, coat and hat areas for built-in color.</p></div></div>
-    <div class="step"><div class="step-n">07</div><div><h3>Wet Cure 24–48h</h3><p>Slow drying prevents cracking. Mist regularly for strong, durable concrete.</p></div></div>
-    <div class="step"><div class="step-n">08</div><div><h3>Sand & Refine</h3><p>Remove seam lines and rough edges with 120 then 220-grit sandpaper.</p></div></div>
-    <div class="step"><div class="step-n">09</div><div><h3>Paint & Seal</h3><p>Basecoat, dry-brush, detail paint and 2 coats of exterior sealer.</p></div></div>
-    <div class="step"><div class="step-n">10</div><div><h3>Display in the Garden</h3><p>Arrange along paths, near flower beds or hidden in shrubs.</p></div></div>
+<section class="steps-section">
+  <div class="steps-sec">
+    <div class="sec-label">The Process</div>
+    <div class="sec-title">How It All Comes Together</div>
+    <div class="steps-list">
+      <div class="step"><div class="step-n">01</div><div><h4>Prepare Your Molds</h4><p>Apply mold release and assemble multi-part silicone gnome molds. The guide tells you exactly what release agent to use and how much.</p></div></div>
+      <div class="step"><div class="step-n">02</div><div><h4>Mix & Pour Concrete</h4><p>Achieve the perfect consistency — thick, lump-free and pourable. Pour slowly and vibrate to eliminate air bubbles for sharp facial detail.</p></div></div>
+      <div class="step"><div class="step-n">03</div><div><h4>Carve at Green Stage</h4><p>Demold at just the right moment and carve beard strands, hat details and glasses. The guide tells you exactly when the window opens and closes.</p></div></div>
+      <div class="step"><div class="step-n">04</div><div><h4>Cure, Sand & Refine</h4><p>Wet-cure for 24–48h to prevent cracking, then sand seam lines smooth with 120 and 220-grit paper.</p></div></div>
+      <div class="step"><div class="step-n">05</div><div><h4>Paint, Seal & Display</h4><p>Basecoat, dry-brush, detail paint and 2 coats of exterior sealer. Place in the garden and watch people stop to stare. &#127775;</p></div></div>
+    </div>
   </div>
+</section>
 
-  <hr class="div"/>
-
-  <div class="slabel">Materials</div>
-  <div class="stitle">What You'll Need</div>
-  <table class="mat">
-    <thead><tr><th>Item</th><th>Quantity</th><th>Notes</th></tr></thead>
-    <tbody>
-      <tr><td>Fine-grain concrete mix</td><td>5 kg</td><td>Craft/decorative mix for sharp detail</td></tr>
-      <tr><td>Silicone gnome molds</td><td>1–3 molds</td><td>Multi-piece for 3D figures</td></tr>
-      <tr><td>Mold release agent</td><td>1 can</td><td>Spray or brush-on</td></tr>
-      <tr><td>Carving & sculpting tools</td><td>1 set</td><td>Dental pick, palette knife</td></tr>
-      <tr><td>Acrylic paint set</td><td>1 set</td><td>Grey, blue, white, brown tones</td></tr>
-      <tr><td>Exterior sealer</td><td>1 can</td><td>Matte finish for outdoor use</td></tr>
-      <tr><td>Oxide pigments</td><td>Small qty</td><td>UV-stable color for concrete mix</td></tr>
-      <tr><td>Safety glasses & gloves</td><td>1 pair each</td><td>Concrete is alkaline — protect hands</td></tr>
-    </tbody>
-  </table>
-</div>
+<section class="bottom-cta">
+  <h2>Ready to <em>Make This?</em></h2>
+  <p>Instant PDF download. Real photos. Everything you need. Only 3 copies left at this price.</p>
+  <button class="gh-buy" onclick="openModal()" style="max-width:480px;margin:0 auto;">&#11015; Buy Guide &mdash; $13.00</button>
+</section>
 
 <footer>
-  <div class="fl">Made By Hand</div>
-  <p>© 2026 · Digital PDF download · madebyhand010@gmail.com</p>
+  <div class="f-logo">Made By Hand</div>
+  <p>&#169; 2026 &middot; Digital PDF Downloads &middot; <a href="mailto:madebyhand010@gmail.com">Contact</a></p>
 </footer>
 
+<!-- MODAL -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <div class="modal-top">
+      <div>
+        <div class="m-title">DIY Concrete Garden Gnomes</div>
+        <div class="m-price-row">
+          <span class="m-price">$13.00</span>
+          <span class="m-was">$26.00</span>
+        </div>
+      </div>
+      <button class="m-close" onclick="closeModal()">&#10005;</button>
+    </div>
+    <div class="modal-body">
+      <div id="form-wrap">
+        <div id="payment-element"><p>&#9203; Loading secure payment...</p></div>
+        <div id="card-err"></div>
+        <button class="pay-btn" id="pay-btn" disabled>Loading...</button>
+        <div class="m-secure">&#128274; Secured by Stripe &middot; PDF delivered instantly</div>
+      </div>
+      <div class="success" id="success-box">
+        <span class="success-icon">&#127881;</span>
+        <h3>All Set!</h3>
+        <p>Your guide is ready. Thank you!</p>
+        <a href="DIY_Concrete_Garden_Gnomes_Guide.pdf" download class="dl-btn">&#11015; Download Your Guide</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EMAIL POPUP -->
+<div id="email-popup" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:2000;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(16px);">
+  <div style="background:#1A1815;border:1px solid rgba(200,150,60,0.3);max-width:440px;width:100%;padding:0;overflow:hidden;">
+    <div style="background:#201E1B;padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div>
+        <p style="font-size:0.6rem;font-weight:500;letter-spacing:0.18em;color:#C8963C;margin:0 0 4px;">One more thing...</p>
+        <p style="font-family:Georgia,serif;font-size:1.1rem;color:#F0EDE8;margin:0;font-weight:400;">Get your guide by email too</p>
+      </div>
+      <button onclick="closeEmailPopup()" style="background:none;border:none;color:#6A6058;font-size:1.4rem;cursor:pointer;line-height:1;padding:0;" onmouseover="this.style.color='#F0EDE8'" onmouseout="this.style.color='#6A6058'">&#10005;</button>
+    </div>
+    <div style="padding:1.75rem 1.5rem;">
+      <p style="font-size:0.88rem;color:#A09890;line-height:1.75;margin:0 0 1.25rem;">
+        Enter your email and we'll send you the guide — plus a <strong style="color:#F0EDE8;">special offer</strong> just for you.
+        <br/><span style="font-size:0.78rem;color:#6A6058;">Don't want to? Just close this and download directly below. &#128071;</span>
+      </p>
+      <div style="display:flex;gap:0;margin-bottom:0.75rem;">
+        <input type="email" id="popup-email" placeholder="your@email.com"
+          style="flex:1;background:#0C0B09;border:1px solid rgba(255,255,255,0.12);border-right:none;padding:12px 14px;font-size:0.9rem;color:#F0EDE8;font-family:'Outfit',sans-serif;outline:none;"
+          onkeydown="if(event.key==='Enter')submitEmail()"/>
+        <button onclick="submitEmail()" id="email-submit-btn"
+          style="background:#C8963C;color:#0C0B09;border:none;padding:12px 20px;font-size:0.7rem;font-weight:600;letter-spacing:0.14em;cursor:pointer;font-family:'Outfit',sans-serif;white-space:nowrap;"
+          onmouseover="this.style.background='#E8B85C'" onmouseout="this.style.background='#C8963C'">
+          Send It &#8594;
+        </button>
+      </div>
+      <p id="email-popup-msg" style="font-size:0.75rem;color:#6A6058;margin:0;min-height:1.2em;"></p>
+    </div>
+    <div style="padding:0 1.5rem 1.5rem;">
+      <div style="border-top:1px solid rgba(255,255,255,0.06);padding-top:1.25rem;">
+        <p style="font-size:0.68rem;color:#4A4540;text-align:center;margin:0 0 0.75rem;letter-spacing:0.1em;">Or just download directly</p>
+        <a id="popup-dl-btn" href="DIY_Concrete_Garden_Gnomes_Guide.pdf" download
+          style="display:flex;align-items:center;justify-content:center;gap:8px;background:#201E1B;border:1px solid rgba(255,255,255,0.1);padding:12px;color:#A09890;text-decoration:none;font-size:0.72rem;font-weight:500;letter-spacing:0.14em;"
+          onmouseover="this.style.borderColor='rgba(200,150,60,0.4)';this.style.color='#F0EDE8'"
+          onmouseout="this.style.borderColor='rgba(255,255,255,0.1)';this.style.color='#A09890'">
+          &#11015; Download Your PDF Guide
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
-let s = 29*60+59;
-function tick(){
-  const t=document.getElementById('timer');
-  if(!t)return;
-  t.textContent=String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
-  if(s>0){s--;setTimeout(tick,1000);}
+const STRIPE_KEY='pk_live_51TQB5uERLV3AA0mv0dp2i9c6m3Y1oxuGCe0pghanMWYW9Y8gr4tPWJdwJAUhdaqDaUfWazxd4GKMaRaPfDgwMrBm00d1NxbK5G';
+const AMOUNT=1300;
+const PRODUCT='DIY Concrete Garden Gnomes';
+let stripe,elements;
+
+// countdown
+(function(){
+  let s=37*60;
+  function tick(){
+    const el=document.getElementById('countdown');
+    if(el)el.textContent=String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+    if(s-->0)setTimeout(tick,1000);
+  }
+  tick();
+})();
+
+async function openModal(){
+  document.getElementById('form-wrap').style.display='block';
+  document.getElementById('success-box').style.display='none';
+  document.getElementById('pay-btn').disabled=true;
+  document.getElementById('pay-btn').textContent='Loading...';
+  document.getElementById('card-err').textContent='';
+  document.getElementById('payment-element').innerHTML='<p>&#9203; Loading secure payment...</p>';
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  stripe=Stripe(STRIPE_KEY);
+  try{
+    const res=await fetch('/.netlify/functions/create-payment-intent',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({amount:AMOUNT,currency:'usd',product:PRODUCT})});
+    const data=await res.json();
+    if(data.error)throw new Error(data.error);
+    elements=stripe.elements({clientSecret:data.clientSecret,appearance:{theme:'night',variables:{colorPrimary:'#C8963C',fontFamily:"'Outfit',sans-serif",borderRadius:'0px',colorBackground:'#201E1B',colorText:'#F0EDE8'}}});
+    document.getElementById('payment-element').innerHTML='';
+    elements.create('payment').mount('#payment-element');
+    document.getElementById('pay-btn').disabled=false;
+    document.getElementById('pay-btn').textContent='Pay $'+(AMOUNT/100).toFixed(2)+' & Download';
+  }catch(err){
+    document.getElementById('payment-element').innerHTML='<p style="color:#B84040">Could not load payment. Please try again.</p>';
+    document.getElementById('pay-btn').textContent='Try Again';
+    document.getElementById('pay-btn').disabled=false;
+    document.getElementById('pay-btn').onclick=openModal;
+  }
 }
-tick();
+
+function closeModal(){document.getElementById('overlay').classList.remove('open');document.body.style.overflow='';}
+document.getElementById('overlay').addEventListener('click',e=>{if(e.target===document.getElementById('overlay'))closeModal();});
+
+document.getElementById('pay-btn').addEventListener('click',async function(){
+  if(this.textContent.includes('Loading')||this.textContent.includes('Try'))return;
+  const btn=this;btn.disabled=true;btn.textContent='Processing...';
+  document.getElementById('card-err').textContent='';
+  try{
+    const{error}=await stripe.confirmPayment({elements,confirmParams:{return_url:window.location.href},redirect:'if_required'});
+    if(error){document.getElementById('card-err').textContent=error.message;btn.disabled=false;btn.textContent='Pay $13.00 & Download';}
+    else{document.getElementById('form-wrap').style.display='none';document.getElementById('success-box').style.display='block';setTimeout(()=>openEmailPopup('DIY_Concrete_Garden_Gnomes_Guide.pdf'),1200);}
+  }catch(err){document.getElementById('card-err').textContent='Something went wrong. Please try again.';btn.disabled=false;btn.textContent='Try Again';}
+});
+
+let popupPdfUrl='';
+function openEmailPopup(pdfUrl){
+  popupPdfUrl=pdfUrl;
+  document.getElementById('popup-dl-btn').href=pdfUrl;
+  document.getElementById('email-popup').style.display='flex';
+  document.body.style.overflow='hidden';
+  setTimeout(()=>document.getElementById('popup-email').focus(),100);
+}
+function closeEmailPopup(){document.getElementById('email-popup').style.display='none';document.body.style.overflow='';}
+
+async function submitEmail(){
+  const email=document.getElementById('popup-email').value.trim();
+  const msg=document.getElementById('email-popup-msg');
+  const btn=document.getElementById('email-submit-btn');
+  if(!email||!email.includes('@')){msg.style.color='#B84040';msg.textContent='Please enter a valid email.';return;}
+  btn.textContent='Sending...';btn.disabled=true;
+  msg.style.color='#6A6058';msg.textContent='';
+  try{
+    await fetch('/.netlify/functions/send-email',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,product:PRODUCT,price:AMOUNT/100,delay_minutes:0})});
+    msg.style.color='#7AB870';msg.textContent='✓ Guide sent! Check your inbox.';
+    btn.textContent='Sent ✓';
+    setTimeout(async()=>{try{await fetch('/.netlify/functions/send-email',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,product:PRODUCT,price:AMOUNT/100,delay_minutes:5})});}catch(e){}},5*60*1000);
+    setTimeout(()=>closeEmailPopup(),2000);
+  }catch(e){
+    msg.style.color='#B84040';msg.textContent='Could not send. Please download directly below.';
+    btn.textContent='Try Again';btn.disabled=false;
+  }
+}
 </script>
 </body>
 </html>
