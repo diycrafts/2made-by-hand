@@ -12,32 +12,20 @@
 :root{--bg:#0C0B09;--bg2:#131210;--surface:#201E1B;--surface2:#282420;--line:rgba(255,255,255,0.07);--line2:rgba(255,255,255,0.12);--text:#F0EDE8;--text2:#A09890;--text3:#6A6058;--accent:#C8963C;--accent2:#E8B85C;--green:#5A8A50;--green2:#7AB870;--red:#B84040;}
 html{scroll-behavior:auto;-webkit-text-size-adjust:100%;}body{-webkit-overflow-scrolling:touch;overscroll-behavior:none;}
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;font-weight:300;}
-
-
-
-
 .cursor-ring.hover{width:60px;height:60px;border-color:var(--accent);background:rgba(200,150,60,0.06);}
-
 .ann{background:var(--accent);padding:9px 5vw;display:flex;align-items:center;justify-content:center;gap:20px;font-size:0.68rem;font-weight:400;letter-spacing:0.16em;text-color:rgba(12,11,9,0.75);flex-wrap:wrap;}
 .ann a{color:var(--bg);text-decoration:none;font-weight:500;border-bottom:1px solid rgba(12,11,9,0.25);}
-
 nav{position:sticky;top:0;z-index:500;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;background:rgba(12,11,9,0.94);backdrop-filter:blur(28px);border-bottom:1px solid var(--line);}
 .logo{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:300;letter-spacing:0.02em;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:10px;}
 .logo-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);}
 .nav-back{font-size:0.65rem;font-weight:400;letter-spacing:0.14em;text-color:var(--text3);text-decoration:none;display:flex;align-items:center;gap:8px;}
 .nav-back:hover{color:var(--accent);}
-
-/* URGENCY BAR */
 .urgency{background:var(--red);color:#fff;text-align:center;padding:10px 20px;font-size:0.72rem;font-weight:400;letter-spacing:0.14em;text-display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;}
 .urgency-timer{font-family:'Fraunces',serif;font-size:0.9rem;background:rgba(0,0,0,0.25);padding:3px 12px;}
-
-/* HERO */
 .guide-hero{display:grid;grid-template-columns:1fr 1fr;min-height:80vh;border-bottom:1px solid var(--line);}
 .gh-img{position:relative;overflow:hidden;}
 .gh-img img{width:100%;height:100%;object-fit:cover;display:block;}
-
 .gh-img-overlay{position:absolute;inset:0;background:linear-gradient(90deg,transparent 60%,var(--bg) 100%);}
-
 .gh-body{padding:5vw;display:flex;flex-direction:column;justify-content:center;}
 .gh-eyebrow{font-size:0.62rem;font-weight:400;letter-spacing:0.22em;text-color:var(--green2);margin-bottom:1.5rem;display:flex;align-items:center;gap:10px;}
 .gh-eyebrow::before{content:'';width:16px;height:1px;background:var(--green2);}
@@ -53,52 +41,16 @@ nav{position:sticky;top:0;z-index:500;height:68px;display:flex;align-items:cente
 .gh-save{font-size:0.6rem;font-weight:400;letter-spacing:0.12em;text-border:1px solid rgba(200,150,60,0.35);color:var(--accent);padding:4px 10px;}
 .gh-stock{font-size:0.65rem;font-weight:400;letter-spacing:0.12em;text-color:var(--red);display:flex;align-items:center;gap:6px;}
 .gh-stock::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--red);}
-
-/* ── BUY BUTTON — imposibil de ratat ─────── */
-.gh-buy-wrap{
-  position:relative;margin-top:1.75rem;
-}
-/* 3 inele concentrice care pulseaza */
-
-
-
-@keyframes pulse-ring{
-  0%{opacity:1;}
-  100%{}
-}
-.gh-buy{
-  display:flex;align-items:center;justify-content:center;gap:14px;
-  width:100%;
-  font-family:'Outfit',sans-serif;font-size:0.9rem;font-weight:600;
-  letter-spacing:0.2em;text-
-  background:linear-gradient(135deg, #D4A843 0%, #C8963C 50%, #B8820A 100%);
-  color:#0C0B09;
-  padding:22px 32px;border:none;cursor:pointer;
-  position:relative;overflow:hidden;
-  
-  
-}
-/* shimmer sweep */
-
-
-.gh-buy:hover{
-  
-  
-}
+.gh-buy-wrap{position:relative;margin-top:1.75rem;}
+@keyframes pulse-ring{0%{opacity:1;}100%{}}
+.gh-buy{display:flex;align-items:center;justify-content:center;gap:14px;width:100%;font-family:'Outfit',sans-serif;font-size:0.9rem;font-weight:600;letter-spacing:0.2em;background:linear-gradient(135deg, #D4A843 0%, #C8963C 50%, #B8820A 100%);color:#0C0B09;padding:22px 32px;border:none;cursor:pointer;position:relative;overflow:hidden;}
 .gh-buy-icon{font-size:1.2rem;}
 .gh-buy-text{display:flex;flex-direction:column;align-items:flex-start;gap:1px;}
 .gh-buy-main{font-size:0.88rem;font-weight:600;letter-spacing:0.16em;}
-.gh-buy-sub{font-size:0.62rem;font-weight:400;letter-spacing:0.1em;opacity:0.75;text-}
+.gh-buy-sub{font-size:0.62rem;font-weight:400;letter-spacing:0.1em;opacity:0.75;}
 .gh-buy-arrow{font-size:1.2rem;margin-left:auto;}
-.gh-buy:hover .gh-buy-arrow{}
-.gh-trust{font-size:0.62rem;font-weight:300;color:var(--text3);letter-spacing:0.1em;text-align:center;margin-top:1rem;}
-
-.gh-buy::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,0.12);}
-.gh-buy:hover::after{}
-.gh-buy:hover{}
 .gh-trust{font-size:0.62rem;font-weight:300;color:var(--text3);letter-spacing:0.1em;margin-top:1rem;}
-
-/* INSIDE SECTION */
+.gh-buy::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,0.12);}
 .inside-sec{padding:6rem 5vw;border-bottom:1px solid var(--line);max-width:1200px;margin:0 auto;}
 .sec-label{font-size:0.62rem;font-weight:400;letter-spacing:0.22em;text-color:var(--green2);margin-bottom:1rem;display:flex;align-items:center;gap:10px;}
 .sec-label::before{content:'';width:16px;height:1px;background:var(--green2);}
@@ -109,8 +61,6 @@ nav{position:sticky;top:0;z-index:500;height:68px;display:flex;align-items:cente
 .ic-icon{font-size:1.5rem;margin-bottom:1rem;display:block;}
 .ic h4{font-family:'Fraunces',serif;font-size:1rem;font-weight:300;color:var(--text);margin-bottom:6px;}
 .ic p{font-size:0.78rem;font-weight:300;color:var(--text3);line-height:1.65;}
-
-/* STEPS */
 .steps-sec{padding:6rem 5vw;border-bottom:1px solid var(--line);max-width:900px;margin:0 auto;}
 .steps-list{display:flex;flex-direction:column;}
 .step{display:grid;grid-template-columns:60px 1fr;gap:1.5rem;padding:1.75rem 0;border-bottom:1px solid var(--line);align-items:start;}
@@ -119,18 +69,13 @@ nav{position:sticky;top:0;z-index:500;height:68px;display:flex;align-items:cente
 .step-n{font-family:'Fraunces',serif;font-size:0.8rem;font-weight:300;color:var(--text3);letter-spacing:0.1em;margin-top:4px;}
 .step h4{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:300;color:var(--text);margin-bottom:6px;}
 .step p{font-size:0.82rem;font-weight:300;color:var(--text3);line-height:1.65;}
-
-/* BOTTOM CTA */
 .bottom-cta{padding:6rem 5vw;text-align:center;background:var(--bg2);border-bottom:1px solid var(--line);}
 .bottom-cta h2{font-family:'Fraunces',serif;font-size:clamp(2rem,4vw,4rem);font-weight:100;color:var(--text);margin-bottom:1rem;line-height:1;}
 .bottom-cta h2 em{font-style:italic;color:var(--accent);}
 .bottom-cta p{font-size:0.9rem;font-weight:300;color:var(--text2);max-width:400px;margin:0 auto 2.5rem;line-height:1.8;}
-
-/* MODAL */
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:1000;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(12px);}
 .overlay.open{display:flex;}
 .modal{background:var(--bg2);border:1px solid var(--line2);width:100%;max-width:480px;overflow:hidden;}
-
 .modal-top{background:var(--surface);padding:1.75rem 2rem;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;border-bottom:1px solid var(--line);}
 .m-title{font-family:'Fraunces',serif;font-size:1rem;font-weight:300;color:var(--text);margin-bottom:4px;}
 .m-price-row{display:flex;align-items:baseline;gap:8px;}
@@ -152,25 +97,12 @@ nav{position:sticky;top:0;z-index:500;height:68px;display:flex;align-items:cente
 .success p{font-size:0.85rem;color:var(--text3);margin-bottom:1.5rem;}
 .dl-btn{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:400;letter-spacing:0.16em;text-padding:12px 24px;text-decoration:none;}
 .dl-btn:hover{background:var(--green2);}
-
 footer{background:var(--surface);padding:2.5rem 5vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;border-top:1px solid var(--line);}
 .f-logo{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:300;color:var(--text3);}
 footer p{font-size:0.6rem;letter-spacing:0.14em;text-color:var(--text3);}
 footer a{color:var(--text3);text-decoration:none;}
-
-
-
-
-@media(max-width:900px){
-  html{cursor:auto;}
-  .guide-hero{grid-template-columns:1fr;}
-  .gh-img{height:60vw;}.gh-img-overlay{display:none;}
-  .inside-grid{grid-template-columns:1fr 1fr;}
-  footer{flex-direction:column;text-align:center;}
-}
+@media(max-width:900px){html{cursor:auto;}.guide-hero{grid-template-columns:1fr;}.gh-img{height:60vw;}.gh-img-overlay{display:none;}.inside-grid{grid-template-columns:1fr 1fr;}footer{flex-direction:column;text-align:center;}}
 @media(max-width:600px){.inside-grid{grid-template-columns:1fr;}}
-
-/* ─── REVIEWS ────────────────────────────── */
 .reviews-section{padding:5rem 5vw;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg2);}
 .reviews-inner{max-width:1100px;margin:0 auto;}
 .reviews-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:3rem;flex-wrap:wrap;gap:1.5rem;}
@@ -190,8 +122,6 @@ footer a{color:var(--text3);text-decoration:none;}
 .rv-author{font-size:0.65rem;font-weight:500;letter-spacing:0.14em;text-color:var(--text3);}
 .rv-author span{color:var(--text3);font-weight:400;}
 @media(max-width:700px){.rv-grid{grid-template-columns:1fr;}.reviews-header{flex-direction:column;}.reviews-summary{text-align:left;}}
-
-
 img{max-width:100%;height:auto;}
 *{-webkit-tap-highlight-color:transparent;}
 button,a{touch-action:manipulation;}
@@ -199,11 +129,10 @@ button,a{touch-action:manipulation;}
 </head>
 <body>
 
-  
 </div>
 
 <div class="ann">
-  <span>&#128308; Limited Pricing — Only 4 left at this price</span>
+  <span>&#128308; Limited Pricing — Only 3 left at this price</span>
   <span>&#8212;</span>
   <a href="shop.html">&#8592; All Guides</a>
 </div>
@@ -214,8 +143,8 @@ button,a{touch-action:manipulation;}
 </nav>
 
 <div class="urgency">
-  <span>&#9888; Only <strong>4 copies</strong> left at this price &mdash;</span>
-  <span class="urgency-timer" id="countdown">33:00</span>
+  <span>&#9888; Only <strong>3 copies</strong> left at this price &mdash;</span>
+  <span class="urgency-timer" id="countdown">38:00</span>
   <span>&#128293; Selling fast</span>
 </div>
 
@@ -227,22 +156,21 @@ button,a{touch-action:manipulation;}
   <div class="gh-body">
     <div class="gh-eyebrow">Concrete · Garden</div>
     <div class="gh-title">Leaf Imprint<br/><em>Stepping Stones</em></div>
-    <p class="gh-desc">Press a large leaf into poured concrete — every single vein transfers perfectly. Nature does the design work. You pour and wait.</p>
+    <p class="gh-desc">Press a large leaf into poured concrete — every single vein transfers perfectly. Under $5 each.</p>
     <div class="gh-chips">
-      <span class="gh-chip">15 min per stone</span>
+      <span class="gh-chip">45 min active</span>
       <span class="gh-chip">Under $5 each</span>
       <span class="gh-chip">Beginner</span>
     </div>
     <div class="gh-price-block">
-      <div class="gh-was">Was $9.00</div>
+      <div class="gh-was">Was $18.00</div>
       <div class="gh-price-row">
-        <div class="gh-price">$5.00</div>
-        <span class="gh-save">44% Off</span>
+        <div class="gh-price">$9.00</div>
+        <span class="gh-save">50% Off</span>
       </div>
-      <div class="gh-stock">Only 4 left at this price</div>
+      <div class="gh-stock">Only 3 left at this price</div>
     </div>
-        <div class="gh-buy-wrap">
-      
+    <div class="gh-buy-wrap">
       <button class="gh-buy" onclick="openModal()">
           <span class="gh-buy-icon">&#11015;</span>
           <span class="gh-buy-text">
@@ -286,9 +214,9 @@ button,a{touch-action:manipulation;}
 </section>
 
 <section class="bottom-cta">
-  <h2>Ready to <em>Make This?</em></h2>
-  <p>Instant PDF download. Real photos. Everything you need. Only 4 copies left at this price.</p>
-  <button class="gh-buy" onclick="openModal()" style="max-width:480px;margin:0 auto;">&#11015; Buy Guide &mdash; $5.00</button>
+  <h2>Ready to <em>Make These?</em></h2>
+  <p>Instant PDF download. Real photos. Everything you need. Only 3 copies left at this price.</p>
+  <button class="gh-buy" onclick="openModal()" style="max-width:480px;margin:0 auto;">&#11015; Buy Guide &mdash; $9.00</button>
 </section>
 
 <footer>
@@ -303,8 +231,8 @@ button,a{touch-action:manipulation;}
       <div>
         <div class="m-title">Leaf Imprint Stepping Stones</div>
         <div class="m-price-row">
-          <span class="m-price">$5.00</span>
-          <span class="m-was">$9.00</span>
+          <span class="m-price">$9.00</span>
+          <span class="m-was">$18.00</span>
         </div>
       </div>
       <button class="m-close" onclick="closeModal()">&#10005;</button>
@@ -328,12 +256,9 @@ button,a{touch-action:manipulation;}
 
 <script>
 const STRIPE_KEY='pk_live_51TQB5uERLV3AA0mv0dp2i9c6m3Y1oxuGCe0pghanMWYW9Y8gr4tPWJdwJAUhdaqDaUfWazxd4GKMaRaPfDgwMrBm00d1NxbK5G';
-const AMOUNT=500;
+const AMOUNT=900;
 const PRODUCT='Leaf Imprint Stepping Stones';
 let stripe,elements;
-
-
-
 
 async function openModal(){
   document.getElementById('form-wrap').style.display='block';
@@ -372,7 +297,7 @@ document.getElementById('pay-btn').addEventListener('click',async function(){
   document.getElementById('card-err').textContent='';
   try{
     const {error}=await stripe.confirmPayment({elements,confirmParams:{return_url:window.location.href},redirect:'if_required'});
-    if(error){document.getElementById('card-err').textContent=error.message;btn.disabled=false;btn.textContent='Pay $5.00 & Download';}
+    if(error){document.getElementById('card-err').textContent=error.message;btn.disabled=false;btn.textContent='Pay $9.00 & Download';}
     else{document.getElementById('form-wrap').style.display='none';document.getElementById('success-box').style.display='block';setTimeout(()=>openEmailPopup('DIY_Leaf_Concrete_Stepping_Stones_Guide.pdf'),1200);}
   }catch(err){document.getElementById('card-err').textContent='Something went wrong. Please try again.';btn.disabled=false;btn.textContent='Try Again';}
 });
@@ -411,14 +336,11 @@ async function submitEmail(){
     btn.textContent='Try Again';btn.disabled=false;
   }
 }
-
 </script>
 
-<!-- EMAIL CAPTURE POPUP — appears after successful payment -->
+<!-- EMAIL CAPTURE POPUP -->
 <div id="email-popup" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:2000;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(16px);">
   <div style="background:#1A1815;border:1px solid rgba(200,150,60,0.3);max-width:440px;width:100%;padding:0;overflow:hidden;">
-    
-    <!-- Top bar -->
     <div style="background:#201E1B;padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.07);">
       <div>
         <p style="font-size:0.6rem;font-weight:500;letter-spacing:0.18em;text-color:#C8963C;margin:0 0 4px;">One more thing...</p>
@@ -426,16 +348,13 @@ async function submitEmail(){
       </div>
       <button onclick="closeEmailPopup()" style="background:none;border:none;color:#6A6058;font-size:1.4rem;cursor:pointer;line-height:1;padding:0;" onmouseover="this.style.color='#F0EDE8'" onmouseout="this.style.color='#6A6058'">&#10005;</button>
     </div>
-
-    <!-- Body -->
     <div style="padding:1.75rem 1.5rem;">
       <p style="font-size:0.88rem;color:#A09890;line-height:1.75;margin:0 0 1.25rem;">
         Enter your email and we'll send you the guide — plus a <strong style="color:#F0EDE8;">special offer</strong> just for you.
         <br/><span style="font-size:0.78rem;color:#6A6058;">Don't want to? Just close this and download directly below. 👇</span>
       </p>
-      
       <div style="display:flex;gap:0;margin-bottom:0.75rem;">
-        <input type="email" id="popup-email" placeholder="your@email.com" 
+        <input type="email" id="popup-email" placeholder="your@email.com"
           style="flex:1;background:#0C0B09;border:1px solid rgba(255,255,255,0.12);border-right:none;padding:12px 14px;font-size:0.9rem;color:#F0EDE8;font-family:'Outfit',sans-serif;outline:none;"
           onkeydown="if(event.key==='Enter')submitEmail()"/>
         <button onclick="submitEmail()" id="email-submit-btn"
@@ -446,20 +365,17 @@ async function submitEmail(){
       </div>
       <p id="email-popup-msg" style="font-size:0.75rem;color:#6A6058;margin:0;min-height:1.2em;"></p>
     </div>
-
-    <!-- Download button — always visible -->
     <div style="padding:0 1.5rem 1.5rem;">
       <div style="border-top:1px solid rgba(255,255,255,0.06);padding-top:1.25rem;">
-        <p style="font-size:0.68rem;color:#4A4540;text-align:center;margin:0 0 0.75rem;letter-spacing:0.1em;text-">Or just download directly</p>
-        <a id="popup-dl-btn" href="#" download 
-          style="display:flex;align-items:center;justify-content:center;gap:8px;background:#201E1B;border:1px solid rgba(255,255,255,0.1);padding:12px;color:#A09890;text-decoration:none;font-size:0.72rem;font-weight:500;letter-spacing:0.14em;text-"
-          onmouseover="this.style.borderColor='rgba(200,150,60,0.4)';this.style.color='#F0EDE8'" 
+        <p style="font-size:0.68rem;color:#4A4540;text-align:center;margin:0 0 0.75rem;letter-spacing:0.1em;">Or just download directly</p>
+        <a id="popup-dl-btn" href="#" download
+          style="display:flex;align-items:center;justify-content:center;gap:8px;background:#201E1B;border:1px solid rgba(255,255,255,0.1);padding:12px;color:#A09890;text-decoration:none;font-size:0.72rem;font-weight:500;letter-spacing:0.14em;"
+          onmouseover="this.style.borderColor='rgba(200,150,60,0.4)';this.style.color='#F0EDE8'"
           onmouseout="this.style.borderColor='rgba(255,255,255,0.1)';this.style.color='#A09890'">
           &#11015; Download Your PDF Guide
         </a>
       </div>
     </div>
-
   </div>
 </div>
 
